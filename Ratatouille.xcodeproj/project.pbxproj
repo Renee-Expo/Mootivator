@@ -32,6 +32,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07EF47852AA5A55900DF4318 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				99F04C052AA596820089ED13 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		07EF47862AA5A56400DF4318 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UI Elements";
+			sourceTree = "<group>";
+		};
+		07EF47872AA5A57700DF4318 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				99F04C032AA596820089ED13 /* RatatouilleApp.swift */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
 		99F04BF72AA596820089ED13 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +74,9 @@
 		99F04C022AA596820089ED13 /* Ratatouille */ = {
 			isa = PBXGroup;
 			children = (
-				99F04C032AA596820089ED13 /* RatatouilleApp.swift */,
-				99F04C052AA596820089ED13 /* ContentView.swift */,
+				07EF47862AA5A56400DF4318 /* UI Elements */,
+				07EF47852AA5A55900DF4318 /* Views */,
+				07EF47872AA5A57700DF4318 /* Backend */,
 				99F04C072AA596870089ED13 /* Assets.xcassets */,
 				99F04C092AA596870089ED13 /* Preview Content */,
 			);
