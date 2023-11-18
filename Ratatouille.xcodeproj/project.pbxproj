@@ -13,6 +13,7 @@
 		0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */; };
 		078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078EFB652AF5FD48003064A6 /* Persistence.swift */; };
 		07EF478B2AA5BE4D00DF4318 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF478A2AA5BE4D00DF4318 /* MainView.swift */; };
+		1E5DBAB22B086BAC00BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimalEmotionElement.swift; path = Ratatouille/Backend/AnimalEmotionElement.swift; sourceTree = SOURCE_ROOT; };
 		078EFB652AF5FD48003064A6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		07EF478A2AA5BE4D00DF4318 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
+				1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */,
 				07EF478A2AA5BE4D00DF4318 /* MainView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
@@ -186,6 +189,7 @@
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
 				070773062B08547F008655E6 /* HomeView.swift in Sources */,
+				1E5DBAB22B086BAC00BF7A50 /* GoalView.swift in Sources */,
 				99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
