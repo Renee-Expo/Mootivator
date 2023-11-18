@@ -11,6 +11,11 @@ struct MainView: View {
     var body: some View {
         TabView {
             HomeView()
+                .tabItem {
+                    Text("HomeView")
+                    Image(systemName: "house")
+                }
+            
         }
     }
 }
