@@ -1,20 +1,20 @@
 //
-//  OnboardingView.swift
+//  GoalView.swift
 //  Ratatouille
 //
-//  Created by klifton Cheng stu on 18/11/23.
+//  Created by Kaveri Mi on 18/11/23.
 //
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct GoalView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
+struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        GoalView()
     }
 }
