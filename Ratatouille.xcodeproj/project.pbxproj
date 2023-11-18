@@ -11,6 +11,7 @@
 		070773082B085646008655E6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070773072B085646008655E6 /* OnboardingView.swift */; };
 		0781EE652B085CC7003B8DC5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE642B085CC7003B8DC5 /* Data.swift */; };
 		0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */; };
+		0781EE6A2B08704F003B8DC5 /* ShowingAnimalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */; };
 		078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078EFB652AF5FD48003064A6 /* Persistence.swift */; };
 		07EF478B2AA5BE4D00DF4318 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF478A2AA5BE4D00DF4318 /* MainView.swift */; };
 		1E5DBAB22B086BAC00BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */; };
@@ -24,7 +25,8 @@
 		070773052B08547F008655E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		070773072B085646008655E6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0781EE642B085CC7003B8DC5 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimalEmotionElement.swift; path = Ratatouille/Backend/AnimalEmotionElement.swift; sourceTree = SOURCE_ROOT; };
+		0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimalEmotionElement.swift; path = "Ratatouille/UI Elements/HomeViewElements/AnimalEmotionElement.swift"; sourceTree = SOURCE_ROOT; };
+		0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowingAnimalTabView.swift; sourceTree = "<group>"; };
 		078EFB652AF5FD48003064A6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		07EF478A2AA5BE4D00DF4318 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
@@ -46,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0781EE682B08701C003B8DC5 /* HomeViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */,
+				0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */,
+			);
+			path = HomeViewElements;
+			sourceTree = "<group>";
+		};
 		07EF47852AA5A55900DF4318 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +72,7 @@
 		07EF47862AA5A56400DF4318 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
-				0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */,
+				0781EE682B08701C003B8DC5 /* HomeViewElements */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -182,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0781EE6A2B08704F003B8DC5 /* ShowingAnimalTabView.swift in Sources */,
 				0781EE652B085CC7003B8DC5 /* Data.swift in Sources */,
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,

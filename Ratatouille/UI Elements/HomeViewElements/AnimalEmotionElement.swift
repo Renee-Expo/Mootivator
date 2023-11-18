@@ -20,10 +20,18 @@ struct AnimalEmotionElement: View {
                 .offset(x: scale, y: 0)
             HStack {
                 Rectangle()
-                    .frame(height: 20)
+                    .frame(height: 10)
                     .cornerRadius(10)
                     .foregroundStyle(.linearGradient(colors: [Color.pink, Color.yellow, Color.green], startPoint: .leading, endPoint: .trailing))
             }
+            .overlay(content: {
+                HStack {
+                    Rectangle()
+                        .frame(width: 2, height: 10)
+                        .cornerRadius(10)
+                        .opacity(0.8)
+                }
+            })
             .padding(.horizontal)
         }
     }

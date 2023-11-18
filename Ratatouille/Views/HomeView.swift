@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    @State var animalEmotion: Double = 20 // testing variable
+    @State var indexItem : Int = 0
     
     var body: some View {
-        Text("Metric == \(animalEmotion)")
-        Spacer()
+        VStack {
+            AnimalEmotionElement(scale: .constant(20))
+            Text("Metric == \(indexItem)") // for debugging
+            Spacer()
+        }
     }
 }
 

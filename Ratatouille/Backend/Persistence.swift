@@ -8,8 +8,19 @@
 import Foundation
 import SwiftUI
 
+// GoalPersistence --------------------------------------------------------
+// final class just means no more child classes
+final class GoalItemManager: ItemManager {
+    @Published var items: [GoalItem] = [] { didSet { write() } }
+    static var shared: GoalItemManager = .init()
+    static var saveLocation: FileSystem.FileName = .GoalItemManager
+    
+    init() {
+        read()
+    }
+}
 
-// new persistence code
+// persistence code -------------------------------------------------------
 // thanks to @KaiTheRedNinja
 // github:  https://github.com/KaiTheRedNinja
 
@@ -42,16 +53,13 @@ enum FileSystem {
     enum FileName {
         
         // add new cases to add new files
-        case todoManager
-        case tagManager
+        case GoalItemManager
         
         var fileName: String {
-            
+
             // change filenames here
             switch self {
-            case .todoManager: return "todo"
-            case .tagManager: return "tags"
-                
+            case .GoalItemManager: return "GoalItemManager"
             }
         }
     }
