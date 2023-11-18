@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct ShowingAnimalTabView: View {
+    
+    @ObservedObject var goalItemList : GoalItemManager = .shared
+    @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Picker(selection: $selection) {
+                ForEach($goalItemList.items, id: \.id ) { $goal in
+                    Text(goal.title)
+                }
+            } label: {
+                Text("no")
+            }
+            .pickerStyle(.segmented)
+        }
     }
 }
 
 #Preview {
-    ShowingAnimalTabView()
+    ShowingAnimalTabView(selection: .constant(0))
 }

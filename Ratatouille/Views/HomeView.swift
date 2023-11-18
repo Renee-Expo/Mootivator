@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    @State var animalEmotion: Double = 20 // testing variable
+    @State var indexItem : Int = 0
     
     var body: some View {
         VStack {
             AnimalEmotionElement(scale: .constant(20))
-            Text("Metric == \(animalEmotion)") // for debugging
+            Text("Metric == \(indexItem)") // for debugging
             Spacer()
         }
     }
 }
 
-#Preview {
-    HomeView()
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
 }
