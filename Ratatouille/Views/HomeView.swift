@@ -12,8 +12,11 @@ struct HomeView: View {
     @State var animalEmotion: Double = 20 // testing variable
     
     var body: some View {
-        Text("Metric == \(animalEmotion)")
-        Spacer()
+        VStack {
+            AnimalEmotionElement(scale: .constant(20))
+            Text("Metric == \(animalEmotion)") // for debugging
+            Spacer()
+        }
     }
 }
 

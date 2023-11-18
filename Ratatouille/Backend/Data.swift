@@ -8,25 +8,25 @@
 import Foundation
 var autonomy: Double = 0
 
-class userMetaData : Identifiable, Codable { // for Gradual Autonomy
+class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
     // code here
 }
 
-enum animalSelection : Codable {
+enum AnimalSelection : Codable {
     case duck, cat, dog, giraffe
 }
 
-struct animal : Identifiable, Codable {
+struct Animal : Identifiable, Codable {
     var id = UUID()
     
     var name : String
     var emotion : Int
-    var kind : animalSelection         // what type/kind/species the animal is
+    var kind : AnimalSelection         // what type/kind/species the animal is
 }
 
-struct goal : Identifiable, Codable{
+struct GoalItem : Identifiable, Codable{
     var id = UUID()
     
     var title : String
-    var animal : animal
+    var animal : Animal
 }
