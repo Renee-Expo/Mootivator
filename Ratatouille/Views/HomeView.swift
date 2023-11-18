@@ -9,10 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var <#Placeholder#> = <#Placeholder Value#>
+    @State var animalEmotion = 0
     
     var body: some View {
-        EmptyView()
+        Text("Metric == \(animalEmotion)")
     }
 }
 
