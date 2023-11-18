@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078EFB652AF5FD48003064A6 /* Persistence.swift */; };
-		07EF478B2AA5BE4D00DF4318 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF478A2AA5BE4D00DF4318 /* HomeView.swift */; };
+		07EF478B2AA5BE4D00DF4318 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF478A2AA5BE4D00DF4318 /* MainView.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
@@ -17,7 +17,7 @@
 
 /* Begin PBXFileReference section */
 		078EFB652AF5FD48003064A6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		07EF478A2AA5BE4D00DF4318 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		07EF478A2AA5BE4D00DF4318 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
-				07EF478A2AA5BE4D00DF4318 /* HomeView.swift */,
+				07EF478A2AA5BE4D00DF4318 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 			files = (
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,
-				07EF478B2AA5BE4D00DF4318 /* HomeView.swift in Sources */,
+				07EF478B2AA5BE4D00DF4318 /* MainView.swift in Sources */,
 				99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
