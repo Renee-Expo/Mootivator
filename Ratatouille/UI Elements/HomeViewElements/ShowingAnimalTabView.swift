@@ -1,0 +1,18 @@
+//
+//  ShowingAnimalTabView.swift
+//  Ratatouille
+//
+//  Created by klifton Cheng stu on 18/11/23.
+//
+
+import SwiftUI
+
+struct ShowingAnimalTabView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+#Preview {
+    ShowingAnimalTabView()
+}
