@@ -14,8 +14,13 @@ struct ContentView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Text("HomeView")
+                    Text("Home")
                     Image(systemName: "house")
+                }
+            GoalView()
+                .tabItem {
+                    Text("Goals")
+                    Image(systemName: "checkmark")
                 }
         }
     }
