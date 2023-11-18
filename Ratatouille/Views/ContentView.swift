@@ -7,11 +7,17 @@
 
 import SwiftUI
 
-// Don't code in this View, its the main holding view, so tab bars, sidebars.
+// Don't code in this View, its the main holding view, so tab bars, sidebars, etc.
 
 struct ContentView: View {
     var body: some View {
-        MainView()
+        TabView {
+            HomeView()
+                .tabItem {
+                    Text("HomeView")
+                    Image(systemName: "house")
+                }
+        }
     }
 }
 
