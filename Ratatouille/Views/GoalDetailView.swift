@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GoalDetailView: View {
-
+    
     @Binding var goal: Goal
     @State private var showGoalDetailSheet = false
     
@@ -34,10 +34,13 @@ struct GoalDetailView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showGoalDetailSheet){
+                GoalEditView ()
+            }
+            
         }
         
     }
-    
 }
 
 struct GoalDetailView_Previews: PreviewProvider {

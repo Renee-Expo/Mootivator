@@ -26,9 +26,10 @@ struct ShowingAnimalTabView: View {
     }
 }
 
+
 struct ShowingAnimalTabView_Previews: PreviewProvider {
     static var previews: some View {
-       ShowingAnimalTabView(selection: .constant(0))
+        ShowingAnimalTabView(selection: .constant(0))
     }
 }
 
