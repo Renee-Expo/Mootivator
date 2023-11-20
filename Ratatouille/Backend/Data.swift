@@ -6,14 +6,25 @@
 //
 
 import Foundation
-var autonomy: Double = 0
+// not to be published, texting data
+//var textData : GoalItem = .init(title: "Hi", animal: Animal(name: "fluffy the ferst", emotion: 0, kind: ))
+// ---------------------------------
 
-class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
-    // code here
+enum AnimalSelection : String, Codable, CaseIterable{
+    case duck = "duck"
+    case cat = "cat"
+    case dog = "dog"
+    case giraffe = "giraffe"
 }
-
-enum AnimalSelection : Codable {
-    case duck, cat, dog, giraffe
+extension AnimalSelection {
+    var animalKindAsString: String {
+        switch self {
+        case .duck      : return "duck"
+        case .cat       : return "cat"
+        case .dog       : return "dog"
+        case .giraffe   : return "giraffe"
+        }
+    }
 }
 
 struct Animal : Identifiable, Codable {
@@ -29,4 +40,9 @@ struct GoalItem : Identifiable, Codable{
     
     var title : String
     var animal : Animal
+}
+
+var autonomy: Double = 0 // not sure if this will/can be used
+class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
+    // code here
 }

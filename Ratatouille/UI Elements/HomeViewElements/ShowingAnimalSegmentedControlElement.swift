@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ShowingAnimalTabView: View {
+struct ShowingAnimalSegmentedControlElement: View {
     
     @ObservedObject var goalItemList : GoalItemManager = .shared
     @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
@@ -19,7 +19,7 @@ struct ShowingAnimalTabView: View {
                     Text(goal.title)
                 }
             } label: {
-                Text("no")
+                Text("Segmented Control")
             }
             .pickerStyle(.segmented)
         }
@@ -27,5 +27,5 @@ struct ShowingAnimalTabView: View {
 }
 
 #Preview {
-    ShowingAnimalTabView(selection: .constant(0))
+    ShowingAnimalSegmentedControlElement(selection: .constant(0))
 }

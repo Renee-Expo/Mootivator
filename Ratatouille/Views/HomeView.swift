@@ -8,13 +8,40 @@
 import SwiftUI
 
 struct HomeView: View {
+    var chevronWidth : Double = 15
     @State var indexItem : Int = 0
     
     var body: some View {
         VStack {
-            AnimalEmotionElement(scale: .constant(20))
-            Text("Metric == \(indexItem)") // for debugging
+//            AnimalEmotionElement(scale: .constant(20))
+//            Text("Metric == \(indexItem)") // for debugging
+            HStack {
+                Button {
+                    // Move left
+                } label: {
+                    Image(systemName: "chevron.compact.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: chevronWidth)
+                }
+                Spacer()
+                // add image view here? should be segmented control
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                Button {
+                    // move right
+                } label: {
+                    Image(systemName: "chevron.compact.right")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: chevronWidth)
+                }
+            }
+            .padding(.horizontal)
             Spacer()
+            // Sheetview here, find a way to remove the darkening background and covering of the navigation bar
         }
     }
 }
