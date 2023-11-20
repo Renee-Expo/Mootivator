@@ -11,7 +11,8 @@ extension Goal {
     
     //Todo.sampleTodos
     static let sampleGoals = [
-        Goal(goalName: "Get A for Math", currentHabit: "Do one Math practice paper daily")
+        Goal(goalName: "Get A for Math", currentHabit: "Do one Math practice paper daily"),
+        Goal(goalName: "Lead a healthier life", currentHabit: "Run 2km")
     ]
     
 }

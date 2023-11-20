@@ -22,6 +22,16 @@ struct ContentView: View {
                     Text("Goals")
                     Image(systemName: "checkmark")
                 }
+            AnimalView()
+                .tabItem{
+                    Text("Animals")
+                    Image(systemName: "cat")
+                }
+            NotificationView()
+                .tabItem{
+                    Text("Notifications")
+                    Image(systemName: "bell")
+                }
         }
     }
 }
