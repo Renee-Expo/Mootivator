@@ -17,7 +17,7 @@ struct ContentView: View {
                     Text("Home")
                     Image(systemName: "house")
                 }
-            GoalView()
+            GoalView(goalManager: GoalManager())
                 .tabItem {
                     Text("Goals")
                     Image(systemName: "checkmark")

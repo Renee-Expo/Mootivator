@@ -26,6 +26,9 @@ struct ShowingAnimalTabView: View {
     }
 }
 
-#Preview {
-    ShowingAnimalTabView(selection: .constant(0))
+struct ShowingAnimalTabView_Previews: PreviewProvider {
+    static var previews: some View {
+       ShowingAnimalTabView(selection: .constant(0))
+    }
 }
+
