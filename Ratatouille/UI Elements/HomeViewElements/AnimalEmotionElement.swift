@@ -37,6 +37,8 @@ struct AnimalEmotionElement: View {
     }
 }
 
-#Preview {
-    AnimalEmotionElement(scale: .constant(-30))
+struct AnimalEmotionElement_Previews: PreviewProvider {
+    static var previews: some View {
+        AnimalEmotionElement(scale: .constant(-30))
+    }
 }
