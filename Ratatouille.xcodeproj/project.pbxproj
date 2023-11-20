@@ -18,7 +18,7 @@
 		1E5DBAD42B0AFA7A00BF7A50 /* GoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */; };
 		1E5DBAD52B0AFA7A00BF7A50 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */; };
 		1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */; };
-		1E5DBAD82B0AFB2500BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD72B0AFB2500BF7A50 /* GoalView.swift */; };
+		1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 		1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalManager.swift; sourceTree = "<group>"; };
 		1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGoals.swift; sourceTree = "<group>"; };
-		1E5DBAD72B0AFB2500BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoalView.swift; path = "../../../../Desktop/Swift Accelerator/Ratatouille/Ratatouille/Views/GoalView.swift"; sourceTree = "<group>"; };
+		1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
-				1E5DBAD72B0AFB2500BF7A50 /* GoalView.swift */,
+				1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
 				1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */,
 				1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */,
@@ -210,7 +210,7 @@
 				0781EE652B085CC7003B8DC5 /* Data.swift in Sources */,
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
 				1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */,
-				1E5DBAD82B0AFB2500BF7A50 /* GoalView.swift in Sources */,
+				1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
