@@ -32,7 +32,7 @@ struct NewGoalView: View {
             Form {
                 Section("Goal") {
                     TextField("Goals", text: $goalEntered)
-                    
+
                     DatePicker("Deadline", selection: $deadline, displayedComponents: [.date, .hourAndMinute])
                 }
                 Section("Pick an Animal") {
@@ -75,13 +75,11 @@ struct NewGoalView: View {
 //                            Text(day)
 //                        }
 //                    }
-                    
 //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
 //                                .onChange(of: days) {
 //                                    print(days)
 //                                }
-                    
-                    .pickerStyle(InlinePickerStyle())
+//                    .pickerStyle(InlinePickerStyle())
                 }
 
                 DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
