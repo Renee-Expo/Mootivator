@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct AnimalPickerView: View {
+    @ObservedObject var goalManager: GoalManager
     @State private var showNewGoalSheet = false
     @Binding var selectedAnimal: Int
+    @State var isAnimalSelected: Bool = false
+    @State var isAnimalSaved: Bool = false
     private let animals: [Int] = Array(1...10)
     private let adaptiveColumns = [
     
@@ -19,7 +22,10 @@ struct AnimalPickerView: View {
         NavigationView{
             ScrollView(.vertical){
                 LazyVGrid(columns: adaptiveColumns, spacing: 20){
-                        ForEach(animals, id: \.self) { animals in
+                    ForEach(animals, id: \.self) { animals in
+                        Button(action: {
+                            isAnimalSelected = true
+                        }) {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.black, lineWidth: 2) // Outline color and width
@@ -30,6 +36,24 @@ struct AnimalPickerView: View {
                                     .frame(width: 100, height: 100)
                             }
                         }
+                    }
+                }
+                if isAnimalSelected == true{
+                    Button(action: {
+                        isAnimalSaved = true
+                        
+                    }) {
+                        Text("Save")
+                            .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color("AccentColor"))
+                            .cornerRadius(8)
+                    }
+                    .sheet(isPresented: $showNewGoalSheet){
+                        NewGoalView (sourceArray: $goalManager.goals)
+                    }
                 }
             }
             .padding()
@@ -56,6 +80,6 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView(selectedAnimal: .constant(0))
+        AnimalPickerView(goalManager: GoalManager(), selectedAnimal: .constant(0))
     }
 }
