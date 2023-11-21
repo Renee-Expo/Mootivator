@@ -40,6 +40,7 @@ struct NotificationView: View {
                     Toggle("Animal feels sad", isOn: $sadAnimal)
                 }
             }
+            .navigationTitle("Notifications")
             
         }
         .onAppear {
