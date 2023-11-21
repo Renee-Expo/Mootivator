@@ -21,7 +21,27 @@ struct ContentView: View {
             GoalView(goalManager: GoalManager())
                 .tabItem {
                     Text("Goals")
-                    Image(systemName: "checkmark")
+                    Image(systemName: "star.fill")
+                }
+            EmptyView()
+                .tabItem {
+                    Text("Animals")
+                    Image(systemName: "pawprint.fill")
+                }
+            EmptyView()
+                .tabItem {
+                    Text("Notifications")
+                    Image(systemName: "bell.fill")
+                }
+            AnimalView()
+                .tabItem{
+                    Text("Animals")
+                    Image(systemName: "cat")
+                }
+            NotificationView()
+                .tabItem{
+                    Text("Notifications")
+                    Image(systemName: "bell")
                 }
             AnimalView()
                 .tabItem{

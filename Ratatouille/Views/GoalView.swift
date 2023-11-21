@@ -20,8 +20,8 @@ struct GoalView: View {
                     GoalDetailView(goal: $goal)
                 } label:{
                     VStack(alignment: .leading){
-                        Text(goal.goalName)
-                        Text(goal.currentHabit)
+                        Text(goal.goalEntered)
+                        Text(goal.habitEntered)
                             .font(.footnote)
                             .foregroundStyle(.gray)
                     }
