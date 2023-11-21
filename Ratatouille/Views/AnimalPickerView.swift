@@ -9,7 +9,26 @@ import SwiftUI
 
 struct AnimalPickerView: View {
     @State private var showNewGoalSheet = false
+    @Binding var selectedAnimal: Int
+    private let animals: [Int] = Array(1...10)
+    private let adaptiveColumns = [
+    
+        GridItem(.adaptive(minimum: 170))
+    ]
     var body: some View {
+        NavigationView{
+            ScrollView(.vertical){
+                VStack{
+                    ForEach(animals, id: \.self) { animals in
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.black, lineWidth: 2) // Outline color and width
+                                .frame(width: 150, height: 150)
+                        }
+                    }
+                }
+            }
+        }
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
         Button(action: {
             showNewGoalSheet = true
@@ -30,6 +49,6 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView()
+        AnimalPickerView(selectedAnimal: .constant(0))
     }
 }
