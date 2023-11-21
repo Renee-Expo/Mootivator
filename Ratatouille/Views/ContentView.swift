@@ -23,35 +23,15 @@ struct ContentView: View {
                     Text("Goals")
                     Image(systemName: "star.fill")
                 }
-            EmptyView()
-                .tabItem {
+            AnimalView()
+                .tabItem{
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
                 }
-            EmptyView()
-                .tabItem {
+            NotificationView()
+                .tabItem{
                     Text("Notifications")
                     Image(systemName: "bell.fill")
-                }
-            AnimalView()
-                .tabItem{
-                    Text("Animals")
-                    Image(systemName: "cat")
-                }
-            NotificationView()
-                .tabItem{
-                    Text("Notifications")
-                    Image(systemName: "bell")
-                }
-            AnimalView()
-                .tabItem{
-                    Text("Animals")
-                    Image(systemName: "cat")
-                }
-            NotificationView()
-                .tabItem{
-                    Text("Notifications")
-                    Image(systemName: "bell")
                 }
         }
         .fullScreenCover(isPresented: $showOnBoarding, content: {
