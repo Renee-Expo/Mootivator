@@ -55,51 +55,51 @@ struct NewGoalView: View {
                     TextField(text: $habitEntered) {
                         Text("Enter a Habit")
                     }
-                }
-                Picker("Frequency", selection: $selectedFrequencyIndex) {
-                    ForEach(0..<frequency.count) { index in
-                        Text(frequency[index])
-                            .tag(index)
+                    
+                    Picker("Frequency", selection: $selectedFrequencyIndex) {
+                        ForEach(0..<frequency.count) { index in
+                            Text(frequency[index])
+                                .tag(index)
+                        }
                     }
-                }
-                
-                if frequency[selectedFrequencyIndex] == "Daily" {
-                    DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
-                } else if frequency[selectedFrequencyIndex] == "Weekly" {
-                    VStack {
-                        Text("Number of times per week: \(Int(numberOfTimesPerWeek.rounded()))")
+                    if frequency[selectedFrequencyIndex] == "Daily" {
+                        DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
+                    } else if frequency[selectedFrequencyIndex] == "Weekly" {
+                        VStack {
+                            Text("Number of times per week: \(Int(numberOfTimesPerWeek.rounded()))")
+                            
+                            Slider(value: $numberOfTimesPerWeek, in: 1...7, step: 1)
+                        }
+                    } else if frequency[selectedFrequencyIndex] == "Monthly" {
+                        VStack {
+                            Text("Number of times per month: \(Int(numberOfTimesPerMonth.rounded()))")
+                            Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
+                        }
+                    } else if frequency[selectedFrequencyIndex] == "Fixed" {
+                        //                    Picker("Days", selection: $selectedDays) {
+                        //                        ForEach(days, id: \.self) {  day in
+                        //                            Text(day)
+                        //                        }
+                        //                    }
+                        //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
+                        //                                .onChange(of: days) {
+                        //                                    print(days)
+                        //                                }
                         
-                        Slider(value: $numberOfTimesPerWeek, in: 1...7, step: 1)
+                        //                    .pickerStyle(InlinePickerStyle())
+                        
+                        //multi-picker isnt working, so we are using "toggle" function instead
+                        
+                        Toggle("Monday", isOn: $mondayChosen)
+                        Toggle("Tuesday", isOn: $tuesdayChosen)
+                        Toggle("Wednesday", isOn: $wednesdayChosen)
+                        Toggle("Thursday", isOn: $thursdayChosen)
+                        Toggle("Friday", isOn: $fridayChosen)
+                        Toggle("Saturday", isOn: $saturdayChosen)
+                        Toggle("Sunday", isOn: $sundayChosen)
+                        
+                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
-                } else if frequency[selectedFrequencyIndex] == "Monthly" {
-                    VStack {
-                        Text("Number of times per month: \(Int(numberOfTimesPerMonth.rounded()))")
-                        Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
-                    }
-                } else if frequency[selectedFrequencyIndex] == "Fixed" {
-                    //                    Picker("Days", selection: $selectedDays) {
-                    //                        ForEach(days, id: \.self) {  day in
-                    //                            Text(day)
-                    //                        }
-                    //                    }
-                    //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-                    //                                .onChange(of: days) {
-                    //                                    print(days)
-                    //                                }
-                    
-                    //                    .pickerStyle(InlinePickerStyle())
-                    
-                    //multi-picker isnt working, so we are using "toggle" function instead
-                    
-                    Toggle("Monday", isOn: $mondayChosen)
-                    Toggle("Tuesday", isOn: $tuesdayChosen)
-                    Toggle("Wednesday", isOn: $wednesdayChosen)
-                    Toggle("Thursday", isOn: $thursdayChosen)
-                    Toggle("Friday", isOn: $fridayChosen)
-                    Toggle("Saturday", isOn: $saturdayChosen)
-                    Toggle("Sunday", isOn: $sundayChosen)
-                    
-                    DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
                 
                 Section("Write something to motivate you") {
@@ -129,3 +129,4 @@ struct NewGoalView_Previews: PreviewProvider {
         NewGoalView(sourceArray: .constant([]))
     }
 }
+
