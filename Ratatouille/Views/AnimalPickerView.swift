@@ -24,26 +24,33 @@ struct AnimalPickerView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.black, lineWidth: 2) // Outline color and width
                                     .frame(width: 150, height: 150)
+                                Image("horse")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
                             }
                         }
                 }
             }
+            .padding()
+            .navigationTitle("Pick your companion!")
         }
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Button(action: {
-            showNewGoalSheet = true
-        }) {
-            Text("Set your first goal!")
-                .frame(width: 200, height: 50)
-                .foregroundColor(.white)
-                .background(Color("AccentColor"))
-                .cornerRadius(8)
-        }
-        .sheet(isPresented: $showNewGoalSheet) {
-            // Define the content of the sheet here
-            Text("sheet")
-            // Add any additional views or components you need
-        }
+
+//        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//        Button(action: {
+//            showNewGoalSheet = true
+//        }) {
+//            Text("Set your first goal!")
+//                .frame(width: 200, height: 50)
+//                .foregroundColor(.white)
+//                .background(Color("AccentColor"))
+//                .cornerRadius(8)
+//        }
+//        .sheet(isPresented: $showNewGoalSheet) {
+//            // Define the content of the sheet here
+//            Text("sheet")
+//            // Add any additional views or components you need
+//        }
     }
 }
 
