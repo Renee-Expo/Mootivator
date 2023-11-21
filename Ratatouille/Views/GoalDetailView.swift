@@ -15,9 +15,15 @@ struct GoalDetailView: View {
     var body: some View {
         
         NavigationStack{
-            List{
+            VStack{
+                VStack{
+                    Text("Current habit")
+                    
+                    Text(goal.habitEntered)
+                }
+                
             }
-            .navigationTitle($goal.goalEntered)
+            .navigationTitle(goal.goalEntered)
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarTrailing){
                     Button{
