@@ -18,14 +18,14 @@ struct AnimalPickerView: View {
     var body: some View {
         NavigationView{
             ScrollView(.vertical){
-                VStack{
-                    ForEach(animals, id: \.self) { animals in
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.black, lineWidth: 2) // Outline color and width
-                                .frame(width: 150, height: 150)
+                LazyVGrid(columns: adaptiveColumns, spacing: 20){
+                        ForEach(animals, id: \.self) { animals in
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.black, lineWidth: 2) // Outline color and width
+                                    .frame(width: 150, height: 150)
+                            }
                         }
-                    }
                 }
             }
         }
