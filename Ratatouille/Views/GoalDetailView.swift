@@ -17,7 +17,7 @@ struct GoalDetailView: View {
         NavigationStack{
             List{
             }
-            .navigationTitle($goal.goalName)
+            .navigationTitle($goal.goalEntered)
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarTrailing){
                     Button{

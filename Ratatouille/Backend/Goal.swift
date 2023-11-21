@@ -10,8 +10,6 @@ import Foundation
 struct Goal: Identifiable, Codable{
     
     var id = UUID ()
-    var goalName = String()
-    var currentHabit = String()
     var goalEntered = String()
     var deadline = Date()
     var habitEntered = String()
