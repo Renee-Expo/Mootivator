@@ -43,6 +43,16 @@ struct ContentView: View {
                     Text("Notifications")
                     Image(systemName: "bell")
                 }
+            AnimalView()
+                .tabItem{
+                    Text("Animals")
+                    Image(systemName: "cat")
+                }
+            NotificationView()
+                .tabItem{
+                    Text("Notifications")
+                    Image(systemName: "bell")
+                }
         }
         .fullScreenCover(isPresented: $showOnBoarding, content: {
             OnboardingView(showOnBoarding: $showOnBoarding)
