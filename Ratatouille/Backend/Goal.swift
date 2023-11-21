@@ -24,6 +24,12 @@ struct Goal: Identifiable, Codable{
     var days = Array<String>()
     var selectedFixedDeadline = Date()
     var isSaveButtonDisabled = Bool() //Save button is still WIP
+    var mondayChosen = Bool()
+    var tuesdayChosen = Bool()
+    var wednesdayChosen = Bool()
+    var thursdayChosen = Bool()
+    var fridayChosen = Bool()
+    var saturdayChosen = Bool()
+    var sundayChosen = Bool()
     
 }
-
