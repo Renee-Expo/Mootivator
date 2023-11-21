@@ -11,9 +11,19 @@
 		070773082B085646008655E6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070773072B085646008655E6 /* OnboardingView.swift */; };
 		0781EE652B085CC7003B8DC5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE642B085CC7003B8DC5 /* Data.swift */; };
 		0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */; };
-		0781EE6A2B08704F003B8DC5 /* ShowingAnimalSegmentedControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE692B08704F003B8DC5 /* ShowingAnimalSegmentedControlElement.swift */; };
+		0781EE6A2B08704F003B8DC5 /* ShowingAnimalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */; };
 		078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078EFB652AF5FD48003064A6 /* Persistence.swift */; };
-		1E5DBAB22B086BAC00BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */; };
+		1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */; };
+		1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */; };
+		1E5DBAD42B0AFA7A00BF7A50 /* GoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */; };
+		1E5DBAD52B0AFA7A00BF7A50 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */; };
+		1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */; };
+		1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */; };
+		99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */; };
+		99B36A9E2B0B3C6A00BD3CC4 /* MultiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */; };
+		1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */; };
+		1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */; };
+		1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
@@ -25,9 +35,19 @@
 		070773072B085646008655E6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0781EE642B085CC7003B8DC5 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimalEmotionElement.swift; path = "Ratatouille/UI Elements/HomeViewElements/AnimalEmotionElement.swift"; sourceTree = SOURCE_ROOT; };
-		0781EE692B08704F003B8DC5 /* ShowingAnimalSegmentedControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowingAnimalSegmentedControlElement.swift; sourceTree = "<group>"; };
+		0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowingAnimalTabView.swift; sourceTree = "<group>"; };
 		078EFB652AF5FD48003064A6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
+		1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
+		1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalManager.swift; sourceTree = "<group>"; };
+		1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGoals.swift; sourceTree = "<group>"; };
+		1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
+		1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditView.swift; sourceTree = "<group>"; };
+		99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPickerView.swift; sourceTree = "<group>"; };
+		99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPickerView.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,7 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */,
-				0781EE692B08704F003B8DC5 /* ShowingAnimalSegmentedControlElement.swift */,
+				0781EE692B08704F003B8DC5 /* ShowingAnimalTabView.swift */,
 			);
 			path = HomeViewElements;
 			sourceTree = "<group>";
@@ -59,9 +79,16 @@
 			isa = PBXGroup;
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
-				1E5DBAB12B086BAC00BF7A50 /* GoalView.swift */,
+				1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */,
+				1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
+				1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
+				1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */,
+				1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */,
+				1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */,
+				99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */,
+				99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -78,6 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				99F04C032AA596820089ED13 /* RatatouilleApp.swift */,
+				1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */,
+				1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */,
+				1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */,
 				078EFB652AF5FD48003064A6 /* Persistence.swift */,
 				0781EE642B085CC7003B8DC5 /* Data.swift */,
 			);
@@ -190,14 +220,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0781EE6A2B08704F003B8DC5 /* ShowingAnimalSegmentedControlElement.swift in Sources */,
+				1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */,
+				1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */,
+				0781EE6A2B08704F003B8DC5 /* ShowingAnimalTabView.swift in Sources */,
+				99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */,
+				1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */,
 				0781EE652B085CC7003B8DC5 /* Data.swift in Sources */,
+				99B36A9E2B0B3C6A00BD3CC4 /* MultiPickerView.swift in Sources */,
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
+				1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */,
+				1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
+				1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */,
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
+				1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */,
+				1E5DBAD52B0AFA7A00BF7A50 /* Goal.swift in Sources */,
 				070773062B08547F008655E6 /* HomeView.swift in Sources */,
-				1E5DBAB22B086BAC00BF7A50 /* GoalView.swift in Sources */,
+				1E5DBAD42B0AFA7A00BF7A50 /* GoalManager.swift in Sources */,
 				99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

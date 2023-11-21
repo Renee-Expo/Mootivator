@@ -10,6 +10,7 @@ import SwiftUI
 // Don't code in this View, its the main holding view, so tab bars, sidebars, etc.
 
 struct ContentView: View {
+    @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
     var body: some View {
         TabView {
             HomeView()
@@ -17,7 +18,7 @@ struct ContentView: View {
                     Text("Home")
                     Image(systemName: "house")
                 }
-            GoalView()
+            GoalView(goalManager: GoalManager())
                 .tabItem {
                     Text("Goals")
                     Image(systemName: "star.fill")
@@ -32,7 +33,20 @@ struct ContentView: View {
                     Text("Notifications")
                     Image(systemName: "bell.fill")
                 }
+            AnimalView()
+                .tabItem{
+                    Text("Animals")
+                    Image(systemName: "cat")
+                }
+            NotificationView()
+                .tabItem{
+                    Text("Notifications")
+                    Image(systemName: "bell")
+                }
         }
+        .fullScreenCover(isPresented: $showOnBoarding, content: {
+            OnboardingView(showOnBoarding: $showOnBoarding)
+        })
     }
 }
 
