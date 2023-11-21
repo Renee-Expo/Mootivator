@@ -22,7 +22,7 @@ struct NewGoalView: View {
     @State private var numberOfTimesPerMonth = 1.0
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     @State private var selectedFixedDeadline = Date()
-    @State private var isSaveButtonDisabled = true
+    @State private var showSaveButton = false
     @State private var mondayChosen = false
     @State private var tuesdayChosen = false
     @State private var wednesdayChosen = false
@@ -30,26 +30,27 @@ struct NewGoalView: View {
     @State private var fridayChosen = false
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
-        
+    @Environment(\.dismiss) var dismiss
+    
     @Binding var sourceArray: [Goal]
     var body: some View {
         NavigationStack {
             Form {
                 Section("Goal") {
                     TextField("Enter a Goal here", text: $goalEntered)
-
+                    
                     DatePicker("Deadline", selection: $deadline, displayedComponents: [.date, .hourAndMinute])
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-//                        AnimalPickerView()
-//                        AnimalPickerView(selection: $selectedAnimal)
+                        //                        AnimalPickerView()
+                        //                        AnimalPickerView(selection: $selectedAnimal)
                     }
                 }
-
+                
                 //there will be an animal to redirect to Animal Picker sheet
-
-
+                
+                
                 Section("Current Habit") {
                     TextField(text: $habitEntered) {
                         Text("Enter a Habit")
@@ -61,7 +62,7 @@ struct NewGoalView: View {
                             .tag(index)
                     }
                 }
-
+                
                 if frequency[selectedFrequencyIndex] == "Daily" {
                     DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                 } else if frequency[selectedFrequencyIndex] == "Weekly" {
@@ -76,20 +77,20 @@ struct NewGoalView: View {
                         Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
                     }
                 } else if frequency[selectedFrequencyIndex] == "Fixed" {
-//                    Picker("Days", selection: $selectedDays) {
-//                        ForEach(days, id: \.self) {  day in
-//                            Text(day)
-//                        }
-//                    }
-//                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-//                                .onChange(of: days) {
-//                                    print(days)
-//                                }
-           
-//                    .pickerStyle(InlinePickerStyle())
+                    //                    Picker("Days", selection: $selectedDays) {
+                    //                        ForEach(days, id: \.self) {  day in
+                    //                            Text(day)
+                    //                        }
+                    //                    }
+                    //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
+                    //                                .onChange(of: days) {
+                    //                                    print(days)
+                    //                                }
+                    
+                    //                    .pickerStyle(InlinePickerStyle())
                     
                     //multi-picker isnt working, so we are using "toggle" function instead
-         
+                    
                     Toggle("Monday", isOn: $mondayChosen)
                     Toggle("Tuesday", isOn: $tuesdayChosen)
                     Toggle("Wednesday", isOn: $wednesdayChosen)
@@ -100,9 +101,21 @@ struct NewGoalView: View {
                     
                     DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
-
+                
                 Section("Write something to motivate you") {
                     TextField("You can do it!", text: $motivationalQuote)
+                }
+            }
+            .onChange(of: motivationalQuote) { newValue in
+                showSaveButton = newValue.count > 0
+            }
+            if showSaveButton{
+                Button{
+                    let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                    sourceArray.append(newGoal)
+                    dismiss()
+                } label:{
+                    Text ("Save")
                 }
             }
         }
