@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct AnimalPickerView: View {
     @ObservedObject var goalManager: GoalManager
     @State private var showNewGoalSheet = false
@@ -22,7 +21,7 @@ struct AnimalPickerView: View {
         NavigationView{
             ScrollView(.vertical){
                 LazyVGrid(columns: adaptiveColumns, spacing: 20){
-                    ForEach(animals, id: \.self) { animals in
+                    ForEach(animals, id: \.self) { animal in
                         Button(action: {
                             isAnimalSelected = true
                         }) {
@@ -30,10 +29,16 @@ struct AnimalPickerView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.black, lineWidth: 2) // Outline color and width
                                     .frame(width: 150, height: 150)
+                                    .opacity(animal == selectedAnimal ? 0.5: 1.0)
+                                    .scaleEffect(animal == selectedAnimal ? 1.1: 1.0)
+                                    .onTapGesture {
+                                        selectedAnimal = animal
+                                    }
                                 Image("horse")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 100, height: 100)
+                                    .opacity(animal == selectedAnimal ? 0.5: 1.0)
                             }
                         }
                     }
@@ -46,6 +51,7 @@ struct AnimalPickerView: View {
                         Text("Save")
                             .buttonStyle(.borderedProminent)
                             .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                             .padding()
                             .background(Color("AccentColor"))

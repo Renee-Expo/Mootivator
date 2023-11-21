@@ -43,8 +43,7 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        //                        AnimalPickerView()
-                        //                        AnimalPickerView(selection: $selectedAnimal)
+                        //                        AnimalPickerView(goalManager: GoalManager, selectedAnimal: 0)
                     }
                 }
                 
@@ -105,23 +104,25 @@ struct NewGoalView: View {
                 Section("Write something to motivate you") {
                     TextField("You can do it!", text: $motivationalQuote)
                 }
-            }
-            .onChange(of: motivationalQuote) { newValue in
-                showSaveButton = newValue.count > 0
-            }
-            if showSaveButton{
-                Button{
-                    let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
-                    sourceArray.append(newGoal)
-                    dismiss()
-                } label:{
-                    Text ("Save")
+                Section("Actions") {
+                    Button(action: {
+                        let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                        sourceArray.append(newGoal)
+                        dismiss()
+                    }) {
+                        Text("Save")
+                        
+                    }
                 }
+                .onChange(of: motivationalQuote) { newValue in
+                    showSaveButton = newValue.count > 0
+                }
+                
             }
         }
-        
     }
 }
+        
 
 
 struct NewGoalView_Previews: PreviewProvider {
@@ -129,4 +130,3 @@ struct NewGoalView_Previews: PreviewProvider {
         NewGoalView(sourceArray: .constant([]))
     }
 }
-
