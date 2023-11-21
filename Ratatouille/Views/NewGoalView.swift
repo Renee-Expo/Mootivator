@@ -76,10 +76,10 @@ struct NewGoalView: View {
 //                        }
 //                    }
                     
-                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-                                .onChange(of: days) {
-                                    print(days)
-                                }
+//                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
+//                                .onChange(of: days) {
+//                                    print(days)
+//                                }
                     
                     .pickerStyle(InlinePickerStyle())
                 }
