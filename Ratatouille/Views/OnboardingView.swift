@@ -84,24 +84,24 @@ struct OnboardingView : View {
             
             PageView(title: "Set Goals",
                      subtitle: "Select when you hope to achieve this goal.\n" + "Pick an animal to represent this goal!\n" + "This companion will be shown on the home screen.\n" + "Complete goals to unlock companions.\n",
-                     imageName: "goal_img",
+                     imageName: "goal img",
                      showStartButton: false,
                      showGoalSheet: false,
                      showOnBoarding: $showOnBoarding)
             PageView(title: "Set Current Habits",
-                     subtitle: "Set a habit frequency and target completion date.\n" + "Gradually increase difficulty after achieving each habit to make reaching your final goal easier!", imageName: "habit_img",
+                     subtitle: "Set a habit frequency and target completion date.\n" + "Gradually increase difficulty after achieving each habit to make reaching your final goal easier!", imageName: "habit img",
                      showStartButton: false,
                      showGoalSheet: false,
                      showOnBoarding: $showOnBoarding)
             PageView(title: "Motivate Yourself",
                      subtitle: "Write down a quote, word or phrase that will motivate you to complete your current habits and final goal!\n" +  "This will be shown on the home screen",
-                     imageName: "motivation_img",
+                     imageName: "motivation img",
                      showStartButton: false,
                      showGoalSheet: true,
                      showOnBoarding: $showOnBoarding)
             PageView(title: "Completing habits",
                      subtitle: "To mark ypur habit as complete, click on the day which you had done your habit.\n" + "When you see the pop-up, click the complete button to save your progress",
-                     imageName: "list.clipboard",
+                     imageName: "calendar img",
                      showStartButton: true,
                      showGoalSheet: false,
                      showOnBoarding: $showOnBoarding)
@@ -164,7 +164,7 @@ struct PageView : View {
                 }
                 .sheet(isPresented: $showNewGoalSheet) {
                     // Define the content of the sheet here
-                    Text("This is your goal-setting sheet!")
+                    Text("sheet")
                     // Add any additional views or components you need
                 }
             }

@@ -26,3 +26,4 @@ struct Goal: Identifiable, Codable{
     var isSaveButtonDisabled = Bool() //Save button is still WIP
     
 }
+

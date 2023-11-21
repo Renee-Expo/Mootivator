@@ -21,6 +21,8 @@
 		1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */; };
 		1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */; };
 		1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */; };
+		1E8A3CEB2B0C55ED008771CC /* HabitCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */; };
+		1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */; };
 		99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */; };
 		99B36A9E2B0B3C6A00BD3CC4 /* MultiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
@@ -44,6 +46,8 @@
 		1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditView.swift; sourceTree = "<group>"; };
+		1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletionView.swift; sourceTree = "<group>"; };
+		1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCompletionView.swift; sourceTree = "<group>"; };
 		99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPickerView.swift; sourceTree = "<group>"; };
 		99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPickerView.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,8 @@
 				1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
 				1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */,
+				1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */,
+				1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
 				1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */,
 				1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */,
@@ -218,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */,
+				1E8A3CEB2B0C55ED008771CC /* HabitCompletionView.swift in Sources */,
 				1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */,
 				99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */,
 				1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */,
@@ -230,6 +237,7 @@
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
 				1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */,
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
+				1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */,
 				1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */,
 				1E5DBAD52B0AFA7A00BF7A50 /* Goal.swift in Sources */,
 				070773062B08547F008655E6 /* HomeView.swift in Sources */,
