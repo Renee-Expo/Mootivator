@@ -7,25 +7,25 @@
 
 import SwiftUI
 struct AnimalPickerView: View {
-    @ObservedObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
+    
     @State private var showNewGoalSheet = false
     @Binding var selectedAnimal: Int
     @State var isAnimalSelected: Bool = false
     @State var isAnimalSaved: Bool = false
-    private let animals: [Int] = Array(1...10)
-    private let adaptiveColumns = [
     
-        GridItem(.adaptive(minimum: 170))
-    ]
+    private let animals: [Int] = Array(1...10)
+    private let adaptiveColumns = [ GridItem(.adaptive(minimum: 170)) ]
+    
     var body: some View {
-        NavigationView{
-            ScrollView(.vertical){
-                LazyVGrid(columns: adaptiveColumns, spacing: 20){
+        NavigationView {
+            ScrollView(.vertical) {
+                LazyVGrid(columns: adaptiveColumns, spacing: 20) {
                     ForEach(animals, id: \.self) { animal in
                         Button(action: {
                             isAnimalSelected = true
                         }) {
-                            ZStack{
+                            ZStack {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.black, lineWidth: 2) // Outline color and width
                                     .frame(width: 150, height: 150)
