@@ -119,7 +119,7 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
                                 
                                 isButtonEnabled = true
                                 sourceArray.append(newGoal)
