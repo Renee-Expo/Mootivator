@@ -22,7 +22,6 @@ struct NewGoalView: View {
     @State private var numberOfTimesPerMonth = 1.0
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     @State private var selectedFixedDeadline = Date()
-    @State private var showSaveButton = false
     @State private var mondayChosen = false
     @State private var tuesdayChosen = false
     @State private var wednesdayChosen = false
@@ -30,6 +29,7 @@ struct NewGoalView: View {
     @State private var fridayChosen = false
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
+    @State private var isButtonEnabled = false
     @Environment(\.dismiss) var dismiss
     
     @Binding var sourceArray: [Goal]
@@ -104,16 +104,34 @@ struct NewGoalView: View {
                 Section("Write something to motivate you") {
                     TextField("You can do it!", text: $motivationalQuote)
                 }
-                Section("Actions") {
-                    Button(action: {
-                        let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
-                        sourceArray.append(newGoal)
-                        dismiss()
-                    }) {
-                        Text("Save")
-                            .lineLimit(nil)
-                        
-                        
+                
+                
+                
+                Section{
+                    if goalEntered.isEmpty || habitEntered.isEmpty || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                        Button{
+                            
+                        }label:{
+                            Text("Save")
+                        }
+                        .disabled(!isButtonEnabled)
+                        .frame(maxWidth: .infinity)
+                    } else {
+                        ZStack{
+                            Color.accentColor
+                            Button {
+                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                                
+                                isButtonEnabled = true
+                                sourceArray.append(newGoal)
+                                dismiss()
+                            } label: {
+                                Text("Save")
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            //                            .background(Color.accentColor)
+                        }
                     }
                 }
                 .background(Color.black)
