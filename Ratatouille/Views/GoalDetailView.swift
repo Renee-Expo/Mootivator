@@ -19,11 +19,11 @@ struct GoalDetailView: View {
                 VStack{
                     Text("Current habit")
                     
-                    Text(goal.habitEntered)
+                    Text(goal.habitTitle)
                 }
                 
             }
-            .navigationTitle(goal.goalEntered)
+            .navigationTitle(goal.title)
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarTrailing){
                     Button{
