@@ -8,6 +8,7 @@ import SwiftUI
 
 struct NewGoalView: View {
     
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var goalManager: GoalManager
     
     @State private var goalEntered = ""
@@ -30,7 +31,6 @@ struct NewGoalView: View {
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
     @State private var isButtonEnabled = false
-    @Environment(\.dismiss) var dismiss
     
     @Binding var sourceArray: [Goal]
     var body: some View {

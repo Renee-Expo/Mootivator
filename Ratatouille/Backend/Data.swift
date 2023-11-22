@@ -48,26 +48,55 @@ struct GoalItem : Identifiable, Codable{
 
 struct Goal: Identifiable, Codable {
     var id = UUID ()
-    var goalEntered : String
-    var deadline : Date
-    var habitEntered : String
-    var selectedAnimal : Int
-    var frequency : Array<String>
-    var motivationalQuote : String
-    var selectedFrequencyIndex : Int
-    var selectedDailyDeadline : Date
-    var numberOfTimesPerWeek = 1.0
-    var numberOfTimesPerMonth = 1.0
-    var selectedFixedDeadline : Date
-//    var mondayChosen : Bool     // really inefficient section.
-//    var tuesdayChosen : Bool
-//    var wednesdayChosen : Bool
-//    var thursdayChosen : Bool
-//    var fridayChosen : Bool
-//    var saturdayChosen : Bool
-//    var sundayChosen : Bool
-//    var dayChosen: DayChosen
     
+    var title : String
+    var habitTitle : String
+    var deadline : Date
+    var frequencyOfHabits : String
+    var frequency : Array<String>
+    var selectedFrequencyIndex : Int
+    
+    var selectedAnimal : Int
+    var motivationalQuote : String // does the motivational quote change?
+    
+    var selectedDailyDeadline : Date // is this a time?
+    var selectedFixedDeadline : Date // date + time ?
+    
+    var numberOfTimesPerWeek : Double  = 1.0 // can be computed from frequency
+    var numberOfTimesPerMonth : Double = 1.0 // can be computed from frequency
+    var days : Array<String>   // I would prefer to use an enum or set
+    // special usage
+    enum daysOfTheWeek : Codable, CaseIterable {
+        case monday
+        case tuesday
+        case wednesday
+        case thursday
+        case friday
+        case saturday
+        case sunday
+        
+        var text : String {
+            switch self {
+            case .monday : return "Monday"
+            case .tuesday : return "Tuesday"
+            case .wednesday : return "Wednesday"
+            case .thursday : return "Thursday"
+            case .friday : return "Friday"
+            case .saturday : return "Saturday"
+            case .sunday : return "Sunday"
+            }
+        }
+    }
+    
+ /*
+    var mondayChosen : Bool     // really inefficient section.
+    var tuesdayChosen : Bool
+    var wednesdayChosen : Bool
+    var thursdayChosen : Bool
+    var fridayChosen : Bool
+    var saturdayChosen : Bool
+    var sundayChosen : Bool
+*/
 }
 //enum Day: String, CaseIterable, Codable{
 //    case monday, tuesday, wednesday, thurday, friday, saturday, sunday
