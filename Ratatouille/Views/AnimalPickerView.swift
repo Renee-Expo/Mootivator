@@ -14,10 +14,11 @@ struct AnimalPickerView: View {
     @Binding var selectedAnimal: Int
     @State private var clickedButton: Int? = nil
     @State var isAnimalSaved: Bool = false
-    
     private let animals: [Int] = Array(1...10)
-    private let adaptiveColumns = [ GridItem(.adaptive(minimum: 170)) ]
-    
+    private let adaptiveColumns = [
+        GridItem(.adaptive(minimum: 170))
+    ]
+
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
@@ -57,7 +58,7 @@ struct AnimalPickerView: View {
                         .cornerRadius(8)
                 }
                 .sheet(isPresented: $showNewGoalSheet) {
-                    NewGoalView(sourceArray: $goalManager.goals)
+                    NewGoalView()
                 }
             }
             .padding()

@@ -12,16 +12,14 @@ struct GoalView: View {
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
     var body: some View {
-        
-        
         NavigationStack{
-            List($goalManager.goals){ $goal in
+            List($goalManager.goals) { $goal in
                 NavigationLink {
                     GoalDetailView(goal: $goal)
                 } label:{
                     VStack(alignment: .leading){
-                        Text(goal.goalEntered)
-                        Text(goal.habitEntered)
+                        Text(goal.title)
+                        Text(goal.habitTitle)
                             .font(.footnote)
                             .foregroundStyle(.gray)
                     }
@@ -54,11 +52,11 @@ struct GoalView: View {
                 }
             }
             .sheet(isPresented: $showNewGoalSheet){
-                NewGoalView (sourceArray: $goalManager.goals)
+                NewGoalView()
             }
             .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
                 Button ("Replace", role:.destructive){
-                    goalManager.loadSampleGoals()
+                    goalManager.loadSampleData()
                 }
             }
         }
