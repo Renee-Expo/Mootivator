@@ -134,16 +134,13 @@ struct NewGoalView: View {
                         }
                     }
                 }
-                .background(Color.black)
-                .onChange(of: motivationalQuote) { newValue in
-                    showSaveButton = newValue.count > 0
-                }
+                
                 
             }
+            
         }
     }
 }
-        
 
 
 struct NewGoalView_Previews: PreviewProvider {
