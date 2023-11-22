@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+/*
 class GoalManager: ObservableObject {
     @Published var goals: [Goal] = [] {
         didSet {
@@ -47,3 +47,4 @@ class GoalManager: ObservableObject {
         }
     }
 }
+*/

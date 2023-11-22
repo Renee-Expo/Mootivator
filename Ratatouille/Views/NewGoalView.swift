@@ -8,6 +8,7 @@ import SwiftUI
 
 struct NewGoalView: View {
     
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var goalManager: GoalManager
     
     @State private var goalEntered = ""
@@ -30,9 +31,7 @@ struct NewGoalView: View {
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
     @State private var isButtonEnabled = false
-    @Environment(\.dismiss) var dismiss
     
-    @Binding var sourceArray: [Goal]
     var body: some View {
         NavigationStack {
             Form {
@@ -56,7 +55,7 @@ struct NewGoalView: View {
                     }
                     
                     Picker("Frequency", selection: $selectedFrequencyIndex) {
-                        ForEach(0..<frequency.count) { index in
+                        ForEach(0..<frequency.count, id: \.self) { index in
                             Text(frequency[index])
                                 .tag(index)
                         }
@@ -120,10 +119,11 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
-                                
-                                isButtonEnabled = true
-                                sourceArray.append(newGoal)
+                                #warning("fix this")
+//                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
+//                                
+//                                isButtonEnabled = true
+//                                goalManager.goals.append(newGoal)
                                 dismiss()
                             } label: {
                                 Text("Save")
@@ -145,7 +145,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(sourceArray: .constant([]))
+        NewGoalView()
             .environmentObject(GoalManager())
     }
 }

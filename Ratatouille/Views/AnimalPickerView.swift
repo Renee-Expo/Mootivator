@@ -6,81 +6,69 @@
 //
 
 import SwiftUI
+
 struct AnimalPickerView: View {
     @EnvironmentObject var goalManager: GoalManager
+    @State private var animalImages = ["HappyCow", "HappySheep", "HappyChicken", "HappyGoat", "HappyDog", "HappyPig", "HappyCat", "HappyHorse", "HappyDuck", "HappyRabbit"]
     @State private var showNewGoalSheet = false
     @Binding var selectedAnimal: Int
-    @State var isAnimalSelected: Bool = false
+    @State private var clickedButton: Int? = nil
     @State var isAnimalSaved: Bool = false
     private let animals: [Int] = Array(1...10)
     private let adaptiveColumns = [
-    
         GridItem(.adaptive(minimum: 170))
     ]
+
     var body: some View {
-        NavigationView{
-            ScrollView(.vertical){
-                LazyVGrid(columns: adaptiveColumns, spacing: 20){
+        NavigationView {
+            ScrollView(.vertical) {
+                LazyVGrid(columns: adaptiveColumns, spacing: 20) {
                     ForEach(animals, id: \.self) { animal in
                         Button(action: {
-                            isAnimalSelected = true
+                            buttonTapped(animal)
                         }) {
-                            ZStack{
+                            ZStack {
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.black, lineWidth: 2) // Outline color and width
+                                    .stroke(Color.black, lineWidth: 2)
                                     .frame(width: 150, height: 150)
-                                    .opacity(animal == selectedAnimal ? 0.5: 1.0)
-                                    .scaleEffect(animal == selectedAnimal ? 1.1: 1.0)
+                                    .opacity(clickedButton == animal ? 0.5 : 1.0)
                                     .onTapGesture {
-                                        selectedAnimal = animal
+                                        buttonTapped(animal)
                                     }
-                                Image("horse")
+                                Image(animalImages[animal - 1])
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 100, height: 100)
-                                    .opacity(animal == selectedAnimal ? 0.5: 1.0)
+                                    .frame(width: 150, height: 150)
+                                    .opacity(clickedButton == animal ? 0.5 : 1.0)
                             }
                         }
                     }
                 }
-                if isAnimalSelected == true{
-                    Button(action: {
-                        isAnimalSaved = true
-                        
-                    }) {
-                        Text("Save")
-                            .buttonStyle(.borderedProminent)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color("AccentColor"))
-                            .cornerRadius(8)
-                    }
-                    .sheet(isPresented: $showNewGoalSheet){
-                        NewGoalView (sourceArray: $goalManager.goals)
-                    }
+
+                Button(action: {
+                    isAnimalSaved = true
+                }) {
+                    Text("Save")
+                        .buttonStyle(.borderedProminent)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color("AccentColor"))
+                        .cornerRadius(8)
+                }
+                .sheet(isPresented: $showNewGoalSheet) {
+                    NewGoalView()
                 }
             }
             .padding()
             .navigationTitle("Pick your companion!")
         }
+    }
 
-//        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-//        Button(action: {
-//            showNewGoalSheet = true
-//        }) {
-//            Text("Set your first goal!")
-//                .frame(width: 200, height: 50)
-//                .foregroundColor(.white)
-//                .background(Color("AccentColor"))
-//                .cornerRadius(8)
-//        }
-//        .sheet(isPresented: $showNewGoalSheet) {
-//            // Define the content of the sheet here
-//            Text("sheet")
-//            // Add any additional views or components you need
-//        }
+    func buttonTapped(_ animal: Int) {
+        clickedButton = animal
+        selectedAnimal = animal
     }
 }
 
