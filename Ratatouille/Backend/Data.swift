@@ -34,8 +34,7 @@ struct Animal : Identifiable, Codable {
     var emotion : Int
     var kind : AnimalSelection         // what type/kind/species the animal is
 }
-// change to Goal from Goal.swift? 
-
+// change to Goal from Goal.swift?
 struct GoalItem : Identifiable, Codable{
     var id = UUID()
     
@@ -43,6 +42,9 @@ struct GoalItem : Identifiable, Codable{
     var animal : Animal
 }
 
+//enum DayChosen {
+//    case monday, tuesday, wednesday, thursday, friday, saturday, sunday
+//}
 
 struct Goal: Identifiable, Codable {
     var id = UUID ()
@@ -102,9 +104,9 @@ struct Goal: Identifiable, Codable {
 
 extension Goal {
     
-    static let sampleGoals = [
-        Goal(goalEntered: "Get A for Math", deadline: <#T##Date#>, habitEntered: "Do one Math practice paper daily", frequencyOfHabits: <#T##String#>, selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: <#T##Int#>, numberOfTimesPerMonth: <#T##Int#>, days: <#T##Array<String>#>, selectedFixedDeadline: <#T##Date#>),
-        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", frequencyOfHabits: <#T##String#>, selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: <#T##Int#>, numberOfTimesPerMonth: <#T##Int#>, days: <#T##Array<String>#>, selectedFixedDeadline: <#T##Date#>)
+    static let sampleGoals: [Goal] = [
+//        Goal(goalEntered: "Get A for Math", deadline: <#T##Date#>, habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double,  selectedFixedDeadline: <#T##Date#>),
+//        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
     ]
     
 }

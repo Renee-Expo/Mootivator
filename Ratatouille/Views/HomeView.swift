@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @EnvironmentObject var goalManager: GoalManager
+    
     var chevronWidth : Double = 15
     @State var indexItem : Int = 0
     @State var selectedDate : Date = Date()
@@ -56,5 +59,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(GoalManager())
     }
 }

@@ -10,7 +10,10 @@ import SwiftUI
 // Don't code in this View, its the main holding view, so tab bars, sidebars, etc.
 
 struct ContentView: View {
+    
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
+    @EnvironmentObject var goalManager: GoalManager
+    
     var body: some View {
         TabView {
             HomeView()
@@ -18,7 +21,7 @@ struct ContentView: View {
                     Text("Home")
                     Image(systemName: "house")
                 }
-            GoalView(goalManager: GoalManager())
+            GoalView()
                 .tabItem {
                     Text("Goals")
                     Image(systemName: "star.fill")
@@ -43,5 +46,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(GoalManager())
     }
 }

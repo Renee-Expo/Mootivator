@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GoalView: View {
-    @ObservedObject var goalManager: GoalManager
+    @EnvironmentObject var goalManager: GoalManager
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
     var body: some View {
@@ -67,6 +67,7 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(goalManager: GoalManager())
+        GoalView()
+            .environmentObject(GoalManager())
     }
 }

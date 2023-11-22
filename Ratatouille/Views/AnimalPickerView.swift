@@ -86,6 +86,7 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView(goalManager: GoalManager(), selectedAnimal: .constant(0))
+        AnimalPickerView(selectedAnimal: .constant(0))
+            .environmentObject(GoalManager())
     }
 }

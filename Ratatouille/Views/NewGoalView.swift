@@ -9,11 +9,11 @@ import SwiftUI
 struct NewGoalView: View {
     
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var goalManager: GoalManager
     
     @State private var goalEntered = ""
     @State private var deadline = Date()
     @State private var habitEntered = ""
-    @State private var frequencyOfHabits = ""
     @State private var selectedAnimal: Int = 0
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
@@ -22,7 +22,6 @@ struct NewGoalView: View {
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var numberOfTimesPerMonth = 1.0
-    var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     @State private var selectedFixedDeadline = Date()
     @State private var mondayChosen = false
     @State private var tuesdayChosen = false
@@ -121,7 +120,7 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
                                 
                                 isButtonEnabled = true
                                 sourceArray.append(newGoal)
@@ -147,5 +146,6 @@ struct NewGoalView: View {
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalView(sourceArray: .constant([]))
+            .environmentObject(GoalManager())
     }
 }
