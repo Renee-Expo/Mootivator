@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var goalManager: GoalManager
+    @Environment(\.colorScheme) var colorScheme
     
     var chevronWidth : Double = 15
     @State var indexItem : Int = 0
@@ -31,10 +32,15 @@ struct HomeView: View {
                 }
                 Spacer()
                 // add image view here? should be segmented control
-                Image(systemName: "photo")
-                    .resizable()
+//                Image(systemName: "photo")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .padding()
+                
+                ShowingAnimalSegmentedControlElement(selection: $indexItem)
+                    .frame(width: 200)
                     .scaledToFit()
-                    .padding()
+                
                 Button {
                     // move right
                 } label: {
@@ -47,11 +53,16 @@ struct HomeView: View {
             .padding(.horizontal)
             Spacer()
             // Sheetview here, find a way to remove the darkening background and covering of the navigation bar
-            DatePicker(selection: $selectedDate, in: ...Date.now, displayedComponents: .date) {
+            DatePicker(selection: $selectedDate, displayedComponents: .date) {
                 Text("Select a date")
             }
             .datePickerStyle(.graphical)
             .padding(10)
+            .background()
+        }
+        .background {
+            Color(.backgroundColors)
+                .ignoresSafeArea()
         }
     }
 }
