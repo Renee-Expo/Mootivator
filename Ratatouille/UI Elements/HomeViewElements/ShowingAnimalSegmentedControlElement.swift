@@ -26,6 +26,8 @@ struct ShowingAnimalSegmentedControlElement: View {
     }
 }
 
-#Preview {
-    ShowingAnimalSegmentedControlElement(selection: .constant(0))
+struct AnimalPickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        ShowingAnimalSegmentedControlElement(selection: .constant(0))
+    }
 }

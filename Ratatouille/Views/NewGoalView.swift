@@ -111,9 +111,12 @@ struct NewGoalView: View {
                         dismiss()
                     }) {
                         Text("Save")
+                            .lineLimit(nil)
+                        
                         
                     }
                 }
+                .background(Color.black)
                 .onChange(of: motivationalQuote) { newValue in
                     showSaveButton = newValue.count > 0
                 }
