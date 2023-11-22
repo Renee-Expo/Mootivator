@@ -11,6 +11,8 @@ import SwiftUI
 // GoalPersistence --------------------------------------------------------
 // final class just means no more child classes
 final class GoalItemManager: ItemManager {
+    typealias T = GoalItem
+    
     @Published var items: [GoalItem] = [] { didSet { write() } }
     static var shared: GoalItemManager = .init()
     static var saveLocation: FileSystem.FileName = .GoalItemManager

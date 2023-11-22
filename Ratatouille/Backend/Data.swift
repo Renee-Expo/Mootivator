@@ -34,15 +34,17 @@ struct Animal : Identifiable, Codable {
     var emotion : Int
     var kind : AnimalSelection         // what type/kind/species the animal is
 }
-// change to Goal from Goal.swift? 
-/*
+// change to Goal from Goal.swift?
 struct GoalItem : Identifiable, Codable{
     var id = UUID()
     
     var title : String
     var animal : Animal
 }
-*/
+
+//enum DayChosen {
+//    case monday, tuesday, wednesday, thursday, friday, saturday, sunday
+//}
 
 struct Goal: Identifiable, Codable {
     var id = UUID ()
@@ -56,9 +58,8 @@ struct Goal: Identifiable, Codable {
     var motivationalQuote : String
     var selectedFrequencyIndex : Int
     var selectedDailyDeadline : Date
-    var numberOfTimesPerWeek : Int
-    var numberOfTimesPerMonth : Int
-    var days : Array<String>
+    var numberOfTimesPerWeek = 1.0
+    var numberOfTimesPerMonth = 1.0
     var selectedFixedDeadline : Date
     var isSaveButtonDisabled : Bool     // Save button is still work in progress
     var mondayChosen : Bool     // really inefficient section.
@@ -68,16 +69,18 @@ struct Goal: Identifiable, Codable {
     var fridayChosen : Bool
     var saturdayChosen : Bool
     var sundayChosen : Bool
+//    var dayChosen: DayChosen
     
 }
 
 extension Goal {
     
     //Todo.sampleTodos
-    static let sampleGoals = [
-        Goal(goalEntered: "Get A for Math", habitEntered: "Do one Math practice paper daily"),
-        Goal(goalEntered: "Lead a healthier life", habitEntered: "Run 2km")
-    ]
+//    static let sampleGoals = [
+//        Goal(goalEntered: "Get A for Math", deadline: .now, habitEntered: "Eating", frequencyOfHabits: "Weekly", selectedAnimal: 0, frequency: [], motivationalQuote: "Hello world", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, selectedFixedDeadline: <#T##Date#>, isSaveButtonDisabled: <#T##Bool#>, mondayChosen: <#T##Bool#>, tuesdayChosen: <#T##Bool#>, wednesdayChosen: <#T##Bool#>, thursdayChosen: <#T##Bool#>, fridayChosen: <#T##Bool#>, saturdayChosen: <#T##Bool#>, sundayChosen: <#T##Bool#>)
+//        Goal(goalEntered: "Get A for Math", habitEntered: "Do one Math practice paper daily"),
+//        Goal(goalEntered: "Lead a healthier life", habitEntered: "Run 2km")
+//    ] 
     
 }
 

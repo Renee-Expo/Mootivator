@@ -14,18 +14,20 @@ struct ShowingAnimalSegmentedControlElement: View {
     
     var body: some View {
         VStack {
-            Picker(selection: $selection) {
-                ForEach($goalItemList.items, id: \.id ) { $goal in
-                    Text(goal.title)
-                }
-            } label: {
+//            Picker(selection: $selection) {
+//                ForEach($goalItemList.items, id: \.id ) { $goal in
+//                    Text(goal.title)
+//                }
+//            } label: {
                 Text("Segmented Control")
-            }
-            .pickerStyle(.segmented)
+//            }
+//            .pickerStyle(.segmented)
         }
     }
 }
 
-#Preview {
-    ShowingAnimalSegmentedControlElement(selection: .constant(0))
+struct ShowingAnimalSegmentedControlElement_Previews: PreviewProvider {
+    static var previews: some View {
+        ShowingAnimalSegmentedControlElement(selection: .constant(0))
+    }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct AnimalPickerView: View {
-    @ObservedObject var goalManager: GoalManager
+    @EnvironmentObject var goalManager: GoalManager
     @State private var showNewGoalSheet = false
     @Binding var selectedAnimal: Int
     @State var isAnimalSelected: Bool = false
@@ -86,6 +86,7 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView(goalManager: GoalManager(), selectedAnimal: .constant(0))
+        AnimalPickerView(selectedAnimal: .constant(0))
+            .environmentObject(GoalManager())
     }
 }

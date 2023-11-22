@@ -20,7 +20,6 @@ struct NewGoalView: View {
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var numberOfTimesPerMonth = 1.0
-    var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     @State private var selectedFixedDeadline = Date()
     @State private var showSaveButton = false
     @State private var mondayChosen = false
@@ -65,13 +64,13 @@ struct NewGoalView: View {
                         DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                     } else if frequency[selectedFrequencyIndex] == "Weekly" {
                         VStack {
-                            Text("Number of times per week: \(Int(numberOfTimesPerWeek.rounded()))")
+                            Text("Number of times per week: \(Double(numberOfTimesPerWeek.rounded()))")
                             
                             Slider(value: $numberOfTimesPerWeek, in: 1...7, step: 1)
                         }
                     } else if frequency[selectedFrequencyIndex] == "Monthly" {
                         VStack {
-                            Text("Number of times per month: \(Int(numberOfTimesPerMonth.rounded()))")
+                            Text("Number of times per month: \(Double(numberOfTimesPerMonth.rounded()))")
                             Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
@@ -106,7 +105,7 @@ struct NewGoalView: View {
                 }
                 Section("Actions") {
                     Button(action: {
-                        let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Int(numberOfTimesPerWeek), numberOfTimesPerMonth: Int(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
+                        let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline, isSaveButtonDisabled: false, mondayChosen: mondayChosen, tuesdayChosen: tuesdayChosen, wednesdayChosen: wednesdayChosen, thursdayChosen: thursdayChosen, fridayChosen: fridayChosen, saturdayChosen: saturdayChosen, sundayChosen: sundayChosen)
                         sourceArray.append(newGoal)
                         dismiss()
                     }) {

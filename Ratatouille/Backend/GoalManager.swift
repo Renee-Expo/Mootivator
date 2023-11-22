@@ -34,7 +34,7 @@ class GoalManager: ObservableObject {
     }
     
     func loadSampleGoals(){
-        goals = Goal.sampleGoals
+//        goals = Goal.sampleGoals
     }
     
     func load() {

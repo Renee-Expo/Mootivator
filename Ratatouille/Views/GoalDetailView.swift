@@ -4,9 +4,7 @@
 //
 //  Created by Kaveri Mi on 19/11/23.
 //
-
 import SwiftUI
-
 struct GoalDetailView: View {
     
     @Binding var goal: Goal
@@ -41,16 +39,15 @@ struct GoalDetailView: View {
                 }
             }
             .sheet(isPresented: $showGoalDetailSheet){
-                GoalEditView ()
+                GoalEditView (goal: $goal)
             }
             
         }
         
     }
 }
-
-struct GoalDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        GoalDetailView(goal: .constant(Goal()))
-    }
-}
+//struct GoalDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GoalDetailView(goal: .constant(Goal()))
+//    }
+//}
