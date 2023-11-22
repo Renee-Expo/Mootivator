@@ -13,7 +13,6 @@ struct NewGoalView: View {
     @State private var goalEntered = ""
     @State private var deadline = Date()
     @State private var habitEntered = ""
-    @State private var frequencyOfHabits = ""
     @State private var selectedAnimal: Int = 0
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
@@ -66,13 +65,13 @@ struct NewGoalView: View {
                         DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                     } else if frequency[selectedFrequencyIndex] == "Weekly" {
                         VStack {
-                            Text("Number of times per week: \(Double(numberOfTimesPerWeek.rounded()))")
+                            Text("Number of times per week: \(Int(numberOfTimesPerWeek.rounded()))")
                             
                             Slider(value: $numberOfTimesPerWeek, in: 1...7, step: 1)
                         }
                     } else if frequency[selectedFrequencyIndex] == "Monthly" {
                         VStack {
-                            Text("Number of times per month: \(Double(numberOfTimesPerMonth.rounded()))")
+                            Text("Number of times per month: \(Int(numberOfTimesPerMonth.rounded()))")
                             Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
@@ -121,7 +120,7 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, frequencyOfHabits: frequencyOfHabits, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
+                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
                                 
                                 isButtonEnabled = true
                                 sourceArray.append(newGoal)

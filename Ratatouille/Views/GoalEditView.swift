@@ -41,13 +41,13 @@ struct GoalEditView: View {
                 }
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Weekly" {
                     VStack {
-                        Text("Number of times per week: \(Double(goal.numberOfTimesPerWeek.rounded()))")
+                        Text("Number of times per week: \(Int(goal.numberOfTimesPerWeek.rounded()))")
                         Slider(value: $goal.numberOfTimesPerWeek, in: 1...7, step: 1)
                     }
                 }
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Monthly" {
                     VStack {
-                        Text("Number of times per month: \(Double(goal.numberOfTimesPerMonth.rounded()))")
+                        Text("Number of times per month: \(Int(goal.numberOfTimesPerMonth.rounded()))")
                         Slider(value: $goal.numberOfTimesPerMonth, in: 1...31, step: 1)
                     }
                 }
