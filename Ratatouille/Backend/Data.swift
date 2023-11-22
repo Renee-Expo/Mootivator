@@ -34,7 +34,7 @@ struct Animal : Identifiable, Codable {
     var emotion : Int
     var kind : AnimalSelection         // what type/kind/species the animal is
 }
-
+// change to Goal from Goal.swift? 
 struct GoalItem : Identifiable, Codable{
     var id = UUID()
     
