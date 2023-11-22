@@ -74,14 +74,14 @@ struct Goal: Identifiable, Codable {
 //    case monday, tuesday, wednesday, thurday, friday, saturday, sunday
 //}
 
-extension Goal {
-    
-    static let sampleGoals = [
-        Goal(goalEntered: "Get A for Math", deadline: <#T##Date#>, habitEntered: "Do one Math practice paper daily", frequencyOfHabits: <#T##String#>, selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double,  selectedFixedDeadline: <#T##Date#>),
-        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", frequencyOfHabits: <#T##String#>, selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
-    ]
-    
-}
+//extension Goal {
+//
+//    static let sampleGoals = [
+//        Goal(goalEntered: "Get A for Math", deadline: <#T##Date#>, habitEntered: "Do one Math practice paper daily", frequencyOfHabits: <#T##String#>, selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double,  selectedFixedDeadline: <#T##Date#>),
+//        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", frequencyOfHabits: <#T##String#>, selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
+//    ]
+//
+//}
 
 var autonomy: Double = 0 // not sure if this will/can be used
 class UserMetaData : Identifiable, Codable { // for Gradual Autonomy

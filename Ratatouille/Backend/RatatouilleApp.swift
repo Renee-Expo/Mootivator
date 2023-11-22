@@ -15,7 +15,7 @@ struct RatatouilleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(goalManager)
+                .environmentObject(GoalManager())
         }
     }
 }
