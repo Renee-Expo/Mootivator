@@ -7,7 +7,7 @@
 import SwiftUI
 struct GoalEditView: View {
     
-    // @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var goalManager: GoalManager
     @Binding var goal: Goal
     @State private var selectedAnimal = 0
     
@@ -19,7 +19,6 @@ struct GoalEditView: View {
                     TextField("Enter a Goal here", text: $goal.goalEntered)
                     DatePicker("Deadline", selection: $goal.deadline, displayedComponents: [.date, .hourAndMinute])
                 }
-                //FormStyleConfiguration
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
                         AnimalPickerView(selectedAnimal: $selectedAnimal)
@@ -40,18 +39,15 @@ struct GoalEditView: View {
                 if goal.frequency[goal.selectedFrequencyIndex] == "Daily" {
                     DatePicker("Deadline", selection: $goal.selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
-                
-                //formstyleconfiguration
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Weekly" {
                     VStack {
-                        Text("Number of times per week: \(Double(goal.numberOfTimesPerWeek.rounded()))")
+                        Text("Number of times per week: \(Int(goal.numberOfTimesPerWeek.rounded()))")
                         Slider(value: $goal.numberOfTimesPerWeek, in: 1...7, step: 1)
                     }
                 }
-                //formstyleconfiguration
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Monthly" {
                     VStack {
-                        Text("Number of times per month: \(Double(goal.numberOfTimesPerMonth.rounded()))")
+                        Text("Number of times per month: \(Int(goal.numberOfTimesPerMonth.rounded()))")
                         Slider(value: $goal.numberOfTimesPerMonth, in: 1...31, step: 1)
                     }
                 }
@@ -68,13 +64,13 @@ struct GoalEditView: View {
 //
 //                    .pickerStyle(InlinePickerStyle())
                     //multi-picker isnt working, so we are using "toggle" function instead
-                    Toggle("Monday", isOn: $goal.mondayChosen)
-                    Toggle("Tuesday", isOn: $goal.tuesdayChosen)
-                    Toggle("Wednesday", isOn: $goal.wednesdayChosen)
-                    Toggle("Thursday", isOn: $goal.thursdayChosen)
-                    Toggle("Friday", isOn: $goal.fridayChosen)
-                    Toggle("Saturday", isOn: $goal.saturdayChosen)
-                    Toggle("Sunday", isOn: $goal.sundayChosen)
+//                    Toggle("Monday", isOn: $goal.mondayChosen)
+//                    Toggle("Tuesday", isOn: $goal.tuesdayChosen)
+//                    Toggle("Wednesday", isOn: $goal.wednesdayChosen)
+//                    Toggle("Thursday", isOn: $goal.thursdayChosen)
+//                    Toggle("Friday", isOn: $goal.fridayChosen)
+//                    Toggle("Saturday", isOn: $goal.saturdayChosen)
+//                    Toggle("Sunday", isOn: $goal.sundayChosen)
                     DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
                 Section("Write something to motivate you") {
@@ -87,8 +83,6 @@ struct GoalEditView: View {
 //struct GoalEditView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        GoalEditView(goal: .constant(Goal()))
-//    .environmentObject(GoalManager())
+//            .environmentObject(GoalManager())
 //    }
 //}
-//
-
