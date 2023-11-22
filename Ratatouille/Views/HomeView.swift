@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     var chevronWidth : Double = 15
     @State var indexItem : Int = 0
+    @State var selectedDate : Date = Date()
     
     var body: some View {
         VStack {
@@ -42,6 +43,11 @@ struct HomeView: View {
             .padding(.horizontal)
             Spacer()
             // Sheetview here, find a way to remove the darkening background and covering of the navigation bar
+            DatePicker(selection: $selectedDate, in: ...Date.now, displayedComponents: .date) {
+                Text("Select a date")
+            }
+            .datePickerStyle(.graphical)
+            .padding(10)
         }
     }
 }
