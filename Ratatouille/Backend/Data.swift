@@ -48,7 +48,6 @@ struct GoalItem : Identifiable, Codable{
 
 struct Goal: Identifiable, Codable {
     var id = UUID ()
-    
     var goalEntered : String
     var deadline : Date
     var habitEntered : String
@@ -61,7 +60,6 @@ struct Goal: Identifiable, Codable {
     var numberOfTimesPerWeek = 1.0
     var numberOfTimesPerMonth = 1.0
     var selectedFixedDeadline : Date
-    var isSaveButtonDisabled : Bool     // Save button is still work in progress
     var mondayChosen : Bool     // really inefficient section.
     var tuesdayChosen : Bool
     var wednesdayChosen : Bool
@@ -72,15 +70,16 @@ struct Goal: Identifiable, Codable {
 //    var dayChosen: DayChosen
     
 }
+//enum Day: String, CaseIterable, Codable{
+//    case monday, tuesday, wednesday, thurday, friday, saturday, sunday
+//}
 
 extension Goal {
     
-    //Todo.sampleTodos
-//    static let sampleGoals = [
-//        Goal(goalEntered: "Get A for Math", deadline: .now, habitEntered: "Eating", frequencyOfHabits: "Weekly", selectedAnimal: 0, frequency: [], motivationalQuote: "Hello world", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, selectedFixedDeadline: <#T##Date#>, isSaveButtonDisabled: <#T##Bool#>, mondayChosen: <#T##Bool#>, tuesdayChosen: <#T##Bool#>, wednesdayChosen: <#T##Bool#>, thursdayChosen: <#T##Bool#>, fridayChosen: <#T##Bool#>, saturdayChosen: <#T##Bool#>, sundayChosen: <#T##Bool#>)
-//        Goal(goalEntered: "Get A for Math", habitEntered: "Do one Math practice paper daily"),
-//        Goal(goalEntered: "Lead a healthier life", habitEntered: "Run 2km")
-//    ] 
+    static let sampleGoals = [
+        Goal(goalEntered: "Get A for Math", deadline: <#T##Date#>, habitEntered: "Do one Math practice paper daily", frequencyOfHabits: <#T##String#>, selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: <#T##Int#>, numberOfTimesPerMonth: <#T##Int#>, days: <#T##Array<String>#>, selectedFixedDeadline: <#T##Date#>),
+        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", frequencyOfHabits: <#T##String#>, selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: <#T##Int#>, numberOfTimesPerMonth: <#T##Int#>, days: <#T##Array<String>#>, selectedFixedDeadline: <#T##Date#>)
+    ]
     
 }
 
