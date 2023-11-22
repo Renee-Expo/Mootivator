@@ -8,6 +8,8 @@ import SwiftUI
 
 struct NewGoalView: View {
     
+    @EnvironmentObject var goalManager: GoalManager
+    
     @State private var goalEntered = ""
     @State private var deadline = Date()
     @State private var habitEntered = ""
@@ -145,5 +147,6 @@ struct NewGoalView: View {
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalView(sourceArray: .constant([]))
+            .environmentObject(GoalManager())
     }
 }

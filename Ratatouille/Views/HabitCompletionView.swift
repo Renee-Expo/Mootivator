@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HabitCompletionView: View {
+    @EnvironmentObject var goalManager: GoalManager
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
@@ -16,5 +17,6 @@ struct HabitCompletionView: View {
 struct HabitCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         HabitCompletionView()
+            .environmentObject(GoalManager())
     }
 }

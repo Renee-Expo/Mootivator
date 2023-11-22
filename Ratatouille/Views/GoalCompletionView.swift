@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GoalCompletionView: View {
     var body: some View {
+        @EnvironmentObject var goalManager: GoalManager
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
@@ -16,5 +17,6 @@ struct GoalCompletionView: View {
 struct GoalCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         GoalCompletionView()
+            .environmentObject(GoalManager())
     }
 }

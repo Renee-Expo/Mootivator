@@ -7,6 +7,7 @@
 import SwiftUI
 struct GoalEditView: View {
     
+    // @EnvironmentObject var goalManager: GoalManager
     @Binding var goal: Goal
     @State private var selectedAnimal = 0
     
@@ -43,14 +44,14 @@ struct GoalEditView: View {
                 //formstyleconfiguration
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Weekly" {
                     VStack {
-                        Text("Number of times per week: \(Int(goal.numberOfTimesPerWeek.rounded()))")
+                        Text("Number of times per week: \(Double(goal.numberOfTimesPerWeek.rounded()))")
                         Slider(value: $goal.numberOfTimesPerWeek, in: 1...7, step: 1)
                     }
                 }
                 //formstyleconfiguration
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Monthly" {
                     VStack {
-                        Text("Number of times per month: \(Int(goal.numberOfTimesPerMonth.rounded()))")
+                        Text("Number of times per month: \(Double(goal.numberOfTimesPerMonth.rounded()))")
                         Slider(value: $goal.numberOfTimesPerMonth, in: 1...31, step: 1)
                     }
                 }
@@ -86,6 +87,7 @@ struct GoalEditView: View {
 //struct GoalEditView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        GoalEditView(goal: .constant(Goal()))
+//    .environmentObject(GoalManager())
 //    }
 //}
 //

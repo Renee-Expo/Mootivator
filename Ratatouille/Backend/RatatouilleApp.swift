@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct RatatouilleApp: App {
     
-    @StateObject var goalManager = GoalManager()
+    @EnvironmentObject var goalManager: GoalManager
     
     var body: some Scene {
         WindowGroup {
