@@ -25,6 +25,20 @@ struct HabitCompletionView: View {
                 .multilineTextAlignment(.center)
                 .fontWeight(.medium)
                 .padding()
+            if isHabitCompleted == false{
+                Button {
+                    // goal edit view
+                } label: {
+                    Text("Set your next current habit!")
+                        .frame(width: 300, height: 50)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .background(Color("AccentColor"))
+                        .cornerRadius(8)
+                        .padding()
+                }
+
+            }
         }
         
         
@@ -33,7 +47,7 @@ struct HabitCompletionView: View {
 
 struct HabitCompletionView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitCompletionView(isHabitCompleted: true)
+        HabitCompletionView(isHabitCompleted: false)
             .environmentObject(GoalManager())
     }
 }
