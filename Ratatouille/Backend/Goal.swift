@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Goal: Identifiable, Codable{
+struct Goal: Identifiable, Codable {
     var id = UUID ()
     
     var goalEntered : String
@@ -24,12 +24,22 @@ struct Goal: Identifiable, Codable{
     var days : Array<String>
     var selectedFixedDeadline : Date
     var isSaveButtonDisabled : Bool     // Save button is still work in progress
-    var mondayChosen : Bool
+    var mondayChosen : Bool     // really inefficient section.
     var tuesdayChosen : Bool
     var wednesdayChosen : Bool
     var thursdayChosen : Bool
     var fridayChosen : Bool
     var saturdayChosen : Bool
     var sundayChosen : Bool
+    
+}
+
+extension Goal {
+    
+    //Todo.sampleTodos
+    static let sampleGoals = [
+        Goal(goalEntered: "Get A for Math", habitEntered: "Do one Math practice paper daily"),
+        Goal(goalEntered: "Lead a healthier life", habitEntered: "Run 2km")
+    ]
     
 }

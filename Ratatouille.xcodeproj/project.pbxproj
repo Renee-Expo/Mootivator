@@ -17,7 +17,6 @@
 		1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */; };
 		1E5DBAD42B0AFA7A00BF7A50 /* GoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */; };
 		1E5DBAD52B0AFA7A00BF7A50 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */; };
-		1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */; };
 		1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */; };
 		1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */; };
 		1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */; };
@@ -44,7 +43,6 @@
 		1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalManager.swift; sourceTree = "<group>"; };
 		1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
-		1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGoals.swift; sourceTree = "<group>"; };
 		1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */,
 				1E5DBAD22B0AFA7A00BF7A50 /* Goal.swift */,
 				1E5DBAD12B0AFA7A00BF7A50 /* GoalManager.swift */,
-				1E5DBAD32B0AFA7A00BF7A50 /* SampleGoals.swift */,
 				078EFB652AF5FD48003064A6 /* Persistence.swift */,
 				0781EE642B085CC7003B8DC5 /* Data.swift */,
 			);
@@ -231,7 +228,6 @@
 			files = (
 				1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */,
 				1E8A3CEB2B0C55ED008771CC /* HabitCompletionView.swift in Sources */,
-				1E5DBAD62B0AFA7A00BF7A50 /* SampleGoals.swift in Sources */,
 				07195B472B0D97AE001CC92B /* ShowingAnimalSegmentedControlElement.swift in Sources */,
 				99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */,
 				1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */,
