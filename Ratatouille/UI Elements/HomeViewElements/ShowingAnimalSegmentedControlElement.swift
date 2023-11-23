@@ -16,18 +16,22 @@ struct ShowingAnimalSegmentedControlElement: View {
         VStack {
             Picker(selection: $selection) {
                 ForEach($goalItemList.goals, id: \.id ) { $goal in
-                    Text(goal.title)
+                    VStack {
+                        Text(goal.selectedAnimal.name)
+                    }
                 }
             } label: {
                 Text("Segmented Control")
             }
             .pickerStyle(.segmented)
+
         }
     }
 }
 
 struct ShowingAnimalSegmentedControlElement_Previews: PreviewProvider {
     static var previews: some View {
-        ShowingAnimalSegmentedControlElement(goalItemList: .init(), selection: .constant(0))
+        ShowingAnimalSegmentedControlElement(selection: .constant(0))
+            .environmentObject(GoalManager())
     }
 }
