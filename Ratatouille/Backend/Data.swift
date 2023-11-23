@@ -126,3 +126,7 @@ var autonomy: Double = 0 // not sure if this will/can be used
 class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
     // code here
 }
+
+
+// IMAGE CATALOG ------------------------
+// use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
