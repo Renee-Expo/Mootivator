@@ -42,11 +42,10 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        //                        AnimalPickerView(goalManager: GoalManager, selectedAnimal: 0)
+                        AnimalPickerView(selectedAnimal: $selectedAnimal)
+
                     }
                 }
-                
-                //there will be an animal to redirect to Animal Picker sheet
                 
                 
                 Section("Current Habit") {

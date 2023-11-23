@@ -9,16 +9,16 @@ import SwiftUI
 
 struct AnimalPickerView: View {
     @EnvironmentObject var goalManager: GoalManager
-    @State private var animalImages = ["HappyCow", "HappySheep", "HappyChicken", "HappyGoat", "HappyDog", "HappyPig", "HappyCat", "HappyHorse", "HappyDuck", "HappyRabbit"]
-    @State private var showNewGoalSheet = false
+    @Environment(\.dismiss) var dismiss
+    @State private var animalImages = ["Cow_Happy", "Sheep_Happy", "Chicken_Happy", "Goat_Happy", "Dog_Happy", "Pig_Happy", "Cat_Happy", "Horse_Happy", "Duck_Happy", "Rabbit_Happy"]
     @Binding var selectedAnimal: Int
+    @State private var isSaveButtonEnabled = false
     @State private var clickedButton: Int? = nil
-    @State var isAnimalSaved: Bool = false
     private let animals: [Int] = Array(1...10)
     private let adaptiveColumns = [
         GridItem(.adaptive(minimum: 170))
     ]
-
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
@@ -44,31 +44,40 @@ struct AnimalPickerView: View {
                         }
                     }
                 }
-
-                Button(action: {
-                    isAnimalSaved = true
-                }) {
-                    Text("Save")
-                        .buttonStyle(.borderedProminent)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color("AccentColor"))
-                        .cornerRadius(8)
-                }
-                .sheet(isPresented: $showNewGoalSheet) {
-                    NewGoalView()
+                .padding()
+                
+                if let selectedAnimal = clickedButton {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Save")
+                            .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color("AccentColor"))
+                            .cornerRadius(8)
+                    }
+                } else {
+                    Button(action: {
+                        
+                    }) {
+                        Text("Save")
+                    }
+                    .disabled(true)
+                    .frame(maxWidth: .infinity)
+                    .padding()
                 }
             }
-            .padding()
             .navigationTitle("Pick your companion!")
         }
     }
-
+    
     func buttonTapped(_ animal: Int) {
         clickedButton = animal
         selectedAnimal = animal
+        isSaveButtonEnabled = true
     }
 }
 

@@ -42,7 +42,7 @@ struct OnboardingView : View {
                     }
                     
                     HStack {
-                        Image(systemName: "powersleep")
+                        Image(systemName: "pawprint.fill")
                             .font(.system(size: 32))
                             .foregroundColor(Color("AccentColor"))
                         
@@ -100,7 +100,7 @@ struct OnboardingView : View {
                      showGoalSheet: true,
                      showOnBoarding: $showOnBoarding)
             PageView(title: "Completing habits",
-                     subtitle: "To mark ypur habit as complete, click on the day which you had done your habit.\n" + "When you see the pop-up, click the complete button to save your progress",
+                     subtitle: "To mark your habit as complete, click on the day which you had done your habit.\n" + "When you see the pop-up, click the complete button to save your progress",
                      imageName: "calendar img",
                      showStartButton: true,
                      showGoalSheet: false,
@@ -163,9 +163,7 @@ struct PageView : View {
                         .cornerRadius(8)
                 }
                 .sheet(isPresented: $showNewGoalSheet) {
-                    // Define the content of the sheet here
                     Text("sheet")
-                    // Add any additional views or components you need
                 }
             }
         }
