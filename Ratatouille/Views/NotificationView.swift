@@ -13,12 +13,12 @@ struct NotificationView: View {
     
     @EnvironmentObject var goalManager: GoalManager
     
-    @State private var dailyTracking = false
-    @State private var reminderTime = Date()
-    @State private var habitDeadline = false
-    @State private var goalDeadline = false
-    @State private var neutralAnimal = false
-    @State private var sadAnimal = false
+    @AppStorage("dailyTracking") var dailyTracking = false
+    @AppStorage("reminderTime") var reminderTime = Date()
+    @AppStorage("habitDeadline") var habitDeadline = false
+    @AppStorage("goalDeadline") var goalDeadline = false
+    @AppStorage("neutralAnimal") var neutralAnimal = false
+    @AppStorage("sadAnimal") var sadAnimal = false
     
     
     var body: some View {

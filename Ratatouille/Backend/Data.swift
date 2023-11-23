@@ -128,5 +128,16 @@ class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
 }
 
 
+extension Date: RawRepresentable {              // Allows date to be added to @AppStorage
+    public var rawValue: String {
+        self.timeIntervalSinceReferenceDate.description
+    }
+    
+    public init?(rawValue: String) {
+        self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
+    }
+}
+
+
 // IMAGE CATALOG ------------------------
 // use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
