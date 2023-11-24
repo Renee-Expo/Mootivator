@@ -14,8 +14,8 @@ struct AnimateProgressView: View {
 
     var body: some View {
         VStack() {
-            CircularProgressView(progress: self.progress / 100)
-                .animation(.linear)
+            CircularProgressView(progress: self.progress / maxProgress)
+//                .animation(.linear)
 
             VStack {
             Text("Progress: \(progress, specifier: "%.1f")")
@@ -42,7 +42,7 @@ struct FinalProgressView: View {
     var body: some View {
         VStack() {
             CircularProgressView(progress: self.progress / 100)
-                .animation(.linear)
+//                .animation(.smooth)
 
             VStack {
             Text("Progress: \(progress, specifier: "%.1f")")
