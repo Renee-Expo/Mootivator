@@ -33,6 +33,7 @@ struct NewGoalView: View {
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
     @State private var isButtonEnabled = false
+    @Binding var isAnimalSelected: Bool
     
     var body: some View {
         NavigationStack {
@@ -44,7 +45,7 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimal: $selectedAnimal)
+                        AnimalPickerView(selectedAnimal: $selectedAnimal, isAnimalSelected: .constant(false))
                         
                     }
                 }
@@ -115,7 +116,7 @@ struct NewGoalView: View {
                 
                 
                 Section{
-                    if title.isEmpty || habitTitle.isEmpty ||  (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                    if title.isEmpty || habitTitle.isEmpty || !isAnimalSelected || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
                         Button{
                             
                         }label:{
@@ -153,7 +154,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView()
+        NewGoalView(isAnimalSelected: .constant(true))
             .environmentObject(GoalManager())
     }
 }
