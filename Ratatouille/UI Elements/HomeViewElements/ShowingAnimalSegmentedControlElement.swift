@@ -16,9 +16,9 @@ struct ShowingAnimalSegmentedControlElement: View {
         VStack {
             Picker(selection: $selection) {
                 ForEach($goalItemList.goals, id: \.id ) { $goal in
-                    VStack {
-                        Text(goal.selectedAnimal.name)
-                    }
+//                    VStack {
+//                        Text(goal.selectedAnimal.name)
+//                    }
                 }
             } label: {
                 Text("Segmented Control")

@@ -7,7 +7,7 @@
 import SwiftUI
 struct GoalDetailView: View {
     
-    // @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var goalManager: GoalManager
     
     @Binding var goal: Goal
     @State private var showGoalDetailSheet = false
@@ -48,9 +48,9 @@ struct GoalDetailView: View {
         
     }
 }
-//struct GoalDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GoalDetailView(goal: .constant(Goal()))
-//              .environmentObject(GoalManager())
-//    }
-//}
+struct GoalDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        GoalDetailView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: 0, motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)))
+            .environmentObject(GoalManager())
+    }
+}
