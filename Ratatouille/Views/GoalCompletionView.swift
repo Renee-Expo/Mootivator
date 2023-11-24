@@ -109,7 +109,7 @@ struct YesScreen: View {
         }
         
         .fullScreenCover(isPresented: $redirectToHome) {
-            HomeView()
+            HomeView(habitTitle: .constant(""), title: .constant(""))
             
         }
     }
@@ -144,7 +144,7 @@ struct NoScreen: View {
             .cornerRadius(8)
         }
         .fullScreenCover(isPresented: $redirectToHome) {
-            HomeView()
+            HomeView(habitTitle: .constant(""), title: .constant(""))
         }
     }
 }
