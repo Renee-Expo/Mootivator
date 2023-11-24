@@ -22,6 +22,7 @@ struct NewGoalView: View {
     @State private var selectedFrequencyIndex = 0
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
+    @State private var daysInWeek = 7
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
@@ -52,9 +53,7 @@ struct NewGoalView: View {
                 
                 
                 Section("Current Habit") {
-                    TextField(text: $habitTitle) {
-                        Text("Enter a Habit")
-                    }
+                    TextField("Enter a Habit", text: $habitTitle)
                     
                     Picker("Frequency", selection: $selectedFrequencyIndex) {
                         ForEach(0..<frequency.count, id: \.self) { index in
@@ -66,15 +65,20 @@ struct NewGoalView: View {
                         DatePicker("Deadline", selection: $selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                     } else if frequency[selectedFrequencyIndex] == "Weekly" {
                         VStack {
-                            Text("Number of times per week: \(Int(numberOfTimesPerWeek.rounded()))")
-                            
-                            Slider(value: $numberOfTimesPerWeek, in: 1...7, step: 1)
+                            Text("Number of times per remaining week: \(Int(numberOfTimesPerWeek.rounded()))")
+
+                            Slider(value: $numberOfTimesPerWeek, in: 1...Double(daysInWeek), step: 1)
                         }
+                        .onAppear {
+                            daysInWeek = daysInWeek - Calendar.current.component(.weekday, from: Date()) + 1
+                        }
+
+
                     } else if frequency[selectedFrequencyIndex] == "Monthly" {
                         VStack {
                             Text("Number of times per remaining month: \(Int(numberOfTimesPerMonth.rounded()))")
                             Slider(value: $numberOfTimesPerMonth, in: 1...Double(daysInMonth), step: 1)
-                            
+
                         }
                         .onAppear {
                             // Calculate the number of days left in the current month
@@ -83,20 +87,20 @@ struct NewGoalView: View {
                             }
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
-                        //                    Picker("Days", selection: $selectedDays) {
-                        //                        ForEach(days, id: \.self) {  day in
-                        //                            Text(day)
-                        //                        }
-                        //                    }
-                        //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-                        //                                .onChange(of: days) {
-                        //                                    print(days)
-                        //                                }
-                        
-                        //                    .pickerStyle(InlinePickerStyle())
-                        
-                        //multi-picker isnt working, so we are using "toggle" function instead
-                        
+//                                            Picker("Days", selection: $selectedDays) {
+//                                                ForEach(days, id: \.self) {  day in
+//                                                    Text(day)
+//                                                }
+//                                            }
+//                                            MultiSelectPickerView(days: days, selectedDays: $selectedDays)
+//                                                        .onChange(of: days) {
+//                                                            print(days)
+//                                                        }
+//
+//                                            .pickerStyle(InlinePickerStyle())
+
+//                        multi-picker isnt working, so we are using "toggle" function instead
+
                         Toggle("Monday", isOn: $mondayChosen)
                         Toggle("Tuesday", isOn: $tuesdayChosen)
                         Toggle("Wednesday", isOn: $wednesdayChosen)
@@ -104,7 +108,7 @@ struct NewGoalView: View {
                         Toggle("Friday", isOn: $fridayChosen)
                         Toggle("Saturday", isOn: $saturdayChosen)
                         Toggle("Sunday", isOn: $sundayChosen)
-                        
+
                         DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
@@ -154,7 +158,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(isAnimalSelected: .constant(true))
+        NewGoalView(isAnimalSelected: .constant(false))
             .environmentObject(GoalManager())
     }
 }

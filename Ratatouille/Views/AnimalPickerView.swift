@@ -12,7 +12,6 @@ struct AnimalPickerView: View {
     @Environment(\.dismiss) var dismiss
     @State private var animalImages = ["Cow_Happy", "Sheep_Happy", "Chicken_Happy", "Goat_Happy", "Dog_Happy", "Pig_Happy", "Cat_Happy", "Horse_Happy", "Duck_Happy", "Rabbit_Happy"]
     @Binding var selectedAnimal: Int
-    @State private var isSaveButtonEnabled = false
     @Binding var isAnimalSelected: Bool
     @State private var clickedButton: Int? = nil
     private let animals: [Int] = Array(1...10)
@@ -50,6 +49,7 @@ struct AnimalPickerView: View {
                 if let selectedAnimal = clickedButton {
                     Button(action: {
                         isAnimalSelected = true
+                        self.selectedAnimal = selectedAnimal
                         dismiss()
                     }) {
                         Text("Save")
@@ -79,7 +79,6 @@ struct AnimalPickerView: View {
     func buttonTapped(_ animal: Int) {
         clickedButton = animal
         selectedAnimal = animal
-        isSaveButtonEnabled = true
     }
 }
 
