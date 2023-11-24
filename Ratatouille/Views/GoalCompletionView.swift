@@ -23,7 +23,7 @@ struct GoalCompletionView: View {
     var body: some View {
 
         VStack {
-            Image("Duck_Happy")
+            Image("\(selectedAnimal)")
                 .resizable()
                 .scaledToFit()
                 .padding()
