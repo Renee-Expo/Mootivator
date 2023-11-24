@@ -23,9 +23,12 @@ struct GoalCompletionView: View {
     var body: some View {
 
         VStack {
-            Image("\(selectedAnimal)")
+            Image("Duck_Happy")
+                .resizable()
+                .scaledToFit()
                 .padding()
             Text("Have you achieved your goal: \(goalEntered)?")
+                .padding()
             
             VStack {
                 Button {
@@ -73,6 +76,7 @@ struct YesScreen: View {
     
     var body: some View {
         VStack {
+            Image(systemName: "checkmark.circle") //placeholder
             Text("Yay, you did it!")
                 .font(.title)
                 .fontWeight(.bold)
@@ -107,6 +111,9 @@ struct NoScreen: View {
     var body: some View {
         
         VStack {
+            Image(systemName: "xmark.circle")
+                .foregroundColor(.red)
+            .font(.system(size: 100))
             Text("Try again!")
                 .font(.title)
                 .fontWeight(.bold)
