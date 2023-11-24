@@ -79,17 +79,17 @@
 			isa = PBXGroup;
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
-				1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */,
-				1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
 				1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */,
+				1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */,
+				1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */,
+				1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */,
+				99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */,
+				1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */,
 				1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */,
 				1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
-				1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */,
 				1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */,
-				1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */,
-				99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */,
 				99B36A9D2B0B3C6A00BD3CC4 /* MultiPickerView.swift */,
 			);
 			path = Views;
