@@ -15,7 +15,7 @@ import SwiftUI
 struct GoalEditView: View {
     @EnvironmentObject var goalManager: GoalManager
     @Binding var goal: Goal
-    @State private var selectedAnimal = 0
+    @State var selectedAnimal : Animal!
     var body: some View {
         NavigationStack {
             Form {
@@ -26,11 +26,11 @@ struct GoalEditView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimal: $selectedAnimal, isAnimalSelected: .constant(false))
+                        AnimalPickerView(selectedAnimal: $selectedAnimal)
                     }
                 }
                 
-                ////                there will be an animal to redirect to Animal Picker sheet
+                // there will be an animal to redirect to Animal Picker sheet
                 
                 Section("Current Habit") {
                     
@@ -47,6 +47,7 @@ struct GoalEditView: View {
                         }
                     }
                 }
+                
                 if goal.frequency[goal.selectedFrequencyIndex] == "Daily" {
                     DatePicker("Deadline", selection: $goal.selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -57,7 +58,6 @@ struct GoalEditView: View {
                     }
                 }
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Monthly" {
-                    
                     VStack {
                         Text("Number of times per month: \(Int(goal.numberOfTimesPerMonth.rounded()))")
                         Slider(value: $goal.numberOfTimesPerMonth, in: 1...31, step: 1)
@@ -67,7 +67,6 @@ struct GoalEditView: View {
                 else if goal.frequency[goal.selectedFrequencyIndex] == "Fixed" {
                     
                     DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
-                    
                 }
                 
                 Section("Write something to motivate you") {
@@ -82,8 +81,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: 0, motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)))
-        
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .giraffe), motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimal: Animal(name: "Name of Animal", kind: .giraffe))
             .environmentObject(GoalManager())
         
     }

@@ -24,6 +24,15 @@ enum AnimalKind : Codable, CaseIterable {
         case .giraffe   : return "giraffe"
         }
     }
+    
+    var image: String {
+        switch self {
+        case .duck      : return "Duck_"
+        case .cat       : return "Cat_"
+        case .dog       : return "Dog_"
+        case .giraffe   : return "Giraffe_"
+        }
+    }
 }
 
 struct Animal : Identifiable, Codable {
@@ -63,8 +72,8 @@ struct Goal: Identifiable, Codable {
     var frequency : Array<String>
     var selectedFrequencyIndex : Int
     
-//    var selectedAnimal : Animal
-    var selectedAnimal : Int
+    var selectedAnimal : Animal
+//    var selectedAnimal : Int
     var motivationalQuote : String
     
     var selectedDailyDeadline : Date
