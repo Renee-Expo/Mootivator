@@ -22,6 +22,7 @@ struct NewGoalView: View {
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var numberOfTimesPerMonth = 1.0
+    @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
     @State private var mondayChosen = false
     @State private var tuesdayChosen = false
@@ -43,7 +44,7 @@ struct NewGoalView: View {
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
                         AnimalPickerView(selectedAnimal: $selectedAnimal)
-
+                        
                     }
                 }
                 
@@ -69,8 +70,15 @@ struct NewGoalView: View {
                         }
                     } else if frequency[selectedFrequencyIndex] == "Monthly" {
                         VStack {
-                            Text("Number of times per month: \(Int(numberOfTimesPerMonth.rounded()))")
-                            Slider(value: $numberOfTimesPerMonth, in: 1...31, step: 1)
+                            Text("Number of times per remaining month: \(Int(numberOfTimesPerMonth.rounded()))")
+                            Slider(value: $numberOfTimesPerMonth, in: 1...Double(daysInMonth), step: 1)
+                            
+                        }
+                        .onAppear {
+                            // Calculate the number of days left in the current month
+                            if let lastDayOfMonth = Calendar.current.range(of: .day, in: .month, for: Date())?.count {
+                                daysInMonth = lastDayOfMonth - Calendar.current.component(.day, from: Date()) + 1
+                            }
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
                         //                    Picker("Days", selection: $selectedDays) {
@@ -118,11 +126,11 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-                                #warning("fix this")
-//                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
-//                                
-//                                isButtonEnabled = true
-//                                goalManager.goals.append(newGoal)
+#warning("fix this")
+                                //                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
+                                //
+                                //                                isButtonEnabled = true
+                                //                                goalManager.goals.append(newGoal)
                                 dismiss()
                             } label: {
                                 Text("Save")
