@@ -28,6 +28,7 @@
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
 		99F04C0B2AA596870089ED13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C0A2AA596870089ED13 /* Preview Assets.xcassets */; };
 		D94B0F3A2B0C8EC600BDE01C /* AnimalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */; };
+		D97164FF2B10A65F00BE63C8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97164FE2B10A65F00BE63C8 /* CircleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		99F04C072AA596870089ED13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99F04C0A2AA596870089ED13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsViewModel.swift; sourceTree = "<group>"; };
+		D97164FE2B10A65F00BE63C8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				99F04C052AA596820089ED13 /* ContentView.swift */,
 				070773052B08547F008655E6 /* HomeView.swift */,
+				D97164FE2B10A65F00BE63C8 /* CircleView.swift */,
 				1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */,
 				1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */,
 				1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */,
@@ -236,6 +239,7 @@
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
 				1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */,
 				1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */,
+				D97164FF2B10A65F00BE63C8 /* CircleView.swift in Sources */,
 				070773062B08547F008655E6 /* HomeView.swift in Sources */,
 				D94B0F3A2B0C8EC600BDE01C /* AnimalsViewModel.swift in Sources */,
 				99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */,
