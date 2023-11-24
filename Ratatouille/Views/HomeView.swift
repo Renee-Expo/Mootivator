@@ -93,4 +93,3 @@ struct HomeView_Previews: PreviewProvider {
             .environmentObject(GoalManager())
     }
 }
-

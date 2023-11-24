@@ -16,6 +16,7 @@ struct GoalDetailView: View {
     @State var indexItem : Int = 0
     @State var selectedDate : Date = Date()
     @State private var showMarkHabitCompletionAlert = false
+    @State private var showHabitCompletionView = false
     
     
     var body: some View {
@@ -50,9 +51,16 @@ struct GoalDetailView: View {
                                             title: Text("Mark \(goal.habitTitle) as Completed?"),
                                             primaryButton: .default(Text("Yes")) {
                                                 //goalmanager.markHabitCompleted(for: selectedDate)
+                                                showHabitCompletionView = true
                                             },
                                             secondaryButton: .cancel(Text("No"))
                                         )
+                                    }
+                                    NavigationLink(
+                                        destination: HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
+                                        isActive: $showHabitCompletionView
+                                    ) {
+                                        EmptyView()
                                     }
                                     
                                 }
