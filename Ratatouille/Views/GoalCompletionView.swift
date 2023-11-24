@@ -14,7 +14,7 @@ import SwiftUI
 
 struct GoalCompletionView: View {
     @EnvironmentObject var goalManager: GoalManager
-    @State private var showCompletionView = false
+    @State private var showGoalCompletionView = false
     @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
     @State private var showNoScreen = false
@@ -25,7 +25,7 @@ struct GoalCompletionView: View {
     var body: some View {
         
         VStack {
-            if showCompletionView{
+            if showGoalCompletionView{
                 Image("\(selectedAnimal)")
                     .resizable()
                     .scaledToFit()
@@ -73,7 +73,7 @@ struct GoalCompletionView: View {
             if Date() >= deadline {
                 // If the current date is greater than or equal to the target date, show the content
                 //            withAnimation {
-                showCompletionView = true
+                showGoalCompletionView = true
                 //            }
             }
         }
