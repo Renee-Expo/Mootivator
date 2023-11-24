@@ -60,10 +60,10 @@ struct HomeView: View {
             .padding(10)
             .background()
         }
-        .background {
-            Color(.backgroundColors)
-                .ignoresSafeArea()
-        }
+//        .background {
+//            Color(.backgroundColors)
+//                .ignoresSafeArea()
+//        }
     }
 }
 

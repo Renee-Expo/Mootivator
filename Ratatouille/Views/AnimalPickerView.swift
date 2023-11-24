@@ -13,6 +13,7 @@ struct AnimalPickerView: View {
     @State private var animalImages = ["Cow_Happy", "Sheep_Happy", "Chicken_Happy", "Goat_Happy", "Dog_Happy", "Pig_Happy", "Cat_Happy", "Horse_Happy", "Duck_Happy", "Rabbit_Happy"]
     @Binding var selectedAnimal: Int
     @State private var isSaveButtonEnabled = false
+    @Binding var isAnimalSelected: Bool
     @State private var clickedButton: Int? = nil
     private let animals: [Int] = Array(1...10)
     private let adaptiveColumns = [
@@ -48,6 +49,7 @@ struct AnimalPickerView: View {
                 
                 if let selectedAnimal = clickedButton {
                     Button(action: {
+                        isAnimalSelected = true
                         dismiss()
                     }) {
                         Text("Save")
@@ -83,7 +85,8 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView(selectedAnimal: .constant(0))
+        AnimalPickerView(selectedAnimal: .constant(0), isAnimalSelected: .constant(false))
             .environmentObject(GoalManager())
     }
 }
+

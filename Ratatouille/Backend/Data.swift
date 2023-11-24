@@ -123,6 +123,8 @@ extension Goal {
     
 }
 
+var isSAnimalSelected : Bool = false
+
 var autonomy: Double = 0 // not sure if this will/can be used
 class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
     // code here
