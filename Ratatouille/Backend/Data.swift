@@ -63,11 +63,12 @@ struct Goal: Identifiable, Codable {
     var title : String
     var habitTitle : String
     var deadline : Date
-    var frequencyOfHabits : String // why string?
+//    var frequencyOfHabits : String // why string?
     var frequency : Array<String>
     var selectedFrequencyIndex : Int
     
-    var selectedAnimal : Animal
+//    var selectedAnimal : Animal
+    var selectedAnimal : Int
     var motivationalQuote : String // does the motivational quote change?
     
     var selectedDailyDeadline : Date // is this a time?
@@ -75,8 +76,8 @@ struct Goal: Identifiable, Codable {
     
     var numberOfTimesPerWeek : Double  = 1.0 // can be computed from frequency
     var numberOfTimesPerMonth : Double = 1.0 // can be computed from frequency
-    var days : Array<String>   // I would prefer to use an enum or set
-    // special usage
+//    var days : Array<String>  // I would prefer to use an enum or set
+//    // special usage
     enum daysOfTheWeek : Codable, CaseIterable {
         case monday
         case tuesday

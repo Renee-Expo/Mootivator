@@ -11,9 +11,10 @@ struct NewGoalView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var goalManager: GoalManager
     
-    @State private var goalEntered = ""
+    @State private var title = ""
     @State private var deadline = Date()
-    @State private var habitEntered = ""
+    @State private var habitTitle = ""
+//    @State private var selectedAnimal: AnimalKind
     @State private var selectedAnimal: Int = 0
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
@@ -37,7 +38,7 @@ struct NewGoalView: View {
         NavigationStack {
             Form {
                 Section("Goal") {
-                    TextField("Enter a Goal here", text: $goalEntered)
+                    TextField("Enter a Goal here", text: $title)
                     
                     DatePicker("Deadline", selection: $deadline, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -50,7 +51,7 @@ struct NewGoalView: View {
                 
                 
                 Section("Current Habit") {
-                    TextField(text: $habitEntered) {
+                    TextField(text: $habitTitle) {
                         Text("Enter a Habit")
                     }
                     
@@ -114,7 +115,7 @@ struct NewGoalView: View {
                 
                 
                 Section{
-                    if goalEntered.isEmpty || habitEntered.isEmpty || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                    if title.isEmpty || habitTitle.isEmpty ||  (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
                         Button{
                             
                         }label:{
@@ -126,11 +127,11 @@ struct NewGoalView: View {
                         ZStack{
                             Color.accentColor
                             Button {
-#warning("fix this")
-                                //                                let newGoal = Goal(goalEntered: goalEntered, deadline: deadline, habitEntered: habitEntered, selectedAnimal: selectedAnimal, frequency: frequency, motivationalQuote: motivationalQuote, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth), selectedFixedDeadline: selectedFixedDeadline)
-                                //
-                                //                                isButtonEnabled = true
-                                //                                goalManager.goals.append(newGoal)
+//#warning("fix this")
+                                let newGoal = Goal(title: title, habitTitle: habitTitle, deadline: deadline, frequency: frequency, selectedFrequencyIndex: selectedFrequencyIndex, selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote, selectedDailyDeadline: selectedDailyDeadline, selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth))
+                                
+                                isButtonEnabled = true
+                                goalManager.goals.append(newGoal)
                                 dismiss()
                             } label: {
                                 Text("Save")
