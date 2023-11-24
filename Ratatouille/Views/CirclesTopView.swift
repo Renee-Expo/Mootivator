@@ -18,7 +18,7 @@ struct CirclesTopView: View {
 
             Spacer()
         }
-        .padding(20)
+        .padding(10)
     }
 }
 

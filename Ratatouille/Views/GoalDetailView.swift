@@ -11,16 +11,58 @@ struct GoalDetailView: View {
     
     @Binding var goal: Goal
     @State private var showGoalDetailSheet = false
+    @Environment(\.colorScheme) var colorScheme
+    var chevronWidth : Double = 15
+    @State var indexItem : Int = 0
+    @State var selectedDate : Date = Date()
+    @State private var showMarkHabitCompletionAlert = false
+    
     
     var body: some View {
         
         NavigationStack{
             VStack{
-                VStack{
-                    Text("Current habit")
-                    
+                VStack(spacing: 5){
                     Text(goal.habitTitle)
+                    Text("Current habit")
+                    AnimateProgressView()
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 2)
+                        .frame(width: 350, height: 400)
+                        .foregroundColor(.white)
+                        .overlay(
+                            ScrollView{
+                                VStack{
+                                    Text("Test  habitt")
+                                        .font(.system(size: 16))
+                                        .multilineTextAlignment(.leading)
+                                        .fontWeight(.bold)
+                                    DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                                        Text("Select a date")
+                                    }
+                                    .datePickerStyle(.graphical)
+                                    .padding(10)
+                                    .onChange(of: selectedDate) { _ in
+                                        showMarkHabitCompletionAlert = true
+                                    }
+                                    .alert(isPresented: $showMarkHabitCompletionAlert) {
+                                        Alert(
+                                            title: Text("Mark \(goal.habitTitle) as Completed?"),
+                                            primaryButton: .default(Text("Yes")) {
+                                                //goalmanager.markHabitCompleted(for: selectedDate)
+                                            },
+                                            secondaryButton: .cancel(Text("No"))
+                                        )
+                                    }
+                                    
+                                }
+                            }
+                        )
+                        .offset(y: -20)
+                    
+                    
                 }
+                
                 
             }
             .navigationTitle(goal.title)

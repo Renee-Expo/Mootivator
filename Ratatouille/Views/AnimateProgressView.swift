@@ -19,17 +19,17 @@ struct AnimateProgressView: View {
 
             VStack {
             Text("Progress: \(progress, specifier: "%.1f")")
-                Slider(value: $progress,
-                       in: minProgress...maxProgress,
-                       minimumValueLabel: Text("0"),
-                       maximumValueLabel: Text("100")
-                ) {}
+//                Slider(value: $progress,
+//                       in: minProgress...maxProgress,
+//                       minimumValueLabel: Text("0"),
+//                       maximumValueLabel: Text("100")
+//                ) {}
             }
             .padding()
 
             Spacer()
         }
-        .padding(20)
+        .padding(10)
     }
 }
 
@@ -57,7 +57,7 @@ struct FinalProgressView: View {
 
             Spacer()
         }
-        .padding(20)
+        .padding(10)
     }
 }
 
@@ -91,7 +91,7 @@ struct CircularProgressView: View {
                 )
         }
         .frame(width: 200, height: 200)
-        .padding()
+//        .padding()
     }
 }
 
