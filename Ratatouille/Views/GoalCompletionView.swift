@@ -70,10 +70,7 @@ struct GoalCompletionView: View {
             }
         }
         .onAppear{
-            let currentDate = Date()
-            //        let targetDate = // Set your target date here
-            
-            if currentDate >= deadline {
+            if Date() >= deadline {
                 // If the current date is greater than or equal to the target date, show the content
                 //            withAnimation {
                 showCompletionView = true
