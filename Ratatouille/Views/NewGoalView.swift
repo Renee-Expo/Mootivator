@@ -15,14 +15,15 @@ struct NewGoalView: View {
     @State private var deadline = Date()
     @State private var habitTitle = ""
 //    @State private var selectedAnimal: AnimalKind
-    @State private var selectedAnimal: Int = 0
+//    @State private var selectedAnimal: Int = 0
+    @State var selectedAnimal: Animal!
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
     @State private var motivationalQuote = ""
     @State private var selectedFrequencyIndex = 0
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
-    @State private var daysInWeek = 7
+    @State private var daysInWeek = 7 // should this be let? 
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
@@ -46,7 +47,7 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimal: $selectedAnimal, isAnimalSelected: .constant(false))
+                        AnimalPickerView(selectedAnimal: $selectedAnimal)
                         
                     }
                 }
