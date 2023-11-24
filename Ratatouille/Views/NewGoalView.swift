@@ -83,20 +83,6 @@ struct NewGoalView: View {
                             }
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
-                        //                    Picker("Days", selection: $selectedDays) {
-                        //                        ForEach(days, id: \.self) {  day in
-                        //                            Text(day)
-                        //                        }
-                        //                    }
-                        //                    MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-                        //                                .onChange(of: days) {
-                        //                                    print(days)
-                        //                                }
-                        
-                        //                    .pickerStyle(InlinePickerStyle())
-                        
-                        //multi-picker isnt working, so we are using "toggle" function instead
-                        
                         Toggle("Monday", isOn: $mondayChosen)
                         Toggle("Tuesday", isOn: $tuesdayChosen)
                         Toggle("Wednesday", isOn: $wednesdayChosen)

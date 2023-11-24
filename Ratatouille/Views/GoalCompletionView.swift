@@ -1,13 +1,18 @@
 //
-//  GoalCompletionView.swift
-//  Ratatouille
+
+//  GoalCompletionView.swift
+
+//  Ratatouille
+
 //
-//  Created by Kaveri Mi on 21/11/23.
+
+//  Created by Kaveri Mi on 21/11/23.
+
 //
+
 import SwiftUI
 
 struct GoalCompletionView: View {
-    
     @EnvironmentObject var goalManager: GoalManager
     @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
@@ -15,17 +20,17 @@ struct GoalCompletionView: View {
     @Binding var goalEntered: String
     @Binding var selectedAnimal: Int
     var isGoalCompleted: Bool
-    
     var body: some View {
+
         VStack {
             Image("\(selectedAnimal)")
                 .padding()
-            
             Text("Have you achieved your goal: \(goalEntered)?")
             
             VStack {
                 Button {
                     showYesScreen = true
+                    
                 } label: {
                     Text("Yes")
                         .padding()
@@ -34,12 +39,15 @@ struct GoalCompletionView: View {
                         .background(Color("AccentColor"))
                         .cornerRadius(8)
                 }
+                
                 .fullScreenCover(isPresented: $showYesScreen) {
                     YesScreen(isGoalCompleted: true)
+                    
                 }
                 
                 Button {
                     showNoScreen = true
+                    
                 } label: {
                     Text("No")
                         .padding()
@@ -48,6 +56,7 @@ struct GoalCompletionView: View {
                         .background(Color("AccentColor"))
                         .cornerRadius(8)
                 }
+                
                 .fullScreenCover(isPresented: $showNoScreen) {
                     NoScreen(isGoalCompleted: false)
                 }
@@ -80,24 +89,28 @@ struct YesScreen: View {
             .background(Color("AccentColor"))
             .cornerRadius(8)
         }
+        
         .fullScreenCover(isPresented: $redirectToHome) {
             HomeView()
+            
         }
     }
 }
+
 struct NoScreen: View {
+    
     @State private var redirectToHome = false
     var isGoalCompleted: Bool
     @State private var showConfirmationScreen = true
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
+        
         VStack {
             Text("Try again!")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()
-            
             Button("Go to Home") {
                 presentationMode.wrappedValue.dismiss()
                 redirectToHome = true
@@ -108,7 +121,7 @@ struct NoScreen: View {
             .foregroundColor(.white)
             .background(Color("AccentColor"))
             .cornerRadius(8)
-        } 
+        }
         .fullScreenCover(isPresented: $redirectToHome) {
             HomeView()
         }
@@ -121,75 +134,3 @@ struct GoalCompletionView_Previews: PreviewProvider {
             .environmentObject(GoalManager())
     }
 }
-
-//            Button {
-//                showConfirmationScreen = false
-//                isGoalCompleted = true
-//            } label: {
-//                Text("Yes")
-//                    .padding()
-//                    .frame(width: 200, height: 50)
-//                    .foregroundColor(.white)
-//                    .background(Color("AccentColor"))
-//                    .cornerRadius(8)
-//            }
-//            .fullScreenCover(isPresented: $redirectToHome) {
-//                HomeView()
-//            }
-//
-//            Button {
-//                showConfirmationScreen = false
-//                isGoalCompleted = false
-//            } label: {
-//                Text("No")
-//                    .padding()
-//                    .frame(width: 200, height: 50)
-//                    .foregroundColor(.white)
-//                    .background(Color("AccentColor"))
-//                    .cornerRadius(8)
-//            }
-//        }
-//    }
-//}
-//
-//                                       VStack {
-//                                           Image(systemName: isGoalCompleted ? "checkmark.circle":"xmark.circle")
-//                                               .foregroundColor(Color(isGoalCompleted ? "AccentColor":"red"))
-//                                               .font(.system(size: 100))
-//                                               .padding()
-//                                           Text(isGoalCompleted ? "Goal Complete!  Well done!":"Goal incomplete")
-//                                               .font(.system(size: 24))
-//                                               .fontWeight(.medium)
-//
-//                                           Text(isGoalCompleted ? "Keep up the good work!":"It’s ok! Try again, you’ve got this!")
-//                                               .font(.system(size: 24))
-//                                               .multilineTextAlignment(.center)
-//                                               .fontWeight(.medium)
-//                                               .padding()
-//
-//                                           Button {
-//                                               redirectToHome = true
-//                                           } label: {
-//                                               Text("Go to Home")
-//                                                   .padding()
-//                                                   .frame(width: 200, height: 50)
-//                                                   .foregroundColor(.white)
-//                                                   .background(Color("AccentColor"))
-//                                                   .cornerRadius(8)
-//                                           }
-//                                           .fullScreenCover(isPresented: $redirectToHome, content: {
-//                                               HomeView()
-//                                           })
-//                                           .padding()
-//                                       }
-//                                   }
-//                               }
-//
-//                               struct GoalCompletionView_Previews: PreviewProvider {
-//                static var previews: some View {
-//                    GoalCompletionView(isGoalCompleted: true)
-//                        .environmentObject(GoalManager())
-//                }
-//            }
-//
-//

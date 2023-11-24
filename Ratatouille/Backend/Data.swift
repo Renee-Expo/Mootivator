@@ -53,10 +53,6 @@ struct GoalItem : Identifiable, Codable{
     var animal : Animal
 }
 
-//enum DayChosen {
-//    case monday, tuesday, wednesday, thursday, friday, saturday, sunday
-//}
-
 struct Goal: Identifiable, Codable {
     var id = UUID ()
     
@@ -69,15 +65,14 @@ struct Goal: Identifiable, Codable {
     
 //    var selectedAnimal : Animal
     var selectedAnimal : Int
-    var motivationalQuote : String // does the motivational quote change?
+    var motivationalQuote : String
     
-    var selectedDailyDeadline : Date // is this a time?
-    var selectedFixedDeadline : Date // date + time ?
+    var selectedDailyDeadline : Date
+    var selectedFixedDeadline : Date
     
-    var numberOfTimesPerWeek : Double  = 1.0 // can be computed from frequency
-    var numberOfTimesPerMonth : Double = 1.0 // can be computed from frequency
-//    var days : Array<String>  // I would prefer to use an enum or set
-//    // special usage
+    var numberOfTimesPerWeek : Double  = 1.0
+    var numberOfTimesPerMonth : Double = 1.0
+// special usage
     enum daysOfTheWeek : Codable, CaseIterable {
         case monday
         case tuesday
@@ -99,20 +94,7 @@ struct Goal: Identifiable, Codable {
             }
         }
     }
-    
- /*
-    var mondayChosen : Bool     // really inefficient section.
-    var tuesdayChosen : Bool
-    var wednesdayChosen : Bool
-    var thursdayChosen : Bool
-    var fridayChosen : Bool
-    var saturdayChosen : Bool
-    var sundayChosen : Bool
-*/
 }
-//enum Day: String, CaseIterable, Codable{
-//    case monday, tuesday, wednesday, thurday, friday, saturday, sunday
-//}
 
 extension Goal {
     
