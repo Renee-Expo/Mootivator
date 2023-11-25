@@ -16,7 +16,7 @@ struct NewGoalView: View {
     @State private var habitTitle = ""
 //    @State private var selectedAnimal: AnimalKind
 //    @State private var selectedAnimal: Int = 0
-    @State var selectedAnimal: Animal!
+    @State var selectedAnimalKind: AnimalKind = .none
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
     @State private var motivationalQuote = ""
@@ -47,7 +47,7 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimal: $selectedAnimal)
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
                         
                     }
                 }
@@ -134,7 +134,7 @@ struct NewGoalView: View {
                             Color.accentColor
                             Button {
 //#warning("fix this")
-                                let newGoal = Goal(title: title, habitTitle: habitTitle, deadline: deadline, frequency: frequency, selectedFrequencyIndex: selectedFrequencyIndex, selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote, selectedDailyDeadline: selectedDailyDeadline, selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth))
+                                let newGoal = Goal(title: title, habitTitle: habitTitle, deadline: deadline, frequency: frequency, selectedFrequencyIndex: selectedFrequencyIndex, selectedAnimal: Animal(name: "", kind: selectedAnimalKind), motivationalQuote: motivationalQuote, selectedDailyDeadline: selectedDailyDeadline, selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth))
                                 
                                 isButtonEnabled = true
                                 goalManager.goals.append(newGoal)
@@ -159,7 +159,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(isAnimalSelected: .constant(false))
+        NewGoalView(isAnimalSelected: .constant(true))
             .environmentObject(GoalManager())
     }
 }

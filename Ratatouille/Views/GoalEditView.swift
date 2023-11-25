@@ -15,10 +15,10 @@ import SwiftUI
 struct GoalEditView: View {
     @EnvironmentObject var goalManager: GoalManager
     @Binding var goal: Goal
-    @State var selectedAnimal : Animal!
+    @State var selectedAnimalKind = AnimalKind.none
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section("Goal") {
                     TextField("Enter a Goal here", text: $goal.title)
                     DatePicker("Deadline", selection: $goal.deadline, displayedComponents: [.date, .hourAndMinute])
@@ -26,7 +26,7 @@ struct GoalEditView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimal: $selectedAnimal)
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
                     }
                 }
                 
@@ -41,7 +41,7 @@ struct GoalEditView: View {
                     }
                     
                     Picker("Frequency", selection: $goal.selectedFrequencyIndex) {
-                        ForEach(0..<goal.frequency.count) { index in
+                        ForEach(0..<goal.frequency.count - 1) { index in
                             Text(goal.frequency[index])
                                 .tag(index)
                         }
@@ -81,7 +81,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimal: Animal(name: "Name of Animal", kind: .cow))
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

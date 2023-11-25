@@ -11,7 +11,7 @@ struct AnimalPickerView: View {
     @EnvironmentObject var goalManager: GoalManager
     @Environment(\.dismiss) var dismiss
     @State private var animalImages = ["Cow_Happy", "Sheep_Happy", "Chicken_Happy", "Goat_Happy", "Dog_Happy", "Pig_Happy", "Cat_Happy", "Horse_Happy", "Duck_Happy", "Rabbit_Happy"]
-    @Binding var selectedAnimal: Animal! // only returns Animal.kind
+    @Binding var selectedAnimalKind: AnimalKind // only returns Animal.kind
 //    @Binding var isAnimalSelected: Bool
 //    @State private var clickedButton: Bool? = nil
 //    private let animals: [Int] = Array(1...10) // may not need?
@@ -23,23 +23,23 @@ struct AnimalPickerView: View {
         NavigationView {
             ScrollView(.vertical) {
                 LazyVGrid(columns: adaptiveColumns, spacing: 20) {
-                    ForEach(AnimalKind.allCases, id: \.self) { animal in
+                    ForEach(AnimalKind.allCases, id: \.self) { animalKind in
                         Button {
-                            selectedAnimal.kind = animal
+                            selectedAnimalKind = animalKind
                         } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.black, lineWidth: 2)
-                                    .frame(width: 150, height: 150)
-                                    .opacity(selectedAnimal.kind == animal ? 0.5 : 1.0)
-//                                    .onTapGesture {
-//                                        selectedAnimal.kind = animal
-//                                    }
-                                Image("\(animal.image)" + "Happy")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 150)
-                                    .opacity(selectedAnimal.kind == animal ? 0.5 : 1.0)
+                            if animalKind != .none {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(selectedAnimalKind == animalKind ? Color.black : Color.gray, lineWidth: 2)
+                                        .frame(width: 150, height: 150)
+                                        .opacity(selectedAnimalKind == animalKind ? 0.5 : 1.0)
+                                    
+                                    Image("\(animalKind.image)" + "Happy")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 150, height: 150)
+                                        .opacity(selectedAnimalKind == animalKind ? 0.5 : 1.0)
+                                }
                             }
                         }
                     }
@@ -47,8 +47,8 @@ struct AnimalPickerView: View {
                 .padding()
                 // Save Button Code
                 Button {
-                    if selectedAnimal == nil {
-                        print("selectedAnimal = \(selectedAnimal)")
+                    if selectedAnimalKind == .none {
+                        print("selectedAnimalKind = \(selectedAnimalKind)")
                     } else {
                         // selected animal should be set above
                         dismiss()
@@ -62,7 +62,7 @@ struct AnimalPickerView: View {
                         .padding()
                         .background(Color("AccentColor"))
                         .cornerRadius(8)
-                        .disabled(selectedAnimal.kind == nil ? true : false)
+                        .disabled(selectedAnimalKind == .none ? true : false)
                 }
                 /*
                 if let selectedAnimal = selectedAnimal {
@@ -103,11 +103,18 @@ struct AnimalPickerView: View {
 */
 }
 
+struct AnimalPickerPreviewWrapper: View {
+    @State var selectedAnimalKind: AnimalKind = .cat
+    
+    var body: some View {
+        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
+            .environmentObject(GoalManager())
+    }
+}
+
 struct AnimalPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalPickerView(selectedAnimal: .constant(Animal(name: "Name of Animal", kind: .cow)))
-            .environmentObject(GoalManager())
-//                .constant(Animal(name: "Name of Animal", kind: .giraffe)), isAnimalSelected: .constant(false))
+        AnimalPickerPreviewWrapper()
     }
 }
 
