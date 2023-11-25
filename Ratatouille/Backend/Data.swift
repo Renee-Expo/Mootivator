@@ -39,16 +39,16 @@ enum AnimalKind : Codable, CaseIterable {
     
     var image: String {
         switch self{
-        case .cow : return "cow"
-        case .sheep : return "sheep"
-        case .chicken : return "chicken"
-        case .goat : return "goat"
-        case .pig : return "pig"
-        case .horse : return "horse"
-        case .dog : return "dog"
-        case .rabbit : return "rabbit"
-        case .cat : return "cat"
-        case .duck : return "duck"
+        case .cow : return "Cow_"
+        case .sheep : return "Sheep_"
+        case .chicken : return "Chicken_"
+        case .goat : return "Goat_"
+        case .pig : return "Pig_"
+        case .horse : return "Horse_"
+        case .dog : return "Dog_"
+        case .rabbit : return "Rabbit_"
+        case .cat : return "Cat_"
+        case .duck : return "Duck_"
         }
     }
 }
