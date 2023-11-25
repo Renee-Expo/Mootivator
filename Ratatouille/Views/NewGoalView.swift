@@ -10,6 +10,7 @@ struct NewGoalView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @State private var title = ""
     @State private var deadline = Date()
@@ -206,5 +207,6 @@ struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalView()
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }

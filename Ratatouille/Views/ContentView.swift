@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
     @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     var body: some View {
         TabView {
@@ -47,5 +48,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }

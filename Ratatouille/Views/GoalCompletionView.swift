@@ -14,6 +14,7 @@ import SwiftUI
 
 struct GoalCompletionView: View {
     @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @State private var showGoalCompletionView = false
     @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
@@ -155,6 +156,7 @@ struct GoalCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: false, numberOfCompletedGoals: .constant(0))
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }
 
