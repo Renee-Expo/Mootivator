@@ -109,7 +109,7 @@ struct GoalDetailView_Previews: PreviewProvider {
         let habitCompletionStatus = HabitCompletionStatus()
         
         return GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()))
-            .environmentObject(goalManager)
-            .environmentObject(habitCompletionStatus)
+            .environmentObject(GoalManager)
+            .environmentObject(HabitCompletionStatus)
     }
 }
