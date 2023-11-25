@@ -12,6 +12,7 @@ import UserNotifications
 struct NotificationView: View {
     
     @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @AppStorage("dailyTracking") var dailyTracking = false
     @AppStorage("reminderTime") var reminderTime = Date()
@@ -79,5 +80,6 @@ struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationView()
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }

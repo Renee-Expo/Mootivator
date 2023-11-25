@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @EnvironmentObject var goalManager: GoalManager
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     var chevronWidth : Double = 15
     @State var indexItem : Int = 0
@@ -20,6 +21,7 @@ struct HomeView: View {
     @Binding var habitTitle : String
     @Binding var title : String
     @State var dailyHabitCompletionStatus: [Date: Bool] = [:]
+    @State var dailyHabitCompleted: [Date: Bool] = [:]
 
     var body: some View {
         NavigationView {
@@ -71,8 +73,8 @@ struct HomeView: View {
                     Alert(
                         title: Text("Mark \(habitTitle) as Completed?"),
                         primaryButton: .default(Text("Yes")) {
-                            showHabitCompletionView = true
-                            dailyHabitCompletionStatus[selectedDate] = true
+                            dailyHabitCompleted[selectedDate] = true
+                            habitCompletionStatus.save()
                             // TODO: Some foreground colour thing
 //                                .foregroundColor(.green)
                             
@@ -80,12 +82,12 @@ struct HomeView: View {
                         secondaryButton: .cancel(Text("No"))
                     )
                 }
-                NavigationLink(
-                    destination:         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
-                    isActive: $showHabitCompletionView
-                ) {
-                    EmptyView()
-                }
+//                NavigationLink(
+//                    destination:         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
+//                    isActive: $showHabitCompletionView
+//                ) {
+//                    EmptyView()
+//                }
             }
         }
     }
@@ -95,6 +97,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"))
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }
 

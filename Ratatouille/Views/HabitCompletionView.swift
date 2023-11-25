@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HabitCompletionView: View {
     @EnvironmentObject var goalManager: GoalManager
+    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @State private var showHabitCompletionView = false
     @Binding var frequency : Array<String>
     @Binding var selectedFrequencyIndex : Int
@@ -60,5 +61,6 @@ struct HabitCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true)
             .environmentObject(GoalManager())
+            .environmentObject(HabitCompletionStatus())
     }
 }
