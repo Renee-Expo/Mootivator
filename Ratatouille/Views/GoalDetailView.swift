@@ -100,7 +100,7 @@ struct GoalDetailView: View {
 }
 struct GoalDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalDetailView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .giraffe), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: .now, selectedFixedDeadline: .now)))
+        GoalDetailView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: .now, selectedFixedDeadline: .now)))
             .environmentObject(GoalManager())
     }
 }

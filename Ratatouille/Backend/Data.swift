@@ -11,26 +11,44 @@ import Foundation
 // ---------------------------------
 
 enum AnimalKind : Codable, CaseIterable {
-    case duck
-    case cat
+    case cow
+    case sheep
+    case chicken
+    case goat
+    case pig
+    case horse
     case dog
-    case giraffe
+    case rabbit
+    case cat
+    case duck
     
     var asString: String {
         switch self {
-        case .duck      : return "duck"
-        case .cat       : return "cat"
-        case .dog       : return "dog"
-        case .giraffe   : return "giraffe"
+        case .cow : return "cow"
+        case .sheep : return "sheep"
+        case .chicken : return "chicken"
+        case .goat : return "goat"
+        case .pig : return "pig"
+        case .horse : return "horse"
+        case .dog : return "dog"
+        case .rabbit : return "rabbit"
+        case .cat : return "cat"
+        case .duck : return "duck"
         }
     }
     
     var image: String {
-        switch self {
-        case .duck      : return "Duck_"
-        case .cat       : return "Cat_"
-        case .dog       : return "Dog_"
-        case .giraffe   : return "Giraffe_"
+        switch self{
+        case .cow : return "cow"
+        case .sheep : return "sheep"
+        case .chicken : return "chicken"
+        case .goat : return "goat"
+        case .pig : return "pig"
+        case .horse : return "horse"
+        case .dog : return "dog"
+        case .rabbit : return "rabbit"
+        case .cat : return "cat"
+        case .duck : return "duck"
         }
     }
 }
@@ -68,12 +86,12 @@ struct Goal: Identifiable, Codable {
     var title : String
     var habitTitle : String
     var deadline : Date
-//    var frequencyOfHabits : String // why string?
+    //    var frequencyOfHabits : String // why string?
     var frequency : Array<String>
     var selectedFrequencyIndex : Int
     
     var selectedAnimal : Animal
-//    var selectedAnimal : Int
+    //    var selectedAnimal : Int
     var motivationalQuote : String
     
     var selectedDailyDeadline : Date
@@ -81,7 +99,7 @@ struct Goal: Identifiable, Codable {
     
     var numberOfTimesPerWeek : Double  = 1.0
     var numberOfTimesPerMonth : Double = 1.0
-// special usage
+    // special usage
     enum daysOfTheWeek : Codable, CaseIterable {
         case monday
         case tuesday
@@ -108,8 +126,8 @@ struct Goal: Identifiable, Codable {
 extension Goal {
     
     static let sampleGoals: [Goal] = [
-//        Goal(goalEntered: "Get A for Math", deadline: Date(), habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: 1, numberOfTimesPerMonth: 4,  selectedFixedDeadline: Date()),
-//        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
+        //        Goal(goalEntered: "Get A for Math", deadline: Date(), habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: 1, numberOfTimesPerMonth: 4,  selectedFixedDeadline: Date()),
+        //        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
     ]
     
 }
