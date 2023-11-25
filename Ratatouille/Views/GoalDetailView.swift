@@ -56,13 +56,6 @@ struct GoalDetailView: View {
                                             secondaryButton: .cancel(Text("No"))
                                         )
                                     }
-                                    NavigationLink(
-                                        destination: HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
-                                        isActive: $showHabitCompletionView
-                                    ) {
-                                        EmptyView()
-                                    }
-                                    
                                 }
                             }
                         )
