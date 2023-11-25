@@ -13,6 +13,7 @@ struct AnimalPickerView: View {
     @State private var animalImages = ["Cow_Happy", "Sheep_Happy", "Chicken_Happy", "Goat_Happy", "Dog_Happy", "Pig_Happy", "Cat_Happy", "Horse_Happy", "Duck_Happy", "Rabbit_Happy"]
     @Binding var selectedAnimalKind: AnimalKind // only returns Animal.kind
 //    @Binding var isAnimalSelected: Bool
+//    @Binding var isAnimalSelected: Bool
 //    @State private var clickedButton: Bool? = nil
 //    private let animals: [Int] = Array(1...10) // may not need?
     private let adaptiveColumns = [
@@ -27,7 +28,7 @@ struct AnimalPickerView: View {
                         Button {
                             selectedAnimalKind = animalKind
                         } label: {
-                            if animalKind != .none {
+//                            if animalKind != .none {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 8)
                                         .stroke(selectedAnimalKind == animalKind ? Color.black : Color.gray, lineWidth: 2)
@@ -40,7 +41,7 @@ struct AnimalPickerView: View {
                                         .frame(width: 150, height: 150)
                                         .opacity(selectedAnimalKind == animalKind ? 0.5 : 1.0)
                                 }
-                            }
+//                            }
                         }
                     }
                 }
@@ -51,6 +52,7 @@ struct AnimalPickerView: View {
                         print("selectedAnimalKind = \(selectedAnimalKind)")
                     } else {
                         // selected animal should be set above
+//                        isAnimalSelected = true
                         dismiss()
                     }
                 } label: {
@@ -104,7 +106,7 @@ struct AnimalPickerView: View {
 }
 
 struct AnimalPickerPreviewWrapper: View {
-    @State var selectedAnimalKind: AnimalKind = .cat
+    @State var selectedAnimalKind: AnimalKind = .cow
     
     var body: some View {
         AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)

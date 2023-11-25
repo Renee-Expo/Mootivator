@@ -56,7 +56,7 @@ struct GoalView: View {
                 }
             }
             .sheet(isPresented: $showNewGoalSheet) {
-                NewGoalView(isAnimalSelected: .constant(false))
+                NewGoalView()
             }
             .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
                 Button("Replace", role: .destructive) {

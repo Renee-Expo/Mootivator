@@ -15,7 +15,7 @@ import SwiftUI
 struct GoalEditView: View {
     @EnvironmentObject var goalManager: GoalManager
     @Binding var goal: Goal
-    @State var selectedAnimalKind = AnimalKind.none
+    @State var selectedAnimalKind = AnimalKind.cow
     var body: some View {
         NavigationStack {
             List {
@@ -81,7 +81,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "dkfjdkfj", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

@@ -14,16 +14,16 @@ struct NewGoalView: View {
     @State private var title = ""
     @State private var deadline = Date()
     @State private var habitTitle = ""
-//    @State private var selectedAnimal: AnimalKind
-//    @State private var selectedAnimal: Int = 0
-    @State var selectedAnimalKind: AnimalKind = .none
+    //    @State private var selectedAnimal: AnimalKind
+    //    @State private var selectedAnimal: Int = 0
+    @State var selectedAnimalKind: AnimalKind = .cow
     @State var frequency = ["Fixed", "Daily", "Weekly", "Monthly"]
     @State var selectedDays = [String]()
     @State private var motivationalQuote = ""
     @State private var selectedFrequencyIndex = 0
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
-    @State private var daysInWeek = 7 // should this be let? 
+    @State private var daysInWeek = 7 // should this be let?
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
@@ -35,7 +35,7 @@ struct NewGoalView: View {
     @State private var saturdayChosen = false
     @State private var sundayChosen = false
     @State private var isButtonEnabled = false
-    @Binding var isAnimalSelected: Bool
+//    @Binding var isAnimalSelected: Bool
     
     var body: some View {
         NavigationStack {
@@ -67,19 +67,19 @@ struct NewGoalView: View {
                     } else if frequency[selectedFrequencyIndex] == "Weekly" {
                         VStack {
                             Text("Number of times per remaining week: \(Int(numberOfTimesPerWeek.rounded()))")
-
+                            
                             Slider(value: $numberOfTimesPerWeek, in: 1...Double(daysInWeek), step: 1)
                         }
                         .onAppear {
                             daysInWeek = daysInWeek - Calendar.current.component(.weekday, from: Date()) + 1
                         }
-
-
+                        
+                        
                     } else if frequency[selectedFrequencyIndex] == "Monthly" {
                         VStack {
                             Text("Number of times per remaining month: \(Int(numberOfTimesPerMonth.rounded()))")
                             Slider(value: $numberOfTimesPerMonth, in: 1...Double(daysInMonth), step: 1)
-
+                            
                         }
                         .onAppear {
                             // Calculate the number of days left in the current month
@@ -88,20 +88,20 @@ struct NewGoalView: View {
                             }
                         }
                     } else if frequency[selectedFrequencyIndex] == "Fixed" {
-//                                            Picker("Days", selection: $selectedDays) {
-//                                                ForEach(days, id: \.self) {  day in
-//                                                    Text(day)
-//                                                }
-//                                            }
-//                                            MultiSelectPickerView(days: days, selectedDays: $selectedDays)
-//                                                        .onChange(of: days) {
-//                                                            print(days)
-//                                                        }
-//
-//                                            .pickerStyle(InlinePickerStyle())
-
-//                        multi-picker isnt working, so we are using "toggle" function instead
-
+                        //                                            Picker("Days", selection: $selectedDays) {
+                        //                                                ForEach(days, id: \.self) {  day in
+                        //                                                    Text(day)
+                        //                                                }
+                        //                                            }
+                        //                                            MultiSelectPickerView(days: days, selectedDays: $selectedDays)
+                        //                                                        .onChange(of: days) {
+                        //                                                            print(days)
+                        //                                                        }
+                        //
+                        //                                            .pickerStyle(InlinePickerStyle())
+                        
+                        //                        multi-picker isnt working, so we are using "toggle" function instead
+                        
                         Toggle("Monday", isOn: $mondayChosen)
                         Toggle("Tuesday", isOn: $tuesdayChosen)
                         Toggle("Wednesday", isOn: $wednesdayChosen)
@@ -109,7 +109,7 @@ struct NewGoalView: View {
                         Toggle("Friday", isOn: $fridayChosen)
                         Toggle("Saturday", isOn: $saturdayChosen)
                         Toggle("Sunday", isOn: $sundayChosen)
-
+                        
                         DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
@@ -118,10 +118,37 @@ struct NewGoalView: View {
                     TextField("You can do it!", text: $motivationalQuote)
                 }
                 
-                
-                
-                Section{
-                    if title.isEmpty || habitTitle.isEmpty || !isAnimalSelected || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                //                Section{
+                //                    if title.isEmpty || habitTitle.isEmpty || !isAnimalSelected || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                //                        Button{
+                //
+                //                        }label:{
+                //                            Text("Save")
+                //                        }
+                //                        .disabled(!isButtonEnabled)
+                //                        .frame(maxWidth: .infinity)
+                //                    } else {
+                //                        ZStack{
+                //                            Color.accentColor
+                //                            Button {
+                //                                //#warning("fix this")
+                //                                let newGoal = Goal(title: title, habitTitle: habitTitle, deadline: deadline, frequency: frequency, selectedFrequencyIndex: selectedFrequencyIndex, selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote, selectedDailyDeadline: selectedDailyDeadline, selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth))
+                //
+                //                                isButtonEnabled = true
+                //                                goalManager.goals.append(newGoal)
+                //                                dismiss()
+                //                            } label: {
+                //                                Text("Save")
+                //                                    .foregroundColor(.white)
+                //                            }
+                //                            .frame(maxWidth: .infinity)
+                //                            //                            .background(Color.accentColor)
+                //                        }
+                //                    }
+                //                }
+                Section {
+                    //                        Button {
+                    if title.isEmpty || habitTitle.isEmpty ||  (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
                         Button{
                             
                         }label:{
@@ -129,16 +156,34 @@ struct NewGoalView: View {
                         }
                         .disabled(!isButtonEnabled)
                         .frame(maxWidth: .infinity)
+                        //Handle the case where the button should be disabled
                     } else {
                         ZStack{
                             Color.accentColor
                             Button {
-//#warning("fix this")
-                                let newGoal = Goal(title: title, habitTitle: habitTitle, deadline: deadline, frequency: frequency, selectedFrequencyIndex: selectedFrequencyIndex, selectedAnimal: Animal(name: "", kind: selectedAnimalKind), motivationalQuote: motivationalQuote, selectedDailyDeadline: selectedDailyDeadline, selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: Double(numberOfTimesPerWeek), numberOfTimesPerMonth: Double(numberOfTimesPerMonth))
-                                
                                 isButtonEnabled = true
+                                let newGoal = Goal(
+                                    title: title,
+                                    habitTitle: habitTitle,
+                                    deadline: deadline,
+                                    frequency: frequency,
+                                    selectedFrequencyIndex: selectedFrequencyIndex,
+                                    selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
+                                    motivationalQuote: motivationalQuote,
+                                    selectedDailyDeadline: selectedDailyDeadline,
+                                    selectedFixedDeadline: selectedFixedDeadline,
+                                    numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
+                                    numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
+                                )
+                                
                                 goalManager.goals.append(newGoal)
                                 dismiss()
+                                //                            }
+                                //                        } label: {
+                                //                            Text("Save")
+                                //                        }
+                                //                        .disabled(!isButtonEnabled)
+                                //                        .frame(maxWidth: .infinity)
                             } label: {
                                 Text("Save")
                                     .foregroundColor(.white)
@@ -159,7 +204,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(isAnimalSelected: .constant(true))
+        NewGoalView()
             .environmentObject(GoalManager())
     }
 }

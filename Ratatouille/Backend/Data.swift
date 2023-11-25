@@ -21,7 +21,7 @@ enum AnimalKind : Codable, CaseIterable {
     case rabbit
     case cat
     case duck
-    case none
+//    case none
     
     var asString: String {
         switch self {
@@ -35,7 +35,7 @@ enum AnimalKind : Codable, CaseIterable {
         case .rabbit : return "rabbit"
         case .cat : return "cat"
         case .duck : return "duck"
-        case .none: return "NONE"
+//        case .none: return "NONE"
         }
     }
     
@@ -51,7 +51,7 @@ enum AnimalKind : Codable, CaseIterable {
         case .rabbit : return "Rabbit_"
         case .cat : return "Cat_"
         case .duck : return "Duck_"
-        case .none: return "NONE_"
+//        case .none: return "NONE_"
         }
     }
 }
@@ -142,7 +142,7 @@ extension Goal {
     
 }
 
-var isSAnimalSelected : Bool = false
+//var isAnimalSelected : Bool = false
 
 var autonomy: Double = 0 // not sure if this will/can be used
 class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
