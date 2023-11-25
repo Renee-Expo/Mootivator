@@ -21,7 +21,8 @@ struct GoalCompletionView: View {
     @Binding var title: String
     @Binding var selectedAnimal: Int
     @Binding var deadline: Date
-    var isGoalCompleted: Bool
+    @State var isGoalCompleted: Bool //not sure if this works bc it's not private var
+    @Binding var numberOfCompletedGoals : Int
     var body: some View {
         
         VStack {
@@ -36,7 +37,8 @@ struct GoalCompletionView: View {
                 VStack {
                     Button {
                         showYesScreen = true
-                        
+                        isGoalCompleted = true
+                        numberOfCompletedGoals = numberOfCompletedGoals + 1
                     } label: {
                         Text("Yes")
                             .padding()
@@ -53,7 +55,7 @@ struct GoalCompletionView: View {
                     
                     Button {
                         showNoScreen = true
-                        
+                        isGoalCompleted = false
                     } label: {
                         Text("No")
                             .padding()
@@ -151,7 +153,7 @@ struct NoScreen: View {
 
 struct GoalCompletionView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: true)
+        GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: false, numberOfCompletedGoals: .constant(0))
             .environmentObject(GoalManager())
     }
 }

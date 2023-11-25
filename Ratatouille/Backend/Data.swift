@@ -129,8 +129,6 @@ struct Goal: Identifiable, Codable {
 extension Goal {
     
     static let sampleGoals: [Goal] = [
-//        Goal(goalEntered: "Get A for Math", deadline: Date(), habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: ["Monday", "Wednesday", "Friday"], motivationalQuote: "You've got this", selectedFrequencyIndex: 0, selectedDailyDeadline: Date(), numberOfTimesPerWeek: 3, numberOfTimesPerMonth: 12, selectedFixedDeadline: Date()),
-//        Goal(goalEntered: "Lead a healthier life", deadline: Date(), habitEntered: "Run 2km", selectedAnimal: , frequency: ["Everyday"], motivationalQuote: "wergh", selectedFrequencyIndex: 0, selectedDailyDeadline: Date(), numberOfTimesPerWeek: 7.0, numberOfTimesPerMonth: 30.0, selectedFixedDeadline: Date())
         
         Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
@@ -141,6 +139,8 @@ extension Goal {
     ]
     
 }
+
+var numberOfCompletedGoals : Int = 0
 
 //var isAnimalSelected : Bool = false
 

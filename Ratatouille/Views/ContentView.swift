@@ -26,7 +26,7 @@ struct ContentView: View {
                     Text("Goals")
                     Image(systemName: "star.fill")
                 }
-            AnimalView()
+            AnimalView(numberOfCompletedGoals: .constant(0))
                 .tabItem{
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
