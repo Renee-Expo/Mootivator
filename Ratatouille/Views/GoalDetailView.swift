@@ -32,9 +32,9 @@ struct GoalDetailView: View {
                         .frame(width: 350, height: 400)
                         .foregroundColor(.white)
                         .overlay(
-                            ScrollView{
-                                VStack{
-                                    Text("Test  habitt")
+                            ScrollView {
+                                VStack {
+                                    Text("Test  habit")
                                         .font(.system(size: 16))
                                         .multilineTextAlignment(.leading)
                                         .fontWeight(.bold)

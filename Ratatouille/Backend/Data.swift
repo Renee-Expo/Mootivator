@@ -129,8 +129,15 @@ struct Goal: Identifiable, Codable {
 extension Goal {
     
     static let sampleGoals: [Goal] = [
-        //        Goal(goalEntered: "Get A for Math", deadline: Date(), habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: <#T##Array<String>#>, motivationalQuote: "You've got this", selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: 1, numberOfTimesPerMonth: 4,  selectedFixedDeadline: Date()),
-        //        Goal(goalEntered: "Lead a healthier life", deadline: <#T##Date#>, habitEntered: "Run 2km", selectedAnimal: 2, frequency: <#T##Array<String>#>, motivationalQuote: <#T##String#>, selectedFrequencyIndex: <#T##Int#>, selectedDailyDeadline: <#T##Date#>, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, selectedFixedDeadline: <#T##Date#>)
+//        Goal(goalEntered: "Get A for Math", deadline: Date(), habitEntered: "Do one Math practice paper daily", selectedAnimal: 1, frequency: ["Monday", "Wednesday", "Friday"], motivationalQuote: "You've got this", selectedFrequencyIndex: 0, selectedDailyDeadline: Date(), numberOfTimesPerWeek: 3, numberOfTimesPerMonth: 12, selectedFixedDeadline: Date()),
+//        Goal(goalEntered: "Lead a healthier life", deadline: Date(), habitEntered: "Run 2km", selectedAnimal: , frequency: ["Everyday"], motivationalQuote: "wergh", selectedFrequencyIndex: 0, selectedDailyDeadline: Date(), numberOfTimesPerWeek: 7.0, numberOfTimesPerMonth: 30.0, selectedFixedDeadline: Date())
+        
+        Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
+        
+        Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+
+
+
     ]
     
 }

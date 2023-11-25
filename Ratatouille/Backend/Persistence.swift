@@ -8,6 +8,13 @@
 import Foundation
 import SwiftUI
 
+enum SortOption: String, CaseIterable {
+    case none = "Show All"
+    case ascending = "Sort by Deadline (Ascending)"
+    case descending = "Sort by Deadline (Descending)"
+}
+
+
 // GoalPersistence --------------------------------------------------------
 // final class just means no more child classes
 final class GoalManager: ObservableObject {
@@ -21,6 +28,40 @@ final class GoalManager: ObservableObject {
     init() {
         load()
     }
+    
+    @Published var searchText = ""
+    @Published var sortOption: SortOption = .none
+    
+    var filteredAndSortedGoals: Binding<[Goal]> {
+        
+        Binding (
+            get: {
+                var filteredGoals = self.goals
+                
+                if !self.searchText.isEmpty {
+                    filteredGoals = filteredGoals.filter {
+                        $0.title.localizedCaseInsensitiveContains(self.searchText) ||
+                        $0.habitTitle.localizedCaseInsensitiveContains(self.searchText)
+                    }
+                }
+                
+                switch self.sortOption {
+                case .ascending:
+                    filteredGoals.sort { $0.deadline < $1.deadline }
+                case .descending:
+                    filteredGoals.sort { $0.deadline > $1.deadline }
+                case .none:
+                    break
+                }
+                
+                return filteredGoals
+            },
+            set: {
+                self.goals = $0
+            }
+        )
+    }
+    
     
     func getArchiveURL() -> URL {
         let plistName = "Goals.plist"
