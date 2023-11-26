@@ -19,11 +19,9 @@ struct AnimateProgressView: View {
 
     var body: some View {
         VStack() {
-            CircularProgressView(progress: self.progress)
-//                .animation(.linear)
-                .padding()
-
-            Spacer()
+            withAnimation(.linear(duration: 1.0)) {
+                CircularProgressView(progress: self.progress)
+            }
         }
         .padding(10)
     }
