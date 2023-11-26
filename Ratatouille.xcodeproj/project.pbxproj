@@ -22,11 +22,11 @@
 		1E8A3CEB2B0C55ED008771CC /* HabitCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */; };
 		1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */; };
 		99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */; };
+		99BC55492B1381340007864F /* HabitCompletionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC55482B1381340007864F /* HabitCompletionStatus.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
 		99F04C0B2AA596870089ED13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C0A2AA596870089ED13 /* Preview Assets.xcassets */; };
-		D93A5B142B134585002A1FE6 /* HabitCompletionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93A5B132B134585002A1FE6 /* HabitCompletionStatus.swift */; };
 		D93A5B172B1346A4002A1FE6 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D93A5B162B1346A4002A1FE6 /* ConfettiSwiftUI */; };
 		D94B0F3A2B0C8EC600BDE01C /* AnimalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */; };
 		D97165012B10A6BA00BE63C8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165002B10A6BA00BE63C8 /* CircleView.swift */; };
@@ -50,12 +50,12 @@
 		1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletionView.swift; sourceTree = "<group>"; };
 		1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCompletionView.swift; sourceTree = "<group>"; };
 		99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPickerView.swift; sourceTree = "<group>"; };
+		99BC55482B1381340007864F /* HabitCompletionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HabitCompletionStatus.swift; path = ../../HabitCompletionStatus.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		99F04C072AA596870089ED13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99F04C0A2AA596870089ED13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D93A5B132B134585002A1FE6 /* HabitCompletionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitCompletionStatus.swift; path = ../../../../HabitCompletionStatus.swift; sourceTree = "<group>"; };
 		D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsViewModel.swift; sourceTree = "<group>"; };
 		D97165002B10A6BA00BE63C8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		D97165042B10A74500BE63C8 /* CirclesTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesTopView.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		07EF47872AA5A57700DF4318 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				D93A5B132B134585002A1FE6 /* HabitCompletionStatus.swift */,
+				99BC55482B1381340007864F /* HabitCompletionStatus.swift */,
 				99F04C032AA596820089ED13 /* RatatouilleApp.swift */,
 				D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */,
 				078EFB652AF5FD48003064A6 /* Persistence.swift */,
@@ -247,7 +247,7 @@
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
 				1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */,
 				1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */,
-				D93A5B142B134585002A1FE6 /* HabitCompletionStatus.swift in Sources */,
+				99BC55492B1381340007864F /* HabitCompletionStatus.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
 				1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */,

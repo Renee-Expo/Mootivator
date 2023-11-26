@@ -14,7 +14,29 @@ import SwiftUI
 
 struct GoalEditView: View {
     @EnvironmentObject var goalManager: GoalManager
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @Binding var goal: Goal
+    @Binding var title : String
+    @Binding var habitTitle : String
+    @Binding var frequency : Array<String>
+    @Binding var selectedFrequencyIndex : Int
+    @Binding var mondayChosen : Bool
+    @Binding var tuesdayChosen : Bool
+    @Binding var wednesdayChosen : Bool
+    @Binding var thursdayChosen : Bool
+    @Binding var fridayChosen : Bool
+    @Binding var saturdayChosen : Bool
+    @Binding var sundayChosen : Bool
+    @Binding var motivationalQuote : String
+    @Binding var isButtonEnabled : Bool
+    @Binding var deadline : Date
+    @Binding var selectedDailyDeadline : Date
+    @Binding var selectedFixedDeadline : Date
+    @Binding var numberOfTimesPerWeek : Double
+    @Binding var numberOfTimesPerMonth : Double
+    @Binding var selectedAnimal : Animal
+
     @State var selectedAnimalKind = AnimalKind.cow
     var body: some View {
         NavigationStack {
@@ -72,6 +94,54 @@ struct GoalEditView: View {
                 Section("Write something to motivate you") {
                     TextField("You can do it!", text: $goal.motivationalQuote)
                 }
+                
+                {
+                    //                        Button {
+                    if title.isEmpty || habitTitle.isEmpty ||  (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
+                        Button{
+                            
+                        }label:{
+                            Text("Save")
+                        }
+                        .disabled(!isButtonEnabled)
+                        .frame(maxWidth: .infinity)
+                        //Handle the case where the button should be disabled
+                    } else {
+                        ZStack{
+                            Color.accentColor
+                            Button {
+                                isButtonEnabled = true
+                                let newGoal = Goal(
+                                    title: title,
+                                    habitTitle: habitTitle,
+                                    deadline: deadline,
+                                    frequency: frequency,
+                                    selectedFrequencyIndex: selectedFrequencyIndex,
+                                    selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
+                                    motivationalQuote: motivationalQuote,
+                                    selectedDailyDeadline: selectedDailyDeadline,
+                                    selectedFixedDeadline: selectedFixedDeadline,
+                                    numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
+                                    numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
+                                )
+                                goalManager.goals.append(newGoal)
+                                presentationMode.wrappedValue.dismiss()
+                                //                            }
+                                //                        } label: {
+                                //                            Text("Save")
+                                //                        }
+                                //                        .disabled(!isButtonEnabled)
+                                //                        .frame(maxWidth: .infinity)
+                            } label: {
+                                Text("Save")
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            //                            .background(Color.accentColor)
+                        }
+                    }
+                }
+                
             }
         }
     }
