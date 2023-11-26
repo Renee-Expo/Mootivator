@@ -142,6 +142,68 @@ extension Goal {
 
 var numberOfCompletedGoals : Int = 0
 
+func calculateTargetDays(for goal: Goal) -> Int {
+    // Assuming you have access to goal's frequency and other relevant data
+    
+    let currentDate = Date()
+    let calendar = Calendar.current
+    
+    // Function to check if a date falls within a week
+    func isInCurrentWeek(_ date: Date) -> Bool {
+        return calendar.isDate(date, equalTo: currentDate, toGranularity: .weekOfYear)
+    }
+    
+    // Function to check if a date falls within a month
+    func isInCurrentMonth(_ date: Date) -> Bool {
+        return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
+    }
+    
+    var targetDays = 0
+    
+    for freq in goal.frequency {
+        switch freq {
+        case "Daily":
+            
+            if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+                let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
+                targetDays += max(0, days)
+                
+            }
+        case "Weekly":
+            let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
+            let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
+            let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
+                        
+            targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
+        case "Monthly":
+            if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
+                let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
+                let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
+                let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
+                
+                targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
+            }
+        case "Fixed":
+            
+            // Calculate target days for fixed frequency (e.g., specific dates selected)
+            // Replace `selectedDates` with actual array of selected dates from Goal struct
+            let selectedDates: [Date] = [] // Placeholder for selected dates
+            for date in selectedDates {
+                if date >= currentDate {
+                    targetDays += 1
+                }
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    return targetDays
+}
+
+
+
 //var isAnimalSelected : Bool = false
 
 var autonomy: Double = 0 // not sure if this will/can be used

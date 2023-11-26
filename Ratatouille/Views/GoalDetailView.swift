@@ -18,16 +18,20 @@ struct GoalDetailView: View {
     @State var indexItem : Int = 0
     @State var selectedDate : Date = Date()
     @State private var showMarkHabitCompletionAlert = false
+    @State private var showDeleteGoalAlert = false
+    @State var title: String = ""
+    @State var habitTitle: String = ""
+    @State var daysCompleted = 0
+
     //    @State private var showHabitCompletionView = false
     
     
     var body: some View {
+        let targetDays = calculateTargetDays(for: goal)
         
         NavigationStack{
             VStack(spacing: 5){
-                Text(goal.habitTitle)
-                Text("Current habit")
-                AnimateProgressView()
+                AnimateProgressView(targetDays: calculateTargetDays(for: goal), daysCompleted: daysCompleted)
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.black, lineWidth: 2)
                     .frame(width: 350, height: 400)
@@ -35,7 +39,7 @@ struct GoalDetailView: View {
                     .overlay(
                         ScrollView {
                             VStack {
-                                Text("Test  habit")
+                                Text(goal.habitTitle)
                                     .font(.system(size: 16))
                                     .multilineTextAlignment(.leading)
                                     .fontWeight(.bold)
@@ -52,6 +56,7 @@ struct GoalDetailView: View {
                                         title: Text("Mark \(goal.habitTitle) as Completed?"),
                                         primaryButton: .default(Text("Yes")) {
                                             dailyHabitCompleted[selectedDate] = true
+                                            daysCompleted += 1
                                             habitCompletionStatus.save()
                                         },
                                         secondaryButton: .cancel(Text("No"))
@@ -86,6 +91,7 @@ struct GoalDetailView: View {
                 }
                 
                 Button{
+                    goalManager.deleteGoal(goal)
                     
                 } label:{
                     Label("Delete goal", systemImage:"trash")
@@ -93,8 +99,19 @@ struct GoalDetailView: View {
                 }
             }
         }
+        .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert){
+            Button("Yes"){
+                goalManager.deleteGoal(goal)
+                GoalView(title: $title, habitTitle: $habitTitle)
+            }
+            Button("No"){
+                
+            }
+        }
         .sheet(isPresented: $showGoalDetailSheet){
-            GoalEditView (goal: $goal)
+            NavigationView {
+                GoalEditView (goal: $goal)
+            }
         }
         
     }
@@ -109,7 +126,7 @@ struct GoalDetailView_Previews: PreviewProvider {
         let habitCompletionStatus = HabitCompletionStatus()
         
         return GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()))
-            .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
+            .environmentObject(goalManager)
+            .environmentObject(habitCompletionStatus)
     }
 }

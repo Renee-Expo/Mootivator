@@ -90,4 +90,12 @@ final class GoalManager: ObservableObject {
     func loadSampleData() {
         goals = Goal.sampleGoals
     }
+    
+    func deleteGoal(_ goal: Goal) {
+        // Implement deletion logic here
+        // For instance, if you're storing goals in an array:
+        if let index = goals.firstIndex(where: { $0.id == goal.id }) {
+            goals.remove(at: index)
+        }
+    }
 }

@@ -4,56 +4,24 @@
 //
 //  Created by T Krobot on 24/11/23.
 //
+
 import SwiftUI
 
 struct AnimateProgressView: View {
-    @State private var progress: Double = 42.0
 
-    var minProgress = 0.0
-    var maxProgress = 100.0
-
-    var body: some View {
-        VStack() {
-            CircularProgressView(progress: self.progress / maxProgress)
-//                .animation(.linear)
-
-            VStack {
-            Text("Progress: \(progress, specifier: "%.1f")")
-//                Slider(value: $progress,
-//                       in: minProgress...maxProgress,
-//                       minimumValueLabel: Text("0"),
-//                       maximumValueLabel: Text("100")
-//                ) {}
-            }
-            .padding()
-
-            Spacer()
-        }
-        .padding(10)
+    var targetDays: Int
+    var daysCompleted: Int
+    var progress: Double {
+        guard targetDays > 0 else { return 0 }
+        let percentage = Double(daysCompleted) / Double(targetDays)
+        return min(percentage, 1.0)
     }
-}
-
-struct FinalProgressView: View {
-    @State private var progress: Double = 42.0
-
-    var minProgress = 0.0
-    var maxProgress = 100.0
 
     var body: some View {
         VStack() {
-            CircularProgressView(progress: self.progress / 100)
-//                .animation(.smooth)
-
-            VStack {
-            Text("Progress: \(progress, specifier: "%.1f")")
-                Slider(value: $progress,
-                       in: minProgress...maxProgress,
-                       minimumValueLabel: Text("0"),
-                       maximumValueLabel: Text("100")
-                ) {}
-            }
-            .accentColor(Color(red: 200/255, green: 168/255, blue: 240/255))
-            .padding()
+            CircularProgressView(progress: self.progress)
+//                .animation(.linear)
+                .padding()
 
             Spacer()
         }
@@ -91,7 +59,7 @@ struct CircularProgressView: View {
                 )
         }
         .frame(width: 200, height: 200)
-//        .padding()
+        .padding()
     }
 }
 
@@ -99,6 +67,6 @@ struct CircularProgressView: View {
 
 struct AnimateProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimateProgressView()
+        AnimateProgressView(targetDays: 30, daysCompleted: 10)
     }
 }
