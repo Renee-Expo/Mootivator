@@ -14,6 +14,9 @@ enum SortOption: String, CaseIterable {
     case descending = "Sort by Deadline (Descending)"
 }
 
+enum FilterOption {
+    case showAll, showCurrent, showPast
+}
 
 // GoalPersistence --------------------------------------------------------
 // final class just means no more child classes
@@ -31,6 +34,8 @@ final class GoalManager: ObservableObject {
     
     @Published var searchText = ""
     @Published var sortOption: SortOption = .none
+    @Published var filterOption: FilterOption = .showCurrent // Default to show current goals only
+//    @Published var showCurrentGoalsOnly: Bool = false // Default to show current goals only
     
     var filteredAndSortedGoals: Binding<[Goal]> {
         
@@ -45,16 +50,32 @@ final class GoalManager: ObservableObject {
                     }
                 }
                 
-                switch self.sortOption {
-                case .ascending:
-                    filteredGoals.sort { $0.deadline < $1.deadline }
-                case .descending:
-                    filteredGoals.sort { $0.deadline > $1.deadline }
-                case .none:
-                    break
-                }
+//                DispatchQueue.main.async {
+                    switch self.sortOption {
+                    case .ascending:
+                        filteredGoals.sort { $0.deadline < $1.deadline }
+                    case .descending:
+                        filteredGoals.sort { $0.deadline > $1.deadline }
+                    case .none:
+                        break
+                    }
+//                }
                 
-                return filteredGoals
+                switch self.filterOption {
+                case .showAll:
+                    return filteredGoals
+                case .showPast:
+                    return filteredGoals.filter { $0.isGoalCompleted }
+                case .showCurrent:
+                    return filteredGoals.filter { !$0.isGoalCompleted }
+                }
+//                if self.showCurrentGoalsOnly {
+//                    return filteredGoals.filter { !$0.isGoalCompleted }
+//                } else {
+//                    return filteredGoals
+//                }
+                
+//                return filteredGoals
             },
             set: {
                 self.goals = $0

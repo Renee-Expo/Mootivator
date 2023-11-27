@@ -23,13 +23,15 @@ struct GoalCompletionView: View {
     @Binding var title: String
     @Binding var selectedAnimal: Int
     @Binding var deadline: Date
-    @State var isGoalCompleted: Bool //not sure if this works bc it's not private var
+    @Binding var isGoalCompleted: Bool 
     @Binding var numberOfCompletedGoals : Int
+    @Binding var goalAnimalKind : AnimalKind
+    @Binding var goalAnimalEmotion: Animal.emotion
     var body: some View {
         
         VStack {
             if showGoalCompletionView{
-                Image("\(selectedAnimal)")
+                Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
                     .resizable()
                     .scaledToFit()
                     .padding()
@@ -171,7 +173,7 @@ struct YesScreen: View {
     
     struct GoalCompletionView_Previews: PreviewProvider {
         static var previews: some View {
-            GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: false, numberOfCompletedGoals: .constant(0))
+            GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: .constant(false), numberOfCompletedGoals: .constant(0), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
                 .environmentObject(GoalManager())
                 .environmentObject(HabitCompletionStatus())
         }

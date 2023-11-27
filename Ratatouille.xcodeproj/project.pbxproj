@@ -13,16 +13,17 @@
 		0781EE652B085CC7003B8DC5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE642B085CC7003B8DC5 /* Data.swift */; };
 		0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */; };
 		078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078EFB652AF5FD48003064A6 /* Persistence.swift */; };
+		1E04D1812B1438D90025BC9C /* HabitCompletionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E04D1802B1438D90025BC9C /* HabitCompletionStatus.swift */; };
 		1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */; };
 		1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */; };
 		1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */; };
 		1E5DBAE02B0B091700BF7A50 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */; };
 		1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */; };
 		1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */; };
+		1E89887F2B139DA80030A6BA /* HabitCompletionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89887E2B139DA80030A6BA /* HabitCompletionStatus.swift */; };
 		1E8A3CEB2B0C55ED008771CC /* HabitCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */; };
 		1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */; };
 		99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */; };
-		99BC55492B1381340007864F /* HabitCompletionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BC55482B1381340007864F /* HabitCompletionStatus.swift */; };
 		99F04C042AA596820089ED13 /* RatatouilleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C032AA596820089ED13 /* RatatouilleApp.swift */; };
 		99F04C062AA596820089ED13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F04C052AA596820089ED13 /* ContentView.swift */; };
 		99F04C082AA596870089ED13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99F04C072AA596870089ED13 /* Assets.xcassets */; };
@@ -41,16 +42,17 @@
 		0781EE642B085CC7003B8DC5 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		0781EE662B086751003B8DC5 /* AnimalEmotionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimalEmotionElement.swift; path = "Ratatouille/UI Elements/HomeViewElements/AnimalEmotionElement.swift"; sourceTree = SOURCE_ROOT; };
 		078EFB652AF5FD48003064A6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		1E04D1802B1438D90025BC9C /* HabitCompletionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitCompletionStatus.swift; sourceTree = "<group>"; };
 		1E5DBACC2B0AFA6800BF7A50 /* GoalDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
 		1E5DBACD2B0AFA6800BF7A50 /* NewGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		1E5DBADD2B0AFE2100BF7A50 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		1E5DBADF2B0B091700BF7A50 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		1E5DBAE12B0B092F00BF7A50 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditView.swift; sourceTree = "<group>"; };
+		1E89887E2B139DA80030A6BA /* HabitCompletionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitCompletionStatus.swift; path = "/.Trash/Ratatouille copy 2/HabitCompletionStatus.swift"; sourceTree = "<absolute>"; };
 		1E8A3CEA2B0C55ED008771CC /* HabitCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletionView.swift; sourceTree = "<group>"; };
 		1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCompletionView.swift; sourceTree = "<group>"; };
 		99B36A9B2B0B2E1F00BD3CC4 /* AnimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPickerView.swift; sourceTree = "<group>"; };
-		99BC55482B1381340007864F /* HabitCompletionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HabitCompletionStatus.swift; path = ../../HabitCompletionStatus.swift; sourceTree = "<group>"; };
 		99F04C002AA596820089ED13 /* Ratatouille.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratatouille.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F04C032AA596820089ED13 /* RatatouilleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleApp.swift; sourceTree = "<group>"; };
 		99F04C052AA596820089ED13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,7 +118,7 @@
 		07EF47872AA5A57700DF4318 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				99BC55482B1381340007864F /* HabitCompletionStatus.swift */,
+				1E04D1802B1438D90025BC9C /* HabitCompletionStatus.swift */,
 				99F04C032AA596820089ED13 /* RatatouilleApp.swift */,
 				D94B0F392B0C8EC600BDE01C /* AnimalsViewModel.swift */,
 				078EFB652AF5FD48003064A6 /* Persistence.swift */,
@@ -125,11 +127,20 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
+		1E04D17F2B1438940025BC9C /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1E89887E2B139DA80030A6BA /* HabitCompletionStatus.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		99F04BF72AA596820089ED13 = {
 			isa = PBXGroup;
 			children = (
 				99F04C022AA596820089ED13 /* Ratatouille */,
 				99F04C012AA596820089ED13 /* Products */,
+				1E04D17F2B1438940025BC9C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,10 +255,11 @@
 				99B36A9C2B0B2E1F00BD3CC4 /* AnimalPickerView.swift in Sources */,
 				1E5DBAE22B0B092F00BF7A50 /* NotificationView.swift in Sources */,
 				0781EE652B085CC7003B8DC5 /* Data.swift in Sources */,
+				1E89887F2B139DA80030A6BA /* HabitCompletionStatus.swift in Sources */,
 				99F04C062AA596820089ED13 /* ContentView.swift in Sources */,
 				1E5DBAD02B0AFA6800BF7A50 /* NewGoalView.swift in Sources */,
 				1E5DBADE2B0AFE2100BF7A50 /* GoalView.swift in Sources */,
-				99BC55492B1381340007864F /* HabitCompletionStatus.swift in Sources */,
+				1E04D1812B1438D90025BC9C /* HabitCompletionStatus.swift in Sources */,
 				078EFB662AF5FD48003064A6 /* Persistence.swift in Sources */,
 				0781EE672B086751003B8DC5 /* AnimalEmotionElement.swift in Sources */,
 				1E5DBAE42B0B0B7200BF7A50 /* GoalEditView.swift in Sources */,

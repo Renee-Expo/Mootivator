@@ -148,7 +148,15 @@ struct Goal: Identifiable, Codable {
         daysOfTheWeek.saturday.text     : false,
         daysOfTheWeek.sunday.text       : false
     ]
+    
+    var scheduledCompletionDates: [Date] = []
+    var isGoalCompleted : Bool = false
+    
 }
+
+
+
+
 
 extension Goal {
     
@@ -157,12 +165,17 @@ extension Goal {
         Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
         Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), isGoalCompleted: true)
 
 
 
     ]
     
 }
+
+var numberOfCompletedGoals : Int = 0
+
+var numberOfDaysCompleted : Int = 0
 
 var numberOfCompletedGoals : Int = 0 // is this to be persisted?
 /*
@@ -228,6 +241,8 @@ func calculateTargetDays(for goal: Goal) -> Int {
 
 */
 
+
+
 //var isAnimalSelected : Bool = false
 
 var autonomy: Double = 0 // not sure if this will/can be used
@@ -250,3 +265,4 @@ extension Date: RawRepresentable {              // Allows date to be added to @A
 
 // IMAGE INFO ------------------------
 // use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
+
