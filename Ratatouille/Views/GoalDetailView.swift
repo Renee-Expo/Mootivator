@@ -25,7 +25,7 @@ struct GoalDetailView: View {
     @State var habitTitle: String = ""
     @Binding var numberOfDaysCompleted : Int
     @State private var completedDates: Set<Date> = []
-    
+    @State private var redirectToGoalView = false
     var body: some View {
         let targetDays = calculateTargetDays(for: goal)
         
@@ -137,18 +137,16 @@ struct GoalDetailView: View {
         .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
             Button("Yes") {
                 goalManager.deleteGoal(goal)
-                
-                NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false))) {
-                    // This closure can be empty or contain a label for the link
-                }
-                
-                
-                
+                redirectToGoalView = true
             }
             Button("No") {
                 
             }
         }
+        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
+            EmptyView()
+        }
+
         .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
                 GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
