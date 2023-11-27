@@ -48,7 +48,7 @@ struct NewGoalView: View {
                 }
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])                        
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])
                     }
                 }
                 
@@ -162,7 +162,7 @@ struct NewGoalView: View {
                             Color.accentColor
                             Button {
                                 isButtonEnabled = true
-                                let newGoal = Goal(
+                                var newGoal = Goal(
                                     title: title,
                                     habitTitle: habitTitle,
                                     deadline: deadline,
@@ -175,6 +175,35 @@ struct NewGoalView: View {
                                     numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
                                     numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
                                 )
+                                
+                                if frequency[selectedFrequencyIndex] == "Daily" {
+                                        newGoal.scheduledCompletionDates = Array(stride(from: Date(), to: selectedDailyDeadline, by: 24 * 60 * 60))
+                                    } else if frequency[selectedFrequencyIndex] == "Fixed" {
+                                        if mondayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if tuesdayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if wednesdayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if thursdayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if fridayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if saturdayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        if sundayChosen {
+                                            newGoal.scheduledCompletionDates += Array(stride(from: Date(), to: selectedFixedDeadline, by: 7 * 24 * 60 * 60))
+                                        }
+                                        
+                                        // Remove duplicates
+                                        newGoal.scheduledCompletionDates = Array(Set(newGoal.scheduledCompletionDates))
+                                    }
                                 
                                 goalManager.goals.append(newGoal)
                                 dismiss()
@@ -209,3 +238,4 @@ struct NewGoalView_Previews: PreviewProvider {
             .environmentObject(HabitCompletionStatus())
     }
 }
+

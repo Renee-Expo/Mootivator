@@ -7,14 +7,15 @@ struct GoalView: View {
     @State private var showConfirmAlert = false
     @Binding var title: String
     @Binding var habitTitle: String
-    @State private var filters = ["Show All", "Ascending Order", "Descending Order"]
+    @State private var filters = ["Show All", "Ascending Order", "Descending Order", "Current", "Past"]
+    @Binding var isGoalCompleted : Bool 
     
     
     var body: some View {
         NavigationStack {
             List(goalManager.filteredAndSortedGoals, id: \.id) { $goal in
                 NavigationLink {
-                    GoalDetailView(goal: $goal, dailyHabitCompleted: $habitCompletionStatus.dailyHabitCompleted)
+                    GoalDetailView(goal: $goal, dailyHabitCompleted: $habitCompletionStatus.dailyHabitCompleted, numberOfDaysCompleted: .constant(0))
                 } label: {
                     VStack(alignment: .leading) {
                         Text(goal.title)
@@ -40,10 +41,11 @@ struct GoalView: View {
                     } label: {
                         Label("Add goal", systemImage: "plus.app")
                     }
-                    
+
                     Menu {
                         Button("Show All") {
                             goalManager.sortOption = .none
+                            goalManager.filterOption = .showAll
                         }
                         Button("Ascending Order") {
                             goalManager.sortOption = .ascending
@@ -51,6 +53,18 @@ struct GoalView: View {
                         Button ("Descending Order") {
                             goalManager.sortOption = .descending
                         }
+                        Button ("Current") {
+                            goalManager.sortOption = .none
+                            goalManager.filterOption = .showCurrent
+                        }
+
+                        Button ("Past") {
+                            goalManager.sortOption = .none
+                            goalManager.filterOption = .showPast
+                        }
+
+
+
                     } label: {
                         Label("Filter", systemImage: "line.horizontal.3.decrease.circle")
                     }
@@ -73,7 +87,7 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(title: .constant("Sample Goal"), habitTitle: .constant("Sample Habit Title"))
+        GoalView(title: .constant("Sample Goal"), habitTitle: .constant("Sample Habit Title"), isGoalCompleted: .constant(false))
             .environmentObject(GoalManager())
             .environmentObject(HabitCompletionStatus())
     }
