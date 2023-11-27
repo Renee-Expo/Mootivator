@@ -8,7 +8,6 @@
 import SwiftUI
 import UserNotifications
 
-
 struct NotificationView: View {
     
     @EnvironmentObject var goalManager: GoalManager
@@ -21,17 +20,12 @@ struct NotificationView: View {
     @AppStorage("neutralAnimal") var neutralAnimal = false
     @AppStorage("sadAnimal") var sadAnimal = false
     
-    @Binding var deadline : Date
-    @Binding var frequency : Array<String>
-    @Binding var selectedFrequencyIndex : Int
-    @Binding var selectedDailyDeadline : Date
-    @Binding var selectedFixedDeadline : Date
-    
+    @Binding var goal: Goal
     
     var body: some View {
-        NavigationStack{
-            Form{
-                Section{
+        NavigationStack {
+            Form {
+                Section {
                     Toggle("Daily tracking reminder", isOn: $dailyTracking)
                     if dailyTracking {
                         DatePicker("Reminder time", selection: $reminderTime, displayedComponents: [.hourAndMinute])
@@ -41,7 +35,7 @@ struct NotificationView: View {
                     }
                 }
                 
-                Section{
+                Section {
                     Toggle("Current habit deadline approached", isOn: $habitDeadline)
                     Toggle("Goal deadline approached", isOn: $goalDeadline)
                     Toggle("Animal feels neutral", isOn: $neutralAnimal)
@@ -49,7 +43,6 @@ struct NotificationView: View {
                 }
             }
             .navigationTitle("Notifications")
-            
         }
         .onAppear {
             if dailyTracking {
@@ -61,16 +54,17 @@ struct NotificationView: View {
             if goalDeadline {
                 scheduleHabitDeadlineNotification()
             }
+
+            // Schedule animal emotion notifications based on toggle state
+            if neutralAnimal {
+                scheduleAnimalEmotionNotification(emotion: .neutral)
+            }
+
+            if sadAnimal {
+                scheduleAnimalEmotionNotification(emotion: .sad)
+            }
         }
     }
-    
-    
-    private func dateComponents(for date: Date) -> DateComponents {
-            var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-            components.second = 0
-            return components
-        }
-    
     
     private func scheduleDailyNotification() {
         let center = UNUserNotificationCenter.current()
@@ -105,7 +99,7 @@ struct NotificationView: View {
             goalContent.title = "Goal Deadline Reminder"
             goalContent.body = "Don't forget your goal deadline!"
             
-            let goalTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: deadline), repeats: false)
+            let goalTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: goal.deadline), repeats: false)
             
             let goalRequest = UNNotificationRequest(identifier: UUID().uuidString, content: goalContent, trigger: goalTrigger)
             
@@ -129,11 +123,11 @@ struct NotificationView: View {
 
             var habitTrigger: UNNotificationTrigger?
 
-            switch frequency[selectedFrequencyIndex] {
+            switch goal.frequency[goal.selectedFrequencyIndex] {
             case "Daily":
-                habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: selectedDailyDeadline), repeats: false)
+                habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: goal.selectedDailyDeadline), repeats: false)
             case "Fixed":
-                habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: selectedFixedDeadline), repeats: false)
+                habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: goal.selectedFixedDeadline), repeats: false)
             case "Weekly":
                 let endOfWeek = Calendar.current.date(bySetting: .weekday, value: 1, of: Date())!
                 habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: endOfWeek), repeats: false)
@@ -156,15 +150,54 @@ struct NotificationView: View {
         }
     }
     
+    private func dateComponents(for date: Date) -> DateComponents {
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        components.second = 0
+        return components
+    }
     
-    
-    
+    private func scheduleAnimalEmotionNotification(emotion: Animal.emotion) {
+        guard emotion != .happy else {
+            // Skip scheduling notification for happy emotion
+            return
+        }
+
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Animal Emotion Reminder"
+        content.body = "Your animal is feeling \(emotion.text)!"
+
+        // Use the selected animal's emotion to determine the appropriate image or other content
+        // Modify this part based on your actual implementation for handling animal emotions
+
+        // Use different identifiers for neutral and sad notifications
+        let identifier = emotion == .neutral ? "NeutralAnimalNotification" : "SadAnimalNotification"
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)  // Adjust the time interval as needed
+
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        center.add(request) { error in
+            if let error = error {
+                print("Error scheduling animal emotion notification: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationView(deadline: .constant(Date()), frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline: .constant(Date()), selectedFixedDeadline: .constant(Date()))
-            .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
+        
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), frequency: ["Daily"], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        
+        let goalManager = GoalManager()
+        let habitCompletionStatus = HabitCompletionStatus()
+        
+        return NavigationStack {
+            NotificationView(goal: .constant(goal))
+                .environmentObject(goalManager)
+                .environmentObject(habitCompletionStatus)
+        }
     }
 }

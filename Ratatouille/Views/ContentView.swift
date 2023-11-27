@@ -32,7 +32,7 @@ struct ContentView: View {
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
                 }
-            NotificationView(deadline: .constant(Date()), frequency: .constant(["Daily"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline: .constant(Date()), selectedFixedDeadline: .constant(Date()))
+            NotificationView(goal: .constant(Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), frequency: ["Daily"], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())))
                 .tabItem{
                     Text("Notifications")
                     Image(systemName: "bell.fill")
