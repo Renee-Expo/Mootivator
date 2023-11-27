@@ -118,6 +118,7 @@ struct Goal: Identifiable, Codable {
     var numberOfTimesPerWeek : Double  = 1.0
     var numberOfTimesPerMonth : Double = 1.0
     // special usage
+    var dailyHabitCompleted: [Date: Bool] = [:]
     enum daysOfTheWeek : Codable, CaseIterable {
         case monday
         case tuesday
