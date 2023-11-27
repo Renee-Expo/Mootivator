@@ -15,9 +15,9 @@ struct NewGoalView: View {
     @State private var deadline = Date()
     @State private var habitTitle = ""
     
-//    @State var selectedAnimalKind: AnimalKind = .cow
-//    @State var frequency = ["Custom", "Daily", "Weekly", "Monthly"]
-//    @State var selectedDays = [String]()
+    //    @State var selectedAnimalKind: AnimalKind = .cow
+    //    @State var frequency = ["Custom", "Daily", "Weekly", "Monthly"]
+    //    @State var selectedDays = [String]()
     @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     @Binding var unlockedAnimals: [AnimalKind]
     @State private var motivationalQuote = ""
@@ -28,22 +28,19 @@ struct NewGoalView: View {
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
-    @State private var customDates : [String: Bool] = [Goal.daysOfTheWeek.monday.text       : false,
-                                                       Goal.daysOfTheWeek.tuesday.text      : false,
-                                                       Goal.daysOfTheWeek.wednesday.text    : false,
-                                                       Goal.daysOfTheWeek.thursday.text     : false,
-                                                       Goal.daysOfTheWeek.friday.text       : false,
-                                                       Goal.daysOfTheWeek.saturday.text     : false,
-                                                       Goal.daysOfTheWeek.sunday.text       : false]
-//    @State private var mondayChosen = false
-//    @State private var tuesdayChosen = false
-//    @State private var wednesdayChosen = false
-//    @State private var thursdayChosen = false
-//    @State private var fridayChosen = false
-//    @State private var saturdayChosen = false
-//    @State private var sundayChosen = false
-//    @State private var isButtonEnabled = false
-//    @Binding var isAnimalSelected: Bool
+    @Binding var customDates : [String: Bool]
+    var areAllTogglesOff: Bool {
+        return !customDates.values.contains(true)
+    }
+    //    @State private var mondayChosen = false
+    //    @State private var tuesdayChosen = false
+    //    @State private var wednesdayChosen = false
+    //    @State private var thursdayChosen = false
+    //    @State private var fridayChosen = false
+    //    @State private var saturdayChosen = false
+    //    @State private var sundayChosen = false
+    //    @State private var isButtonEnabled = true
+    //    @Binding var isAnimalSelected: Bool
     
     var body: some View {
         NavigationStack {
@@ -112,7 +109,7 @@ struct NewGoalView: View {
                         //                        multi-picker isnt working, so we are using "toggle" function instead
                         // toggle days in the week
                         
-                        HStack {
+                        VStack {
                             
                             Toggle("Monday", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
                             Toggle("Tuesday",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
@@ -121,8 +118,9 @@ struct NewGoalView: View {
                             Toggle("Friday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
                             Toggle("Saturday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
                             Toggle("Sunday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
-                                .toggleStyle(.button)
+                            
                         }
+                        //                        .toggleStyle(.button)
                         
                         //                    .toggleStyle(CheckboxToggleStyle())
                         
@@ -134,7 +132,16 @@ struct NewGoalView: View {
                     TextField("You can do it!", text: $motivationalQuote)
                 }
                 
+                
+                
+                //                if title.isEmpty || habitTitle.isEmpty || selectedAnimal.name.isEmpty || (selectedFrequencyIndex == .custom && areAllTogglesOff) || motivationalQuote.isEmpty {
+                //                    isButtonEnabled = false
+                //                }else{
+                //                    isButtonEnabled = true
+                //                }
+                
                 Button {
+                    //                    if isButtonEnabled{
                     goalManager.goals.append(.init(title: title,
                                                    habitTitle: habitTitle,
                                                    deadline: deadline,
@@ -142,10 +149,14 @@ struct NewGoalView: View {
                                                    selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                    selectedDailyDeadline: selectedDailyDeadline,
                                                    selectedFixedDeadline: selectedFixedDeadline))
+                    dismiss()
+                    //                    }
                 } label: {
                     Text("Save")
                         .frame(maxWidth: .infinity)
                 }
+                .disabled(title.isEmpty || habitTitle.isEmpty || selectedAnimal.name.isEmpty || (selectedFrequencyIndex == .custom && areAllTogglesOff) || motivationalQuote.isEmpty)
+                
                 
                 //                Section {
                 //                    if title.isEmpty || habitTitle.isEmpty || !isAnimalSelected || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
@@ -282,7 +293,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(unlockedAnimals: .constant([.cow]))
+        NewGoalView(unlockedAnimals: .constant([.cow]), customDates: .constant([:]))
             .environmentObject(GoalManager())
     }
 }
