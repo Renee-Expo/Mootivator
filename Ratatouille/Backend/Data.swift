@@ -90,8 +90,23 @@ struct Goal: Identifiable, Codable {
     var habitTitle : String
     var deadline : Date
     //    var frequencyOfHabits : String // why string?
-    var frequency : Array<String>
-    var selectedFrequencyIndex : Int
+//    var frequency : Array<String>
+    enum frequency : Codable, CaseIterable {
+        case custom
+        case daily
+        case weekly
+        case monthly
+        
+        var text : String {
+            switch self {
+            case.custom     : return "Custom"
+            case.daily      : return "Daily"
+            case.weekly     : return "Weekly"
+            case.monthly    : return "Monthly"
+            }
+        }
+    }
+    var selectedFrequencyIndex : Self.frequency
     
     var selectedAnimal : Animal
     //    var selectedAnimal : Int
@@ -124,15 +139,24 @@ struct Goal: Identifiable, Codable {
             }
         }
     }
+    var dayState : [String: Bool] = [
+        daysOfTheWeek.monday.text       : false,
+        daysOfTheWeek.tuesday.text      : false,
+        daysOfTheWeek.wednesday.text    : false,
+        daysOfTheWeek.thursday.text     : false,
+        daysOfTheWeek.friday.text       : false,
+        daysOfTheWeek.saturday.text     : false,
+        daysOfTheWeek.sunday.text       : false
+    ]
 }
 
 extension Goal {
     
     static let sampleGoals: [Goal] = [
         
-        Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
+        Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
-        Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
 
 
 
@@ -140,8 +164,8 @@ extension Goal {
     
 }
 
-var numberOfCompletedGoals : Int = 0
-
+var numberOfCompletedGoals : Int = 0 // is this to be persisted?
+/*
 func calculateTargetDays(for goal: Goal) -> Int {
     // Assuming you have access to goal's frequency and other relevant data
     
@@ -160,7 +184,7 @@ func calculateTargetDays(for goal: Goal) -> Int {
     
     var targetDays = 0
     
-    for freq in goal.frequency {
+    for freq in goal.selectedFrequencyIndex {
         switch freq {
         case "Daily":
             
@@ -183,7 +207,7 @@ func calculateTargetDays(for goal: Goal) -> Int {
                 
                 targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
             }
-        case "Fixed":
+        case "Custom":
             
             // Calculate target days for fixed frequency (e.g., specific dates selected)
             // Replace `selectedDates` with actual array of selected dates from Goal struct
@@ -202,7 +226,7 @@ func calculateTargetDays(for goal: Goal) -> Int {
     return targetDays
 }
 
-
+*/
 
 //var isAnimalSelected : Bool = false
 
@@ -221,7 +245,8 @@ extension Date: RawRepresentable {              // Allows date to be added to @A
         self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
     }
 }
+ 
 
 
-// IMAGE CATALOG ------------------------
+// IMAGE INFO ------------------------
 // use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
