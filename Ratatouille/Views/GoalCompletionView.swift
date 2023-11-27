@@ -23,7 +23,7 @@ struct GoalCompletionView: View {
     @Binding var title: String
     @Binding var selectedAnimal: Int
     @Binding var deadline: Date
-    @Binding var isGoalCompleted: Bool 
+    @Binding var isGoalCompleted: Bool
     @Binding var numberOfCompletedGoals : Int
     @Binding var goalAnimalKind : AnimalKind
     @Binding var goalAnimalEmotion: Animal.emotion
@@ -122,7 +122,7 @@ struct YesScreen: View {
                 .padding()
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
                 
             }
             ConfettiCannon(counter: $counter)
@@ -166,7 +166,7 @@ struct YesScreen: View {
                 .cornerRadius(8)
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
             }
         }
     }
@@ -177,4 +177,3 @@ struct YesScreen: View {
                 .environmentObject(GoalManager())
         }
     }
-

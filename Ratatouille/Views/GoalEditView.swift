@@ -54,6 +54,7 @@ struct GoalEditView: View {
                     NavigationLink("Pick an animal") {
                         AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])
                     } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
+                    TextField("Name your animal", text: $goal.selectedAnimal.name)
                 }
                 
                 // there will be an animal to redirect to Animal Picker sheet
@@ -110,15 +111,43 @@ struct GoalEditView: View {
                     && !(goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false)
                     || (goal.motivationalQuote.isEmpty)
                 ) {
+//
+//                    Button {
+//                        goalManager.goals.append(.init(title: goal.title,
+//                                                       habitTitle: goal.habitTitle,
+//                                                       deadline: goal.deadline,
+//                                                       selectedFrequencyIndex: goal.selectedFrequencyIndex,
+//                                                       selectedAnimal: goal.selectedAnimal, motivationalQuote: goal.motivationalQuote,
+//                                                       selectedDailyDeadline: goal.selectedDailyDeadline,
+//                                                       selectedFixedDeadline: goal.selectedFixedDeadline))
+//                    } label: {
+//                        Text("Save")
+//                            .frame(maxWidth: .infinity)
+//                    }
+                    
+                    
+                    
                     Button {
-                        // does this work???
-//                        goal.daysOfTheWeek.tuesday.state = true
-                        
+                        if let index = goalManager.goals.firstIndex(where: { $0.id == goal.id }) {
+                            goalManager.goals[index] = goal
+                        } else {
+                            goalManager.goals.append(goal)
+                        }
+                        presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("Save")
                     }
-//                    .disabled(!isButtonEnabled)
                     .frame(maxWidth: .infinity)
+                    
+                    //Button {
+//                        // does this work???
+////                        goal.daysOfTheWeek.tuesday.state = true
+//
+//                    } label: {
+//                        Text("Save")
+//                    }
+////                    .disabled(!isButtonEnabled)
+//                    .frame(maxWidth: .infinity)
                         
 //Handle the case where the button should be disabled
                 } else {
