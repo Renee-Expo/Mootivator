@@ -40,12 +40,12 @@ struct GoalEditView: View {
     @Binding var numberOfTimesPerMonth : Double
     @Binding var selectedAnimal : Animal
      */
-    
-    @Binding var customDates : [String: Bool]
+//
+//    @Binding var customDates : [String: Bool]
 
     @State var selectedAnimalKind = AnimalKind.cow
     var areAllTogglesOff: Bool {
-        return !customDates.values.contains(true)
+        return !goal.dayState.values.contains(true)
     }
     
     var body: some View {
@@ -99,14 +99,14 @@ struct GoalEditView: View {
                         
                         VStack {
                             
-                            Toggle("Monday", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
-                            Toggle("Tuesday",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
-                            Toggle("Wednesday", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.wednesday.text]!},  set: { customDates[Goal.daysOfTheWeek.wednesday.text] = $0} ))
-                            Toggle("Thursday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.thursday.text]!},  set: { customDates[Goal.daysOfTheWeek.thursday.text] = $0} ))
-                            Toggle("Friday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
-                            Toggle("Saturday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
-                            Toggle("Sunday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
-                            
+                            Toggle("Monday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.monday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.monday.text] = $0 }))
+                                    Toggle("Tuesday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] = $0 }))
+                                    Toggle("Wednesday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] = $0 }))
+                                    Toggle("Thursday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.thursday.text] = $0 }))
+                                    Toggle("Friday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.friday.text] = $0 }))
+                                    Toggle("Saturday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.saturday.text] = $0 }))
+                                    Toggle("Sunday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.sunday.text] = $0 }))
+
                         }
                         
                         DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
@@ -209,7 +209,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), unlockedAnimals: .constant([.cow]), customDates: .constant([:]), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), unlockedAnimals: .constant([.cow]), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

@@ -148,7 +148,7 @@ struct GoalDetailView: View {
 
         .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
-                GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals), customDates: .constant(customDates))
+                GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
             }
         }
     }

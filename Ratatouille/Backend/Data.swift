@@ -159,14 +159,6 @@ struct Goal: Identifiable, Codable {
 
 var unlockedAnimals: [AnimalKind] = [.cow]
 
-var customDates : [String: Bool] = [Goal.daysOfTheWeek.monday.text       : false,
-                                                   Goal.daysOfTheWeek.tuesday.text      : false,
-                                                   Goal.daysOfTheWeek.wednesday.text    : false,
-                                                   Goal.daysOfTheWeek.thursday.text     : false,
-                                                   Goal.daysOfTheWeek.friday.text       : false,
-                                                   Goal.daysOfTheWeek.saturday.text     : false,
-                                                   Goal.daysOfTheWeek.sunday.text       : false]
-
 
 extension Goal {
     

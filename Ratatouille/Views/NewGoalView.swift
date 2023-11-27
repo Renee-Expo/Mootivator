@@ -28,7 +28,14 @@ struct NewGoalView: View {
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
-    @Binding var customDates : [String: Bool]
+    @State private var customDates: [String: Bool] = [
+        Goal.daysOfTheWeek.monday.text: false,
+        Goal.daysOfTheWeek.tuesday.text: false,
+        Goal.daysOfTheWeek.wednesday.text: false,
+        Goal.daysOfTheWeek.thursday.text: false,
+        Goal.daysOfTheWeek.friday.text: false,
+        Goal.daysOfTheWeek.saturday.text: false,
+        Goal.daysOfTheWeek.sunday.text: false]
     var areAllTogglesOff: Bool {
         return !customDates.values.contains(true)
     }
@@ -148,7 +155,7 @@ struct NewGoalView: View {
                                                    selectedFrequencyIndex: selectedFrequencyIndex,
                                                    selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                    selectedDailyDeadline: selectedDailyDeadline,
-                                                   selectedFixedDeadline: selectedFixedDeadline))
+                                                   selectedFixedDeadline: selectedFixedDeadline, dayState: customDates))
                     dismiss()
                     //                    }
                 } label: {
@@ -293,8 +300,9 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(unlockedAnimals: .constant([.cow]), customDates: .constant([:]))
+        NewGoalView(unlockedAnimals: .constant([.cow]))
             .environmentObject(GoalManager())
     }
 }
+
 
