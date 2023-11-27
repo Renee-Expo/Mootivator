@@ -5,27 +5,26 @@
 //  Created by Kaveri Mi on 19/11/23.
 //
 import SwiftUI
+
 struct GoalDetailView: View {
     
     @EnvironmentObject var goalManager: GoalManager
     @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @Binding var goal: Goal
-    @Binding var dailyHabitCompleted : [Date: Bool]
+    @Binding var dailyHabitCompleted: [Date: Bool]
     @State private var showGoalDetailSheet = false
     @Environment(\.colorScheme) var colorScheme
-    var chevronWidth : Double = 15
-    @State var indexItem : Int = 0
-    @State var selectedDate : Date = Date()
+    var chevronWidth: Double = 15
+    @State var indexItem: Int = 0
+    @State var selectedDate: Date = Date()
     @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
+    @State private var showOverallHabitCompletionAlert = false
     @State var title: String = ""
     @State var habitTitle: String = ""
-    @State var daysCompleted = 0
+    @Binding var numberOfDaysCompleted : Int
     @State private var completedDates: Set<Date> = []
-
-    //    @State private var showHabitCompletionView = false
-    
     
     var body: some View {
 //        let targetDays = calculateTargetDays(for: goal)
@@ -69,23 +68,39 @@ struct GoalDetailView: View {
                                             primaryButton: .default(Text("Yes")) {
                                                 completedDates.insert(selectedDate)
                                                 // Call function to update progress bar
+                                                
+                                                
+                                                if (goal.selectedFrequencyIndex == .weekly
+                                                    && numberOfDaysCompleted == targetDays)
+                                                    || (goal.selectedFrequencyIndex == .monthly
+                                                        && numberOfDaysCompleted == targetDays) {
+                                                    
+                                                    showOverallHabitCompletionAlert = true
+                                                    
+                                                }
+                                                
+                                                
                                             },
                                             secondaryButton: .cancel(Text("No"))
                                         )
                                     }
                                 }
+                                .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
+                                    Button("OK", role: .cancel) {
+                                       
+                                    }
+                                }
                                 
-                                HStack{
+                                
+                                HStack {
                                     Spacer()
                                     VStack {
                                         Text("Completed")
-                                        Text("\(daysCompleted)d")
+                                        Text("\(numberOfDaysCompleted)d")
                                             .fontWeight(.bold)
                                             .padding(1)
-                                        
                                     }
                                     .padding(5)
-                                    
                                     
                                     VStack {
                                         Text("Target")
@@ -95,49 +110,51 @@ struct GoalDetailView: View {
                                     }
                                     .padding(5)
                                     Spacer()
-
                                 }
-                                
                             }
                         }
                     )
             }
         }
         .navigationTitle(goal.title)
-        .toolbar{
-            ToolbarItemGroup(placement: .navigationBarTrailing){
-                Button{
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
                     showGoalDetailSheet = true
-                } label:{
+                } label: {
                     Label("Edit goal", systemImage: "pencil")
                 }
                 
-                Button{
-                    goalManager.deleteGoal(goal)
+                Button {
+                    showDeleteGoalAlert = true
                     
-                } label:{
-                    Label("Delete goal", systemImage:"trash")
+                } label: {
+                    Label("Delete goal", systemImage: "trash")
                         .foregroundColor(.red)
                 }
             }
         }
-        .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert){
-            Button("Yes"){
+        .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
+            Button("Yes") {
                 goalManager.deleteGoal(goal)
-                GoalView(title: $title, habitTitle: $habitTitle)
+                
+                NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false))) {
+                    // This closure can be empty or contain a label for the link
+                }
+                
+                
+                
             }
-            Button("No"){
+            Button("No") {
                 
             }
         }
-        .sheet(isPresented: $showGoalDetailSheet){
+        .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
-                GoalEditView (goal: $goal)
+                GoalEditView(goal: $goal)
             }
         }
-        
     }
-    
 }
 
 struct GoalDetailView_Previews: PreviewProvider {
@@ -149,9 +166,10 @@ struct GoalDetailView_Previews: PreviewProvider {
         let habitCompletionStatus = HabitCompletionStatus()
         
         return NavigationStack {
-            GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()))
+            GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()), numberOfDaysCompleted: .constant(0))
                 .environmentObject(goalManager)
-            .environmentObject(habitCompletionStatus)
+                .environmentObject(habitCompletionStatus)
         }
     }
 }
+

@@ -148,7 +148,15 @@ struct Goal: Identifiable, Codable {
         daysOfTheWeek.saturday.text     : false,
         daysOfTheWeek.sunday.text       : false
     ]
+    
+    var scheduledCompletionDates: [Date] = []
+    var isGoalCompleted : Bool = false
+    
 }
+
+
+
+
 
 extension Goal {
     
@@ -157,15 +165,13 @@ extension Goal {
         Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
         Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
-
-
-
     ]
     
 }
 
+var numberOfDaysCompleted : Int = 0
 var numberOfCompletedGoals : Int = 0 // is this to be persisted?
-/*
+
 func calculateTargetDays(for goal: Goal) -> Int {
     // Assuming you have access to goal's frequency and other relevant data
     
@@ -184,22 +190,21 @@ func calculateTargetDays(for goal: Goal) -> Int {
     
     var targetDays = 0
     
-    for freq in goal.selectedFrequencyIndex {
-        switch freq {
-        case "Daily":
+        switch goal.selectedFrequencyIndex {
+        case .daily:
             
             if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
                 let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
                 targetDays += max(0, days)
                 
             }
-        case "Weekly":
+        case .weekly:
             let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
             let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
             let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
                         
             targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
-        case "Monthly":
+        case .monthly:
             if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
                 let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
                 let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
@@ -207,7 +212,7 @@ func calculateTargetDays(for goal: Goal) -> Int {
                 
                 targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
             }
-        case "Custom":
+        case .custom:
             
             // Calculate target days for fixed frequency (e.g., specific dates selected)
             // Replace `selectedDates` with actual array of selected dates from Goal struct
@@ -221,12 +226,11 @@ func calculateTargetDays(for goal: Goal) -> Int {
         default:
             break
         }
-    }
     
     return targetDays
 }
 
-*/
+
 
 //var isAnimalSelected : Bool = false
 
@@ -250,3 +254,4 @@ extension Date: RawRepresentable {              // Allows date to be added to @A
 
 // IMAGE INFO ------------------------
 // use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
+

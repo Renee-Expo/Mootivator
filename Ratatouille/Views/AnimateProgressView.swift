@@ -10,10 +10,10 @@ import SwiftUI
 struct AnimateProgressView: View {
 
     var targetDays: Int
-    var daysCompleted: Int
+    @Binding var numberOfDaysCompleted : Int
     var progress: Double {
         guard targetDays > 0 else { return 0 }
-        let percentage = Double(daysCompleted) / Double(targetDays)
+        let percentage = Double(numberOfDaysCompleted) / Double(targetDays)
         return min(percentage, 1.0)
     }
 
@@ -65,6 +65,6 @@ struct CircularProgressView: View {
 
 struct AnimateProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimateProgressView(targetDays: 30, daysCompleted: 10)
+        AnimateProgressView(targetDays: 30, numberOfDaysCompleted: .constant(10))
     }
 }
