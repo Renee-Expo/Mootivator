@@ -3,10 +3,9 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @Environment(\.colorScheme) var colorScheme
     
-    var chevronWidth : Double = 15
+    let chevronWidth : Double = 15
     @State var indexItem : Int = 0
     @State var selectedDate : Date = Date()
     @State private var showMarkHabitCompletionAlert = false
@@ -74,7 +73,8 @@ struct HomeView: View {
                         title: Text("Mark \(habitTitle) as Completed?"),
                         primaryButton: .default(Text("Yes")) {
                             dailyHabitCompleted[selectedDate] = true
-                            habitCompletionStatus.save()
+                            updateAnimalEmotion(habitCompletionStatus: true)
+//                            habitCompletionStatus.save()
                             // TODO: Some foreground colour thing
                             //                                .foregroundColor(.green)
                             
@@ -95,9 +95,9 @@ struct HomeView: View {
                     .padding()
                 
             }
-            .onChange(of: $habitCompletionStatus) { habitCompletionStatus in
-                updateAnimalEmotion(habitCompletionStatus: $habitCompletionStatus)
-            }
+//            .onChange(of: $goalManager.goals[indexItem].isGoalCompleted.wrappedValue) { statusItem in
+//                updateAnimalEmotion(habitCompletionStatus: statusItem)
+//            }
         }
     }
     
@@ -142,6 +142,5 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
             .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
     }
 }

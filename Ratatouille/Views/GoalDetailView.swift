@@ -9,10 +9,10 @@ import SwiftUI
 struct GoalDetailView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @Binding var goal: Goal
-    @Binding var dailyHabitCompleted: [Date: Bool]
+//    @Binding var dailyHabitCompleted: [Date: Bool]
     @State private var showGoalDetailSheet = false
     @Environment(\.colorScheme) var colorScheme
     var chevronWidth: Double = 15
@@ -163,12 +163,10 @@ struct GoalDetailView_Previews: PreviewProvider {
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
         
         let goalManager = GoalManager()
-        let habitCompletionStatus = HabitCompletionStatus()
         
         return NavigationStack {
-            GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()), numberOfDaysCompleted: .constant(0))
+            GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
                 .environmentObject(goalManager)
-                .environmentObject(habitCompletionStatus)
         }
     }
 }

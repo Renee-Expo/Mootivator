@@ -11,7 +11,6 @@ import UserNotifications
 struct NotificationView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @AppStorage("dailyTracking") var dailyTracking = false
     @AppStorage("reminderTime") var reminderTime = Date()
@@ -192,12 +191,10 @@ struct NotificationView_Previews: PreviewProvider {
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
         
         let goalManager = GoalManager()
-        let habitCompletionStatus = HabitCompletionStatus()
         
         return NavigationStack {
             NotificationView(goal: .constant(goal))
                 .environmentObject(goalManager)
-                .environmentObject(habitCompletionStatus)
         }
     }
 }

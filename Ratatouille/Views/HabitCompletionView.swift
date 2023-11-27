@@ -10,15 +10,15 @@ import SwiftUI
 
 struct HabitCompletionView: View {
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @Binding var goal: Goal
     @State private var showHabitCompletionView = false
-    @Binding var frequency : Array<String>
-    @Binding var selectedFrequencyIndex : Int
+    @State var isHabitCompleted : Bool
+    
+//    @Binding var frequency : Array<String>
+    @Binding var selectedFrequencyIndex : Goal.frequency
     @Binding var selectedDailyDeadline : Date
     @Binding var selectedFixedDeadline : Date
-    @State var isHabitCompleted : Bool
     @Binding var numberOfDaysCompleted : Int
     @Binding var completedDates: [Date]
     @Binding var scheduledCompletionDates: [Date]
@@ -43,16 +43,17 @@ struct HabitCompletionView: View {
             
         }
         .onAppear{
-            if (frequency[selectedFrequencyIndex] == "Fixed" && Date() >= selectedFixedDeadline) ||
-                (frequency[selectedFrequencyIndex] == "Daily" && Date() >= selectedDailyDeadline) {
+            if (goal.selectedFrequencyIndex == .custom
+                && Date() >= selectedFixedDeadline)
+                || (goal.selectedFrequencyIndex == .daily && Date() >= selectedDailyDeadline) {
                 showHabitCompletionView = true
-            } else if frequency[selectedFrequencyIndex] == "Weekly" {
+            } else if goal.selectedFrequencyIndex == .weekly {
                 // Check if the current date is the next Monday
                 if let nextSunday = Calendar.current.nextDate(after: Date(), matching: DateComponents(weekday: 1), matchingPolicy: .nextTime),
                    Calendar.current.isDate(Date(), equalTo: nextSunday, toGranularity: .day) {
                     showHabitCompletionView = true
                 }
-            } else if frequency[selectedFrequencyIndex] == "Monthly" {
+            } else if goal.selectedFrequencyIndex == .monthly {
                 // Check if the current date is the last day of the month
                 if let lastDayOfMonth = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: Date()),
                    Calendar.current.isDate(Date(), equalTo: lastDayOfMonth, toGranularity: .day) {
@@ -62,7 +63,14 @@ struct HabitCompletionView: View {
             
             let targetDays = calculateTargetDays(for: goal)
             
-            if (frequency[selectedFrequencyIndex] == "Fixed"  && scheduledCompletionDates.allSatisfy({ completedDates.contains($0) })) || (frequency[selectedFrequencyIndex] == "Daily"  && scheduledCompletionDates.allSatisfy({ completedDates.contains($0) })) || (frequency[selectedFrequencyIndex] == "Weekly"  && numberOfDaysCompleted >= targetDays) || (frequency[selectedFrequencyIndex] == "Monthly"  && numberOfDaysCompleted >= targetDays) {
+            if (goal.selectedFrequencyIndex == .custom
+                && scheduledCompletionDates.allSatisfy({ completedDates.contains($0)}))
+                || (goal.selectedFrequencyIndex == .daily  
+                    && scheduledCompletionDates.allSatisfy({ completedDates.contains($0) }))
+                || (goal.selectedFrequencyIndex == .weekly
+                    && numberOfDaysCompleted >= targetDays)
+                || (goal.selectedFrequencyIndex == .monthly
+                    && numberOfDaysCompleted >= targetDays) {
                 isHabitCompleted = true
             } else {
                 isHabitCompleted = false
@@ -81,9 +89,8 @@ struct HabitCompletionView_Previews: PreviewProvider {
         
         return NavigationStack{
             
-            HabitCompletionView(goal: .constant(goal), frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()),  isHabitCompleted: false, numberOfDaysCompleted: .constant(0), completedDates: .constant([]), scheduledCompletionDates: .constant([]))
+            HabitCompletionView(goal: .constant(goal), isHabitCompleted: false, selectedFrequencyIndex: .constant(Goal.frequency.custom), selectedDailyDeadline: .constant(Date()), selectedFixedDeadline: .constant(Date()), numberOfDaysCompleted: .constant(0), completedDates: .constant([]), scheduledCompletionDates: .constant([]))
                 .environmentObject(GoalManager())
-                .environmentObject(HabitCompletionStatus())
         }
     }
 }

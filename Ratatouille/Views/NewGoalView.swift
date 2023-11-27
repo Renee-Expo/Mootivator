@@ -10,7 +10,6 @@ struct NewGoalView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @State private var title = ""
     @State private var deadline = Date()
@@ -45,7 +44,7 @@ struct NewGoalView: View {
 //    @Binding var isAnimalSelected: Bool
     
     var body: some View {
-        Form {
+        List {
             
             Section("Goal") {
                 TextField("Enter a Goal here", text: $title)
@@ -55,7 +54,7 @@ struct NewGoalView: View {
             
             Section("Pick an Animal") {
                 NavigationLink("Pick an animal") {
-                    AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])
+//                    AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep]) // help!!!
                 }
             }
             
@@ -110,15 +109,16 @@ struct NewGoalView: View {
                     // toggle days in the week
                     
                     HStack {
-                        Toggle("Monday",    isOn: $customDates[Goal.daysOfTheWeek.monday.text])
-                        Toggle("Tuesday",   isOn: $customDates[Goal.daysOfTheWeek.tuesday.text])
-                        Toggle("Wednesday", isOn: $customDates[Goal.daysOfTheWeek.wednesday.text])
-                        Toggle("Thursday",  isOn: $customDates[Goal.daysOfTheWeek.thursday.text])
-                        Toggle("Friday",    isOn: $customDates[Goal.daysOfTheWeek.friday.text])
-                        Toggle("Saturday",  isOn: $customDates[Goal.daysOfTheWeek.saturday.text])
-                        Toggle("Sunday",    isOn: $customDates[Goal.daysOfTheWeek.sunday.text])
+                        
+                        Toggle("Monday", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
+                        Toggle("Tuesday",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
+                        Toggle("Wednesday", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.wednesday.text]!},  set: { customDates[Goal.daysOfTheWeek.wednesday.text] = $0} ))
+                        Toggle("Thursday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.thursday.text]!},  set: { customDates[Goal.daysOfTheWeek.thursday.text] = $0} ))
+                        Toggle("Friday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
+                        Toggle("Saturday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
+                        Toggle("Sunday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
                     }
-                    .toggleStyle(CheckboxToggleStyle())
+//                    .toggleStyle(CheckboxToggleStyle())
                     
                     DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -264,7 +264,6 @@ struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalView()
             .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
     }
 }
 
