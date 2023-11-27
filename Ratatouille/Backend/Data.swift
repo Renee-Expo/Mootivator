@@ -165,11 +165,18 @@ extension Goal {
         Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
         Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), frequency: ["Everyday"], selectedFrequencyIndex: 0, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), isGoalCompleted: true)
+
+
+
     ]
     
 }
 
+var numberOfCompletedGoals : Int = 0
+
 var numberOfDaysCompleted : Int = 0
+
 var numberOfCompletedGoals : Int = 0 // is this to be persisted?
 
 func calculateTargetDays(for goal: Goal) -> Int {
@@ -229,6 +236,8 @@ func calculateTargetDays(for goal: Goal) -> Int {
     
     return targetDays
 }
+
+
 
 
 
