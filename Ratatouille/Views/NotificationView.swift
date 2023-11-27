@@ -11,7 +11,6 @@ import UserNotifications
 struct NotificationView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @AppStorage("dailyTracking") var dailyTracking = false
     @AppStorage("reminderTime") var reminderTime = Date()
@@ -123,15 +122,15 @@ struct NotificationView: View {
 
             var habitTrigger: UNNotificationTrigger?
 
-            switch goal.frequency[goal.selectedFrequencyIndex] {
-            case "Daily":
+            switch goal.selectedFrequencyIndex {
+            case .daily:
                 habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: goal.selectedDailyDeadline), repeats: false)
-            case "Fixed":
+            case .custom:
                 habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: goal.selectedFixedDeadline), repeats: false)
-            case "Weekly":
+            case .weekly:
                 let endOfWeek = Calendar.current.date(bySetting: .weekday, value: 1, of: Date())!
                 habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: endOfWeek), repeats: false)
-            case "Monthly":
+            case .monthly:
                 let endOfMonth = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: Date())!
                 habitTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents(for: endOfMonth), repeats: false)
             default:
@@ -189,15 +188,13 @@ struct NotificationView: View {
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), frequency: ["Daily"], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
         
         let goalManager = GoalManager()
-        let habitCompletionStatus = HabitCompletionStatus()
         
         return NavigationStack {
             NotificationView(goal: .constant(goal))
                 .environmentObject(goalManager)
-                .environmentObject(habitCompletionStatus)
         }
     }
 }

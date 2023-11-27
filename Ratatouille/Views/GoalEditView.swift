@@ -16,7 +16,9 @@ struct GoalEditView: View {
     @EnvironmentObject var goalManager: GoalManager
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
+    
     @Binding var goal: Goal
+    /*
     @Binding var title : String
     @Binding var habitTitle : String
     @Binding var frequency : Array<String>
@@ -36,8 +38,10 @@ struct GoalEditView: View {
     @Binding var numberOfTimesPerWeek : Double
     @Binding var numberOfTimesPerMonth : Double
     @Binding var selectedAnimal : Animal
+     */
 
     @State var selectedAnimalKind = AnimalKind.cow
+    
     var body: some View {
         NavigationStack {
             List {
@@ -49,7 +53,7 @@ struct GoalEditView: View {
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
                         AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])
-                    }
+                    } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
                 }
                 
                 // there will be an animal to redirect to Animal Picker sheet
@@ -57,36 +61,34 @@ struct GoalEditView: View {
                 Section("Current Habit") {
                     
                     TextField(text: $goal.habitTitle) {
-                        
                         Text("Enter a Habit")
-                        
                     }
                     
                     Picker("Frequency", selection: $goal.selectedFrequencyIndex) {
-                        ForEach(0..<goal.frequency.count - 1) { index in
-                            Text(goal.frequency[index])
+                        ForEach(Goal.frequency.allCases, id: \.self) { index in
+                            Text(index.text)
                                 .tag(index)
                         }
                     }
                 }
                 
-                if goal.frequency[goal.selectedFrequencyIndex] == "Daily" {
+                if goal.selectedFrequencyIndex == .daily {
                     DatePicker("Deadline", selection: $goal.selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
-                else if goal.frequency[goal.selectedFrequencyIndex] == "Weekly" {
+                else if goal.selectedFrequencyIndex == .weekly {
                     VStack {
                         Text("Number of times per week: \(Int(goal.numberOfTimesPerWeek.rounded()))")
                         Slider(value: $goal.numberOfTimesPerWeek, in: 1...7, step: 1)
                     }
                 }
-                else if goal.frequency[goal.selectedFrequencyIndex] == "Monthly" {
+                else if goal.selectedFrequencyIndex == .monthly {
                     VStack {
                         Text("Number of times per month: \(Int(goal.numberOfTimesPerMonth.rounded()))")
                         Slider(value: $goal.numberOfTimesPerMonth, in: 1...31, step: 1)
                     }
                 }
                 
-                else if goal.frequency[goal.selectedFrequencyIndex] == "Fixed" {
+                else if goal.selectedFrequencyIndex == .custom {
                     
                     DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -95,50 +97,57 @@ struct GoalEditView: View {
                     TextField("You can do it!", text: $goal.motivationalQuote)
                 }
                 
-                {
-                    //                        Button {
-                    if title.isEmpty || habitTitle.isEmpty ||  (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
-                        Button{
+                //                        Button {
+                if (goal.title.isEmpty ||
+                    goal.habitTitle.isEmpty ||
+                    goal.selectedFrequencyIndex == .custom
+                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false)
+                    && !(goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false)
+                    || (goal.motivationalQuote.isEmpty)
+                ) {
+                    Button {
+                        // does this work???
+//                        goal.daysOfTheWeek.tuesday.state = true
+                        
+                    } label: {
+                        Text("Save")
+                    }
+//                    .disabled(!isButtonEnabled)
+                    .frame(maxWidth: .infinity)
+                        
+//Handle the case where the button should be disabled
+                } else {
+                    ZStack{
+                        Color.accentColor
+                        Button {
+//                            isButtonEnabled = true
+//                            let newGoal = Goal(
+//                                title: title,
+//                                habitTitle: habitTitle,
+//                                deadline: deadline,
+//                                frequency: frequency,
+//                                selectedFrequencyIndex: selectedFrequencyIndex,
+//                                selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
+//                                motivationalQuote: motivationalQuote,
+//                                selectedDailyDeadline: selectedDailyDeadline,
+//                                selectedFixedDeadline: selectedFixedDeadline,
+//                                numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
+//                                numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
+//                            )
                             
-                        }label:{
+//                            goalManager.goals.append(newGoal)
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
                             Text("Save")
+                                .foregroundColor(.white)
                         }
-                        .disabled(!isButtonEnabled)
                         .frame(maxWidth: .infinity)
-                        //Handle the case where the button should be disabled
-                    } else {
-                        ZStack{
-                            Color.accentColor
-                            Button {
-                                isButtonEnabled = true
-                                let newGoal = Goal(
-                                    title: title,
-                                    habitTitle: habitTitle,
-                                    deadline: deadline,
-                                    frequency: frequency,
-                                    selectedFrequencyIndex: selectedFrequencyIndex,
-                                    selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
-                                    motivationalQuote: motivationalQuote,
-                                    selectedDailyDeadline: selectedDailyDeadline,
-                                    selectedFixedDeadline: selectedFixedDeadline,
-                                    numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
-                                    numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
-                                )
-                                goalManager.goals.append(newGoal)
-                                presentationMode.wrappedValue.dismiss()
-                                //                            }
-                                //                        } label: {
-                                //                            Text("Save")
-                                //                        }
-                                //                        .disabled(!isButtonEnabled)
-                                //                        .frame(maxWidth: .infinity)
-                            } label: {
-                                Text("Save")
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity)
-                            //                            .background(Color.accentColor)
-                        }
+                        //                            .background(Color.accentColor)
                     }
                 }
                 
@@ -151,7 +160,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, frequency: [], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

@@ -13,11 +13,11 @@ struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     var body: some View {
         TabView {
-            HomeView(habitTitle: .constant(""), title: .constant(""))
+            HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
                 .tabItem {
                     Text("Home")
                     Image(systemName: "house")
@@ -32,7 +32,7 @@ struct ContentView: View {
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
                 }
-            NotificationView(goal: .constant(Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), frequency: ["Daily"], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())))
+            NotificationView(goal: .constant(Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())))
                 .tabItem{
                     Text("Notifications")
                     Image(systemName: "bell.fill")
@@ -48,6 +48,5 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
     }
 }

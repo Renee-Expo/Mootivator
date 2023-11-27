@@ -2,7 +2,6 @@ import SwiftUI
 
 struct GoalView: View {
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
     @Binding var title: String
@@ -15,7 +14,7 @@ struct GoalView: View {
         NavigationStack {
             List(goalManager.filteredAndSortedGoals, id: \.id) { $goal in
                 NavigationLink {
-                    GoalDetailView(goal: $goal, dailyHabitCompleted: $habitCompletionStatus.dailyHabitCompleted, numberOfDaysCompleted: .constant(0))
+                    GoalDetailView(goal: $goal, numberOfDaysCompleted: .constant(0))
                 } label: {
                     VStack(alignment: .leading) {
                         Text(goal.title)
@@ -89,6 +88,6 @@ struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
         GoalView(title: .constant("Sample Goal"), habitTitle: .constant("Sample Habit Title"), isGoalCompleted: .constant(false))
             .environmentObject(GoalManager())
-            .environmentObject(HabitCompletionStatus())
+//            .environmentObject(HabitCompletionStatus())
     }
 }

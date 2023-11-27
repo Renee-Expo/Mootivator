@@ -15,7 +15,7 @@ import ConfettiSwiftUI
 
 struct GoalCompletionView: View {
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @State private var showGoalCompletionView = false
     @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
@@ -122,7 +122,7 @@ struct YesScreen: View {
                 .padding()
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
                 
             }
             ConfettiCannon(counter: $counter)
@@ -166,7 +166,7 @@ struct YesScreen: View {
                 .cornerRadius(8)
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
             }
         }
     }
@@ -175,7 +175,6 @@ struct YesScreen: View {
         static var previews: some View {
             GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: .constant(false), numberOfCompletedGoals: .constant(0), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
                 .environmentObject(GoalManager())
-                .environmentObject(HabitCompletionStatus())
         }
     }
 

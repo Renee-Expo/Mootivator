@@ -9,10 +9,10 @@ import SwiftUI
 struct GoalDetailView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @Binding var goal: Goal
-    @Binding var dailyHabitCompleted: [Date: Bool]
+//    @Binding var dailyHabitCompleted: [Date: Bool]
     @State private var showGoalDetailSheet = false
     @Environment(\.colorScheme) var colorScheme
     var chevronWidth: Double = 15
@@ -29,9 +29,9 @@ struct GoalDetailView: View {
     var body: some View {
         let targetDays = calculateTargetDays(for: goal)
         
-        NavigationStack {
-            AnimateProgressView (targetDays: targetDays, numberOfDaysCompleted: $numberOfDaysCompleted)
-            VStack(alignment: .leading, spacing: 1) {
+        NavigationStack{
+            AnimateProgressView(targetDays: calculateTargetDays(for: goal), numberOfDaysCompleted: $numberOfDaysCompleted)
+            VStack(alignment: .leading, spacing: 1){
                 Text("Current habit")
                     .font(.system(size: 16))
                     .fontWeight(.bold)
@@ -70,7 +70,10 @@ struct GoalDetailView: View {
                                                 // Call function to update progress bar
                                                 
                                                 
-                                                if (goal.frequency[goal.selectedFrequencyIndex] == "Weekly" && numberOfDaysCompleted == targetDays) || (goal.frequency[goal.selectedFrequencyIndex] == "Monthly" && numberOfDaysCompleted == targetDays) {
+                                                if (goal.selectedFrequencyIndex == .weekly
+                                                    && numberOfDaysCompleted == targetDays)
+                                                    || (goal.selectedFrequencyIndex == .monthly
+                                                        && numberOfDaysCompleted == targetDays) {
                                                     
                                                     showOverallHabitCompletionAlert = true
                                                     
@@ -101,7 +104,7 @@ struct GoalDetailView: View {
                                     
                                     VStack {
                                         Text("Target")
-                                        Text("\(targetDays)d")
+//                                        Text("\(targetDays)d")
                                             .fontWeight(.bold)
                                             .padding(1)
                                     }
@@ -157,15 +160,13 @@ struct GoalDetailView: View {
 struct GoalDetailView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), frequency: ["Daily"], selectedFrequencyIndex: 0, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
         
         let goalManager = GoalManager()
-        let habitCompletionStatus = HabitCompletionStatus()
         
         return NavigationStack {
-            GoalDetailView(goal: .constant(goal), dailyHabitCompleted: .constant([Date: Bool]()), numberOfDaysCompleted: .constant(0))
+            GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
                 .environmentObject(goalManager)
-                .environmentObject(habitCompletionStatus)
         }
     }
 }
