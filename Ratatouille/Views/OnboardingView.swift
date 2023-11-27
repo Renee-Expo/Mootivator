@@ -11,7 +11,7 @@ struct OnboardingView : View {
     @Binding var showOnBoarding : Bool
     var body: some View {
         TabView {
-            VStack(){
+            VStack {
                 Text("Welcome to (app name)!")
                     .lineLimit(1)
                     .font(.largeTitle)

@@ -34,7 +34,7 @@ struct HomeView: View {
                 
                 HStack {
                     Button {
-                        // Move left
+                        indexItem = indexItem%goalManager.goals.count - 1
                     } label: {
                         Image(systemName: "chevron.compact.left")
                             .resizable()
@@ -42,18 +42,16 @@ struct HomeView: View {
                             .frame(width: chevronWidth)
                     }
                     
-                    // Replace ShowingAnimalSegmentedControlElement with your segmented control
-                    ShowingAnimalSegmentedControlElement(selection: $indexItem)
-                        .frame(width: 200)
+                    ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
                         .scaledToFit()
                     
-                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
+//                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .padding()
                     
                     Button {
-                        // move right
+                        indexItem = indexItem%goalManager.goals.count + 1
                     } label: {
                         Image(systemName: "chevron.compact.right")
                             .resizable()

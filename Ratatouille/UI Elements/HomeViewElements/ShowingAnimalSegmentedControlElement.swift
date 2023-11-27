@@ -12,32 +12,29 @@ struct ShowingAnimalSegmentedControlElement: View {
     @EnvironmentObject var goalItemList : GoalManager
     @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
 //    @Binding var goalItem : Goal
+    @Binding var emotion : Animal.emotion
     
     var body: some View {
         VStack {
-            //            Picker(selection: $selection) {
-            ForEach($goalItemList.goals, id: \.id ) { $goal in
-                VStack {
-                    //                        Text(goal.selectedAnimal.name) // this should be navigation title on homeview
-                    Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(Animal.emotion.self)")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                        .padding()
+            Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
+                .resizable()
+                .scaledToFit()
+                .padding()
+            TabView {
+                ForEach($goalItemList.goals, id: \.id ) { _ in
+                    Text(goalItemList.goals[selection].selectedAnimal.name)
                 }
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                .pickerStyle(.segmented)
             }
-//            } label: {
-//                Text("Segmented Control")
-//            }
-            .pickerStyle(.segmented)
-
         }
     }
 }
 
 struct ShowingAnimalSegmentedControlElement_Previews: PreviewProvider {
     static var previews: some View {
-        ShowingAnimalSegmentedControlElement(selection: .constant(0))
+        ShowingAnimalSegmentedControlElement(selection: .constant(0), emotion: .constant(Animal.emotion.sad))
             .environmentObject(GoalManager())
     }
 }
