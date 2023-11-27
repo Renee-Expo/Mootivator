@@ -157,14 +157,14 @@ struct Goal: Identifiable, Codable {
 }
 
 
-
+var unlockedAnimals: [AnimalKind] = [.cow]
 
 
 extension Goal {
     
     static let sampleGoals: [Goal] = [
         
-        Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
+        Goal(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "Animal1", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()),
         
         Goal(title: "Lead a healthier Life", habitTitle: "Exercise", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "YourAnimalName", kind: .cow), motivationalQuote: "no", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
 

@@ -18,6 +18,7 @@ struct GoalEditView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var goal: Goal
+    @Binding var unlockedAnimals: [AnimalKind]
     /*
     @Binding var title : String
     @Binding var habitTitle : String
@@ -52,7 +53,7 @@ struct GoalEditView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep])
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: $unlockedAnimals)
                     } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
                     TextField("Name your animal", text: $goal.selectedAnimal.name)
                 }
@@ -189,7 +190,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now)), unlockedAnimals: .constant([.cow]), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

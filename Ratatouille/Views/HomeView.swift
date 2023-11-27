@@ -34,7 +34,7 @@ struct HomeView: View {
                 
                 HStack {
                     Button {
-                        // Move left
+                        indexItem = indexItem%goalManager.goals.count - 1
                     } label: {
                         Image(systemName: "chevron.compact.left")
                             .resizable()
@@ -53,7 +53,7 @@ struct HomeView: View {
 //                        .padding()
                     
                     Button {
-                        // move right
+                        indexItem = indexItem%goalManager.goals.count + 1
                     } label: {
                         Image(systemName: "chevron.compact.right")
                             .resizable()
