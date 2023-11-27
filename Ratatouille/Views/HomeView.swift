@@ -17,10 +17,21 @@ struct HomeView: View {
     @Binding var goalAnimalKind : AnimalKind
     @Binding var goalAnimalEmotion: Animal.emotion
     @State var animalEmotionScale: Double = 0.0
+    @Binding var motivationalQuote : String
+    //@Binding var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     
     var body: some View {
         NavigationView {
             VStack {
+                Text("\(motivationalQuote)")
+                    .font(.system(size: 24))
+                    .fontWeight(.medium)
+                
+                AnimalEmotionElement(scale: $animalEmotionScale, animalEmotionScale: $animalEmotionScale) // Use $animalEmotionScale here
+//                    .padding()
+                //Text("\(Animal.name)")
+
+                
                 HStack {
                     Button {
                         // Move left
@@ -30,12 +41,16 @@ struct HomeView: View {
                             .scaledToFit()
                             .frame(width: chevronWidth)
                     }
-                    Spacer()
                     
                     // Replace ShowingAnimalSegmentedControlElement with your segmented control
                     ShowingAnimalSegmentedControlElement(selection: $indexItem)
                         .frame(width: 200)
                         .scaledToFit()
+                    
+                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
                     
                     Button {
                         // move right
@@ -48,16 +63,15 @@ struct HomeView: View {
                 }
                 .padding(.horizontal)
                 
-                AnimalEmotionElement(scale: $animalEmotionScale, animalEmotionScale: $animalEmotionScale) // Use $animalEmotionScale here
-                    .padding()
-                
-                
-                Spacer()
-                
-                HStack {
+                VStack (alignment: .leading){
                     Text("\(title)")
                         .font(.system(size: 24))
+                        .fontWeight(.heavy)
+                        .offset(x: -90, y: 20)
+                    Text("\(habitTitle)")
+                        .font(.system(size: 20))
                         .fontWeight(.medium)
+                        .offset(x: -90, y: 20)
                 }
                 
                 DatePicker(selection: $selectedDate, displayedComponents: .date) {
@@ -82,18 +96,6 @@ struct HomeView: View {
                         secondaryButton: .cancel(Text("No"))
                     )
                 }
-                //                NavigationLink(
-                //                    destination:         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
-                //                    isActive: $showHabitCompletionView
-                //                ) {
-                //                    EmptyView()
-                //                }
-                
-                Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-                
             }
 //            .onChange(of: $goalManager.goals[indexItem].isGoalCompleted.wrappedValue) { statusItem in
 //                updateAnimalEmotion(habitCompletionStatus: statusItem)
@@ -140,7 +142,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
+        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant("Sample Motivational Quote"))
             .environmentObject(GoalManager())
     }
 }
