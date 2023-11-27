@@ -1,17 +1,10 @@
-//
-//  HomeView.swift
-//  Ratatouille
-//
-//  Created by klifton Cheng stu on 18/11/23.
-//
-
 import SwiftUI
 
 struct HomeView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+    @Environment(\.colorScheme) var colorScheme
     
     var chevronWidth : Double = 15
     @State var indexItem : Int = 0
@@ -22,7 +15,10 @@ struct HomeView: View {
     @Binding var title : String
     @State var dailyHabitCompletionStatus: [Date: Bool] = [:]
     @State var dailyHabitCompleted: [Date: Bool] = [:]
-
+    @Binding var goalAnimalKind : AnimalKind
+    @Binding var goalAnimalEmotion: Animal.emotion
+    @State var animalEmotionScale: Double = 0.0
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -53,6 +49,10 @@ struct HomeView: View {
                 }
                 .padding(.horizontal)
                 
+                AnimalEmotionElement(scale: $animalEmotionScale, animalEmotionScale: $animalEmotionScale) // Use $animalEmotionScale here
+                    .padding()
+                
+                
                 Spacer()
                 
                 HStack {
@@ -76,175 +76,72 @@ struct HomeView: View {
                             dailyHabitCompleted[selectedDate] = true
                             habitCompletionStatus.save()
                             // TODO: Some foreground colour thing
-//                                .foregroundColor(.green)
+                            //                                .foregroundColor(.green)
                             
                         },
                         secondaryButton: .cancel(Text("No"))
                     )
                 }
-//                NavigationLink(
-//                    destination:         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
-//                    isActive: $showHabitCompletionView
-//                ) {
-//                    EmptyView()
-//                }
+                //                NavigationLink(
+                //                    destination:         HabitCompletionView(frequency: .constant(["Fixed", "Daily", "Weekly", "Monthly"]), selectedFrequencyIndex: .constant(0), selectedDailyDeadline:.constant(Date()), selectedFixedDeadline: .constant(Date()), isHabitCompleted: true),
+                //                    isActive: $showHabitCompletionView
+                //                ) {
+                //                    EmptyView()
+                //                }
+                
+                Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                
             }
+            .onChange(of: $habitCompletionStatus) { habitCompletionStatus in
+                updateAnimalEmotion(habitCompletionStatus: $habitCompletionStatus)
+            }
+        }
+    }
+    
+    func updateAnimalEmotion(habitCompletionStatus: Bool) {
+        let step: Double = 1.0 // Change this value based on how much the arrow should move for each completion
+        
+        if habitCompletionStatus == true {
+            // Move arrow to the right
+            if animalEmotionScale < 2 * step {
+                animalEmotionScale += step
+            }
+        } else {
+            // Move arrow to the left
+            if animalEmotionScale > -2 * step {
+                animalEmotionScale -= step
+            }
+        }
+        
+        // Update animal emotion based on arrow position
+        updateAnimalEmotion()
+    }
+    
+    func updateAnimalEmotion() {
+        let maxScale: Double = 2.0
+        let minScale: Double = -2.0
+        
+        // Determine animal emotion based on arrow position
+        if animalEmotionScale >= maxScale {
+            // Move to sad face
+            goalAnimalEmotion = .sad
+        } else if animalEmotionScale <= minScale {
+            // Move to happy face
+            goalAnimalEmotion = .happy
+        } else {
+            // Move to neutral face
+            goalAnimalEmotion = .neutral
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"))
+        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
             .environmentObject(GoalManager())
             .environmentObject(HabitCompletionStatus())
     }
 }
-
-
-//import SwiftUI
-//
-//struct HomeView: View {
-//
-//    @EnvironmentObject var goalManager: GoalManager
-//    @Environment(\.colorScheme) var colorScheme
-//
-//    var chevronWidth : Double = 15
-//    @State var indexItem : Int = 0
-//    @State var selectedDate = Date()
-//    @State private var showMarkHabitCompletionAlert = false
-//    @Binding var habitTitle : String
-//    @Binding var title : String
-//    @Binding var isHabitCompleted : Bool
-//
-//    var body: some View {
-//        VStack {
-//            //            AnimalEmotionElement(scale: .constant(20))
-//            //            Text("Metric == \(indexItem)") // for debugging
-//
-//            HStack {
-//                Button {
-//                    // Move left
-//                } label: {
-//                    Image(systemName: "chevron.compact.left")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: chevronWidth)
-//                }
-//                Spacer()
-//                // add image view here? should be segmented control
-//                //                Image(systemName: "photo")
-//                //                    .resizable()
-//                //                    .scaledToFit()
-//                //                    .padding()
-//
-//                ShowingAnimalSegmentedControlElement(selection: $indexItem)
-//                    .frame(width: 200)
-//                    .scaledToFit()
-//
-//                Button {
-//                    // move right
-//                } label: {
-//                    Image(systemName: "chevron.compact.right")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: chevronWidth)
-//                }
-//            }
-//            .padding(.horizontal)
-//
-//            Spacer()
-//            // Sheetview here, find a way to remove the darkening background and covering of the navigation bar
-//
-//            HStack {
-//                Text("\(title)")
-//                    .font(.system(size: 24))
-//                    .fontWeight(.medium)
-//            }
-//
-//            DatePicker(selection: $selectedDate, displayedComponents: .date) {
-//                Text("Select a date")
-//            }
-//            .datePickerStyle(.graphical)
-//            .padding(10)
-//            .onTapGesture {
-//                if selectedDate <= Date() {
-//                    showMarkHabitCompletionAlert = true
-//                }
-//            }
-//            .alert(isPresented: $showMarkHabitCompletionAlert) {
-//                Alert(
-//                    title: Text("Mark \(habitTitle) as Completed?"),
-//                    primaryButton: .default(Text("Yes")) {
-//                        isHabitCompleted = true
-//                    },
-//                    secondaryButton: .cancel(Text("No"))
-//                )
-//            }
-//
-//            .overlay(
-//                Circle()
-//                    .foregroundColor(isHabitCompleted ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
-//                    .frame(width: 30, height: 30)
-//            )
-//            .onChange(of: selectedDate) { _ in
-//                showMarkHabitCompletionAlert = false
-//            }
-//
-//        }
-//        //        .background {
-//        //            Color(.backgroundColors)
-//        //                .ignoresSafeArea()
-//        //        }
-//    }
-//}
-//
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"),isHabitCompleted: .constant(true))
-//            .environmentObject(GoalManager())
-//    }
-//}
-//
-////            .datePickerStyle(.graphical)
-////            .padding()
-////
-////            //CalendarView(selectedDate: $selectedDate, isHabitCompleted: $isHabitCompleted)
-//////            .overlay(
-//////                Circle()
-//////                    .foregroundColor(isHabitCompleted ? Color.green.opacity(0.3) : Color.red.opacity(0.3))
-//////                    .frame(width: 30, height: 30)
-//////                    .position(x:UIScreen.main.bounds.width / 2, y: 250)
-//////                    .onTapGesture {
-//////                        if selectedDate <= Date() {
-//////                        showMarkHabitCompletionAlert = true
-//////                    }
-//////                }
-//////            )
-////            .onChange(of: selectedDate) { _ in
-////                showMarkHabitCompletionAlert = false
-////            }
-////            .alert(isPresented: $showMarkHabitCompletionAlert) {
-////                Alert(
-////                    title: Text("Mark \(habitTitle) as Completed?"),
-////                    primaryButton: .default(Text("Yes")) {
-////                        //goalmanager.markHabitCompleted(for: selectedDate)
-////                    },
-////                    secondaryButton: .cancel(Text("No"))
-////                )
-////            }
-////        }
-//////        .background {
-//////            Color(.backgroundColors)
-//////                .ignoresSafeArea()
-//////        }
-////    }
-////}
-////
-////struct HomeView_Previews: PreviewProvider {
-////    static var previews: some View {
-////        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"),isHabitCompleted: .constant(true))
-////            .environmentObject(GoalManager())
-////    }
-////}
-//
