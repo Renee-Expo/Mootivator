@@ -118,7 +118,7 @@ struct NotificationView: View {
         if habitDeadline {
             let habitContent = UNMutableNotificationContent()
             habitContent.title = "Habit Deadline Reminder"
-            habitContent.body = "Don't forget your habit deadline!"
+            habitContent.body = "Your deadline for \(goal.habitTitle) is reaching soon. Remember check in to complete it today!"
 
             var habitTrigger: UNNotificationTrigger?
 
@@ -164,8 +164,8 @@ struct NotificationView: View {
         let center = UNUserNotificationCenter.current()
 
         let content = UNMutableNotificationContent()
-        content.title = "Animal Emotion Reminder"
-        content.body = "Your animal is feeling \(emotion.text)!"
+        content.title = "\(goal.selectedAnimal.name) is feeling \(emotion.text)..."
+        content.body = "Your animal is feeling \(emotion.text). Quick, complete your habit!!"
 
         // Use the selected animal's emotion to determine the appropriate image or other content
         // Modify this part based on your actual implementation for handling animal emotions

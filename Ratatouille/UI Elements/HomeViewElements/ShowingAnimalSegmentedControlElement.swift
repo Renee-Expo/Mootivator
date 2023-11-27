@@ -15,6 +15,7 @@ struct ShowingAnimalSegmentedControlElement: View {
     @Binding var emotion : Animal.emotion
     
     var body: some View {
+        
         VStack {
             if goalItemList.goals.count > 0 {
                 TabView {
@@ -42,6 +43,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                 Text("You have no current goals!")
             }
         }
+           
     }
 }
 
