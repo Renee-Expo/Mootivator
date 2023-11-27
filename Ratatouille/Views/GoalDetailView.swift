@@ -27,10 +27,10 @@ struct GoalDetailView: View {
     @State private var completedDates: Set<Date> = []
     
     var body: some View {
-//        let targetDays = calculateTargetDays(for: goal)
+        let targetDays = calculateTargetDays(for: goal)
         
         NavigationStack{
-//            AnimateProgressView(targetDays: calculateTargetDays(for: goal), daysCompleted: daysCompleted)
+            AnimateProgressView(targetDays: calculateTargetDays(for: goal), numberOfDaysCompleted: $numberOfDaysCompleted)
             VStack(alignment: .leading, spacing: 1){
                 Text("Current habit")
                     .font(.system(size: 16))
