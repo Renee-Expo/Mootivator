@@ -15,9 +15,10 @@ struct NewGoalView: View {
     @State private var deadline = Date()
     @State private var habitTitle = ""
     
-    @State var selectedAnimalKind: AnimalKind = .cow
+//    @State var selectedAnimalKind: AnimalKind = .cow
 //    @State var frequency = ["Custom", "Daily", "Weekly", "Monthly"]
 //    @State var selectedDays = [String]()
+    @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     @State private var motivationalQuote = ""
     @State private var selectedFrequencyIndex = Goal.frequency.custom
     @State private var selectedDailyDeadline = Date()
@@ -54,8 +55,10 @@ struct NewGoalView: View {
             
             Section("Pick an Animal") {
                 NavigationLink("Pick an animal") {
-//                    AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: [.cow, .sheep]) // help!!!
+//                    AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind, unlockedAnimals: [.cow, .sheep]) // help!!!
                 }
+                TextField("Name your animal", text: $selectedAnimal.name)
+                
             }
             
             
@@ -135,12 +138,12 @@ struct NewGoalView: View {
                                                habitTitle: habitTitle,
                                                deadline: deadline,
                                                selectedFrequencyIndex: selectedFrequencyIndex,
-                                               selectedAnimal: selectedAnimalKind, // #warning: error here
-                                               motivationalQuote: motivationalQuote,
+                                               selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                selectedDailyDeadline: selectedDailyDeadline,
                                                selectedFixedDeadline: selectedFixedDeadline))
             } label: {
                 Text("Save")
+                    .frame(maxWidth: .infinity)
             }
             
             //                Section {
