@@ -122,7 +122,7 @@ struct YesScreen: View {
                 .padding()
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
                 
             }
             ConfettiCannon(counter: $counter)
@@ -166,7 +166,7 @@ struct YesScreen: View {
                 .cornerRadius(8)
             }
             .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""))
+                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
             }
         }
     }
