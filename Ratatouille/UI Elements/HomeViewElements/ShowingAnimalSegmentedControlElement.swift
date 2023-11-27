@@ -16,7 +16,7 @@ struct ShowingAnimalSegmentedControlElement: View {
     
     var body: some View {
         VStack {
-            if goalItemList.goals.count > 1 {
+            if goalItemList.goals.count > 0 {
                 TabView {
                     ForEach($goalItemList.goals, id: \.id ) { _ in
                         VStack {
@@ -30,6 +30,9 @@ struct ShowingAnimalSegmentedControlElement: View {
                                 .padding(.bottom, 10)
                             Text(goalItemList.goals[selection].selectedAnimal.name)
                         }
+                        .tabViewStyle(PageTabViewStyle())
+//                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                        .pickerStyle(.segmented)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())

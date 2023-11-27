@@ -49,7 +49,6 @@ struct HomeView: View {
                     
                     ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
                         .background(Color("BackgroundColors"))
-                        .ignoresSafeArea()
                     
                     Spacer()
                     
@@ -67,23 +66,25 @@ struct HomeView: View {
                 .padding(.horizontal)
                 
                 Spacer()
-                
-                VStack (alignment: .leading){
-                    Text("\(title)")
-                        .font(.system(size: 24))
-                        .fontWeight(.heavy)
-                        .offset(x: -90, y: 20)
-                    Text("\(habitTitle)")
-                        .font(.system(size: 20))
-                        .fontWeight(.medium)
-                        .offset(x: -90, y: 20)
+                HStack {
+                    VStack (alignment: .leading){
+                        Text("\(title)")
+                            .font(.system(.title2))
+                            .fontWeight(.heavy)
+                        Text("\(habitTitle)")
+                            .font(.system(.title3))
+                            .fontWeight(.medium)
+                    }
+                    Spacer()
                 }
+                .padding(.horizontal)
                 
                 DatePicker(selection: $selectedDate, displayedComponents: .date) {
                     Text("Select a date")
                 }
                 .datePickerStyle(.graphical)
                 .padding(10)
+                .background(Color.primary.colorInvert())
                 .onChange(of: selectedDate) { _ in
                     showMarkHabitCompletionAlert = true
                 }
