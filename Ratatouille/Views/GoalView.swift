@@ -70,7 +70,7 @@ struct GoalView: View {
                 }
             }
             .sheet(isPresented: $showNewGoalSheet) {
-                NewGoalView(unlockedAnimals: .constant(unlockedAnimals))
+                NewGoalView(unlockedAnimals: .constant(unlockedAnimals), customDates: .constant(customDates))
             }
             .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
                 Button("Replace", role: .destructive) {
