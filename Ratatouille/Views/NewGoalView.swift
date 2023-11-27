@@ -27,6 +27,13 @@ struct NewGoalView: View {
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
+    @State private var customDates : [String: Bool] = [Goal.daysOfTheWeek.monday.text       : false,
+                                                       Goal.daysOfTheWeek.tuesday.text      : false,
+                                                       Goal.daysOfTheWeek.wednesday.text    : false,
+                                                       Goal.daysOfTheWeek.thursday.text     : false,
+                                                       Goal.daysOfTheWeek.friday.text       : false,
+                                                       Goal.daysOfTheWeek.saturday.text     : false,
+                                                       Goal.daysOfTheWeek.sunday.text       : false]
 //    @State private var mondayChosen = false
 //    @State private var tuesdayChosen = false
 //    @State private var wednesdayChosen = false
@@ -69,7 +76,6 @@ struct NewGoalView: View {
                 } else if selectedFrequencyIndex == .weekly {
                     VStack {
                         Text("Number of times per remaining week: \(Int(numberOfTimesPerWeek.rounded()))")
-                        
                         Slider(value: $numberOfTimesPerWeek, in: 1.0...7.0, step: 1)
                     }
                     .onAppear {
@@ -80,7 +86,6 @@ struct NewGoalView: View {
                     VStack {
                         Text("Number of times per remaining month: \(Int(numberOfTimesPerMonth.rounded()))")
                         Slider(value: $numberOfTimesPerMonth, in: 1...Double(daysInMonth), step: 1)
-                        
                     }
                     .onAppear {
                         // Calculate the number of days left in the current month
@@ -103,18 +108,17 @@ struct NewGoalView: View {
                     
                     //                        multi-picker isnt working, so we are using "toggle" function instead
                     // toggle days in the week
-                    /*
+                    
                     HStack {
-                        Toggle("Monday", isOn: goalManager.dayState[Goal.daysOfTheWeek.monday.text])
-                        Toggle("Tuesday", isOn: goalManager.dayState[Goal.daysOfTheWeek.tuesday.text])
-                        Toggle("Wednesday", isOn: goalManager.dayState[Goal.daysOfTheWeek.wednesday.text])
-                        Toggle("Thursday", isOn: goalManager.dayState[Goal.daysOfTheWeek.thursday.text])
-                        Toggle("Friday", isOn: goalManager.dayState[Goal.daysOfTheWeek.friday.text])
-                        Toggle("Saturday", isOn: goalManager.dayState[Goal.daysOfTheWeek.saturday.text])
-                        Toggle("Sunday", isOn: goalManager.dayState[Goal.daysOfTheWeek.sunday.text])
+                        Toggle("Monday",    isOn: $customDates[Goal.daysOfTheWeek.monday.text])
+                        Toggle("Tuesday",   isOn: $customDates[Goal.daysOfTheWeek.tuesday.text])
+                        Toggle("Wednesday", isOn: $customDates[Goal.daysOfTheWeek.wednesday.text])
+                        Toggle("Thursday",  isOn: $customDates[Goal.daysOfTheWeek.thursday.text])
+                        Toggle("Friday",    isOn: $customDates[Goal.daysOfTheWeek.friday.text])
+                        Toggle("Saturday",  isOn: $customDates[Goal.daysOfTheWeek.saturday.text])
+                        Toggle("Sunday",    isOn: $customDates[Goal.daysOfTheWeek.sunday.text])
                     }
                     .toggleStyle(CheckboxToggleStyle())
-                     */
                     
                     DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -124,7 +128,7 @@ struct NewGoalView: View {
                 TextField("You can do it!", text: $motivationalQuote)
             }
             
-            //                Section{
+            //                Section {
             //                    if title.isEmpty || habitTitle.isEmpty || !isAnimalSelected || (frequency[selectedFrequencyIndex] == "Fixed" && !mondayChosen && !tuesdayChosen && !wednesdayChosen && !thursdayChosen && !fridayChosen && !saturdayChosen && !sundayChosen) || motivationalQuote.isEmpty {
             //                        Button{
             //
