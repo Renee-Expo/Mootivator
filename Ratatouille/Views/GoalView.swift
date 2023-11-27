@@ -7,7 +7,7 @@ struct GoalView: View {
     @Binding var title: String
     @Binding var habitTitle: String
     @State private var filters = ["Show All", "Ascending Order", "Descending Order", "Current", "Past"]
-    @Binding var isGoalCompleted : Bool 
+    @Binding var isGoalCompleted : Bool
     
     
     var body: some View {
@@ -70,7 +70,7 @@ struct GoalView: View {
                 }
             }
             .sheet(isPresented: $showNewGoalSheet) {
-                NewGoalView()
+                NewGoalView(unlockedAnimals: .constant(unlockedAnimals))
             }
             .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
                 Button("Replace", role: .destructive) {
