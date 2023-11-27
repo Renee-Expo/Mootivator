@@ -24,44 +24,49 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 Text("\(motivationalQuote)")
-                    .font(.system(size: 24))
+                    .font(.title)
                     .fontWeight(.medium)
                 
                 AnimalEmotionElement(scale: $animalEmotionScale, animalEmotionScale: $animalEmotionScale) // Use $animalEmotionScale here
 //                    .padding()
                 //Text("\(Animal.name)")
 
+                Spacer()
                 
                 HStack {
-                    Button {
-                        indexItem = indexItem%goalManager.goals.count - 1
-                    } label: {
-                        Image(systemName: "chevron.compact.left")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: chevronWidth)
-                    }
+//                    Button {
+//                        if indexItem > 0 {
+//                            indexItem = indexItem - 1
+//                        }
+//                    } label: {
+//                        Image(systemName: "chevron.compact.left")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: chevronWidth)
+//                    }
                     
-                    // Replace ShowingAnimalSegmentedControlElement with your segmented control
+                    Spacer()
+                    
                     ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
-                        .frame(width: 200)
-                        .scaledToFit()
+                        .background(Color("BackgroundColors"))
+                        .ignoresSafeArea()
                     
-//                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .padding()
+                    Spacer()
                     
-                    Button {
-                        indexItem = indexItem%goalManager.goals.count + 1
-                    } label: {
-                        Image(systemName: "chevron.compact.right")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: chevronWidth)
-                    }
+//                    Button {
+//                        if indexItem < goalManager.goals.count - 1 {
+//                            indexItem = indexItem + 1
+//                        }
+//                    } label: {
+//                        Image(systemName: "chevron.compact.right")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: chevronWidth)
+//                    }
                 }
                 .padding(.horizontal)
+                
+                Spacer()
                 
                 VStack (alignment: .leading){
                     Text("\(title)")

@@ -9,7 +9,6 @@ import SwiftUI
 struct GoalDetailView: View {
     
     @EnvironmentObject var goalManager: GoalManager
-//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     @Binding var goal: Goal
 //    @Binding var dailyHabitCompleted: [Date: Bool]
