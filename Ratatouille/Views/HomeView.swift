@@ -43,14 +43,14 @@ struct HomeView: View {
                     }
                     
                     // Replace ShowingAnimalSegmentedControlElement with your segmented control
-                    ShowingAnimalSegmentedControlElement(selection: $indexItem)
+                    ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
                         .frame(width: 200)
                         .scaledToFit()
                     
-                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
+//                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .padding()
                     
                     Button {
                         // move right
