@@ -42,7 +42,9 @@ struct HomeView: View {
                             .frame(width: chevronWidth)
                     }
                     
+                    // Replace ShowingAnimalSegmentedControlElement with your segmented control
                     ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
+                        .frame(width: 200)
                         .scaledToFit()
                     
 //                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")

@@ -19,6 +19,7 @@ struct ShowingAnimalSegmentedControlElement: View {
             Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
                 .resizable()
                 .scaledToFit()
+                .frame(width: 200)
                 .padding()
             TabView {
                 ForEach($goalItemList.goals, id: \.id ) { _ in
@@ -27,6 +28,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .pickerStyle(.segmented)
+                
             }
         }
     }

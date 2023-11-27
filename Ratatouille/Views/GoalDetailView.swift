@@ -151,7 +151,7 @@ struct GoalDetailView: View {
         }
         .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
-                GoalEditView(goal: $goal)
+                GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
             }
         }
     }

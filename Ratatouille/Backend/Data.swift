@@ -157,7 +157,7 @@ struct Goal: Identifiable, Codable {
 }
 
 
-
+var unlockedAnimals: [AnimalKind] = [.cow]
 
 
 extension Goal {
