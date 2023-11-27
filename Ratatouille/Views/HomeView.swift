@@ -24,17 +24,20 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 Text("\(motivationalQuote)")
-                    .font(.system(size: 24))
+                    .font(.title)
                     .fontWeight(.medium)
                 
                 AnimalEmotionElement(scale: $animalEmotionScale, animalEmotionScale: $animalEmotionScale) // Use $animalEmotionScale here
 //                    .padding()
                 //Text("\(Animal.name)")
 
+                Spacer()
                 
                 HStack {
                     Button {
-                        indexItem = indexItem%goalManager.goals.count - 1
+                        if indexItem > 0 {
+                            indexItem = indexItem - 1
+                        }
                     } label: {
                         Image(systemName: "chevron.compact.left")
                             .resizable()
@@ -42,18 +45,16 @@ struct HomeView: View {
                             .frame(width: chevronWidth)
                     }
                     
-                    // Replace ShowingAnimalSegmentedControlElement with your segmented control
-                    ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
-                        .frame(width: 200)
-                        .scaledToFit()
+                    Spacer()
                     
-//                    Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .padding()
+                    ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
+                    
+                    Spacer()
                     
                     Button {
-                        indexItem = indexItem%goalManager.goals.count + 1
+                        if indexItem < goalManager.goals.count - 1 {
+                            indexItem = indexItem + 1
+                        }
                     } label: {
                         Image(systemName: "chevron.compact.right")
                             .resizable()
@@ -62,6 +63,8 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal)
+                
+                Spacer()
                 
                 VStack (alignment: .leading){
                     Text("\(title)")

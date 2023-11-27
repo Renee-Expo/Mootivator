@@ -16,19 +16,23 @@ struct ShowingAnimalSegmentedControlElement: View {
     
     var body: some View {
         VStack {
-            Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200)
-                .padding()
-            TabView {
-                ForEach($goalItemList.goals, id: \.id ) { _ in
-                    Text(goalItemList.goals[selection].selectedAnimal.name)
+            if goalItemList.goals.count > 0 {
+                Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal)
+                if goalItemList.goals.count > 1 {
+                    TabView {
+                        ForEach($goalItemList.goals, id: \.id ) { _ in
+                            Text(goalItemList.goals[selection].selectedAnimal.name)
+                        }
+                        .tabViewStyle(PageTabViewStyle())
+//                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                        .pickerStyle(.segmented)
+                    }
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
-                .pickerStyle(.segmented)
-                
+            } else {
+                Text("You have no current goals!")
             }
         }
     }
