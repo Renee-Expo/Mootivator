@@ -22,7 +22,7 @@ struct NewGoalView: View {
     @State private var selectedFrequencyIndex = Goal.frequency.custom
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
-    @State private var daysInWeek = 7 // should this be let?
+    @State private var daysInWeek = 7
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
     @State private var selectedFixedDeadline = Date()
@@ -117,7 +117,9 @@ struct NewGoalView: View {
                         Toggle("Friday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
                         Toggle("Saturday",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
                         Toggle("Sunday",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
+                            .toggleStyle(.button)
                     }
+                    
 //                    .toggleStyle(CheckboxToggleStyle())
                     
                     DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
@@ -126,6 +128,19 @@ struct NewGoalView: View {
             
             Section("Write something to motivate you") {
                 TextField("You can do it!", text: $motivationalQuote)
+            }
+            
+            Button {
+                goalManager.goals.append(.init(title: title,
+                                               habitTitle: habitTitle,
+                                               deadline: deadline,
+                                               selectedFrequencyIndex: selectedFrequencyIndex,
+                                               selectedAnimal: selectedAnimalKind, // #warning: error here
+                                               motivationalQuote: motivationalQuote,
+                                               selectedDailyDeadline: selectedDailyDeadline,
+                                               selectedFixedDeadline: selectedFixedDeadline))
+            } label: {
+                Text("Save")
             }
             
             //                Section {
