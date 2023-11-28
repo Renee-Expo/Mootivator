@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GoalView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
     @Binding var title: String

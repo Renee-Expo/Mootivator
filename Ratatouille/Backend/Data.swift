@@ -10,6 +10,16 @@ import Foundation
 //var textData : GoalItem = .init(title: "Hi", animal: Animal(name: "fluffy the ferst", emotion: 0, kind: ))
 // ---------------------------------
 
+enum SortOption: String, CaseIterable {
+    case none = "Show All"
+    case ascending = "Sort by Deadline (Ascending)"
+    case descending = "Sort by Deadline (Descending)"
+}
+
+enum FilterOption {
+    case showAll, showCurrent, showPast
+}
+
 enum AnimalKind : Codable, CaseIterable {
     case cow
     case sheep

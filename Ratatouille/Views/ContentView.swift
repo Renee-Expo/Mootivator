@@ -12,7 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
 //    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
     var body: some View {

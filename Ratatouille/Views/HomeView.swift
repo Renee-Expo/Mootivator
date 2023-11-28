@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @Environment(\.colorScheme) var colorScheme
     
     let chevronWidth : Double = 15

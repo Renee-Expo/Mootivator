@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimalPickerView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @Environment(\.dismiss) var dismiss
     @Binding var selectedAnimalKind: AnimalKind
     @Binding var unlockedAnimals: [AnimalKind]

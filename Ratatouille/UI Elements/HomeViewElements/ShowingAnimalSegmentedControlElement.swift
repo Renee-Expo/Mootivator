@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShowingAnimalSegmentedControlElement: View {
     
-    @EnvironmentObject var goalItemList : GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
 //    @Binding var goalItem : Goal
     @Binding var emotion : Animal.emotion
@@ -17,11 +17,11 @@ struct ShowingAnimalSegmentedControlElement: View {
     var body: some View {
         
         VStack {
-            if goalItemList.goals.count > 0 {
+            if goalManager.items.count > 0 {
                 TabView {
-                    ForEach($goalItemList.goals, id: \.id ) { _ in
+                    ForEach(goalManager.items, id: \.id ) { _ in
                         VStack {
-                            Image("\(goalItemList.goals[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
+                            Image("\(goalManager.items[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
                                 .resizable()
                                 .scaledToFit()
                                 .padding(.horizontal)
@@ -29,7 +29,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                                 .background(Color.accentColor)
                                 .clipShape(Circle())
                                 .padding(.bottom, 10)
-                            Text(goalItemList.goals[selection].selectedAnimal.name)
+                            Text(goalManager.items[selection].selectedAnimal.name)
                         }
                         .tabViewStyle(PageTabViewStyle())
 //                        .indexViewStyle(.page(backgroundDisplayMode: .always))
