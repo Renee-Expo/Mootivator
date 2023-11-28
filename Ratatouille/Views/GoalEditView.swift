@@ -20,29 +20,29 @@ struct GoalEditView: View {
     @Binding var goal: Goal
     @Binding var unlockedAnimals: [AnimalKind]
     /*
-    @Binding var title : String
-    @Binding var habitTitle : String
-    @Binding var frequency : Array<String>
-    @Binding var selectedFrequencyIndex : Int
-    @Binding var mondayChosen : Bool
-    @Binding var tuesdayChosen : Bool
-    @Binding var wednesdayChosen : Bool
-    @Binding var thursdayChosen : Bool
-    @Binding var fridayChosen : Bool
-    @Binding var saturdayChosen : Bool
-    @Binding var sundayChosen : Bool
-    @Binding var motivationalQuote : String
-    @Binding var isButtonEnabled : Bool
-    @Binding var deadline : Date
-    @Binding var selectedDailyDeadline : Date
-    @Binding var selectedFixedDeadline : Date
-    @Binding var numberOfTimesPerWeek : Double
-    @Binding var numberOfTimesPerMonth : Double
-    @Binding var selectedAnimal : Animal
+     @Binding var title : String
+     @Binding var habitTitle : String
+     @Binding var frequency : Array<String>
+     @Binding var selectedFrequencyIndex : Int
+     @Binding var mondayChosen : Bool
+     @Binding var tuesdayChosen : Bool
+     @Binding var wednesdayChosen : Bool
+     @Binding var thursdayChosen : Bool
+     @Binding var fridayChosen : Bool
+     @Binding var saturdayChosen : Bool
+     @Binding var sundayChosen : Bool
+     @Binding var motivationalQuote : String
+     @Binding var isButtonEnabled : Bool
+     @Binding var deadline : Date
+     @Binding var selectedDailyDeadline : Date
+     @Binding var selectedFixedDeadline : Date
+     @Binding var numberOfTimesPerWeek : Double
+     @Binding var numberOfTimesPerMonth : Double
+     @Binding var selectedAnimal : Animal
      */
-//
-//    @Binding var customDates : [String: Bool]
-
+    //
+    //    @Binding var customDates : [String: Bool]
+    
     @State var selectedAnimalKind = AnimalKind.cow
     var areAllTogglesOff: Bool {
         return !goal.dayState.values.contains(true)
@@ -97,17 +97,18 @@ struct GoalEditView: View {
                     
                     else if goal.selectedFrequencyIndex == .custom {
                         
-                        VStack {
+                        HStack {
                             
-                            Toggle("Monday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.monday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.monday.text] = $0 }))
-                                    Toggle("Tuesday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] = $0 }))
-                                    Toggle("Wednesday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] = $0 }))
-                                    Toggle("Thursday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.thursday.text] = $0 }))
-                                    Toggle("Friday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.friday.text] = $0 }))
-                                    Toggle("Saturday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.saturday.text] = $0 }))
-                                    Toggle("Sunday", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.sunday.text] = $0 }))
-
+                            Toggle("M", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.monday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.monday.text] = $0 }))
+                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] = $0 }))
+                            Toggle("W", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] = $0 }))
+                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.thursday.text] = $0 }))
+                            Toggle("F", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.friday.text] = $0 }))
+                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.saturday.text] = $0 }))
+                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.sunday.text] = $0 }))
+                            
                         }
+                        .toggleStyle(.button)
                         
                         DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
@@ -118,87 +119,87 @@ struct GoalEditView: View {
                 }
                 
                 //                        Button {
-//                if (goal.title.isEmpty ||
-//                    goal.habitTitle.isEmpty ||
-//                    goal.selectedFrequencyIndex == .custom
-//                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false)
-//                    && !(goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false)
-//                    || (goal.motivationalQuote.isEmpty)
-//                ) {
-//
-//                    Button {
-//                        goalManager.goals.append(.init(title: goal.title,
-//                                                       habitTitle: goal.habitTitle,
-//                                                       deadline: goal.deadline,
-//                                                       selectedFrequencyIndex: goal.selectedFrequencyIndex,
-//                                                       selectedAnimal: goal.selectedAnimal, motivationalQuote: goal.motivationalQuote,
-//                                                       selectedDailyDeadline: goal.selectedDailyDeadline,
-//                                                       selectedFixedDeadline: goal.selectedFixedDeadline))
-//                    } label: {
-//                        Text("Save")
-//                            .frame(maxWidth: .infinity)
-//                    }
-                    
-                    
-                    
-                    Button {
-                        if let index = goalManager.goals.firstIndex(where: { $0.id == goal.id }) {
-                            goalManager.goals[index] = goal
-                        } else {
-                            goalManager.goals.append(goal)
-                        }
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Save")
+                //                if (goal.title.isEmpty ||
+                //                    goal.habitTitle.isEmpty ||
+                //                    goal.selectedFrequencyIndex == .custom
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false)
+                //                    && !(goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false)
+                //                    || (goal.motivationalQuote.isEmpty)
+                //                ) {
+                //
+                //                    Button {
+                //                        goalManager.goals.append(.init(title: goal.title,
+                //                                                       habitTitle: goal.habitTitle,
+                //                                                       deadline: goal.deadline,
+                //                                                       selectedFrequencyIndex: goal.selectedFrequencyIndex,
+                //                                                       selectedAnimal: goal.selectedAnimal, motivationalQuote: goal.motivationalQuote,
+                //                                                       selectedDailyDeadline: goal.selectedDailyDeadline,
+                //                                                       selectedFixedDeadline: goal.selectedFixedDeadline))
+                //                    } label: {
+                //                        Text("Save")
+                //                            .frame(maxWidth: .infinity)
+                //                    }
+                
+                
+                
+                Button {
+                    if let index = goalManager.goals.firstIndex(where: { $0.id == goal.id }) {
+                        goalManager.goals[index] = goal
+                    } else {
+                        goalManager.goals.append(goal)
                     }
-                    .frame(maxWidth: .infinity)
-                    .disabled(goal.title.isEmpty || goal.habitTitle.isEmpty || goal.selectedAnimal.name.isEmpty || (goal.selectedFrequencyIndex == .custom && areAllTogglesOff) || goal.motivationalQuote.isEmpty)
-                    
-                    //Button {
-//                        // does this work???
-////                        goal.daysOfTheWeek.tuesday.state = true
-//
-//                    } label: {
-//                        Text("Save")
-//                    }
-////                    .disabled(!isButtonEnabled)
-//                    .frame(maxWidth: .infinity)
-                        
-//Handle the case where the button should be disabled
-//                } else {
-//                    ZStack{
-//                        Color.accentColor
-//                        Button {
-//                            isButtonEnabled = true
-//                            let newGoal = Goal(
-//                                title: title,
-//                                habitTitle: habitTitle,
-//                                deadline: deadline,
-//                                frequency: frequency,
-//                                selectedFrequencyIndex: selectedFrequencyIndex,
-//                                selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
-//                                motivationalQuote: motivationalQuote,
-//                                selectedDailyDeadline: selectedDailyDeadline,
-//                                selectedFixedDeadline: selectedFixedDeadline,
-//                                numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
-//                                numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
-//                            )
-                            
-//                            goalManager.goals.append(newGoal)
-//                            presentationMode.wrappedValue.dismiss()
-//                        } label: {
-//                            Text("Save")
-//                                .foregroundColor(.white)
-//                        }
-//                        .frame(maxWidth: .infinity)
-                        //                            .background(Color.accentColor)
-//                    }
-//                }
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("Save")
+                }
+                .frame(maxWidth: .infinity)
+                .disabled(goal.title.isEmpty || goal.habitTitle.isEmpty || goal.selectedAnimal.name.isEmpty || (goal.selectedFrequencyIndex == .custom && areAllTogglesOff) || goal.motivationalQuote.isEmpty)
+                
+                //Button {
+                //                        // does this work???
+                ////                        goal.daysOfTheWeek.tuesday.state = true
+                //
+                //                    } label: {
+                //                        Text("Save")
+                //                    }
+                ////                    .disabled(!isButtonEnabled)
+                //                    .frame(maxWidth: .infinity)
+                
+                //Handle the case where the button should be disabled
+                //                } else {
+                //                    ZStack{
+                //                        Color.accentColor
+                //                        Button {
+                //                            isButtonEnabled = true
+                //                            let newGoal = Goal(
+                //                                title: title,
+                //                                habitTitle: habitTitle,
+                //                                deadline: deadline,
+                //                                frequency: frequency,
+                //                                selectedFrequencyIndex: selectedFrequencyIndex,
+                //                                selectedAnimal: Animal(name: "", kind: selectedAnimalKind),
+                //                                motivationalQuote: motivationalQuote,
+                //                                selectedDailyDeadline: selectedDailyDeadline,
+                //                                selectedFixedDeadline: selectedFixedDeadline,
+                //                                numberOfTimesPerWeek: Double(numberOfTimesPerWeek),
+                //                                numberOfTimesPerMonth: Double(numberOfTimesPerMonth)
+                //                            )
+                
+                //                            goalManager.goals.append(newGoal)
+                //                            presentationMode.wrappedValue.dismiss()
+                //                        } label: {
+                //                            Text("Save")
+                //                                .foregroundColor(.white)
+                //                        }
+                //                        .frame(maxWidth: .infinity)
+                //                            .background(Color.accentColor)
+                //                    }
+                //                }
                 
             }
         }
