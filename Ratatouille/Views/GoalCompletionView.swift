@@ -14,7 +14,7 @@ import SwiftUI
 import ConfettiSwiftUI
 
 struct GoalCompletionView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
 //    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     @State private var showGoalCompletionView = false
     @State private var showConfirmationScreen = true

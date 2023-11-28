@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimalView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @Binding var numberOfCompletedGoals: Int
     @State private var unlockedAnimals: Set<AnimalKind> = []
 

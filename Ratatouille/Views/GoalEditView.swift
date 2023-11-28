@@ -13,7 +13,7 @@
 import SwiftUI
 
 struct GoalEditView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
     
@@ -148,10 +148,10 @@ struct GoalEditView: View {
                 
                 
                 Button {
-                    if let index = goalManager.goals.firstIndex(where: { $0.id == goal.id }) {
-                        goalManager.goals[index] = goal
+                    if let index = goalManager.items.firstIndex(where: { $0.id == goal.id }) {
+                        goalManager.items[index] = goal
                     } else {
-                        goalManager.goals.append(goal)
+                        goalManager.items.append(goal)
                     }
                     presentationMode.wrappedValue.dismiss()
                 } label: {

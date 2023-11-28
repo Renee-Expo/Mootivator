@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct HabitCompletionView: View {
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
     @State private var showHabitCompletionView = false

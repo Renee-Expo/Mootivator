@@ -9,7 +9,7 @@ import SwiftUI
 struct NewGoalView: View {
     
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     
     @State private var title = ""
     @State private var deadline = Date()
@@ -149,7 +149,7 @@ struct NewGoalView: View {
                 
                 Button {
                     //                    if isButtonEnabled{
-                    goalManager.goals.append(.init(title: title,
+                    goalManager.items.append(.init(title: title,
                                                    habitTitle: habitTitle,
                                                    deadline: deadline,
                                                    selectedFrequencyIndex: selectedFrequencyIndex,

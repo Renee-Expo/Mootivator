@@ -10,7 +10,7 @@ import UserNotifications
 
 struct NotificationView: View {
     
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     
     @AppStorage("dailyTracking") var dailyTracking = false
     @AppStorage("reminderTime") var reminderTime = Date()

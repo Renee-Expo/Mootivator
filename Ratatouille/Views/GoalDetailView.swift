@@ -8,7 +8,7 @@ import SwiftUI
 
 struct GoalDetailView: View {
     
-    @EnvironmentObject var goalManager: GoalManager
+    @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
 //    @Binding var dailyHabitCompleted: [Date: Bool]
