@@ -8,6 +8,7 @@ import SwiftUI
 
 struct GoalDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
@@ -126,7 +127,6 @@ struct GoalDetailView: View {
                 
                 Button {
                     showDeleteGoalAlert = true
-                    
                 } label: {
                     Label("Delete goal", systemImage: "trash")
                         .foregroundColor(.red)
@@ -136,7 +136,9 @@ struct GoalDetailView: View {
         .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
             Button("Yes") {
                 goalManager.deleteGoal(goal)
-                redirectToGoalView = true
+//                redirectToGoalView = true
+                self.presentationMode.wrappedValue.dismiss()
+                
             }
             Button("No") {
                 
