@@ -8,27 +8,27 @@ import SwiftUI
 
 struct GoalDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-//    @Binding var dailyHabitCompleted: [Date: Bool]
-    @State private var showGoalDetailSheet = false
-    @Environment(\.colorScheme) var colorScheme
-    var chevronWidth: Double = 15
+    @Binding var numberOfDaysCompleted : Int
+    
+    @State var title: String = ""
+    @State var habitTitle: String = ""
     @State var indexItem: Int = 0
     @State var selectedDate: Date = Date()
+    @State private var showGoalDetailSheet = false
     @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
     @State private var showOverallHabitCompletionAlert = false
-    @State var title: String = ""
-    @State var habitTitle: String = ""
-    @Binding var numberOfDaysCompleted : Int
     @State private var completedDates: Set<Date> = []
     @State private var redirectToGoalView = false
+    
     var body: some View {
         let targetDays = calculateTargetDays(for: goal)
         
-        NavigationStack{
+        NavigationStack {
             AnimateProgressView(targetDays: calculateTargetDays(for: goal), numberOfDaysCompleted: $numberOfDaysCompleted)
             VStack(alignment: .leading, spacing: 1){
                 Text("Current habit")
@@ -126,7 +126,6 @@ struct GoalDetailView: View {
                 
                 Button {
                     showDeleteGoalAlert = true
-                    
                 } label: {
                     Label("Delete goal", systemImage: "trash")
                         .foregroundColor(.red)
@@ -136,15 +135,17 @@ struct GoalDetailView: View {
         .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
             Button("Yes") {
                 goalManager.deleteGoal(goal)
-                redirectToGoalView = true
+//                redirectToGoalView = true
+                self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
+                
             }
             Button("No") {
                 
             }
         }
-        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
-            EmptyView()
-        }
+//        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
+//            EmptyView()
+//        }
 
         .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
