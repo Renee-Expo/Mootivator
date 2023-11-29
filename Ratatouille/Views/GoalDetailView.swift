@@ -28,92 +28,61 @@ struct GoalDetailView: View {
     var body: some View {
         let targetDays = calculateTargetDays(for: goal)
         
-        NavigationStack {
+        ScrollView {
             AnimateProgressView(targetDays: calculateTargetDays(for: goal), numberOfDaysCompleted: $numberOfDaysCompleted)
-            VStack(alignment: .leading, spacing: 1){
+            
+            VStack(alignment: .leading) {
                 Text("Current habit")
-                    .font(.system(size: 16))
+                    .font(.headline)
                     .fontWeight(.bold)
-                    .padding()
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 2)
-                    .frame(width: 350, height: 350)
-                    .foregroundColor(.white)
-                    .overlay(
-                        ScrollView {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(goal.habitTitle)
-                                    .font(.system(size: 16))
-                                    .fontWeight(.bold)
-                                    .padding()
-                                DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                                    Text("Select a date")
-                                }
-                                .datePickerStyle(.graphical)
-                                .padding(5)
-                                .onChange(of: selectedDate) { _ in
-                                    showMarkHabitCompletionAlert = true
-                                }
-                                .alert(isPresented: $showMarkHabitCompletionAlert) {
-                                    let isDateCompleted = completedDates.contains(selectedDate)
-                                    if isDateCompleted {
-                                        return Alert(title: Text("Habit Already Completed"),
-                                                     message: Text("You've already marked this habit as done on this date."),
-                                                     dismissButton: .default(Text("OK")))
-                                    } else {
-                                        return Alert(
-                                            title: Text("Mark Habit as Completed?"),
-                                            message: Text("Are you sure you want to mark the habit as done for this date?"),
-                                            primaryButton: .default(Text("Yes")) {
-                                                completedDates.insert(selectedDate)
-                                                // Call function to update progress bar
-                                                
-                                                
-                                                if (goal.selectedFrequencyIndex == .weekly
-                                                    && numberOfDaysCompleted == targetDays)
-                                                    || (goal.selectedFrequencyIndex == .monthly
-                                                        && numberOfDaysCompleted == targetDays) {
-                                                    
-                                                    showOverallHabitCompletionAlert = true
-                                                    
-                                                }
-                                                
-                                                
-                                            },
-                                            secondaryButton: .cancel(Text("No"))
-                                        )
-                                    }
-                                }
-                                .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
-                                    Button("OK", role: .cancel) {
-                                       
-                                    }
-                                }
-                                
-                                
-                                HStack {
-                                    Spacer()
-                                    VStack {
-                                        Text("Completed")
-                                        Text("\(numberOfDaysCompleted)d")
-                                            .fontWeight(.bold)
-                                            .padding(1)
-                                    }
-                                    .padding(5)
-                                    
-                                    VStack {
-                                        Text("Target")
-//                                        Text("\(targetDays)d")
-                                            .fontWeight(.bold)
-                                            .padding(1)
-                                    }
-                                    .padding(5)
-                                    Spacer()
-                                }
-                            }
-                        }
-                    )
+                
+                HStack {
+                    Text("\(numberOfDaysCompleted) days remaining")
+                }
+                HStack {
+                    Text("Target --> something")
+//                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                }
+                
+                Text(goal.habitTitle)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                
+                DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                    Text("Select a date")
+                }
+                .datePickerStyle(.graphical)
+                .onChange(of: selectedDate) { _ in
+                    showMarkHabitCompletionAlert = true
+                }
+                //                            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
+                //                                Button("OK", role: .cancel) {
+                //
+                //                                }
+                //                            }
+                
+                
+//                HStack {
+//                    Spacer()
+//                    //                        VStack {
+//                    //                            Text("Completed")
+//                    //                            Text("\(numberOfDaysCompleted)d")
+//                    //                                .fontWeight(.bold)
+//                    //                                .padding(1)
+//                    //                        }
+//                        .padding(5)
+//                    
+//                    VStack {
+//                        Text("Target")
+//                        //                                        Text("\(targetDays)d")
+//                            .fontWeight(.bold)
+//                            .padding(1)
+//                    }
+//                    .padding(5)
+//                    Spacer()
+//                }
             }
+            .padding(.horizontal)
         }
         .navigationTitle(goal.title)
         .toolbar {
@@ -135,18 +104,46 @@ struct GoalDetailView: View {
         .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
             Button("Yes") {
                 goalManager.deleteGoal(goal)
-//                redirectToGoalView = true
+                //                redirectToGoalView = true
                 self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
                 
             }
-            Button("No") {
-                
+            Button("Cancel") {}
+        }
+        .alert(isPresented: $showMarkHabitCompletionAlert) {
+            let isDateCompleted = completedDates.contains(selectedDate)
+            if isDateCompleted {
+                return Alert(title: Text("Habit Already Completed"),
+                             message: Text("You've already marked this habit as done on this date."),
+                             dismissButton: .default(Text("OK")))
+            } else {
+                return Alert(
+                    title: Text("Mark Habit as Completed?"),
+                    message: Text("Are you sure you want to mark the habit as done for this date?"),
+                    primaryButton: .default(Text("Yes")) {
+                        completedDates.insert(selectedDate)
+                        // Call function to update progress bar
+                        
+                        
+                        if (goal.selectedFrequencyIndex == .weekly
+                            && numberOfDaysCompleted == targetDays)
+                            || (goal.selectedFrequencyIndex == .monthly
+                                && numberOfDaysCompleted == targetDays) {
+                            
+                            showOverallHabitCompletionAlert = true
+                            
+                        }
+                        
+                        
+                    },
+                    secondaryButton: .cancel(Text("No"))
+                )
             }
         }
-//        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
-//            EmptyView()
-//        }
-
+        //        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
+        //            EmptyView()
+        //        }
+        
         .sheet(isPresented: $showGoalDetailSheet) {
             NavigationView {
                 GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
@@ -158,13 +155,10 @@ struct GoalDetailView: View {
 struct GoalDetailView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
-        
-        let goalManager = GoalManager()
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
         
         return NavigationStack {
             GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
-                .environmentObject(goalManager)
         }
     }
 }

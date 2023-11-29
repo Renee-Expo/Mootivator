@@ -190,11 +190,8 @@ struct NotificationView_Previews: PreviewProvider {
         
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
         
-        let goalManager = GoalManager()
-        
         return NavigationStack {
             NotificationView(goal: .constant(goal))
-                .environmentObject(goalManager)
         }
     }
 }
