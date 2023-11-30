@@ -8,6 +8,15 @@
         "branch" : "master",
         "revision" : "469de4e43949815dc92570cc786922d8d1385b06"
       }
+    },
+    {
+      "identity" : "fscalendar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WenchaoD/FSCalendar",
+      "state" : {
+        "branch" : "master",
+        "revision" : "2a1bdab38bd4c90caaa4b593e0608c05f4173160"
+      }
     }
   ],
   "version" : 2

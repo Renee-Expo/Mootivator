@@ -33,6 +33,7 @@
 		D97165052B10A74500BE63C8 /* CirclesTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165042B10A74500BE63C8 /* CirclesTopView.swift */; };
 		D97165072B10A77400BE63C8 /* AnimateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165062B10A77400BE63C8 /* AnimateProgressView.swift */; };
 		D9FCBEC62B19074F00FB5869 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FCBEC52B19074F00FB5869 /* CalendarView.swift */; };
+		D9FCBEC92B19078100FB5869 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D9FCBEC82B19078100FB5869 /* FSCalendar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D93A5B172B1346A4002A1FE6 /* ConfettiSwiftUI in Frameworks */,
+				D9FCBEC92B19078100FB5869 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +184,7 @@
 			name = Ratatouille;
 			packageProductDependencies = (
 				D93A5B162B1346A4002A1FE6 /* ConfettiSwiftUI */,
+				D9FCBEC82B19078100FB5869 /* FSCalendar */,
 			);
 			productName = Ratatouille;
 			productReference = 99F04C002AA596820089ED13 /* Ratatouille.app */;
@@ -213,6 +216,7 @@
 			mainGroup = 99F04BF72AA596820089ED13;
 			packageReferences = (
 				D93A5B152B1346A4002A1FE6 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				D9FCBEC72B19078100FB5869 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 99F04C012AA596820089ED13 /* Products */;
 			projectDirPath = "";
@@ -471,6 +475,14 @@
 				kind = branch;
 			};
 		};
+		D9FCBEC72B19078100FB5869 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -478,6 +490,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D93A5B152B1346A4002A1FE6 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
 			productName = ConfettiSwiftUI;
+		};
+		D9FCBEC82B19078100FB5869 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9FCBEC72B19078100FB5869 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
