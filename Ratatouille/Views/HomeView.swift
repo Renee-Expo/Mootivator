@@ -4,7 +4,6 @@ struct HomeView: View {
     
     @ObservedObject var goalManager: GoalManager = .shared
     @Environment(\.colorScheme) var colorScheme
-    
     let chevronWidth : Double = 15
     @State var indexItem : Int = 0
     @State var selectedDate : Date = Date()
@@ -78,30 +77,31 @@ struct HomeView: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-                
-                DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                    Text("Select a date")
-                }
-                .datePickerStyle(.graphical)
-                .padding(10)
-                .background(Color.primary.colorInvert())
-                .onChange(of: selectedDate) { _ in
-                    showMarkHabitCompletionAlert = true
-                }
-                .alert(isPresented: $showMarkHabitCompletionAlert) {
-                    Alert(
-                        title: Text("Mark \(habitTitle) as Completed?"),
-                        primaryButton: .default(Text("Yes")) {
-                            dailyHabitCompleted[selectedDate] = true
-                            updateAnimalEmotion(habitCompletionStatus: true)
-//                            habitCompletionStatus.save()
-                            // TODO: Some foreground colour thing
-                            //                                .foregroundColor(.green)
-                            
-                        },
-                        secondaryButton: .cancel(Text("No"))
-                    )
-                }
+                CalendarView(selectedDate: Date(), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+                    .scaledToFit()
+//                DatePicker(selection: $selectedDate, displayedComponents: .date) {
+//                    Text("Select a date")
+//                }
+//                .datePickerStyle(.graphical)
+//                .padding(10)
+//                .background(Color.primary.colorInvert())
+//                .onChange(of: selectedDate) { _ in
+//                    showMarkHabitCompletionAlert = true
+//                }
+//                .alert(isPresented: $showMarkHabitCompletionAlert) {
+//                    Alert(
+//                        title: Text("Mark \(habitTitle) as Completed?"),
+//                        primaryButton: .default(Text("Yes")) {
+//                            dailyHabitCompleted[selectedDate] = true
+//                            updateAnimalEmotion(habitCompletionStatus: true)
+////                            habitCompletionStatus.save()
+//                            // TODO: Some foreground colour thing
+//                            //                                .foregroundColor(.green)
+//
+//                        },
+//                        secondaryButton: .cancel(Text("No"))
+//                    )
+//                }
             }
 //            .onChange(of: $goalManager.goals[indexItem].isGoalCompleted.wrappedValue) { statusItem in
 //                updateAnimalEmotion(habitCompletionStatus: statusItem)

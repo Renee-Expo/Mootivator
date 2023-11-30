@@ -210,7 +210,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), unlockedAnimals: .constant([.cow]), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", completedDates: [], deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), unlockedAnimals: .constant([.cow]), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

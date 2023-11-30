@@ -151,7 +151,7 @@ struct NewGoalView: View {
                     //                    if isButtonEnabled{
                     goalManager.items.append(.init(title: title,
                                                    habitTitle: habitTitle,
-                                                   deadline: deadline,
+                                                   completedDates: [], deadline: deadline,
                                                    selectedFrequencyIndex: selectedFrequencyIndex,
                                                    selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                    selectedDailyDeadline: selectedDailyDeadline,

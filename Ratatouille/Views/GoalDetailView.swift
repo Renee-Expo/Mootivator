@@ -19,7 +19,7 @@ struct GoalDetailView: View {
     @State var indexItem: Int = 0
     @State var selectedDate: Date = Date()
     @State private var showGoalDetailSheet = false
-    @State private var showMarkHabitCompletionAlert = false
+    //    @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
     @State private var showOverallHabitCompletionAlert = false
     @State private var completedDates: Set<Date> = []
@@ -41,20 +41,26 @@ struct GoalDetailView: View {
                 }
                 HStack {
                     Text("Target --> something")
-//                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                    //                    Text("\(goal.selectedFixedDeadline - Date()) days")
                 }
                 
                 Text(goal.habitTitle)
                     .font(.headline)
                     .fontWeight(.bold)
                 
-                DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                    Text("Select a date")
-                }
-                .datePickerStyle(.graphical)
-                .onChange(of: selectedDate) { _ in
-                    showMarkHabitCompletionAlert = true
-                }
+                CalendarView(selectedDate: Date(), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+                    .scaledToFit()
+                    .padding()
+                
+                
+                
+                //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                //                    Text("Select a date")
+                //                }
+                //                .datePickerStyle(.graphical)
+                //                .onChange(of: selectedDate) { _ in
+                //                    showMarkHabitCompletionAlert = true
+                //                }
                 //                            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
                 //                                Button("OK", role: .cancel) {
                 //
@@ -62,104 +68,105 @@ struct GoalDetailView: View {
                 //                            }
                 
                 
-//                HStack {
-//                    Spacer()
-//                    //                        VStack {
-//                    //                            Text("Completed")
-//                    //                            Text("\(numberOfDaysCompleted)d")
-//                    //                                .fontWeight(.bold)
-//                    //                                .padding(1)
-//                    //                        }
-//                        .padding(5)
-//                    
-//                    VStack {
-//                        Text("Target")
-//                        //                                        Text("\(targetDays)d")
-//                            .fontWeight(.bold)
-//                            .padding(1)
-//                    }
-//                    .padding(5)
-//                    Spacer()
-//                }
+                //                HStack {
+                //                    Spacer()
+                //                    //                        VStack {
+                //                    //                            Text("Completed")
+                //                    //                            Text("\(numberOfDaysCompleted)d")
+                //                    //                                .fontWeight(.bold)
+                //                    //                                .padding(1)
+                //                    //                        }
+                //                        .padding(5)
+                //
+                //                    VStack {
+                //                        Text("Target")
+                //                        //                                        Text("\(targetDays)d")
+                //                            .fontWeight(.bold)
+                //                            .padding(1)
+                //                    }
+                //                    .padding(5)
+                //                    Spacer()
+                ////                }
+                //            }
+                //            .padding(.horizontal)
             }
-            .padding(.horizontal)
-        }
-        .navigationTitle(goal.title)
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    showGoalDetailSheet = true
-                } label: {
-                    Label("Edit goal", systemImage: "pencil")
+            .navigationTitle(goal.title)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        showGoalDetailSheet = true
+                    } label: {
+                        Label("Edit goal", systemImage: "pencil")
+                    }
+                    
+                    Button {
+                        showDeleteGoalAlert = true
+                    } label: {
+                        Label("Delete goal", systemImage: "trash")
+                            .foregroundColor(.red)
+                    }
                 }
-                
-                Button {
-                    showDeleteGoalAlert = true
-                } label: {
-                    Label("Delete goal", systemImage: "trash")
-                        .foregroundColor(.red)
+            }
+            .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
+                Button("Yes") {
+                    goalManager.deleteGoal(goal)
+                    //                redirectToGoalView = true
+                    self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
+                    
                 }
+                Button("Cancel") {}
             }
-        }
-        .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
-            Button("Yes") {
-                goalManager.deleteGoal(goal)
-                //                redirectToGoalView = true
-                self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
-                
-            }
-            Button("Cancel") {}
-        }
-        .alert(isPresented: $showMarkHabitCompletionAlert) {
-            let isDateCompleted = completedDates.contains(selectedDate)
-            if isDateCompleted {
-                return Alert(title: Text("Habit Already Completed"),
-                             message: Text("You've already marked this habit as done on this date."),
-                             dismissButton: .default(Text("OK")))
-            } else {
-                return Alert(
-                    title: Text("Mark Habit as Completed?"),
-                    message: Text("Are you sure you want to mark the habit as done for this date?"),
-                    primaryButton: .default(Text("Yes")) {
-                        completedDates.insert(selectedDate)
-                        // Call function to update progress bar
-                        
-                        
-                        if (goal.selectedFrequencyIndex == .weekly
-                            && numberOfDaysCompleted == targetDays)
-                            || (goal.selectedFrequencyIndex == .monthly
-                                && numberOfDaysCompleted == targetDays) {
-                            
-                            showOverallHabitCompletionAlert = true
-                            
-                        }
-                        
-                        
-                    },
-                    secondaryButton: .cancel(Text("No"))
-                )
-            }
-        }
-        //        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
-        //            EmptyView()
-        //        }
-        
-        .sheet(isPresented: $showGoalDetailSheet) {
-            NavigationView {
-                GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
+            //        .alert(isPresented: $showMarkHabitCompletionAlert) {
+            //            let isDateCompleted = completedDates.contains(selectedDate)
+            //            if isDateCompleted {
+            //                return Alert(title: Text("Habit Already Completed"),
+            //                             message: Text("You've already marked this habit as done on this date."),
+            //                             dismissButton: .default(Text("OK")))
+            //            } else {
+            //                return Alert(
+            //                    title: Text("Mark Habit as Completed?"),
+            //                    message: Text("Are you sure you want to mark the habit as done for this date?"),
+            //                    primaryButton: .default(Text("Yes")) {
+            //                        completedDates.insert(selectedDate)
+            //                        // Call function to update progress bar
+            //
+            //
+            //                        if (goal.selectedFrequencyIndex == .weekly
+            //                            && numberOfDaysCompleted == targetDays)
+            //                            || (goal.selectedFrequencyIndex == .monthly
+            //                                && numberOfDaysCompleted == targetDays) {
+            //
+            //                            showOverallHabitCompletionAlert = true
+            //
+            //                        }
+            //
+            //
+            //                    },
+            //                    secondaryButton: .cancel(Text("No"))
+            //                )
+            //            }
+            //        }
+            //        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
+            //            EmptyView()
+            //        }
+            
+            .sheet(isPresented: $showGoalDetailSheet) {
+                NavigationView {
+                    GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
+                }
             }
         }
     }
-}
-
-struct GoalDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
-        
-        return NavigationStack {
-            GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
+    
+    struct GoalDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            
+            let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
+            
+            return NavigationStack {
+                GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
+            }
         }
     }
+    
 }
-
