@@ -83,7 +83,7 @@ struct NewGoalView: View {
                     } else if selectedFrequencyIndex == .weekly {
                         VStack {
                             Text("Number of times per remaining week: \(Int(numberOfTimesPerWeek.rounded()))")
-                            Slider(value: $numberOfTimesPerWeek, in: 1.0...7.0, step: 1)
+                            Slider(value: $numberOfTimesPerWeek, in: 1.0...Double(daysInWeek), step: 1)
                         }
                         .onAppear {
                             daysInWeek = daysInWeek - Calendar.current.component(.weekday, from: Date()) + 1
