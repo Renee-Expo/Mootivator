@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 // not to be published, texting data
 //var textData : GoalItem = .init(title: "Hi", animal: Animal(name: "fluffy the ferst", emotion: 0, kind: ))
 // ---------------------------------
@@ -211,10 +212,6 @@ struct Goal: Identifiable, Codable {
 }
 
 
-
-var unlockedAnimals: [AnimalKind] = [.cow]
-
-
 extension Goal {
     
     static let sampleGoals: [Goal] = [
@@ -228,9 +225,6 @@ extension Goal {
     ]
     
 }
-
-var numberOfDaysCompleted : Int = 0
-var numberOfCompletedGoals : Int = 0 // is this to be persisted?
 
 func calculateTargetDays(for goal: Goal) -> Int {
     // Assuming you have access to goal's frequency and other relevant data

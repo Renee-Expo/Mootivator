@@ -12,6 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
+    @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 20
     @ObservedObject var goalManager: GoalManager = .shared
 //    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
     
@@ -27,7 +28,7 @@ struct ContentView: View {
                     Text("Goals")
                     Image(systemName: "star.fill")
                 }
-            AnimalView(numberOfCompletedGoals: .constant(0))
+            AnimalView(numberOfCompletedGoals: $numberOfCompletedGoals)
                 .tabItem{
                     Text("Animals")
                     Image(systemName: "pawprint.fill")

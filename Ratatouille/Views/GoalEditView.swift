@@ -14,11 +14,13 @@ import SwiftUI
 
 struct GoalEditView: View {
     @ObservedObject var goalManager: GoalManager = .shared
+    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
+    
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
     
     @Binding var goal: Goal
-    @Binding var unlockedAnimals: [AnimalKind]
+//    @Binding var unlockedAnimals: [AnimalKind]
     /*
      @Binding var title : String
      @Binding var habitTitle : String
@@ -58,7 +60,7 @@ struct GoalEditView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: $unlockedAnimals)
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
                     } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
                     TextField("Name your animal", text: $goal.selectedAnimal.name)
                 }
@@ -210,7 +212,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", completedDates: [], deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), unlockedAnimals: .constant([.cow]), selectedAnimalKind: .cow)
+        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", completedDates: [], deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }
