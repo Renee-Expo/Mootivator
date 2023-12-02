@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Emotion.happy), motivationalQuote: .constant(""))
+            HomeView(goalAnimalEmotion: .constant(Emotion.neutral))
                 .tabItem {
                     Text("Home")
                     Image(systemName: "house")

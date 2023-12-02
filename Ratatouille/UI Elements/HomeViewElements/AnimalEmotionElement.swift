@@ -9,8 +9,17 @@
 import SwiftUI
 
 struct AnimalEmotionElement: View {
-    @Binding var scale: Double
-    @Binding var animalEmotionScale: Double
+    var goal : Goal
+//    @Binding var scale: Double
+//    @Binding var animalEmotionScale: Double
+    
+    var scale : Double {
+        switch goal.selectedAnimal.emotion {
+        case .happy     : return 20
+        case .neutral   : return 0
+        case .sad       : return -20
+        }
+    }
     
     var body: some View {
         VStack {
@@ -28,7 +37,10 @@ struct AnimalEmotionElement: View {
 
 struct AnimalEmotionElement_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalEmotionElement(scale: .constant(0), animalEmotionScale: .constant(0))
+        
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
+        
+        AnimalEmotionElement(goal: goal)
     }
 }
 
