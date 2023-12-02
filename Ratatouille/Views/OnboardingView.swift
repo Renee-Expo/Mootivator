@@ -163,7 +163,7 @@ struct PageView : View {
                         .cornerRadius(8)
                 }
                 .sheet(isPresented: $showNewGoalSheet) {
-                    Text("sheet")
+                    NewGoalView()
                 }
             }
         }
