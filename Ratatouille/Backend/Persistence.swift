@@ -120,10 +120,6 @@ final class GoalManager: ItemManager {
     init() {
         read()
     }
-    // during DEBUG only
-    func loadSampleData() {
-        items = Goal.sampleGoals
-    }
     
     func deleteGoal(_ goal: Goal) {
         // Implement deletion logic here
@@ -131,6 +127,11 @@ final class GoalManager: ItemManager {
         if let index = items.firstIndex(where: { $0.id == goal.id }) {
             items.remove(at: index)
         }
+    }
+    
+    // during DEBUG only
+    func loadSampleData() {
+        items = Goal.sampleGoals
     }
     
     @Published var searchText = ""
@@ -175,6 +176,16 @@ final class GoalManager: ItemManager {
     }
 }
 
+//final class UnlockedAnimalManager: ItemManager {
+//    @Published var items: [<#UnlockedAnimals?#>] = [] { didSet { write() } }
+//    static var shared: UnlockedAnimalManager = .init()
+//    static var saveLocation: FileSystem.FileName = .unlockedAnimalManager
+//    
+//    init() {
+//        read()
+//    }
+//}
+
 // new persistence code
 // thanks to @KaiTheRedNinja
 // github:  https://github.com/KaiTheRedNinja
@@ -209,12 +220,14 @@ enum FileSystem {
         
         // add new cases to add new files
         case goalManager
+        case unlockedAnimalManager
         
         var fileName: String {
             
             // change filenames here
             switch self {
             case .goalManager: return "GoalManager"
+            case .unlockedAnimalManager: return "UnlockedAnimalManager"
                 
             }
         }

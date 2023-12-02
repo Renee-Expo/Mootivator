@@ -14,7 +14,7 @@ struct HomeView: View {
     @State var dailyHabitCompletionStatus: [Date: Bool] = [:]
     @State var dailyHabitCompleted: [Date: Bool] = [:]
     @Binding var goalAnimalKind : AnimalKind
-    @Binding var goalAnimalEmotion: Animal.emotion
+    @Binding var goalAnimalEmotion: Emotion
     @State var animalEmotionScale: Double = 0.0
     @Binding var motivationalQuote : String
     //@Binding var selectedAnimal: Animal = Animal(name: "", kind: .cow)
@@ -46,7 +46,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    ShowingAnimalSegmentedControlElement(selection: $indexItem, emotion: $goalAnimalEmotion)
+                    ShowingAnimalSegmentedControlElement(selection: $indexItem)
                         .background(Color("BackgroundColors"))
                     
                     Spacer()
@@ -77,7 +77,16 @@ struct HomeView: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-                CalendarView(selectedDate: Date(), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+                CalendarView(selectedDate: Date(), 
+                             goal: Goal(title: "Sample Title", 
+                                        habitTitle: "Sample Habit Title",
+                                        completedDates: [], deadline: Date(),
+                                        selectedFrequencyIndex: Goal.frequency.custom,
+                                        selectedAnimal: Animal(name: "Name of Animal",
+                                        kind: .cow),
+                                        motivationalQuote: "imagine the motivational quote", 
+                                        selectedDailyDeadline: Date(),
+                                        selectedFixedDeadline: Date()))
                     .scaledToFit()
 //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
 //                    Text("Select a date")
@@ -135,20 +144,20 @@ struct HomeView: View {
         // Determine animal emotion based on arrow position
         if animalEmotionScale >= maxScale {
             // Move to sad face
-            goalAnimalEmotion = .sad
+            goalAnimalEmotion = Emotion.sad
         } else if animalEmotionScale <= minScale {
             // Move to happy face
-            goalAnimalEmotion = .happy
+            goalAnimalEmotion = Emotion.happy
         } else {
             // Move to neutral face
-            goalAnimalEmotion = .neutral
+            goalAnimalEmotion = Emotion.neutral
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant("Sample Motivational Quote"))
+        HomeView(habitTitle: .constant("Sample Habit Title"), title: .constant("Sample Title"), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Emotion.happy), motivationalQuote: .constant("Sample Motivational Quote"))
             .environmentObject(GoalManager())
     }
 }

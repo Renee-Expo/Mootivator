@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnimalView: View {
+    
     @ObservedObject var goalManager: GoalManager = .shared
     @Binding var numberOfCompletedGoals: Int
     @State private var unlockedAnimals: Set<AnimalKind> = []
