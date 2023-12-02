@@ -11,11 +11,11 @@ struct ShowingAnimalSegmentedControlElement: View {
     
     @ObservedObject var goalManager: GoalManager = .shared
     @Environment(\.colorScheme) var colorScheme
-//    @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
-//    @Binding var goalItem : Goal
+    //    @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
+    //    @Binding var goalItem : Goal
     
     var body: some View {
-        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
+//        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
         VStack {
             if goalManager.items.count > 0 {
                 TabView {
@@ -35,27 +35,34 @@ struct ShowingAnimalSegmentedControlElement: View {
                                 .scaledToFit()
                                 .padding(.horizontal)
 //                                .frame(width: 200)
-                                .background(Color.accentColor)
-                                .clipShape(Circle())
+                                .background(Color("BackgroundColors"))
+//                                .clipShape(Circle())
                                 .padding(.bottom, 10)
                             Text(item.selectedAnimal.name)
+                            Text("\(item.motivationalQuote)")
+                                .font(.footnote)
+                                .fontWeight(.medium)
+                                .padding(.top, 10)
+//                                .padding(.leading, 100)
+//                                .padding( )
+//                                .multilineTextAlignment(.trailing)
                             
-                            Spacer()
+//                            Spacer()
                             
                             CalendarView(selectedDate: Date(), goal: $item)
                                 .scaledToFit()
                                 .padding()
                             
-                            HStack {
-                                Spacer()
-                                Text("\(item.motivationalQuote)")
-                                    .font(.footnote)
-                                    .fontWeight(.medium)
-                                    .padding(.bottom, 200)
-                                    .padding(.leading, 100)
-                                    .padding( )
-                                    .multilineTextAlignment(.trailing)
-                            }
+//                            HStack {
+//                                Spacer()
+//                                Text("\(item.motivationalQuote)")
+//                                    .font(.footnote)
+//                                    .fontWeight(.medium)
+//                                    .padding(.bottom, 200)
+//                                    .padding(.leading, 100)
+//                                    .padding( )
+//                                    .multilineTextAlignment(.trailing)
+//                            }
                         }
                         .scrollIndicators(.never)
                         .frame(width: 400)
@@ -68,10 +75,10 @@ struct ShowingAnimalSegmentedControlElement: View {
                 .overlay {
                     VStack {
                         Spacer()
-                        Rectangle()
-                            .fill(.linearGradient(Gradient(colors: [colorInverted, colorInverted, .clear]), startPoint: .bottom, endPoint: .top))
-                            .frame(height: 50)
-                            .scaledToFill()
+//                        Rectangle()
+//                           .fill(.linearGradient(Gradient(colors: [colorInverted, colorInverted, .clear]), startPoint: .bottom, endPoint: .top))
+//                            .frame(height: 50)
+//                            .scaledToFill()
                     }
                 }
             } else {
