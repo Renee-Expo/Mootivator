@@ -12,19 +12,14 @@ import SwiftUI
 struct CalendarView: View {
     @State var selectedDate = Date()
     @State var isHabitCompleted = false
-    @State var progress: Double = 0.0
+    @Binding var numberOfDaysCompleted: Int
     var goal: Goal
 
     var body: some View {
         VStack {
-            //displaying selected date
-//            FormattedDate(selectedDate: selectedDate, omitTime: true)
             //passing selecteddate as binding
             CalendarViewRepresentable(selectedDate: $selectedDate, goal: goal, isHabitCompleted: $isHabitCompleted)
                 .scaledToFit()
-            ProgressCircle(progress: $progress)
-                .scaledToFit()
-                .frame(width: 100, height: 100)
         }
     }
 }
@@ -75,8 +70,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
 
     }
-
-
     
     //create custom instance that is used to communicate btwn swiftui & uikitviews
     func makeCoordinator() -> Coordinator {
@@ -270,30 +263,6 @@ func calculateTargetDays(for goal: Goal) -> Int {
     return targetDays
 }
 
-struct ProgressCircle: View {
-    @Binding var progress: Double
-
-    var body: some View {
-        ZStack {
-            Circle()
-                .stroke(lineWidth: 10.0)
-                .opacity(0.3)
-                .foregroundColor(Color.gray)
-
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
-                .foregroundColor(Color.blue)
-                .rotationEffect(Angle(degrees: 270.0))
-                .animation(.linear)
-                .onAppear {
-                    // Set the progress initially
-                    self.progress = 0.5 // Modify as needed
-                }
-        }
-    }
-}
-
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
@@ -303,6 +272,6 @@ struct CalendarView_Previews: PreviewProvider {
         
         let defaultDate = Date() // Creating a constant for the preview
         
-        return CalendarView(selectedDate: defaultDate, goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+        return CalendarView(selectedDate: defaultDate, numberOfDaysCompleted: .constant(3), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
     }
 }

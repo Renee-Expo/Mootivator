@@ -48,7 +48,7 @@ struct GoalDetailView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                 
-                CalendarView(selectedDate: Date(), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+                CalendarView(selectedDate: Date(), numberOfDaysCompleted: $numberOfDaysCompleted, goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
                     .scaledToFit()
                     .padding()
                 
