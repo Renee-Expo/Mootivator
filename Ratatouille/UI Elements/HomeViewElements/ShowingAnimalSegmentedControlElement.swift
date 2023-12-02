@@ -12,16 +12,15 @@ struct ShowingAnimalSegmentedControlElement: View {
     @ObservedObject var goalManager: GoalManager = .shared
     @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
 //    @Binding var goalItem : Goal
-    @Binding var emotion : Animal.emotion
     
     var body: some View {
         
         VStack {
             if goalManager.items.count > 0 {
                 TabView {
-                    ForEach(goalManager.items, id: \.id ) { _ in
+                    ForEach(goalManager.items, id: \.id ) { item in
                         VStack {
-                            Image("\(goalManager.items[selection].selectedAnimal.kind.image)" + "\(emotion.text)")
+                            Image("\(item.selectedAnimal.kind.image)" + "\(item.selectedAnimal.emotion.text)")
                                 .resizable()
                                 .scaledToFit()
                                 .padding(.horizontal)
@@ -49,7 +48,7 @@ struct ShowingAnimalSegmentedControlElement: View {
 
 struct ShowingAnimalSegmentedControlElement_Previews: PreviewProvider {
     static var previews: some View {
-        ShowingAnimalSegmentedControlElement(selection: .constant(0), emotion: .constant(Animal.emotion.sad))
+        ShowingAnimalSegmentedControlElement(selection: .constant(0))
             .environmentObject(GoalManager())
     }
 }

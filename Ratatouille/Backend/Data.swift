@@ -71,20 +71,63 @@ struct Animal : Identifiable, Codable {
     
     var name : String
     var kind : AnimalKind         // what type/kind/species the animal is
-    enum emotion {
-        case happy
-        case neutral
-        case sad
-        
-        var text : String {
-            switch self {
-            case .happy     : return "Happy"
-            case .neutral   : return "Neutral"
-            case .sad       : return "Sad"
-            }
+    var emotion = Emotion.neutral
+}
+
+enum Emotion {
+    case happy
+    case neutral
+    case sad
+    
+    var text : String {
+        switch self {
+        case .happy     : return "Happy"
+        case .neutral   : return "Neutral"
+        case .sad       : return "Sad"
         }
     }
 }
+
+// Enum Emotion conform to Codable
+extension Emotion: Codable {
+    
+    enum Key: CodingKey {
+        case rawValue
+    }
+    
+    enum CodingError: Error {
+        case unknownValue
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Key.self)
+        let rawValue = try container.decode(Int.self, forKey: .rawValue)
+        switch rawValue {
+        case 0:
+            self = .happy
+        case 1:
+            self = .neutral
+        case 2:
+            self = .sad
+        default:
+            throw CodingError.unknownValue
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: Key.self)
+        switch self {
+        case .happy:
+            try container.encode(0, forKey: .rawValue)
+        case .neutral:
+            try container.encode(1, forKey: .rawValue)
+        case .sad:
+            try container.encode(2, forKey: .rawValue)
+        }
+    }
+    
+}
+
 // change to Goal from Goal.swift?
 struct GoalItem : Identifiable, Codable{
     var id = UUID()

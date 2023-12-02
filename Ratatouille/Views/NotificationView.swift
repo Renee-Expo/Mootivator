@@ -56,11 +56,11 @@ struct NotificationView: View {
 
             // Schedule animal emotion notifications based on toggle state
             if neutralAnimal {
-                scheduleAnimalEmotionNotification(emotion: .neutral)
+                scheduleAnimalEmotionNotification(emotion: Emotion.neutral)
             }
 
             if sadAnimal {
-                scheduleAnimalEmotionNotification(emotion: .sad)
+                scheduleAnimalEmotionNotification(emotion: Emotion.sad)
             }
         }
     }
@@ -155,7 +155,7 @@ struct NotificationView: View {
         return components
     }
     
-    private func scheduleAnimalEmotionNotification(emotion: Animal.emotion) {
+    private func scheduleAnimalEmotionNotification(emotion: Emotion) {
         guard emotion != .happy else {
             // Skip scheduling notification for happy emotion
             return

@@ -26,12 +26,13 @@ struct GoalCompletionView: View {
     @Binding var isGoalCompleted: Bool
     @Binding var numberOfCompletedGoals : Int
     @Binding var goalAnimalKind : AnimalKind
-    @Binding var goalAnimalEmotion: Animal.emotion
+    @Binding var goal : Goal
+//    @Binding var goalAnimalEmotion: Animal.emotion
     var body: some View {
         
         VStack {
             if showGoalCompletionView{
-                Image("\(goalAnimalKind.image)" + "\(goalAnimalEmotion.text)")
+                Image("\(goalAnimalKind.image)" + "\(goal.selectedAnimal.emotion.text)")
                     .resizable()
                     .scaledToFit()
                     .padding()
@@ -121,10 +122,10 @@ struct YesScreen: View {
                 .cornerRadius(8)
                 .padding()
             }
-            .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
-                
-            }
+//            .fullScreenCover(isPresented: $redirectToHome) {
+//                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
+//                
+//            }
             ConfettiCannon(counter: $counter)
                 .onAppear {
                     withAnimation{
@@ -165,15 +166,19 @@ struct YesScreen: View {
                 .background(Color("AccentColor"))
                 .cornerRadius(8)
             }
-            .fullScreenCover(isPresented: $redirectToHome) {
-                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
-            }
+//            .fullScreenCover(isPresented: $redirectToHome) {
+//                HomeView(habitTitle: .constant(""), title: .constant(""), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy), motivationalQuote: .constant(""))
+//            }
         }
     }
     
     struct GoalCompletionView_Previews: PreviewProvider {
         static var previews: some View {
-            GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: .constant(false), numberOfCompletedGoals: .constant(0), goalAnimalKind: .constant(AnimalKind.cow), goalAnimalEmotion: .constant(Animal.emotion.happy))
+            
+            let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
+            
+            GoalCompletionView(title: .constant("Sample Goal"), selectedAnimal: .constant(0), deadline: .constant(Date()), isGoalCompleted: .constant(false), numberOfCompletedGoals: .constant(0), goalAnimalKind: .constant(AnimalKind.cow), goal: .constant(
+                goal))
                 .environmentObject(GoalManager())
         }
     }
