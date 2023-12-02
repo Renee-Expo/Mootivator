@@ -32,23 +32,34 @@ struct GoalDetailView: View {
                 Text("Current habit")
                     .font(.headline)
                     .fontWeight(.bold)
+                    .padding(.bottom, 10)
                 
-                HStack {
-                    Text("\(goal.numberOfDaysCompleted) days remaining")
-                }
-                HStack {
-                    Text("Target --> something")
-                    //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                }
+                
                 
                 Text(goal.habitTitle)
                     .font(.headline)
-                    .fontWeight(.bold)
+//                    .fontWeight(.bold)
                 
                 CalendarView(selectedDate: Date(), goal: $goal)
                     .scaledToFit()
                     .padding()
                 
+                HStack{
+                    Spacer()
+                    VStack {
+                        Text("completed")
+                        Text("\(goal.numberOfDaysCompleted)d")
+                        
+                    }
+                    
+                    Spacer()
+                    VStack {
+                        Text("Target")
+                        Text("\(goal.scheduledCompletionDates.count)d")
+                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                    }
+                    Spacer()
+                }
                 
                 
                 //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
