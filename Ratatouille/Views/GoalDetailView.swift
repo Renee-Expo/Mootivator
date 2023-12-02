@@ -26,7 +26,7 @@ struct GoalDetailView: View {
     
     var body: some View {
         ScrollView {
-            AnimateProgressView(targetDays: Int(Double(calculateTargetDays(for: goal))), goal: $goal)
+            AnimateProgressView(targetDays: Double(Int(Double(calculateTargetDays(for: goal)))), goal: $goal)
             
             VStack(alignment: .leading) {
                 Text("Current habit")

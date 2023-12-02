@@ -36,10 +36,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     //creates uiview that will be rendered on the ui
     func makeUIView(context: Context) -> FSCalendar {
         calendar.delegate = context.coordinator //fixed
-        calendar.dataSource = context.coordinator //fixed
-//        calendar.appearance.todayColor = UIColor(displayedP3Red: 0, green: 0, blue: 0, alpha: 0)
-//        calendar.appearance.titleTodayColor = .black
-        calendar.appearance.selectionColor = .gray
+        calendar.dataSource = context.coordinator //fixed//        calendar.appearance.selectionColor = .gray
         return calendar //fixed
     }
     
@@ -59,12 +56,9 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         }
 //        let currentDate = Date()
 //        let isCompletedForCurrentDate = isHabitCompletedForDate(date: currentDate)
-        
-        if isHabitCompleted {
             uiView.appearance.titleSelectionColor = .white
             uiView.appearance.subtitleSelectionColor = .white
             uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
-        }
 
 
     }
@@ -96,16 +90,18 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             calendar.delegate = self
         }
         
+        func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+            if isHabitCompletedForDate(date) {
+                deleteCompletionDate(date)
+            }
+        }
         func calendar(_ calendar: FSCalendar,
                       didSelect date: Date,
                       at monthPosition: FSCalendarMonthPosition) {
             selectedDate.wrappedValue = date
-            if isHabitCompletedForDate(date) {
-                deleteCompletionDate(date)
-            } else {
+            if !isHabitCompletedForDate(date) {
                 showHabitCompletionAlert(for: date)
             }
-            
         }
 //            var parent: CalendarViewRepresentable
 //
@@ -135,8 +131,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             _ = formatter.string(from: date)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 //update habit completion and modify appearance if the habit is completed
-                self.isHabitCompleted.wrappedValue = true
-
                 if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
                        // Refresh the progress value in SwiftUI view
@@ -149,6 +143,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.isHabitCompleted.wrappedValue = false
+//            self.deleteCompletionDate(date)
             
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
