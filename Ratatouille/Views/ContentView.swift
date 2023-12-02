@@ -33,11 +33,11 @@ struct ContentView: View {
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
                 }
-            NotificationView(goal: .constant(Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())))
-                .tabItem{
-                    Text("Notifications")
-                    Image(systemName: "bell.fill")
-                }
+//            NotificationView(goal: .constant(Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())))
+//                .tabItem{
+//                    Text("Notifications")
+//                    Image(systemName: "bell.fill")
+//                }
         }
         .fullScreenCover(isPresented: $showOnBoarding, content: {
             OnboardingView(showOnBoarding: $showOnBoarding)
