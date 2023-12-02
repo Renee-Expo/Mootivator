@@ -22,7 +22,7 @@ struct AnimalPickerView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: adaptiveColumns, spacing: 20) {
-                ForEach(AnimalKind.allCases, id: \.asString) { animalKind in
+                ForEach(unlockedAnimalManager.items, id: \.asString) { animalKind in
                     Button {
                         selectedAnimalKind = animalKind
                     } label: {

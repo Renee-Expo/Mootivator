@@ -10,10 +10,12 @@ import SwiftUI
 struct ShowingAnimalSegmentedControlElement: View {
     
     @ObservedObject var goalManager: GoalManager = .shared
+    @Environment(\.colorScheme) var colorScheme
 //    @Binding var selection : Int // controlled by a swipeGesture/Button to increment/decrement for selection of the correct animal
 //    @Binding var goalItem : Goal
     
     var body: some View {
+        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
         VStack {
             if goalManager.items.count > 0 {
                 TabView {
@@ -67,7 +69,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                     VStack {
                         Spacer()
                         Rectangle()
-                            .fill(.linearGradient(Gradient(colors: [.white, .white, .clear]), startPoint: .bottom, endPoint: .top))
+                            .fill(.linearGradient(Gradient(colors: [colorInverted, colorInverted, .clear]), startPoint: .bottom, endPoint: .top))
                             .frame(height: 50)
                             .scaledToFill()
                     }

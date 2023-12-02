@@ -12,9 +12,9 @@ import SwiftUI
 struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
-    @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 20
+    @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 0
     @ObservedObject var goalManager: GoalManager = .shared
-//    @EnvironmentObject var habitCompletionStatus: HabitCompletionStatus
+    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     
     var body: some View {
         TabView {
@@ -28,7 +28,7 @@ struct ContentView: View {
                     Text("Goals")
                     Image(systemName: "star.fill")
                 }
-            AnimalView(numberOfCompletedGoals: $numberOfCompletedGoals)
+            AnimalView(numberOfCompletedGoals: numberOfCompletedGoals)
                 .tabItem{
                     Text("Animals")
                     Image(systemName: "pawprint.fill")
@@ -42,12 +42,27 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $showOnBoarding, content: {
             OnboardingView(showOnBoarding: $showOnBoarding)
         })
+        .onAppear {
+            for animalKind in AnimalKind.allCases {
+                let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
+                let isUnlocked = numberOfCompletedGoals >= numberInText
+                print("number in text: \(numberInText)")
+                print("numberOfCompletedGoals >= numberInText \(numberOfCompletedGoals >= numberInText)")
+                
+                // update the persisted unlocked animals
+                if (isUnlocked && (!(unlockedAnimalManager.items.contains(animalKind))) ) {
+                    unlockedAnimalManager.items.append(animalKind)
+                    print("It happened")
+                }
+            }
+        }
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(GoalManager())
+
     }
 }

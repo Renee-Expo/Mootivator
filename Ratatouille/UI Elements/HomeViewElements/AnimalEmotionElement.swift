@@ -15,9 +15,9 @@ struct AnimalEmotionElement: View {
     
     var scale : Double {
         switch goal.selectedAnimal.emotion {
-        case .happy     : return 20
+        case .happy     : return 180
         case .neutral   : return 0
-        case .sad       : return -20
+        case .sad       : return -180
         }
     }
     
