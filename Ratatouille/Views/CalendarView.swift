@@ -17,7 +17,7 @@ struct CalendarView: View {
     var body: some View {
         VStack {
             //passing selecteddate as binding
-            CalendarViewRepresentable(selectedDate: $selectedDate, goal: goal, isHabitCompleted: $isHabitCompleted)
+            CalendarViewRepresentable(selectedDate: $selectedDate, goal: $goal, isHabitCompleted: $isHabitCompleted)
                 .scaledToFit()
         }
     }
@@ -30,7 +30,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     fileprivate var calendar = FSCalendar()
     
     @Binding var selectedDate: Date
-    var goal: Goal
+    @Binding var goal: Goal
     @Binding var isHabitCompleted: Bool
     
     //creates uiview that will be rendered on the ui
@@ -63,7 +63,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         } else {
             uiView.appearance.titleSelectionColor = .white
             uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor = .white
+            uiView.appearance.selectionColor = UIColor(named: "AccentColor")
         }
         
 
@@ -72,7 +72,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     
     //create custom instance that is used to communicate btwn swiftui & uikitviews
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, selectedDate: $selectedDate, goal: goal, calendar: calendar, isHabitCompleted: $isHabitCompleted)
+        Coordinator(self, selectedDate: $selectedDate, goal: $goal, calendar: calendar, isHabitCompleted: $isHabitCompleted)
     }
 
     //custom instance returned from makeCoordinator
@@ -80,16 +80,15 @@ struct CalendarViewRepresentable: UIViewRepresentable {
           FSCalendarDelegate, FSCalendarDataSource {
         
         var selectedDate: Binding<Date>
-        var completedDates: Set<String> = []
-        var goal: Goal // Store the habit property
+        var goal: Binding<Goal>/// Store the habit property
         var calendar: FSCalendar
         var parent: CalendarViewRepresentable
         var isHabitCompleted: Binding<Bool>
 
-        init(_ parent: CalendarViewRepresentable, selectedDate: Binding<Date>, goal: Goal, calendar: FSCalendar, isHabitCompleted: Binding<Bool>) {
+        init(_ parent: CalendarViewRepresentable, selectedDate: Binding<Date>, goal: Binding<Goal>, calendar: FSCalendar, isHabitCompleted: Binding<Bool>) {
             self.selectedDate = selectedDate
 
-            self.goal = goal// Assign the habit property
+            self.goal = goal // Assign the habit property
             self.calendar = calendar
             self.parent = parent
             self.isHabitCompleted = isHabitCompleted
@@ -102,7 +101,12 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                       didSelect date: Date,
                       at monthPosition: FSCalendarMonthPosition) {
             selectedDate.wrappedValue = date
-            showHabitCompletionAlert(for: date)
+            if isHabitCompletedForDate(date) {
+                deleteCompletionDate(date)
+            } else {
+                showHabitCompletionAlert(for: date)
+            }
+            
         }
 //            var parent: CalendarViewRepresentable
 //
@@ -110,20 +114,20 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 //                self.parent = parent
 //            }
 
-        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-//            if isWeekend(date: date) {
-//                return false
-//            }
-            return true
-        }
-        func calendar(_ calendar: FSCalendar,
-                  imageFor date: Date) -> UIImage? {
-//            if isWeekend(date: date) {
-//                return UIImage(systemName: "sparkles")
-//            }
-            return nil
-        }
-        
+//        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+////            if isWeekend(date: date) {
+////                return false
+////            }
+//            return true
+//        }
+//        func calendar(_ calendar: FSCalendar,
+//                  imageFor date: Date) -> UIImage? {
+////            if isWeekend(date: date) {
+////                return UIImage(systemName: "sparkles")
+////            }
+//            return nil
+//        }
+//
         func showHabitCompletionAlert(for date: Date) {
             let alert = UIAlertController(title: "Habit completion",
                                           message: "Did you complete the habit for this day?",
@@ -133,9 +137,9 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 //update habit completion and modify appearance if the habit is completed
                 self.isHabitCompleted.wrappedValue = true
-                if self.isHabitCompletedForDate(date) {
+
+                if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
-                    numberOfDaysCompleted += 1
                        // Refresh the progress value in SwiftUI view
 //                       self.parent.progress = progress
 //                    let progressValue = Double(self.numberOfDaysCompleted.wrappedValue) / Double(targetDays)
@@ -180,23 +184,35 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 //               self.parent.calendar.appearance.selectionColor = .green
 //           }
 //       }
-        private func addCompletionDate(_ date: Date) {
+          func addCompletionDate(_ date: Date) {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd"
             let dateString = formatter.string(from: date)
             
-            goal.completedDates.insert(dateString)
+              goal.wrappedValue.completedDates.insert(dateString)
+              goal.wrappedValue.numberOfDaysCompleted += 1
             // Ensure this change in the set is persisted or updated in the source of truth
         }
         
-        private func isHabitCompletedForDate(_ date: Date) -> Bool {
+        func deleteCompletionDate(_ date: Date) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            let dateString = formatter.string(from: date)
+            
+                goal.wrappedValue.completedDates.remove(dateString)
+                goal.wrappedValue.numberOfDaysCompleted -= 1
+            print(goal.completedDates)
+        }
+        
+        func isHabitCompletedForDate(_ date: Date) -> Bool {
             //add logic to check if the habit is completed for the provided date
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd"
             
+            
             let dateString = formatter.string(from: date)
             
-            return completedDates.contains(dateString)
+            return goal.wrappedValue.completedDates.contains(dateString)
         }
         
 
@@ -206,61 +222,61 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 }
 
 
-var numberOfDaysCompleted: Int = 0
-var progress: Double = 0.0
-var targetDays = 0
-
-func calculateTargetDays(for goal: Goal) -> Int {
-        let currentDate = Date()
-        let calendar = Calendar.current
-    
-        // Function to check if a date falls within a week
-        func isInCurrentWeek(_ date: Date) -> Bool {
-            return calendar.isDate(date, equalTo: currentDate, toGranularity: .weekOfYear)
-        }
-    
-        // Function to check if a date falls within a month
-        func isInCurrentMonth(_ date: Date) -> Bool {
-            return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
-        }
-    
-        var targetDays = 0
-        switch goal.selectedFrequencyIndex {
-        case .daily:
-    
-            if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
-                let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
-                targetDays += max(0, days)
-    
-            }
-        case .weekly:
-            let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
-            let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
-            let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
-    
-            targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
-        case .monthly:
-            if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
-                let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
-                let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
-                let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
-    
-                targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
-            }
-        case .custom:
-    
-            // Calculate target days for fixed frequency (e.g., specific dates selected)
-            // Replace `selectedDates` with actual array of selected dates from Goal struct
-            let selectedDates: [Date] = [] // Placeholder for selected dates
-            for date in selectedDates {
-                if date >= currentDate {
-                    targetDays += 1
-                }
-            }
-        }
-        
-    return targetDays
-}
+//var numberOfDaysCompleted: Int = 0
+//var progress: Double = 0.0
+//var targetDays = 0
+//
+//func calculateTargetDays(for goal: Goal) -> Int {
+//        let currentDate = Date()
+//        let calendar = Calendar.current
+//    
+//        // Function to check if a date falls within a week
+//        func isInCurrentWeek(_ date: Date) -> Bool {
+//            return calendar.isDate(date, equalTo: currentDate, toGranularity: .weekOfYear)
+//        }
+//    
+//        // Function to check if a date falls within a month
+//        func isInCurrentMonth(_ date: Date) -> Bool {
+//            return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
+//        }
+//    
+//        var targetDays = 0
+//        switch goal.selectedFrequencyIndex {
+//        case .daily:
+//    
+//            if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+//                let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
+//                targetDays += max(0, days)
+//    
+//            }
+//        case .weekly:
+//            let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
+//            let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
+//            let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
+//    
+//            targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
+//        case .monthly:
+//            if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
+//                let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
+//                let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
+//                let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
+//    
+//                targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
+//            }
+//        case .custom:
+//    
+//            // Calculate target days for fixed frequency (e.g., specific dates selected)
+//            // Replace `selectedDates` with actual array of selected dates from Goal struct
+//            let selectedDates: [Date] = [] // Placeholder for selected dates
+//            for date in selectedDates {
+//                if date >= currentDate {
+//                    targetDays += 1
+//                }
+//            }
+//        }
+//        
+//    return targetDays
+//}
 
 
 struct CalendarView_Previews: PreviewProvider {

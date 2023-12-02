@@ -5,17 +5,15 @@ struct GoalView: View {
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
-    @Binding var title: String
-    @Binding var habitTitle: String
+
     @State private var filters = ["Show All", "Ascending Order", "Descending Order", "Current", "Past"]
-    @Binding var isGoalCompleted : Bool
     
     
     var body: some View {
         NavigationStack {
             List(goalManager.filteredAndSortedGoals, id: \.id) { $goal in
                 NavigationLink {
-                    GoalDetailView(goal: $goal, numberOfDaysCompleted: .constant(0))
+                    GoalDetailView(goal: $goal)
                 } label: {
                     VStack(alignment: .leading) {
                         Text(goal.title)
@@ -87,7 +85,7 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(title: .constant("Sample Goal"), habitTitle: .constant("Sample Habit Title"), isGoalCompleted: .constant(false))
+        GoalView()
             .environmentObject(GoalManager())
 //            .environmentObject(HabitCompletionStatus())
     }

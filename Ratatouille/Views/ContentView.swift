@@ -23,7 +23,7 @@ struct ContentView: View {
                     Text("Home")
                     Image(systemName: "house")
                 }
-            GoalView(title: .constant("Sample Goal"), habitTitle: .constant("Sample Habit"), isGoalCompleted: .constant(false))
+            GoalView()
                 .tabItem {
                     Text("Goals")
                     Image(systemName: "star.fill")

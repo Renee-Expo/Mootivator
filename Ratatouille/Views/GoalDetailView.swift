@@ -12,7 +12,6 @@ struct GoalDetailView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-    @Binding var numberOfDaysCompleted : Int
     
     @State var title: String = ""
     @State var habitTitle: String = ""
@@ -26,10 +25,8 @@ struct GoalDetailView: View {
     @State private var redirectToGoalView = false
     
     var body: some View {
-        let targetDays = calculateTargetDays(for: goal)
-        
         ScrollView {
-            AnimateProgressView(targetDays: calculateTargetDays(for: goal), numberOfDaysCompleted: $numberOfDaysCompleted)
+            AnimateProgressView(targetDays: calculateTargetDays(for: goal), goal: $goal)
             
             VStack(alignment: .leading) {
                 Text("Current habit")
@@ -37,11 +34,11 @@ struct GoalDetailView: View {
                     .fontWeight(.bold)
                 
                 HStack {
-                    Text("\(numberOfDaysCompleted) days remaining")
+                    Text("\(goal.numberOfDaysCompleted) days remaining")
                 }
                 HStack {
                     Text("Target --> something")
-                    //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                    //          er          Text("\(goal.selectedFixedDeadline - Date()) days")
                 }
                 
                 Text(goal.habitTitle)
@@ -129,7 +126,7 @@ struct GoalDetailView: View {
             let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5)
             
             return NavigationStack {
-                GoalDetailView(goal: .constant(goal), numberOfDaysCompleted: .constant(0))
+                GoalDetailView(goal: .constant(goal))
             }
         }
     }
