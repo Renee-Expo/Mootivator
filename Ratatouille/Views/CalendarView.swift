@@ -144,6 +144,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.isHabitCompleted.wrappedValue = false
 //            self.deleteCompletionDate(date)
+            self.calendar.deselect(date)
             
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
