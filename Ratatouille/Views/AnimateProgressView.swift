@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AnimateProgressView: View {
 
-    var targetDays: Int
+    var targetDays: Double
 //    @Binding var numberOfDaysCompleted : Int
     @Binding var goal: Goal
     @State var progress: Double = 1

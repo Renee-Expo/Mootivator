@@ -229,7 +229,7 @@ extension Goal {
     
 }
 
-func calculateTargetDays(for goal: Goal) -> Int {
+func calculateTargetDays(for goal: Goal) -> Double {
     // Assuming you have access to goal's frequency and other relevant data
 
     let currentDate = Date()
@@ -245,29 +245,29 @@ func calculateTargetDays(for goal: Goal) -> Int {
         return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
     }
     
-    var targetDays = 0
+    var targetDays : Double = 0.0
     
     switch goal.selectedFrequencyIndex {
     case .daily:
         
         if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
             let days = calendar.dateComponents([.day], from: currentDate, to: goal.selectedDailyDeadline).day ?? 0
-            targetDays += max(0, days)
+            targetDays += Double(max(0, days))
             
         }
     case .weekly:
         let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
         let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
-        let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
+        let weeklyFrequency = goal.numberOfTimesPerWeek // Example: The user wants to achieve twice a week
         
-        targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
+        targetDays += Double(min(Double(remainingDaysInWeek), Double(remainingWeeksInMonth) * Double(weeklyFrequency)))
     case .monthly:
         if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
             let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
             let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
-            let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
+            let monthlyFrequency = goal.numberOfTimesPerMonth // Example: The user wants to achieve 4 times a month
             
-            targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
+            targetDays += Double(min(Double(remainingDaysInMonth), Double(remainingMonthsInYear) * Double(monthlyFrequency)))
         }
     case .custom:
         
