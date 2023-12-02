@@ -12,8 +12,7 @@ import SwiftUI
 struct CalendarView: View {
     @State var selectedDate = Date()
     @State var isHabitCompleted = false
-    @Binding var numberOfDaysCompleted: Int
-    var goal: Goal
+    @Binding var goal: Goal
 
     var body: some View {
         VStack {
@@ -272,6 +271,8 @@ struct CalendarView_Previews: PreviewProvider {
         
         let defaultDate = Date() // Creating a constant for the preview
         
-        return CalendarView(selectedDate: defaultDate, numberOfDaysCompleted: .constant(3), goal: Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date()))
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        
+        return CalendarView(selectedDate: defaultDate, goal: .constant(goal))
     }
 }

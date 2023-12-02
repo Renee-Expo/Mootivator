@@ -17,7 +17,7 @@ struct ShowingAnimalSegmentedControlElement: View {
         VStack {
             if goalManager.items.count > 0 {
                 TabView {
-                    ForEach(goalManager.items, id: \.id ) { item in
+                    ForEach($goalManager.items, id: \.id ) { $item in
                         ScrollView {
                             AnimalEmotionElement(goal: item)
                             VStack(alignment: .leading) {
@@ -40,7 +40,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                             
                             Spacer()
                             
-                            CalendarView(selectedDate: Date(), goal: item)
+                            CalendarView(selectedDate: Date(), goal: $item)
                                 .scaledToFit()
                                 .padding()
                             
