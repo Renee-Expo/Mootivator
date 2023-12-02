@@ -20,6 +20,30 @@ struct GoalEditView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var goal: Goal
+//    @Binding var unlockedAnimals: [AnimalKind]
+    /*
+     @Binding var title : String
+     @Binding var habitTitle : String
+     @Binding var frequency : Array<String>
+     @Binding var selectedFrequencyIndex : Int
+     @Binding var mondayChosen : Bool
+     @Binding var tuesdayChosen : Bool
+     @Binding var wednesdayChosen : Bool
+     @Binding var thursdayChosen : Bool
+     @Binding var fridayChosen : Bool
+     @Binding var saturdayChosen : Bool
+     @Binding var sundayChosen : Bool
+     @Binding var motivationalQuote : String
+     @Binding var isButtonEnabled : Bool
+     @Binding var deadline : Date
+     @Binding var selectedDailyDeadline : Date
+     @Binding var selectedFixedDeadline : Date
+     @Binding var numberOfTimesPerWeek : Double
+     @Binding var numberOfTimesPerMonth : Double
+     @Binding var selectedAnimal : Animal
+     */
+    //
+    //    @Binding var customDates : [String: Bool]
     
     @State var selectedAnimalKind = AnimalKind.cow
     var areAllTogglesOff: Bool {
