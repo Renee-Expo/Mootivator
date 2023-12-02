@@ -58,12 +58,12 @@ struct GoalEditView: View {
                     DatePicker("Deadline", selection: $goal.deadline, displayedComponents: [.date, .hourAndMinute])
                 }
                 
-                Section("Pick an Animal") {
-                    NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
-                    } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
-                    TextField("Name your animal", text: $goal.selectedAnimal.name)
-                }
+//                Section("Pick an Animal") {
+//                    NavigationLink("Pick an animal") {
+//                        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
+//                    } // um are you only going to set 2 unlocked? cuz the user will never be able to unlock more...
+//                    TextField("Name your animal", text: $goal.selectedAnimal.name)
+//                }
                 
                 // there will be an animal to redirect to Animal Picker sheet
                 
