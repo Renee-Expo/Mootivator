@@ -28,6 +28,7 @@ struct AnimateProgressView: View {
                 CircularProgressView(progress: progress)
                     .onAppear{
                         progress = calculateProgress()
+
                     }
             }
         }
@@ -42,8 +43,7 @@ struct CircularProgressView: View {
         let progressText = String(format: "%.0f%%", progress * 100)
         let purpleAngularGradient = AngularGradient(
             gradient: Gradient(colors: [
-                Color("Accent Color"),
-                Color(red: 52/255, green: 115/255, blue: 65/255)
+                Color("AccentColor")
             ]),
             center: .center,
             startAngle: .degrees(0),
