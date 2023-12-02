@@ -46,13 +46,13 @@ struct ContentView: View {
             for animalKind in AnimalKind.allCases {
                 let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
                 let isUnlocked = numberOfCompletedGoals >= numberInText
-                print("number in text: \(numberInText)")
-                print("numberOfCompletedGoals >= numberInText \(numberOfCompletedGoals >= numberInText)")
+//                print("number in text: \(numberInText)")
+//                print("numberOfCompletedGoals >= numberInText \(numberOfCompletedGoals >= numberInText)")
                 
                 // update the persisted unlocked animals
                 if (isUnlocked && (!(unlockedAnimalManager.items.contains(animalKind))) ) {
                     unlockedAnimalManager.items.append(animalKind)
-                    print("It happened")
+//                    print("It happened")
                 }
             }
         }

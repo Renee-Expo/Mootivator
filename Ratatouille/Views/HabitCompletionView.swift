@@ -68,9 +68,9 @@ struct HabitCompletionView: View {
                 || (goal.selectedFrequencyIndex == .daily  
                     && scheduledCompletionDates.allSatisfy({ completedDates.contains($0) }))
                 || (goal.selectedFrequencyIndex == .weekly
-                    && numberOfDaysCompleted >= targetDays)
+                    && Double(numberOfDaysCompleted) >= targetDays)
                 || (goal.selectedFrequencyIndex == .monthly
-                    && numberOfDaysCompleted >= targetDays) {
+                    && Double(numberOfDaysCompleted) >= targetDays) {
                 isHabitCompleted = true
             } else {
                 isHabitCompleted = false
