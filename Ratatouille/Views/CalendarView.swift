@@ -54,18 +54,17 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         for dateKey in completedDateKeys {
             if let date = formatter.date(from: dateKey) {
                 uiView.select(date) // Mark the completed dates as selected
+                
             }
         }
+//        let currentDate = Date()
+//        let isCompletedForCurrentDate = isHabitCompletedForDate(date: currentDate)
+        
         if isHabitCompleted {
             uiView.appearance.titleSelectionColor = .white
             uiView.appearance.subtitleSelectionColor = .white
             uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
-        } else {
-            uiView.appearance.titleSelectionColor = .white
-            uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor = UIColor(named: "AccentColor")
         }
-        
 
 
     }
@@ -150,6 +149,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.isHabitCompleted.wrappedValue = false
+            
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                 let rootViewController = windowScene.windows.first?.rootViewController {

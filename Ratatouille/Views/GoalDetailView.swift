@@ -26,7 +26,7 @@ struct GoalDetailView: View {
     
     var body: some View {
         ScrollView {
-            AnimateProgressView(targetDays: calculateTargetDays(for: goal), goal: $goal)
+            AnimateProgressView(targetDays: Int(Double(calculateTargetDays(for: goal))), goal: $goal)
             
             VStack(alignment: .leading) {
                 Text("Current habit")
@@ -38,7 +38,7 @@ struct GoalDetailView: View {
                 }
                 HStack {
                     Text("Target --> something")
-                    //          er          Text("\(goal.selectedFixedDeadline - Date()) days")
+                    //                    Text("\(goal.selectedFixedDeadline - Date()) days")
                 }
                 
                 Text(goal.habitTitle)
