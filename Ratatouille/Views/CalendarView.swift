@@ -13,7 +13,7 @@ struct CalendarView: View {
     @State var selectedDate = Date()
     @State var isHabitCompleted = false
     @Binding var goal: Goal
-
+    
     var body: some View {
         VStack {
             //passing selecteddate as binding
@@ -47,40 +47,52 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         let completedDateKeys = goal.completedDates
         uiView.allowsMultipleSelection = true
         
-
+        
         for dateKey in completedDateKeys {
             if let date = formatter.date(from: dateKey) {
                 uiView.select(date) // Mark the completed dates as selected
                 
             }
         }
-//        let currentDate = Date()
-//        let isCompletedForCurrentDate = isHabitCompletedForDate(date: currentDate)
-            uiView.appearance.titleSelectionColor = .white
-            uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
-
-
+        //        let currentDate = Date()
+        //        let isCompletedForCurrentDate = isHabitCompletedForDate(date: currentDate)
+        uiView.appearance.titleSelectionColor = .white
+        uiView.appearance.subtitleSelectionColor = .white
+        uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
+        uiView.appearance.titleDefaultColor = UIColor(named: "DynamicTextColor")
+        uiView.appearance.weekdayTextColor = UIColor(named: "AccentColor")
+        uiView.appearance.headerTitleColor = UIColor(named: "AccentColor")
+        
+        
+        uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
+        //        uiView.appearance.titleTodayColor = .black
+        
+        uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
+        
+        
+        
+        
+        
     }
     
     //create custom instance that is used to communicate btwn swiftui & uikitviews
     func makeCoordinator() -> Coordinator {
         Coordinator(self, selectedDate: $selectedDate, goal: $goal, calendar: calendar, isHabitCompleted: $isHabitCompleted)
     }
-
+    
     //custom instance returned from makeCoordinator
     class Coordinator: NSObject,
-          FSCalendarDelegate, FSCalendarDataSource {
+                       FSCalendarDelegate, FSCalendarDataSource {
         
         var selectedDate: Binding<Date>
         var goal: Binding<Goal>/// Store the habit property
         var calendar: FSCalendar
         var parent: CalendarViewRepresentable
         var isHabitCompleted: Binding<Bool>
-
+        
         init(_ parent: CalendarViewRepresentable, selectedDate: Binding<Date>, goal: Binding<Goal>, calendar: FSCalendar, isHabitCompleted: Binding<Bool>) {
             self.selectedDate = selectedDate
-
+            
             self.goal = goal // Assign the habit property
             self.calendar = calendar
             self.parent = parent
@@ -103,26 +115,26 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 showHabitCompletionAlert(for: date)
             }
         }
-//            var parent: CalendarViewRepresentable
-//
-//            init(_ parent: CalendarViewRepresentable) {
-//                self.parent = parent
-//            }
-
-//        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-////            if isWeekend(date: date) {
-////                return false
-////            }
-//            return true
-//        }
-//        func calendar(_ calendar: FSCalendar,
-//                  imageFor date: Date) -> UIImage? {
-////            if isWeekend(date: date) {
-////                return UIImage(systemName: "sparkles")
-////            }
-//            return nil
-//        }
-//
+        //            var parent: CalendarViewRepresentable
+        //
+        //            init(_ parent: CalendarViewRepresentable) {
+        //                self.parent = parent
+        //            }
+        
+        //        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        ////            if isWeekend(date: date) {
+        ////                return false
+        ////            }
+        //            return true
+        //        }
+        //        func calendar(_ calendar: FSCalendar,
+        //                  imageFor date: Date) -> UIImage? {
+        ////            if isWeekend(date: date) {
+        ////                return UIImage(systemName: "sparkles")
+        ////            }
+        //            return nil
+        //        }
+        //
         func showHabitCompletionAlert(for date: Date) {
             let alert = UIAlertController(title: "Habit completion",
                                           message: "Did you complete the habit for this day?",
@@ -133,60 +145,60 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 //update habit completion and modify appearance if the habit is completed
                 if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
-                       // Refresh the progress value in SwiftUI view
-//                       self.parent.progress = progress
-//                    let progressValue = Double(self.numberOfDaysCompleted.wrappedValue) / Double(targetDays)
-//                    progress = min(progressValue, 1.0)
-//                    self.updateCalendarAppearanceForCompletionDate(date)
+                    // Refresh the progress value in SwiftUI view
+                    //                       self.parent.progress = progress
+                    //                    let progressValue = Double(self.numberOfDaysCompleted.wrappedValue) / Double(targetDays)
+                    //                    progress = min(progressValue, 1.0)
+                    //                    self.updateCalendarAppearanceForCompletionDate(date)
                 }
             }))
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.isHabitCompleted.wrappedValue = false
-//            self.deleteCompletionDate(date)
+            //            self.deleteCompletionDate(date)
             self.calendar.deselect(date)
             
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let rootViewController = windowScene.windows.first?.rootViewController {
+               let rootViewController = windowScene.windows.first?.rootViewController {
                 rootViewController.present(alert, animated: true, completion: nil)
             }
-
-
+            
+            
         }
-//        private func updateCalendarAppearanceForCompletionDate(_ date: Date) {
-//           let formatter = DateFormatter()
-//           formatter.dateFormat = "yyyyMMdd"
-//           let selectedDateKey = formatter.string(from: date)
-//
-//
-//            print("Completed Dates: \(habit.completedDates)")
-//            print("Selected Date Key: \(selectedDateKey)")
-//
-//           if habit.completedDates.contains(selectedDateKey) {
-//               // Change the appearance when the habit is completed for the selected date
-//               self.isHabitCompleted.wrappedValue = true
-//               print("Habit is completed for the selected date")
-//               self.parent.calendar.appearance.titleSelectionColor = .red
-//               self.parent.calendar.appearance.subtitleSelectionColor = .red
-//               self.parent.calendar.appearance.selectionColor = .blue
-//           }
-//            else {
-//               // Reset appearance when the habit is not completed for the selected date
-//                self.isHabitCompleted.wrappedValue = false
-//               print("rhefdjk")
-//               self.parent.calendar.appearance.titleSelectionColor = .white
-//               self.parent.calendar.appearance.subtitleSelectionColor = .white
-//               self.parent.calendar.appearance.selectionColor = .green
-//           }
-//       }
-          func addCompletionDate(_ date: Date) {
+        //        private func updateCalendarAppearanceForCompletionDate(_ date: Date) {
+        //           let formatter = DateFormatter()
+        //           formatter.dateFormat = "yyyyMMdd"
+        //           let selectedDateKey = formatter.string(from: date)
+        //
+        //
+        //            print("Completed Dates: \(habit.completedDates)")
+        //            print("Selected Date Key: \(selectedDateKey)")
+        //
+        //           if habit.completedDates.contains(selectedDateKey) {
+        //               // Change the appearance when the habit is completed for the selected date
+        //               self.isHabitCompleted.wrappedValue = true
+        //               print("Habit is completed for the selected date")
+        //               self.parent.calendar.appearance.titleSelectionColor = .red
+        //               self.parent.calendar.appearance.subtitleSelectionColor = .red
+        //               self.parent.calendar.appearance.selectionColor = .blue
+        //           }
+        //            else {
+        //               // Reset appearance when the habit is not completed for the selected date
+        //                self.isHabitCompleted.wrappedValue = false
+        //               print("rhefdjk")
+        //               self.parent.calendar.appearance.titleSelectionColor = .white
+        //               self.parent.calendar.appearance.subtitleSelectionColor = .white
+        //               self.parent.calendar.appearance.selectionColor = .green
+        //           }
+        //       }
+        func addCompletionDate(_ date: Date) {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd"
             let dateString = formatter.string(from: date)
             
-              goal.wrappedValue.completedDates.insert(dateString)
-              goal.wrappedValue.numberOfDaysCompleted += 1
+            goal.wrappedValue.completedDates.insert(dateString)
+            goal.wrappedValue.numberOfDaysCompleted += 1
             // Ensure this change in the set is persisted or updated in the source of truth
         }
         
@@ -195,8 +207,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             formatter.dateFormat = "yyyyMMdd"
             let dateString = formatter.string(from: date)
             
-                goal.wrappedValue.completedDates.remove(dateString)
-                goal.wrappedValue.numberOfDaysCompleted -= 1
+            goal.wrappedValue.completedDates.remove(dateString)
+            goal.wrappedValue.numberOfDaysCompleted -= 1
             print(goal.completedDates)
         }
         
@@ -211,7 +223,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             return goal.wrappedValue.completedDates.contains(dateString)
         }
         
-
+        
     }
     
     
@@ -277,9 +289,9 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-//        let sampleHabit = Habit(
-//            completedDates: ["20230101", "20230105", "20231101", "20231102"]
-//        )
+        //        let sampleHabit = Habit(
+        //            completedDates: ["20230101", "20230105", "20231101", "20231102"]
+        //        )
         
         let defaultDate = Date() // Creating a constant for the preview
         
