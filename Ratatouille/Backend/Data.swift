@@ -68,7 +68,7 @@ enum AnimalKind : Codable, CaseIterable {
     }
 }
 
-struct Animal : Identifiable, Codable {
+struct Animal : Identifiable, Codable, Hashable {
     var id = UUID()
     
     var name : String
@@ -138,7 +138,7 @@ struct GoalItem : Identifiable, Codable{
     var animal : Animal
 }
 
-struct Goal: Identifiable, Codable {
+struct Goal: Identifiable, Codable, Hashable {
     var id = UUID ()
     
     var title : String
@@ -147,7 +147,7 @@ struct Goal: Identifiable, Codable {
     var deadline : Date
     //    var frequencyOfHabits : String // why string?
 //    var frequency : Array<String>
-    enum frequency : Codable, CaseIterable {
+    enum frequency : Codable, CaseIterable, Hashable {
         case custom
         case daily
         case weekly

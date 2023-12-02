@@ -8,6 +8,7 @@ struct GoalView: View {
 
     @State private var filters = ["Show All", "Ascending Order", "Descending Order", "Current", "Past"]
     
+    @State private var searchText = ""
     
     var body: some View {
         NavigationStack {
@@ -21,19 +22,18 @@ struct GoalView: View {
                             .font(.footnote)
                             .foregroundStyle(.gray)
                     }
-                    .padding(5)
                 }
             }
             .navigationTitle("Goals")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                #if DEBUG
-                    Button {
-                        showConfirmAlert = true
-                    } label: {
-                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
-                    }
-                #endif
+//                #if DEBUG
+//                    Button {
+//                        showConfirmAlert = true
+//                    } label: {
+//                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
+//                    }
+//                #endif
                     Button {
                         showNewGoalSheet = true
                     } label: {
@@ -76,9 +76,11 @@ struct GoalView: View {
                     goalManager.loadSampleData()
                 }
             }
+            .searchable(text: $searchText)
+            .onChange(of: searchText) { prompt in
+                goalManager.searchText = prompt
+            }
         }
-        .searchable(text: $goalManager.searchText)
-        
     }
 }
 
