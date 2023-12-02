@@ -44,7 +44,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     }
     
     //update state of the view
-    func updateUIView (_ uiView: FSCalendar, context: Context) {
+    func updateUIView (_ uiView: FSCalendar, context: Context) -> Void {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         let completedDateKeys = goal.completedDates
@@ -63,7 +63,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         } else {
             uiView.appearance.titleSelectionColor = .white
             uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor = UIColor(named: "AccentColor")
+            uiView.appearance.selectionColor = .red
         }
         
 

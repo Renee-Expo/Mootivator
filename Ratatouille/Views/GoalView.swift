@@ -11,7 +11,7 @@ struct GoalView: View {
     
     var body: some View {
         NavigationStack {
-            List(goalManager.filteredAndSortedGoals, id: \.id) { $goal in
+            List(goalManager.filteredAndSortedGoals, id: \.id, editActions: .all) { $goal in
                 NavigationLink {
                     GoalDetailView(goal: $goal)
                 } label: {
