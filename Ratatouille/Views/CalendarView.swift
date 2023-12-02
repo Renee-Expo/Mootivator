@@ -12,7 +12,7 @@ import SwiftUI
 struct CalendarView: View {
     @State var selectedDate = Date()
     @State var isHabitCompleted = false
-    @State var progress: Double = 0
+    @State var progress: Double = 0.0
     var goal: Goal
 
     var body: some View {
@@ -22,6 +22,9 @@ struct CalendarView: View {
             //passing selecteddate as binding
             CalendarViewRepresentable(selectedDate: $selectedDate, goal: goal, isHabitCompleted: $isHabitCompleted)
                 .scaledToFit()
+            ProgressCircle(progress: $progress)
+                .scaledToFit()
+                .frame(width: 100, height: 100)
         }
     }
 }
@@ -93,6 +96,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
         init(_ parent: CalendarViewRepresentable, selectedDate: Binding<Date>, goal: Goal, calendar: FSCalendar, isHabitCompleted: Binding<Bool>) {
             self.selectedDate = selectedDate
+
             self.goal = goal// Assign the habit property
             self.calendar = calendar
             self.parent = parent
@@ -137,9 +141,13 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 //update habit completion and modify appearance if the habit is completed
                 self.isHabitCompleted.wrappedValue = true
-                progress = Double(numberOfDaysCompleted) / Double(targetDays)
                 if self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
+                    numberOfDaysCompleted += 1
+                       // Refresh the progress value in SwiftUI view
+//                       self.parent.progress = progress
+//                    let progressValue = Double(self.numberOfDaysCompleted.wrappedValue) / Double(targetDays)
+//                    progress = min(progressValue, 1.0)
 //                    self.updateCalendarAppearanceForCompletionDate(date)
                 }
             }))
@@ -224,7 +232,7 @@ func calculateTargetDays(for goal: Goal) -> Int {
             return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
         }
     
-    
+        var targetDays = 0
         switch goal.selectedFrequencyIndex {
         case .daily:
     
@@ -261,6 +269,31 @@ func calculateTargetDays(for goal: Goal) -> Int {
         
     return targetDays
 }
+
+struct ProgressCircle: View {
+    @Binding var progress: Double
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 10.0)
+                .opacity(0.3)
+                .foregroundColor(Color.gray)
+
+            Circle()
+                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
+                .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
+                .foregroundColor(Color.blue)
+                .rotationEffect(Angle(degrees: 270.0))
+                .animation(.linear)
+                .onAppear {
+                    // Set the progress initially
+                    self.progress = 0.5 // Modify as needed
+                }
+        }
+    }
+}
+
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
