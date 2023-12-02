@@ -68,3 +68,5 @@ struct AnimateProgressView_Previews: PreviewProvider {
         AnimateProgressView(targetDays: 30, numberOfDaysCompleted: .constant(10))
     }
 }
+
+

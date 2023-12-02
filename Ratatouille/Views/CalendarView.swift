@@ -12,6 +12,7 @@ import SwiftUI
 struct CalendarView: View {
     @State var selectedDate = Date()
     @State var isHabitCompleted = false
+    @State var progress: Double = 0
     var goal: Goal
 
     var body: some View {
@@ -65,7 +66,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         } else {
             uiView.appearance.titleSelectionColor = .white
             uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
+            uiView.appearance.selectionColor = .white
         }
         
 
@@ -136,6 +137,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 //update habit completion and modify appearance if the habit is completed
                 self.isHabitCompleted.wrappedValue = true
+                progress = Double(numberOfDaysCompleted) / Double(targetDays)
                 if self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
 //                    self.updateCalendarAppearanceForCompletionDate(date)
@@ -143,6 +145,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             }))
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            self.isHabitCompleted.wrappedValue = false
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                 let rootViewController = windowScene.windows.first?.rootViewController {
@@ -200,6 +203,63 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     }
     
     
+}
+
+
+var numberOfDaysCompleted: Int = 0
+var progress: Double = 0.0
+var targetDays = 0
+
+func calculateTargetDays(for goal: Goal) -> Int {
+        let currentDate = Date()
+        let calendar = Calendar.current
+    
+        // Function to check if a date falls within a week
+        func isInCurrentWeek(_ date: Date) -> Bool {
+            return calendar.isDate(date, equalTo: currentDate, toGranularity: .weekOfYear)
+        }
+    
+        // Function to check if a date falls within a month
+        func isInCurrentMonth(_ date: Date) -> Bool {
+            return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
+        }
+    
+    
+        switch goal.selectedFrequencyIndex {
+        case .daily:
+    
+            if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+                let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
+                targetDays += max(0, days)
+    
+            }
+        case .weekly:
+            let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
+            let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
+            let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
+    
+            targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
+        case .monthly:
+            if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
+                let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
+                let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
+                let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
+    
+                targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
+            }
+        case .custom:
+    
+            // Calculate target days for fixed frequency (e.g., specific dates selected)
+            // Replace `selectedDates` with actual array of selected dates from Goal struct
+            let selectedDates: [Date] = [] // Placeholder for selected dates
+            for date in selectedDates {
+                if date >= currentDate {
+                    targetDays += 1
+                }
+            }
+        }
+        
+    return targetDays
 }
 
 struct CalendarView_Previews: PreviewProvider {
