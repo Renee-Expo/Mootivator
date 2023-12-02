@@ -10,16 +10,13 @@ struct NewGoalView: View {
     
     @Environment(\.dismiss) var dismiss
     @ObservedObject var goalManager: GoalManager = .shared
+    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     
     @State private var title = ""
     @State private var deadline = Date()
     @State private var habitTitle = ""
     
-    //    @State var selectedAnimalKind: AnimalKind = .cow
-    //    @State var frequency = ["Custom", "Daily", "Weekly", "Monthly"]
-    //    @State var selectedDays = [String]()
     @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
-    @Binding var unlockedAnimals: [AnimalKind]
     @State private var motivationalQuote = ""
     @State private var selectedFrequencyIndex = Goal.frequency.custom
     @State private var selectedDailyDeadline = Date()
@@ -39,15 +36,6 @@ struct NewGoalView: View {
     var areAllTogglesOff: Bool {
         return !customDates.values.contains(true)
     }
-    //    @State private var mondayChosen = false
-    //    @State private var tuesdayChosen = false
-    //    @State private var wednesdayChosen = false
-    //    @State private var thursdayChosen = false
-    //    @State private var fridayChosen = false
-    //    @State private var saturdayChosen = false
-    //    @State private var sundayChosen = false
-    //    @State private var isButtonEnabled = true
-    //    @Binding var isAnimalSelected: Bool
     
     var body: some View {
         NavigationStack {
@@ -60,7 +48,7 @@ struct NewGoalView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind, unlockedAnimals: $unlockedAnimals) // help!!!
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind) 
                     }
                     TextField("Name your animal", text: $selectedAnimal.name)
                     
@@ -146,8 +134,7 @@ struct NewGoalView: View {
 
 struct NewGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView(unlockedAnimals: .constant([.cow]))
-            .environmentObject(GoalManager())
+        NewGoalView()
     }
 }
 

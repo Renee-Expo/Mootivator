@@ -9,54 +9,52 @@ import SwiftUI
 
 struct AnimalPickerView: View {
     @ObservedObject var goalManager: GoalManager = .shared
+    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
+    
     @Environment(\.dismiss) var dismiss
     @Binding var selectedAnimalKind: AnimalKind
-    @Binding var unlockedAnimals: [AnimalKind]
+//    @Binding var unlockedAnimals: [AnimalKind]
 
     private let adaptiveColumns = [
         GridItem(.adaptive(minimum: 170))
     ]
 
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical) {
-                LazyVGrid(columns: adaptiveColumns, spacing: 20) {
-                    ForEach(AnimalKind.allCases, id: \.self) { animalKind in
-                        Button {
-                            selectedAnimalKind = animalKind
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(selectedAnimalKind == animalKind ? Color.black : Color.gray, lineWidth: 2)
-                                    .frame(width: 150, height: 150)
-                                    .opacity(selectedAnimalKind == animalKind || unlockedAnimals.contains(animalKind) ? 1.0 : 0.5)
-
-                                Image("\(animalKind.image)" + "Happy")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 150)
-                                    .opacity(selectedAnimalKind == animalKind || unlockedAnimals.contains(animalKind) ? 1.0 : 0.5)
-                            }
+        ScrollView(.vertical) {
+            LazyVGrid(columns: adaptiveColumns, spacing: 20) {
+                ForEach(AnimalKind.allCases, id: \.asString) { animalKind in
+                    Button {
+                        selectedAnimalKind = animalKind
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke((selectedAnimalKind == animalKind ? Color.black : Color.gray), lineWidth: 2)
+                            
+                            Image("\(animalKind.image)" + "Happy")
+                                .resizable()
+                                .scaledToFit()
                         }
+                        .frame(width: 150, height: 150)
+                        .opacity(selectedAnimalKind == animalKind || UnlockedAnimalManager.shared.items.contains(animalKind) ? 1.0 : 0.5)
                     }
                 }
-                .padding()
-
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Save")
-                        .buttonStyle(.borderedProminent)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color("AccentColor"))
-                        .cornerRadius(8)
-                }
             }
-            .navigationTitle("Pick your companion!")
+            .padding()
+            
+            Button {
+                dismiss()
+            } label: {
+                Text("Save")
+                    .buttonStyle(.borderedProminent)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color("AccentColor"))
+                    .cornerRadius(8)
+            }
         }
+        .navigationTitle("Pick your companion!")
     }
 }
 
@@ -65,8 +63,7 @@ struct AnimalPickerPreviewWrapper: View {
     @State var selectedAnimalKind: AnimalKind = .cow
     
     var body: some View {
-        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: .constant([.cow, .sheep]))
-            .environmentObject(GoalManager())
+        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
     }
 }
 

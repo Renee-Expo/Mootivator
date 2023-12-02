@@ -110,49 +110,14 @@ struct GoalDetailView: View {
             .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
                 Button("Yes") {
                     goalManager.deleteGoal(goal)
-                    //                redirectToGoalView = true
                     self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
                     
                 }
                 Button("Cancel") {}
             }
-            //        .alert(isPresented: $showMarkHabitCompletionAlert) {
-            //            let isDateCompleted = completedDates.contains(selectedDate)
-            //            if isDateCompleted {
-            //                return Alert(title: Text("Habit Already Completed"),
-            //                             message: Text("You've already marked this habit as done on this date."),
-            //                             dismissButton: .default(Text("OK")))
-            //            } else {
-            //                return Alert(
-            //                    title: Text("Mark Habit as Completed?"),
-            //                    message: Text("Are you sure you want to mark the habit as done for this date?"),
-            //                    primaryButton: .default(Text("Yes")) {
-            //                        completedDates.insert(selectedDate)
-            //                        // Call function to update progress bar
-            //
-            //
-            //                        if (goal.selectedFrequencyIndex == .weekly
-            //                            && numberOfDaysCompleted == targetDays)
-            //                            || (goal.selectedFrequencyIndex == .monthly
-            //                                && numberOfDaysCompleted == targetDays) {
-            //
-            //                            showOverallHabitCompletionAlert = true
-            //
-            //                        }
-            //
-            //
-            //                    },
-            //                    secondaryButton: .cancel(Text("No"))
-            //                )
-            //            }
-            //        }
-            //        NavigationLink(destination: GoalView(title: $title, habitTitle: $habitTitle, isGoalCompleted: .constant(false)), isActive: $redirectToGoalView) {
-            //            EmptyView()
-            //        }
-            
             .sheet(isPresented: $showGoalDetailSheet) {
                 NavigationView {
-                    GoalEditView(goal: $goal, unlockedAnimals: .constant(unlockedAnimals))
+                    GoalEditView(goal: $goal)
                 }
             }
         }

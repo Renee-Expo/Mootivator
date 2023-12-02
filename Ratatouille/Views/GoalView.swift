@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GoalView: View {
     @ObservedObject var goalManager: GoalManager = .shared
+    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
     @Binding var title: String
@@ -70,7 +71,7 @@ struct GoalView: View {
                 }
             }
             .sheet(isPresented: $showNewGoalSheet) {
-                NewGoalView(unlockedAnimals: .constant(unlockedAnimals))
+                NewGoalView()
             }
             .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
                 Button("Replace", role: .destructive) {

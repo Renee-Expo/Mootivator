@@ -11,7 +11,7 @@ struct AnimalView: View {
     
     @ObservedObject var goalManager: GoalManager = .shared
     @Binding var numberOfCompletedGoals: Int
-    @State private var unlockedAnimals: Set<AnimalKind> = []
+    @State var unlockedAnimals: Set<AnimalKind> = []
 
     private let adaptiveColumns = [
         GridItem(.adaptive(minimum: 170))

@@ -176,15 +176,15 @@ final class GoalManager: ItemManager {
     }
 }
 
-//final class UnlockedAnimalManager: ItemManager {
-//    @Published var items: [<#UnlockedAnimals?#>] = [] { didSet { write() } }
-//    static var shared: UnlockedAnimalManager = .init()
-//    static var saveLocation: FileSystem.FileName = .unlockedAnimalManager
-//    
-//    init() {
-//        read()
-//    }
-//}
+final class UnlockedAnimalManager: ItemManager {
+    @Published var items: [AnimalKind] = [] { didSet { write() } }
+    static var shared: UnlockedAnimalManager = .init()
+    static var saveLocation: FileSystem.FileName = .unlockedAnimalManager
+    
+    init() {
+        read()
+    }
+}
 
 // new persistence code
 // thanks to @KaiTheRedNinja
