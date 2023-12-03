@@ -43,8 +43,8 @@ struct HabitCompletionView: View {
             
         }
         .onAppear{
-            if (goal.selectedFrequencyIndex == .custom
-                && Date() >= goal.selectedFixedDeadline)
+            if (/*goal.selectedFrequencyIndex == .custom
+                && */Date() >= goal.selectedFixedDeadline)
                 || (goal.selectedFrequencyIndex == .daily && Date() >= goal.selectedDailyDeadline) {
                 showHabitCompletionView = true
             } else if goal.selectedFrequencyIndex == .weekly {
@@ -63,9 +63,9 @@ struct HabitCompletionView: View {
             
             let targetDays = calculateTargetDays(for: goal)
             
-            if (goal.selectedFrequencyIndex == .custom
-                && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue)}))
-                || (goal.selectedFrequencyIndex == .daily  
+            if (/*goal.selectedFrequencyIndex == .custom
+                &&*/ goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue)}))
+                || (goal.selectedFrequencyIndex == .daily
                     && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue) }))
                 || (goal.selectedFrequencyIndex == .weekly
                     && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerWeek)
@@ -85,7 +85,7 @@ struct HabitCompletionView: View {
 struct HabitCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
         
         return NavigationStack{
             

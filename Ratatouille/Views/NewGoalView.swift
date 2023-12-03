@@ -18,7 +18,7 @@ struct NewGoalView: View {
     
     @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     @State private var motivationalQuote = ""
-    @State private var selectedFrequencyIndex = Goal.frequency.custom
+    @State private var selectedFrequencyIndex = Goal.frequency.daily
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var daysInWeek = 7
@@ -118,24 +118,20 @@ struct NewGoalView: View {
                                         numberOfTimesPerMonth = 1
                                     }
                         }
-                    } else if selectedFrequencyIndex == .custom {
-                        HStack {
-                            
-                            Toggle("M", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
-                            Toggle("T",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
-                            Toggle("W", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.wednesday.text]!},  set: { customDates[Goal.daysOfTheWeek.wednesday.text] = $0} ))
-                            Toggle("T",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.thursday.text]!},  set: { customDates[Goal.daysOfTheWeek.thursday.text] = $0} ))
-                            Toggle("F",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
-                            Toggle("S",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
-                            Toggle("S",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
-                        }
-                        .toggleStyle(.button)
-                        
-                        
-                        
-                        //                    .toggleStyle(CheckboxToggleStyle())
-                        
-                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
+//                    } else if selectedFrequencyIndex == .custom {
+//                        HStack {
+//                            
+//                            Toggle("M", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
+//                            Toggle("T",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
+//                            Toggle("W", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.wednesday.text]!},  set: { customDates[Goal.daysOfTheWeek.wednesday.text] = $0} ))
+//                            Toggle("T",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.thursday.text]!},  set: { customDates[Goal.daysOfTheWeek.thursday.text] = $0} ))
+//                            Toggle("F",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.friday.text]!},  set: { customDates[Goal.daysOfTheWeek.friday.text] = $0} ))
+//                            Toggle("S",  isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.saturday.text]!},  set: { customDates[Goal.daysOfTheWeek.saturday.text] = $0} ))
+//                            Toggle("S",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
+//                        }
+//                        .toggleStyle(.button)
+//                        
+//                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
                 
@@ -147,7 +143,7 @@ struct NewGoalView: View {
                 
                 Button {
                     
-                    if selectedFrequencyIndex == .daily{
+                    if selectedFrequencyIndex == .daily {
                         let currentDate = Date()
                         var currentDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: currentDate)
                         
@@ -156,19 +152,26 @@ struct NewGoalView: View {
                             currentDateComponent.day! += 1
                         }
                         
-                    } else if selectedFrequencyIndex == .custom {
+                    } /*else if selectedFrequencyIndex == .custom {
                         
-                    }
+                    }*/
                     
                     
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     //                    print (dailyDaysDifference)
-                    goalManager.items.append(.init(title: title,
-                                                   habitTitle: habitTitle,
-                                                   selectedFrequencyIndex: selectedFrequencyIndex,
-                                                   selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
-                                                   selectedDailyDeadline: selectedDailyDeadline,
-                                                   selectedFixedDeadline: selectedFixedDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, dayState: customDates, dailyDaysDifference: dailyDaysDifference, scheduledCompletionDates: scheduledCompletionDates))
+                    goalManager.items.append(Goal(title: title,
+                                                  habitTitle: habitTitle,
+                                                  selectedFrequencyIndex: selectedFrequencyIndex,
+                                                  selectedAnimal: selectedAnimal,
+                                                  motivationalQuote: motivationalQuote,
+                                                  selectedDailyDeadline: selectedDailyDeadline,
+                                                  selectedFixedDeadline: selectedFixedDeadline,
+                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
+                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
+                                                  dayState: customDates,
+                                                  scheduledCompletionDates: scheduledCompletionDates,
+                                                  completedDates: [],
+                                                  deadline: deadline))
                     print (scheduledCompletionDates)
                     
                     
@@ -177,7 +180,7 @@ struct NewGoalView: View {
                     Text("Save")
                         .frame(maxWidth: .infinity)
                 }
-                .disabled(title.isEmpty || habitTitle.isEmpty || selectedAnimal.name.isEmpty || (selectedFrequencyIndex == .custom && areAllTogglesOff) || motivationalQuote.isEmpty)
+                .disabled(title.isEmpty || habitTitle.isEmpty || selectedAnimal.name.isEmpty || /*(selectedFrequencyIndex == .custom && areAllTogglesOff) || */motivationalQuote.isEmpty)
                 
             }
         }

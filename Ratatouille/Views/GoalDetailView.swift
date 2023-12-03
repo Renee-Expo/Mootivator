@@ -55,7 +55,7 @@ struct GoalDetailView: View {
                     Spacer()
                     VStack {
                         Text("Target")
-                        if (goal.selectedFrequencyIndex == .custom) || (goal.selectedFrequencyIndex == .daily) {
+                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
                             
                             Text("\(goal.scheduledCompletionDates.count)d")
                             //                    Text("\(goal.selectedFixedDeadline - Date()) days")
@@ -142,7 +142,7 @@ struct GoalDetailView: View {
     struct GoalDetailView_Previews: PreviewProvider {
         static var previews: some View {
             
-            let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
+            let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
             
             return NavigationStack {
                 GoalDetailView(goal: .constant(goal))
