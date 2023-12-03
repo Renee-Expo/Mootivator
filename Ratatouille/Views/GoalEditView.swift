@@ -227,7 +227,9 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalEditView(goal: .constant(Goal(title: "", habitTitle: "", completedDates: [], deadline: .now, selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:])), selectedAnimalKind: .cow)
+        let goal = Goal(title: "", habitTitle: "", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:], completedDates: [], deadline: .now)
+        
+        GoalEditView(goal: .constant(goal), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
         
     }

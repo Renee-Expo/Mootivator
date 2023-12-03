@@ -198,7 +198,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             let dateString = formatter.string(from: date)
             
             goal.wrappedValue.completedDates.insert(dateString)
-            goal.wrappedValue.numberOfDaysCompleted += 1
+//            goal.wrappedValue.numberOfDaysCompleted += 1
+            goal.wrappedValue.selectedAnimal.emotion = updateEmotion(goal: goal.wrappedValue, increment: true)
             // Ensure this change in the set is persisted or updated in the source of truth
         }
         
@@ -208,19 +209,42 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             let dateString = formatter.string(from: date)
             
             goal.wrappedValue.completedDates.remove(dateString)
-            goal.wrappedValue.numberOfDaysCompleted -= 1
-            print(goal.completedDates)
+//            goal.wrappedValue.numberOfDaysCompleted -= 1
+            goal.wrappedValue.selectedAnimal.emotion = updateEmotion(goal: goal.wrappedValue, increment: false)
         }
         
         func isHabitCompletedForDate(_ date: Date) -> Bool {
             //add logic to check if the habit is completed for the provided date
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd"
-            
-            
             let dateString = formatter.string(from: date)
             
             return goal.wrappedValue.completedDates.contains(dateString)
+        }
+        
+        func updateEmotion(goal: Goal, increment: Bool) -> Emotion {
+            var stuff : Emotion {
+                switch goal.selectedAnimal.emotion {
+                case .happy     : return (increment ? .happy    : .neutral)
+                case .neutral   : return (increment ? .happy    : .sad)
+                case .sad       : return (increment ? .neutral  : .sad)
+                }
+            }
+            
+            return stuff
+        }
+        
+        func calculateDatesCompleted(goal: Goal) -> Int {
+            // get current date
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            let today = formatter.string(from: Date()) // current date
+            
+            if let lastDate = goal.completedDates.sorted(by: { $1 > $0 }).last {
+                return Int(today)! - Int(lastDate)!
+            } else {
+                return 0
+            }
         }
         
         
@@ -295,7 +319,7 @@ struct CalendarView_Previews: PreviewProvider {
         
         let defaultDate = Date() // Creating a constant for the preview
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", completedDates: [], deadline: Date(), selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date())
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
         
         return CalendarView(selectedDate: defaultDate, goal: .constant(goal))
     }

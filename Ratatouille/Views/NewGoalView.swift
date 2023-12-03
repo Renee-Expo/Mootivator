@@ -165,7 +165,6 @@ struct NewGoalView: View {
                     //                    print (dailyDaysDifference)
                     goalManager.items.append(.init(title: title,
                                                    habitTitle: habitTitle,
-                                                   completedDates: [], deadline: deadline,
                                                    selectedFrequencyIndex: selectedFrequencyIndex,
                                                    selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                    selectedDailyDeadline: selectedDailyDeadline,
