@@ -16,12 +16,12 @@ struct HabitCompletionView: View {
     @State var isHabitCompleted : Bool
     
 //    @Binding var frequency : Array<String>
-    @Binding var selectedFrequencyIndex : Goal.frequency
-    @Binding var selectedDailyDeadline : Date
-    @Binding var selectedFixedDeadline : Date
-    @Binding var numberOfDaysCompleted : Int
-    @Binding var completedDates: [Date]
-    @Binding var scheduledCompletionDates: [Date]
+//    @Binding var selectedFrequencyIndex : Goal.frequency
+//    @Binding var selectedDailyDeadline : Date
+//    @Binding var selectedFixedDeadline : Date
+//    @Binding var numberOfDaysCompleted : Int
+//    @Binding var completedDates: [Date]
+//    @Binding var scheduledCompletionDates: [Date]
 
     
     var body: some View {
@@ -44,8 +44,8 @@ struct HabitCompletionView: View {
         }
         .onAppear{
             if (goal.selectedFrequencyIndex == .custom
-                && Date() >= selectedFixedDeadline)
-                || (goal.selectedFrequencyIndex == .daily && Date() >= selectedDailyDeadline) {
+                && Date() >= goal.selectedFixedDeadline)
+                || (goal.selectedFrequencyIndex == .daily && Date() >= goal.selectedDailyDeadline) {
                 showHabitCompletionView = true
             } else if goal.selectedFrequencyIndex == .weekly {
                 // Check if the current date is the next Monday
@@ -64,13 +64,13 @@ struct HabitCompletionView: View {
             let targetDays = calculateTargetDays(for: goal)
             
             if (goal.selectedFrequencyIndex == .custom
-                && scheduledCompletionDates.allSatisfy({ completedDates.contains($0)}))
+                && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue)}))
                 || (goal.selectedFrequencyIndex == .daily  
-                    && scheduledCompletionDates.allSatisfy({ completedDates.contains($0) }))
+                    && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue) }))
                 || (goal.selectedFrequencyIndex == .weekly
-                    && Double(numberOfDaysCompleted) >= targetDays)
+                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerWeek)
                 || (goal.selectedFrequencyIndex == .monthly
-                    && Double(numberOfDaysCompleted) >= targetDays) {
+                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerMonth) {
                 isHabitCompleted = true
             } else {
                 isHabitCompleted = false
@@ -89,7 +89,7 @@ struct HabitCompletionView_Previews: PreviewProvider {
         
         return NavigationStack{
             
-            HabitCompletionView(goal: .constant(goal), isHabitCompleted: false, selectedFrequencyIndex: .constant(Goal.frequency.custom), selectedDailyDeadline: .constant(Date()), selectedFixedDeadline: .constant(Date()), numberOfDaysCompleted: .constant(0), completedDates: .constant([]), scheduledCompletionDates: .constant([]))
+            HabitCompletionView(goal: .constant(goal), isHabitCompleted: false)
                 .environmentObject(GoalManager())
         }
     }

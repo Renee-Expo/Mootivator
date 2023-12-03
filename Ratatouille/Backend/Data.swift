@@ -205,6 +205,8 @@ struct Goal: Identifiable, Codable, Hashable {
         daysOfTheWeek.sunday.text       : false
     ]
     
+    var dailyDaysDifference : Int = 0
+
     var scheduledCompletionDates: [Date] = []
     var isGoalCompleted : Bool = false
     var numberOfDaysCompleted : Int = 0
