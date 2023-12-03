@@ -112,13 +112,14 @@ struct NewGoalView: View {
                 }
                 
                 Button {
-                    goalManager.items.append(.init(title: title,
+                    goalManager.items.append(Goal(title: title,
                                                    habitTitle: habitTitle,
-                                                   completedDates: [], deadline: deadline,
                                                    selectedFrequencyIndex: selectedFrequencyIndex,
                                                    selectedAnimal: selectedAnimal, motivationalQuote: motivationalQuote,
                                                    selectedDailyDeadline: selectedDailyDeadline,
-                                                   selectedFixedDeadline: selectedFixedDeadline, dayState: customDates))
+                                                   selectedFixedDeadline: selectedFixedDeadline, dayState: customDates,
+                                                  completedDates: [],
+                                                  deadline: deadline))
                     dismiss()
                 } label: {
                     Text("Save")
