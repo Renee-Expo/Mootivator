@@ -51,14 +51,14 @@ struct EmotionBar: View {
                 .frame(height: 10)
                 .cornerRadius(10)
                 .foregroundStyle(.linearGradient(colors: [Color.pink, Color.yellow, Color.green], startPoint: .leading, endPoint: .trailing))
-                .overlay(
-                    HStack {
-                        Rectangle()
-                            .frame(width: 2, height: 10)
-                            .cornerRadius(10)
-                            .opacity(0.8)
-                    }
-                )
+//                .overlay(
+//                    HStack {
+//                        Rectangle()
+//                            .frame(width: 2, height: 10)
+//                            .cornerRadius(10)
+//                            .opacity(0.8)
+//                    }
+//                )
         }
     }
 }

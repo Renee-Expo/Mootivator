@@ -47,9 +47,11 @@ struct GoalView: View {
                         }
                         Button("Ascending Deadlines") {
                             goalManager.sortOption = .ascending
+                            goalManager.filterOption = .showAll
                         }
                         Button ("Descending Deadlines") {
                             goalManager.sortOption = .descending
+                            goalManager.filterOption = .showAll
                         }
                         Button ("Current") {
                             goalManager.sortOption = .none
