@@ -12,6 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
+//    @State var showOnBoarding : Bool = true
     @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 0
     @ObservedObject var goalManager: GoalManager = .shared
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
@@ -44,9 +45,12 @@ struct ContentView: View {
                 //                    Image(systemName: "bell.fill")
                 //                }
             }
-            .fullScreenCover(isPresented: $showOnBoarding, content: {
+            .navigationDestination(isPresented: $isActive) {
+                HabitCompletionView(goal: $goalItemCompletion)
+            }
+            .fullScreenCover(isPresented: $showOnBoarding) {
                 OnboardingView(showOnBoarding: $showOnBoarding)
-            })
+            }
             .onAppear {
                 // check permissions for notifications
                 //            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -84,9 +88,6 @@ struct ContentView: View {
                     showCompletions(goal: goal)
                 }
             })
-            NavigationLink(isActive: $isActive) {
-                HabitCompletionView(goal: $goalItemCompletion)
-            } label: {}
         }
     }
     
@@ -111,6 +112,7 @@ struct ContentView: View {
         // Set isActive to true to trigger the NavigationLink
         isActive = true
         goalItemCompletion = goal
+        print("it redirected")
     }
 }
 
