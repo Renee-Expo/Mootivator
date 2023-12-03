@@ -153,7 +153,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 }
             }))
             
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.isHabitCompleted.wrappedValue = false
             //            self.deleteCompletionDate(date)
             self.calendar.deselect(date)

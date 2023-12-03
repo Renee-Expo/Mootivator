@@ -27,13 +27,13 @@ struct GoalView: View {
             .navigationTitle("Goals")
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                #if DEBUG
-//                    Button {
-//                        showConfirmAlert = true
-//                    } label: {
-//                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
-//                    }
-//                #endif
+                #if DEBUG
+                    Button {
+                        showConfirmAlert = true
+                    } label: {
+                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
+                    }
+                #endif
                     Button {
                         showNewGoalSheet = true
                     } label: {

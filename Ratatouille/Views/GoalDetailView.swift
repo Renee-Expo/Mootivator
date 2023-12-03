@@ -47,7 +47,7 @@ struct GoalDetailView: View {
                 HStack{
                     Spacer()
                     VStack {
-                        Text("completed")
+                        Text("Completed")
                         Text("\(goal.numberOfDaysCompleted)d")
                         
                     }
