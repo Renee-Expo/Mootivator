@@ -130,8 +130,10 @@ struct NewGoalView: View {
 //                            Toggle("S",    isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.sunday.text]!},  set: { customDates[Goal.daysOfTheWeek.sunday.text] = $0} ))
 //                        }
 //                        .toggleStyle(.button)
-//                        
-//                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
+//
+                    }
+                    if selectedFrequencyIndex != .daily {
+                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
                 

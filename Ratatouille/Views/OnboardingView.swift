@@ -12,8 +12,7 @@ struct OnboardingView : View {
     var body: some View {
         TabView {
             VStack {
-                Text("Welcome to (app name)!")
-                    .lineLimit(1)
+                Text("Welcome to Mootivator!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -153,17 +152,22 @@ struct PageView : View {
             }
 
             if showGoalSheet {
-                Button(action: {
+                Button {
                     showNewGoalSheet = true
-                }) {
+                } label: {
                     Text("Set your first goal!")
                         .frame(width: 200, height: 50)
                         .foregroundColor(.white)
                         .background(Color("AccentColor"))
                         .cornerRadius(8)
                 }
-                .sheet(isPresented: $showNewGoalSheet) {
+                .sheet(isPresented: $showNewGoalSheet, onDismiss: {
+                    print("create new goal sheet dismissed")
+                }) {
                     NewGoalView()
+                }
+                .onAppear {
+                    print("showgoalsheet presented")
                 }
             }
         }
