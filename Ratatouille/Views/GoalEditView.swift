@@ -150,6 +150,21 @@ struct GoalEditView: View {
                 
                 
                 Button {
+                    
+                    if goal.selectedFrequencyIndex == .daily{
+                        goal.scheduledCompletionDates = []
+                        let currentDate = Date()
+                        var currentDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: currentDate)
+                        
+                        while let currentDate = Calendar.current.date(from: currentDateComponent), currentDate <= goal.selectedDailyDeadline {
+                            goal.scheduledCompletionDates.append(currentDate)
+                            currentDateComponent.day! += 1
+                        }
+                        
+                    } else if goal.selectedFrequencyIndex == .custom {
+                        
+                    }
+                    
                     if let index = goalManager.items.firstIndex(where: { $0.id == goal.id }) {
                         goalManager.items[index] = goal
                     } else {

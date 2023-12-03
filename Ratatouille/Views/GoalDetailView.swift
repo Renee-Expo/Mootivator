@@ -38,7 +38,7 @@ struct GoalDetailView: View {
                 
                 Text(goal.habitTitle)
                     .font(.headline)
-//                    .fontWeight(.bold)
+                //                    .fontWeight(.bold)
                 
                 CalendarView(selectedDate: Date(), goal: $goal)
                     .scaledToFit()
@@ -55,8 +55,16 @@ struct GoalDetailView: View {
                     Spacer()
                     VStack {
                         Text("Target")
-                        Text("\(goal.scheduledCompletionDates.count)d")
-                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                        if (goal.selectedFrequencyIndex == .custom) || (goal.selectedFrequencyIndex == .daily) {
+                            
+                            Text("\(goal.scheduledCompletionDates.count)d")
+                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                        } else if goal.selectedFrequencyIndex == .weekly{
+                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
+                        } else if goal.selectedFrequencyIndex == .monthly {
+                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+                        }
+                        
                     }
                     Spacer()
                 }
