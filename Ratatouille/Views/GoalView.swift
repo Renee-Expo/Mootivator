@@ -45,10 +45,10 @@ struct GoalView: View {
                             goalManager.sortOption = .none
                             goalManager.filterOption = .showAll
                         }
-                        Button("Ascending Order") {
+                        Button("Ascending Deadlines") {
                             goalManager.sortOption = .ascending
                         }
-                        Button ("Descending Order") {
+                        Button ("Descending Deadlines") {
                             goalManager.sortOption = .descending
                         }
                         Button ("Current") {
