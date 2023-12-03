@@ -9,26 +9,32 @@ import SwiftUI
 
 struct AnimateProgressView: View {
 
-    var targetDays: Double
+    @Binding var targetDays: Double
 //    @Binding var numberOfDaysCompleted : Int
     @Binding var goal: Goal
-    @State var progress: Double = 1
+    @State var progress: Double = 0
     
     func calculateProgress() -> Double {
-            guard targetDays > 0 else { return 0 }
-            let percentage = Double(goal.numberOfDaysCompleted) / Double(targetDays)
-            print("dfkhu")
-            print(goal.numberOfDaysCompleted)
-            return min(percentage, 1.0)
+        guard targetDays > 0 else { return 0 }
+        let percentage = Double(goal.numberOfDaysCompleted) / Double(targetDays)
+        print("goal.numberOfDaysCompleted = \(goal.numberOfDaysCompleted)")
+        print("percentage? = \(min(percentage, 1.0))")
+        return min(percentage, 1.0)
     }
 
     var body: some View {
-        VStack() {
+        VStack {
             withAnimation(.linear(duration: 1.0)) {
-                CircularProgressView(progress: progress)
-                    .onAppear{
+                CircularProgressView(progress: $progress)
+                    .onChange(of: goal, perform: { _ in
                         progress = calculateProgress()
-
+                    })
+                    .onChange(of: targetDays, perform: { newValue in
+//                        print("targetDays in animateprogressview: \(targetDays)")
+                        progress = calculateProgress()
+                    })
+                    .onAppear {
+                        progress = calculateProgress()
                     }
             }
         }
@@ -37,7 +43,7 @@ struct AnimateProgressView: View {
 }
 
 struct CircularProgressView: View {
-    @State var progress: Double
+    @Binding var progress: Double
 
     var body: some View {
         let progressText = String(format: "%.0f%%", progress * 100)
@@ -75,7 +81,7 @@ struct AnimateProgressView_Previews: PreviewProvider {
     static var previews: some View {
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
         
-        return AnimateProgressView(targetDays: 30, goal: .constant(goal))
+        return AnimateProgressView(targetDays: .constant(30), goal: .constant(goal))
     }
 }
 

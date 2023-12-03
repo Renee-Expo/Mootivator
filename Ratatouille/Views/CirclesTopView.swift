@@ -7,23 +7,23 @@
 
 
 import SwiftUI
-
-struct CirclesTopView: View {
-    var body: some View {
-        VStack() {
-            CircularProgressView(progress: 0.55)
-
-            CircularProgressView(progress: 0.85)
-                .scaleEffect(0.75)
-
-            Spacer()
-        }
-        .padding(10)
-    }
-}
-
-struct CirclesTopView_Previews: PreviewProvider {
-    static var previews: some View {
-        CirclesTopView()
-    }
-}
+//
+//struct CirclesTopView: View {
+//    var body: some View {
+//        VStack() {
+//            CircularProgressView(progress: 0.55)
+//
+//            CircularProgressView(progress: 0.85)
+//                .scaleEffect(0.75)
+//
+//            Spacer()
+//        }
+//        .padding(10)
+//    }
+//}
+//
+//struct CirclesTopView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CirclesTopView()
+//    }
+//}

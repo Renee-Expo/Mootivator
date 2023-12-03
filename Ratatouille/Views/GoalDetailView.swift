@@ -24,9 +24,11 @@ struct GoalDetailView: View {
     @State private var completedDates: Set<Date> = []
     @State private var redirectToGoalView = false
     
+    @State private var targetDays : Double = 0
+    
     var body: some View {
         ScrollView {
-            AnimateProgressView(targetDays: Double(calculateTargetDays(for: goal)), goal: $goal)
+            AnimateProgressView(targetDays: $targetDays, goal: $goal)
             
             VStack(alignment: .leading) {
                 Text("Current habit")
@@ -133,8 +135,17 @@ struct GoalDetailView: View {
             }
             .sheet(isPresented: $showGoalDetailSheet) {
                 NavigationView {
-                    GoalEditView(goal: $goal)
+                    GoalEditView(goal: $goal, workingGoal: goal)
                 }
+            }
+            .onAppear {
+                targetDays = Double(calculateTargetDays(for: goal))
+            }
+            .onChange(of: goal) { newValue in
+                targetDays = Double(calculateTargetDays(for: newValue))
+//                print("goal = \(goal)")
+//                print("newValue = \(newValue)")
+                print("new TargetDays : \(targetDays)")
             }
         }
     }

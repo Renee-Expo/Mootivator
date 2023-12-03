@@ -251,19 +251,10 @@ func calculateTargetDays(for goal: Goal) -> Double {
             
         }
     case .weekly:
-        let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
-        let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
-        let weeklyFrequency = goal.numberOfTimesPerWeek // Example: The user wants to achieve twice a week
+        targetDays = goal.numberOfTimesPerWeek
         
-        targetDays += Double(min(Double(remainingDaysInWeek), Double(remainingWeeksInMonth) * Double(weeklyFrequency)))
     case .monthly:
-        if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
-            let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
-            let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
-            let monthlyFrequency = goal.numberOfTimesPerMonth // Example: The user wants to achieve 4 times a month
-            
-            targetDays += Double(min(Double(remainingDaysInMonth), Double(remainingMonthsInYear) * Double(monthlyFrequency)))
-        }
+        targetDays = goal.numberOfTimesPerMonth
 //    case .custom:
 //        
 //        // Calculate target days for fixed frequency (e.g., specific dates selected)
@@ -281,16 +272,6 @@ func calculateTargetDays(for goal: Goal) -> Double {
 
 
 
-
-
-//var isAnimalSelected : Bool = false
-
-var autonomy: Double = 0 // not sure if this will/can be used
-class UserMetaData : Identifiable, Codable { // for Gradual Autonomy
-    // code here
-}
-
-
 extension Date: RawRepresentable {              // Allows date to be added to @AppStorage
     public var rawValue: String {
         self.timeIntervalSinceReferenceDate.description
@@ -300,9 +281,5 @@ extension Date: RawRepresentable {              // Allows date to be added to @A
         self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
     }
 }
- 
 
-
-// IMAGE INFO ------------------------
-// use the animal name, then the emotion and concatenate to get full imagename from assets catalog, eg animalName: "dog_", emotion(from animal struct): .happy.text -> finalString = "dog_happy" then find filename called dog_happy
 
