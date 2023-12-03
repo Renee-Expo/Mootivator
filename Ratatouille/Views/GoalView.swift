@@ -22,6 +22,7 @@ struct GoalView: View {
                             .font(.footnote)
                             .foregroundStyle(.gray)
                     }
+                    .padding(5)
                 }
             }
             .navigationTitle("Goals")

@@ -30,46 +30,82 @@ struct GoalDetailView: View {
         ScrollView {
             AnimateProgressView(targetDays: $targetDays, goal: $goal)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("Current habit")
                     .font(.headline)
                     .fontWeight(.bold)
-                    .padding(.bottom, 10)
+                    .padding(.top, 5)
                 
                 
                 
                 Text(goal.habitTitle)
                     .font(.headline)
+                    .padding(.bottom, 5)
                 //                    .fontWeight(.bold)
-                
-                CalendarView(selectedDate: Date(), goal: $goal)
-                    .scaledToFit()
-                    .padding()
-                
-                HStack{
-                    Spacer()
-                    VStack {
-                        Text("Completed")
-                        Text("\(goal.numberOfDaysCompleted)d")
-                        
-                    }
-                    
-                    Spacer()
-                    VStack {
-                        Text("Target")
-                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
-                            
-                            Text("\(goal.scheduledCompletionDates.count)d")
-                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                        } else if goal.selectedFrequencyIndex == .weekly{
-                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
-                        } else if goal.selectedFrequencyIndex == .monthly {
-                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+                RoundedRectangle(cornerRadius: 30)
+                    .strokeBorder(Color.black, lineWidth: 2)
+                    .frame(width: 350, height: 400)
+                    .foregroundColor(.white)
+                    .overlay(
+                        VStack {
+                            CalendarView(selectedDate: Date(), goal: $goal)
+                                .scaledToFit()
+                                .padding()
+                            HStack{
+                                Spacer()
+                                VStack {
+                                    Text("Completed")
+                                    Text("\(goal.numberOfDaysCompleted)d")
+                                        .padding(.bottom)
+                                    
+                                }
+                                
+                                Spacer()
+                                VStack {
+                                    Text("Target")
+                                    if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
+                                        
+                                        Text("\(goal.scheduledCompletionDates.count)d")
+                                            .padding(.bottom)
+                                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                                    } else if goal.selectedFrequencyIndex == .weekly{
+                                        Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
+                                            .padding(.bottom)
+                                    } else if goal.selectedFrequencyIndex == .monthly {
+                                        Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+                                            .padding(.bottom)
+                                    }
+                                    
+                                }
+                                Spacer()
+                            }
                         }
-                        
-                    }
-                    Spacer()
-                }
+
+                        )
+//                HStack{
+//                    Spacer()
+//                    VStack {
+//                        Text("Completed")
+//                        Text("\(goal.numberOfDaysCompleted)d")
+//
+//                    }
+//
+//                    Spacer()
+//                    VStack {
+//                        Text("Target")
+//                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
+//
+//                            Text("\(goal.scheduledCompletionDates.count)d")
+//                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+//                        } else if goal.selectedFrequencyIndex == .weekly{
+//                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
+//                        } else if goal.selectedFrequencyIndex == .monthly {
+//                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+//                        }
+//
+//                    }
+//                    Spacer()
+//                }
                 
                 
                 //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
@@ -148,6 +184,7 @@ struct GoalDetailView: View {
                 print("new TargetDays : \(targetDays)")
             }
         }
+        .scrollIndicators(.never)
     }
     
     struct GoalDetailView_Previews: PreviewProvider {

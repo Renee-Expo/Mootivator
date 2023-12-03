@@ -41,10 +41,11 @@ struct ShowingAnimalSegmentedControlElement: View {
         //                                .frame(width: 200)
                                         .background(Color("BackgroundColors"))
                                     Text(item.selectedAnimal.name)
+                                        .padding(.top, 5)
                                     Text("\(item.motivationalQuote)")
                                         .font(.footnote)
                                         .fontWeight(.medium)
-                                        .padding(10)
+                                        .padding(5)
                                 }
     //                                .padding(.leading, 100)
     //                                .padding( )
@@ -55,10 +56,10 @@ struct ShowingAnimalSegmentedControlElement: View {
                                     .frame(width: 400, height: 350)
                                     .foregroundColor(.white)
                                     .overlay(
-                                CalendarView(selectedDate: Date(), goal: $item)
-                                    .scaledToFit()
-                                    .frame(width: 300, height: 300)
-                                    .padding()
+                                        CalendarView(selectedDate: Date(), goal: $item)
+                                            .scaledToFit()
+                                            .frame(width: 300, height: 300)
+                                            .padding()
                                 )
                                 
     //                            HStack {
