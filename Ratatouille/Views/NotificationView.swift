@@ -62,6 +62,7 @@ struct NotificationView: View {
             if sadAnimal {
                 scheduleAnimalEmotionNotification(emotion: Emotion.sad)
             }
+            
         }
     }
     

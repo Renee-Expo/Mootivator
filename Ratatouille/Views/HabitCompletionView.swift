@@ -13,7 +13,7 @@ struct HabitCompletionView: View {
     
     @Binding var goal: Goal
     @State private var showHabitCompletionView = false
-    @State var isHabitCompleted : Bool
+    @State var isHabitCompleted : Bool = false
     
 //    @Binding var frequency : Array<String>
 //    @Binding var selectedFrequencyIndex : Goal.frequency
