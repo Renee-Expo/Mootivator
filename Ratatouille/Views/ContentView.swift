@@ -112,7 +112,7 @@ struct ContentView: View {
         // Set isActive to true to trigger the NavigationLink
         isActive = true
         goalItemCompletion = goal
-        print("it redirected")
+        print("redirected to HabitCompletionView of \(goal.title)")
     }
 }
 
