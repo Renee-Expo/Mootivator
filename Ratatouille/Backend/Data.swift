@@ -138,14 +138,14 @@ struct Goal: Identifiable, Codable, Hashable {
     //    var frequencyOfHabits : String // why string?
 //    var frequency : Array<String>
     enum frequency : Codable, CaseIterable, Hashable {
-        case custom
+//        case custom
         case daily
         case weekly
         case monthly
         
         var text : String {
             switch self {
-            case.custom     : return "Custom"
+//            case.custom     : return "Custom"
             case.daily      : return "Daily"
             case.weekly     : return "Weekly"
             case.monthly    : return "Monthly"
@@ -212,11 +212,11 @@ extension Goal {
     
     static let sampleGoals: [Goal] = [
         
-        .init(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "fluffy the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
+        .init(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
         
-            .init(title: "Lead a healthier Life", habitTitle: "Exercise", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
+            .init(title: "Lead a healthier Life", habitTitle: "Exercise", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
         
-            .init(title: "Submit Homework On time", habitTitle: "Do Homework according to plan", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal:  Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date())
+            .init(title: "Submit Homework On time", habitTitle: "Do Homework according to plan", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: ["20231101"], deadline: Date())
 
 
 
@@ -264,16 +264,16 @@ func calculateTargetDays(for goal: Goal) -> Double {
             
             targetDays += Double(min(Double(remainingDaysInMonth), Double(remainingMonthsInYear) * Double(monthlyFrequency)))
         }
-    case .custom:
-        
-        // Calculate target days for fixed frequency (e.g., specific dates selected)
-        // Replace `selectedDates` with actual array of selected dates from Goal struct
-        let selectedDates: [Date] = [] // Placeholder for selected dates
-        for date in selectedDates {
-            if date >= currentDate {
-                targetDays += 1
-            }
-        }
+//    case .custom:
+//        
+//        // Calculate target days for fixed frequency (e.g., specific dates selected)
+//        // Replace `selectedDates` with actual array of selected dates from Goal struct
+//        let selectedDates: [Date] = [] // Placeholder for selected dates
+//        for date in selectedDates {
+//            if date >= currentDate {
+//                targetDays += 1
+//            }
+//        }
     }
     print("targetDays: \(targetDays)")
     return targetDays

@@ -97,23 +97,23 @@ struct GoalEditView: View {
                         }
                     }
                     
-                    else if goal.selectedFrequencyIndex == .custom {
-                        
-                        HStack {
-                            
-                            Toggle("M", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.monday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.monday.text] = $0 }))
-                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] = $0 }))
-                            Toggle("W", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] = $0 }))
-                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.thursday.text] = $0 }))
-                            Toggle("F", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.friday.text] = $0 }))
-                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.saturday.text] = $0 }))
-                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.sunday.text] = $0 }))
-                            
-                        }
-                        .toggleStyle(.button)
+//                    else if goal.selectedFrequencyIndex == .custom {
+//                        
+//                        HStack {
+//                            
+//                            Toggle("M", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.monday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.monday.text] = $0 }))
+//                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.tuesday.text] = $0 }))
+//                            Toggle("W", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.wednesday.text] = $0 }))
+//                            Toggle("T", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.thursday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.thursday.text] = $0 }))
+//                            Toggle("F", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.friday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.friday.text] = $0 }))
+//                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.saturday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.saturday.text] = $0 }))
+//                            Toggle("S", isOn: Binding<Bool>(get: { goal.dayState[Goal.daysOfTheWeek.sunday.text] ?? false }, set: { goal.dayState[Goal.daysOfTheWeek.sunday.text] = $0 }))
+//                            
+//                        }
+//                        .toggleStyle(.button)
                         
                         DatePicker("Deadline", selection: $goal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
-                    }
+//                    }
                 }
                 
                 Section("Write something to motivate you") {
@@ -161,9 +161,9 @@ struct GoalEditView: View {
                             currentDateComponent.day! += 1
                         }
                         
-                    } else if goal.selectedFrequencyIndex == .custom {
+                    } /*else if goal.selectedFrequencyIndex == .custom {
                         
-                    }
+                    }*/
                     
                     if let index = goalManager.items.firstIndex(where: { $0.id == goal.id }) {
                         goalManager.items[index] = goal
@@ -175,7 +175,7 @@ struct GoalEditView: View {
                     Text("Save")
                 }
                 .frame(maxWidth: .infinity)
-                .disabled(goal.title.isEmpty || goal.habitTitle.isEmpty || goal.selectedAnimal.name.isEmpty || (goal.selectedFrequencyIndex == .custom && areAllTogglesOff) || goal.motivationalQuote.isEmpty)
+                .disabled(goal.title.isEmpty || goal.habitTitle.isEmpty || goal.selectedAnimal.name.isEmpty || /*(goal.selectedFrequencyIndex == .custom && areAllTogglesOff) || */goal.motivationalQuote.isEmpty)
                 
                 //Button {
                 //                        // does this work???
@@ -227,7 +227,7 @@ struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let goal = Goal(title: "", habitTitle: "", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:], completedDates: [], deadline: .now)
+        let goal = Goal(title: "", habitTitle: "", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, selectedFixedDeadline: .now, dayState: [:], completedDates: [], deadline: .now)
         
         GoalEditView(goal: .constant(goal), selectedAnimalKind: .cow)
             .environmentObject(GoalManager())

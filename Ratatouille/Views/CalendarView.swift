@@ -319,7 +319,7 @@ struct CalendarView_Previews: PreviewProvider {
         
         let defaultDate = Date() // Creating a constant for the preview
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.custom, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
         
         return CalendarView(selectedDate: defaultDate, goal: .constant(goal))
     }
