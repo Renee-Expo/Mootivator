@@ -12,17 +12,22 @@ struct GoalDetailView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
+    @Binding var numberOfCompletedGoals: Int
     
-    @State var title: String = ""
-    @State var habitTitle: String = ""
-    @State var indexItem: Int = 0
-    @State var selectedDate: Date = Date()
+    @State private var goalAnimalKind: AnimalKind = .cow
+//    @State var title: String = ""
+//    @State var habitTitle: String = ""
+//    @State var indexItem: Int = 0
+//    @State var selectedDate: Date = Date()
     @State private var showGoalDetailSheet = false
     //    @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
-    @State private var showOverallHabitCompletionAlert = false
-    @State private var completedDates: Set<Date> = []
-    @State private var redirectToGoalView = false
+//    @State private var showOverallHabitCompletionAlert = false
+//    @State private var completedDates: Set<Date> = []
+//    @State private var redirectToGoalView = false
+    @State private var showGoalCompletionView = false
+    @State private var showYesScreen = false
+    @State private var showNoScreen = false
     
     @State private var targetDays : Double = 0
     
@@ -148,6 +153,11 @@ struct GoalDetailView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
+                        showGoalCompletionView = true
+                    } label: {
+                        Label("Complete goal", systemImage: "checkmark.circle")
+                    }
+                    Button {
                         showGoalDetailSheet = true
                     } label: {
                         Label("Edit goal", systemImage: "pencil")
@@ -174,6 +184,9 @@ struct GoalDetailView: View {
                     GoalEditView(goal: $goal, workingGoal: goal)
                 }
             }
+            .sheet(isPresented: $showGoalCompletionView) {
+                GoalCompletionView(goalAnimalKind: goalAnimalKind, numberOfCompletedGoals: $numberOfCompletedGoals, goal: $goal)
+            }
             .onAppear {
                 targetDays = Double(calculateTargetDays(for: goal))
             }
@@ -186,16 +199,15 @@ struct GoalDetailView: View {
         }
         .scrollIndicators(.never)
     }
-    
-    struct GoalDetailView_Previews: PreviewProvider {
-        static var previews: some View {
-            
-            let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
-            
-            return NavigationStack {
-                GoalDetailView(goal: .constant(goal))
-            }
+        
+}
+struct GoalDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
+        
+        return NavigationStack {
+            GoalDetailView(goal: .constant(goal), numberOfCompletedGoals: .constant(0))
         }
     }
-    
 }

@@ -16,9 +16,6 @@ struct ShowingAnimalSegmentedControlElement: View {
     
     var body: some View {
 //        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
-        ZStack {
-            Color("BackgroundColors")
-                .edgesIgnoringSafeArea(.all)
             VStack {
                 if goalManager.items.count > 0 {
                     TabView {
@@ -51,16 +48,9 @@ struct ShowingAnimalSegmentedControlElement: View {
     //                                .padding( )
     //                                .multilineTextAlignment(.trailing)
                                 
-    //                            Spacer()
-                                RoundedRectangle(cornerRadius: 30)
-                                    .frame(width: 400, height: 350)
-                                    .foregroundColor(.white)
-                                    .overlay(
                                         CalendarView(selectedDate: Date(), goal: $item)
                                             .scaledToFit()
-                                            .frame(width: 300, height: 300)
                                             .padding()
-                                )
                                 
     //                            HStack {
     //                                Spacer()
@@ -94,7 +84,6 @@ struct ShowingAnimalSegmentedControlElement: View {
                     Text("You have no current goals!")
                 }
             }
-        }
     }
 }
 

@@ -12,7 +12,7 @@ struct AnimalView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     
-    var numberOfCompletedGoals: Int
+    @Binding var numberOfCompletedGoals: Int
     @State var unlockedAnimals: Set<AnimalKind> = []
     
     private let adaptiveColumns = [
@@ -21,17 +21,19 @@ struct AnimalView: View {
     
     var body: some View {
         NavigationView {
+            
             ScrollView(.vertical) {
                 Spacer(minLength: 20)
                 Text("Number of completed goals: \(numberOfCompletedGoals)")
                     .font(.system(size: 20))
                     .bold()
-
+                    .onAppear{
+                        print("\(numberOfCompletedGoals)")
+                    }
                 LazyVGrid(columns: adaptiveColumns, spacing: 20) {
                     ForEach(AnimalKind.allCases, id: \.self) { animalKind in
                         let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
                         let isUnlocked = numberOfCompletedGoals >= numberInText
-
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 8)
@@ -76,10 +78,11 @@ struct AnimalView: View {
 
 
 
+
 struct AnimalView_Previews: PreviewProvider {
     static var previews: some View {
 //        AnimalView(numberOfCompletedGoals: .constant(0), isAnimalUnlocked: .constant(false))
-        AnimalView(numberOfCompletedGoals: 0)
+        AnimalView(numberOfCompletedGoals: .constant(0))
     }
 }
 
