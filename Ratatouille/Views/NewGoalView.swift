@@ -132,9 +132,9 @@ struct NewGoalView: View {
 //                        .toggleStyle(.button)
 //
                     }
-                    if selectedFrequencyIndex != .daily {
-                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
-                    }
+//                    if selectedFrequencyIndex != .daily {
+//                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
+//                    }
                 }
                 
                 Section("Write something to motivate you") {

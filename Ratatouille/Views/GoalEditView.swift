@@ -114,7 +114,7 @@ struct GoalEditView: View {
 //                        }
 //                        .toggleStyle(.button)
                         
-                        DatePicker("Deadline", selection: $workingGoal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
+//                        DatePicker("Deadline", selection: $workingGoal.selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
 //                    }
                 }
                 
