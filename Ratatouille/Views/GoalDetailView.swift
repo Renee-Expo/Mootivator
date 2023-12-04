@@ -185,7 +185,7 @@ struct GoalDetailView: View {
                 }
             }
             .sheet(isPresented: $showGoalCompletionView) {
-                GoalCompletionView(goalAnimalKind: goalAnimalKind, numberOfCompletedGoals: $numberOfCompletedGoals, goal: $goal)
+                GoalCompletionView(numberOfCompletedGoals: $numberOfCompletedGoals, goal: $goal)
             }
             .onAppear {
                 targetDays = Double(calculateTargetDays(for: goal))

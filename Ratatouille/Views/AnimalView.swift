@@ -82,7 +82,7 @@ struct AnimalView: View {
 struct AnimalView_Previews: PreviewProvider {
     static var previews: some View {
 //        AnimalView(numberOfCompletedGoals: .constant(0), isAnimalUnlocked: .constant(false))
-        AnimalView(numberOfCompletedGoals: .constant(0))
+        AnimalView(numberOfCompletedGoals: .constant(20))
     }
 }
 

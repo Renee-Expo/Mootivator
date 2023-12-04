@@ -19,7 +19,7 @@ struct GoalCompletionView: View {
 //    @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
     @State private var showNoScreen = false
-    @State var goalAnimalKind: AnimalKind = .cat
+    @State private var goalAnimalKind: AnimalKind = .cat
 //    @State var goalAnimalEmotion: Emotion = .neutral
 //    @Binding var title: String
 //    @Binding var selectedAnimal: Int

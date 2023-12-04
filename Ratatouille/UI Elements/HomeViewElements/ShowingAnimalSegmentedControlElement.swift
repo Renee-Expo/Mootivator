@@ -17,7 +17,7 @@ struct ShowingAnimalSegmentedControlElement: View {
     var body: some View {
 //        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
             VStack {
-                if goalManager.items.count > 0 {
+                if goalManager.items.count > 0 && goalManager.items.contains(where: { !$0.isGoalCompleted } ){
                     TabView {
                         ForEach($goalManager.items, id: \.id ) { $item in
                             ScrollView {
