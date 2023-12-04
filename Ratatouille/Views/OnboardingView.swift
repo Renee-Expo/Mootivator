@@ -21,14 +21,15 @@ struct OnboardingView : View {
                     .padding(.horizontal)
                 Spacer().frame(height: 100)
                 VStack(alignment: .leading, spacing: 35) {
-                    HStack {
+                    HStack(alignment: .center) {
                         Image(systemName: "pencil")
                             .font(.system(size: 32))
                             .foregroundColor(Color("AccentColor"))
+                            .padding(.horizontal, 5)
                         
                         VStack(alignment: .leading) {
                             Text("Transform Goals into Achievable Habits")
-                                .lineLimit(1)
+//                                .lineLimit(1)
                                 .fontWeight(.medium)
                                 .font(.system(size: 20))
                             
@@ -40,10 +41,11 @@ struct OnboardingView : View {
                         }
                     }
                     
-                    HStack {
+                    HStack(alignment: .center) {
                         Image(systemName: "pawprint.fill")
                             .font(.system(size: 32))
                             .foregroundColor(Color("AccentColor"))
+                            .padding(3)
                         
                         VStack(alignment: .leading) {
                             Text("Take Care of Your Pets")
@@ -61,6 +63,7 @@ struct OnboardingView : View {
                         Image(systemName: "checkmark.circle")
                             .font(.system(size: 32))
                             .foregroundColor(Color("AccentColor"))
+                            .padding(.horizontal, 5)
                         
                         VStack(alignment: .leading) {
                             Text("Achieve Your Goals")
