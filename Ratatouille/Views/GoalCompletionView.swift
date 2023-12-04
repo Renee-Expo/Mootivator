@@ -19,7 +19,7 @@ struct GoalCompletionView: View {
 //    @State private var showConfirmationScreen = true
     @State private var showYesScreen = false
     @State private var showNoScreen = false
-    @State private var goalAnimalKind: AnimalKind = .cat
+//    @State private var goalAnimalKind: AnimalKind = .cat
 //    @State var goalAnimalEmotion: Emotion = .neutral
 //    @Binding var title: String
 //    @Binding var selectedAnimal: Int
@@ -31,7 +31,7 @@ struct GoalCompletionView: View {
     var body: some View {
         
         VStack {
-                Image("\(goalAnimalKind.image)" + "\(goal.selectedAnimal.emotion.text)")
+            Image("\(goal.selectedAnimal.kind.image)" + "\(goal.selectedAnimal.emotion.text)")
                     .resizable()
                     .scaledToFit()
                     .padding()
