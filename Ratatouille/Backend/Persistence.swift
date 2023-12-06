@@ -116,6 +116,7 @@ final class GoalManager: ItemManager {
     @Published var items: [Goal] = [] { didSet { write() } }
     static var shared: GoalManager = .init()
     static var saveLocation: FileSystem.FileName = .goalManager
+    @Published var numberOfCompletedGoals: Int = 0
     
     init() {
         read()

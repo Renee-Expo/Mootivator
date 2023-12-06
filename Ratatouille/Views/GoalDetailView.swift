@@ -12,7 +12,7 @@ struct GoalDetailView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-    @Binding var numberOfCompletedGoals: Int
+//    @Binding var numberOfCompletedGoals: Int
     
     @State private var goalAnimalKind: AnimalKind = .cow
 //    @State var title: String = ""
@@ -185,7 +185,7 @@ struct GoalDetailView: View {
                 }
             }
             .sheet(isPresented: $showGoalCompletionView) {
-                GoalCompletionView(numberOfCompletedGoals: $numberOfCompletedGoals, goal: $goal)
+                GoalCompletionView(goal: $goal)
             }
             .onAppear {
                 targetDays = Double(calculateTargetDays(for: goal))
@@ -207,7 +207,7 @@ struct GoalDetailView_Previews: PreviewProvider {
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
         
         return NavigationStack {
-            GoalDetailView(goal: .constant(goal), numberOfCompletedGoals: .constant(0))
+            GoalDetailView(goal: .constant(goal))
         }
     }
 }

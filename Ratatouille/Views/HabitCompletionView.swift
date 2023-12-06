@@ -42,42 +42,43 @@ struct HabitCompletionView: View {
             }
             
         }
-        .onAppear{
-            if (/*goal.selectedFrequencyIndex == .custom
-                && */Date() >= goal.selectedFixedDeadline)
-                || (goal.selectedFrequencyIndex == .daily && Date() >= goal.selectedDailyDeadline) {
-                showHabitCompletionView = true
-            } else if goal.selectedFrequencyIndex == .weekly {
-                // Check if the current date is the next Monday
-                if let nextSunday = Calendar.current.nextDate(after: Date(), matching: DateComponents(weekday: 1), matchingPolicy: .nextTime),
-                   Calendar.current.isDate(Date(), equalTo: nextSunday, toGranularity: .day) {
-                    showHabitCompletionView = true
-                }
-            } else if goal.selectedFrequencyIndex == .monthly {
-                // Check if the current date is the last day of the month
-                if let lastDayOfMonth = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: Date()),
-                   Calendar.current.isDate(Date(), equalTo: lastDayOfMonth, toGranularity: .day) {
-                    showHabitCompletionView = true
-                }
-            }
-            
-            let targetDays = calculateTargetDays(for: goal)
-            
-            if (/*goal.selectedFrequencyIndex == .custom
-                &&*/ goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue)}))
-                || (goal.selectedFrequencyIndex == .daily
-                    && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue) }))
-                || (goal.selectedFrequencyIndex == .weekly
-                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerWeek)
-                || (goal.selectedFrequencyIndex == .monthly
-                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerMonth) {
-                isHabitCompleted = true
-            } else {
-                isHabitCompleted = false
-            }
-
-            
-        }
+//        .onAppear{
+//            let currentDate = Date()
+//            if (/*goal.selectedFrequencyIndex == .custom
+//                && */currentDate >= goal.selectedFixedDeadline)
+//                || (goal.selectedFrequencyIndex == .daily && Date() >= goal.selectedDailyDeadline) {
+//                showHabitCompletionView = true
+//            } else if goal.selectedFrequencyIndex == .weekly {
+//                // Check if the current date is the next Monday
+//                if let nextSunday = Calendar.current.nextDate(after: Date(), matching: DateComponents(weekday: 1), matchingPolicy: .nextTime),
+//                   Calendar.current.isDate(Date(), equalTo: nextSunday, toGranularity: .day) {
+//                    showHabitCompletionView = true
+//                }
+//            } else if goal.selectedFrequencyIndex == .monthly {
+//                // Check if the current date is the last day of the month
+//                if let lastDayOfMonth = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: Date()),
+//                   Calendar.current.isDate(Date(), equalTo: lastDayOfMonth, toGranularity: .day) {
+//                    showHabitCompletionView = true
+//                }
+//            }
+//            
+//            let targetDays = calculateTargetDays(for: goal)
+//            
+//            if (/*goal.selectedFrequencyIndex == .custom
+//                &&*/ goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue)}))
+//                || (goal.selectedFrequencyIndex == .daily
+//                    && goal.scheduledCompletionDates.allSatisfy({ goal.completedDates.contains($0.rawValue) }))
+//                || (goal.selectedFrequencyIndex == .weekly
+//                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerWeek)
+//                || (goal.selectedFrequencyIndex == .monthly
+//                    && Double(goal.numberOfDaysCompleted) >= goal.numberOfTimesPerMonth) {
+//                isHabitCompleted = true
+//            } else {
+//                isHabitCompleted = false
+//            }
+//
+//            
+//        }
         
     }
 }

@@ -25,7 +25,7 @@ struct GoalCompletionView: View {
 //    @Binding var selectedAnimal: Int
 //    @Binding var deadline: Date
 //    @Binding var isGoalCompleted: Bool
-    @Binding var numberOfCompletedGoals : Int
+//    @Binding var numberOfCompletedGoals : Int
     @Binding var goal : Goal
 //    @Binding var goalAnimalEmotion: Animal.emotion
     var body: some View {
@@ -42,8 +42,8 @@ struct GoalCompletionView: View {
                     Button {
                         showYesScreen = true
                         goal.isGoalCompleted = true
-                        numberOfCompletedGoals += 1
-                        print("number of goals: \(numberOfCompletedGoals)")
+                        goalManager.numberOfCompletedGoals += 1
+                        print("number of goals: \(goalManager.numberOfCompletedGoals)")
                     } label: {
                         Text("Yes")
                             .padding()
@@ -173,7 +173,7 @@ struct GoalCompletionView_Previews: PreviewProvider {
         
         let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date() + 5, completedDates: [], deadline: Date())
         
-        GoalCompletionView(numberOfCompletedGoals: .constant(0), goal: .constant(goal))
+        GoalCompletionView(goal: .constant(goal))
         .environmentObject(GoalManager())
     }
 }

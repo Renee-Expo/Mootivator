@@ -5,7 +5,7 @@ struct GoalView: View {
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     @State private var showNewGoalSheet = false
     @State private var showConfirmAlert = false
-    @State private var numberOfCompletedGoals: Int = 0
+//    @State private var numberOfCompletedGoals: Int = 0
 
     @State private var filters = ["Show All", "Ascending Order", "Descending Order", "Current", "Past"]
     
@@ -15,7 +15,7 @@ struct GoalView: View {
         NavigationStack {
             List(goalManager.filteredAndSortedGoals, id: \.id, editActions: .all) { $goal in
                 NavigationLink {
-                    GoalDetailView(goal: $goal, numberOfCompletedGoals: $numberOfCompletedGoals)
+                    GoalDetailView(goal: $goal)
                 } label: {
                     VStack(alignment: .leading) {
                         Text(goal.title)
