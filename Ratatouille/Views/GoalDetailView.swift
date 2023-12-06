@@ -68,18 +68,20 @@ struct GoalDetailView: View {
                                 Spacer()
                                 VStack {
                                     Text("Target")
-                                    if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
-                                        
-                                        Text("\(goal.scheduledCompletionDates.count)d")
-                                            .padding(.bottom)
-                                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                                    } else if goal.selectedFrequencyIndex == .weekly{
-                                        Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
-                                            .padding(.bottom)
-                                    } else if goal.selectedFrequencyIndex == .monthly {
-                                        Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
-                                            .padding(.bottom)
-                                    }
+                                    Text("\(Int(targetDays))d")
+                                        .padding(.bottom)
+//                                    if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
+//
+//                                        Text("\(goal.scheduledCompletionDates.count)d")
+//                                            .padding(.bottom)
+//                                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+//                                    } else if goal.selectedFrequencyIndex == .weekly{
+//                                        Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
+//                                            .padding(.bottom)
+//                                    } else if goal.selectedFrequencyIndex == .monthly {
+//                                        Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+//                                            .padding(.bottom)
+//                                    }
                                     
                                 }
                                 Spacer()

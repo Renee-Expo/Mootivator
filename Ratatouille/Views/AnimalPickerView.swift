@@ -13,7 +13,7 @@ struct AnimalPickerView: View {
     
     @Environment(\.dismiss) var dismiss
     @Binding var selectedAnimalKind: AnimalKind
-//    @Binding var unlockedAnimals: [AnimalKind]
+    @Binding var unlockedAnimals: [AnimalKind]
 
     private let adaptiveColumns = [
         GridItem(.adaptive(minimum: 170))
@@ -61,9 +61,9 @@ struct AnimalPickerView: View {
 
 struct AnimalPickerPreviewWrapper: View {
     @State var selectedAnimalKind: AnimalKind = .cow
-    
+    @State var unlockedAnimals: [AnimalKind] = [.cow, .cat]
     var body: some View {
-        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind)
+        AnimalPickerView(selectedAnimalKind: $selectedAnimalKind, unlockedAnimals: $unlockedAnimals)
     }
 }
 

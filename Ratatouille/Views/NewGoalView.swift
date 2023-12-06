@@ -15,6 +15,7 @@ struct NewGoalView: View {
     @State private var title = ""
     @State private var deadline = Date()
     @State private var habitTitle = ""
+    @State var unlockedAnimals: [AnimalKind] = []
     
     @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     @State private var motivationalQuote = ""
@@ -60,7 +61,7 @@ struct NewGoalView: View {
                 
                 Section("Pick an Animal") {
                     NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind)
+                        AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind, unlockedAnimals: $unlockedAnimals)
                     }
                     TextField("Name your animal", text: $selectedAnimal.name)
                     
