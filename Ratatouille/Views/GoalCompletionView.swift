@@ -46,6 +46,8 @@ struct GoalCompletionView: View {
                         print("number of goals: \(goalManager.numberOfCompletedGoals)")
                     } label: {
                         Text("Yes")
+                            .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
                             .padding()
                             .frame(width: 200, height: 50)
                             .foregroundColor(.white)
@@ -62,6 +64,8 @@ struct GoalCompletionView: View {
                         showNoScreen = true
                     } label: {
                         Text("No")
+                            .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
                             .padding()
                             .frame(width: 200, height: 50)
                             .foregroundColor(.white)
@@ -109,11 +113,13 @@ struct YesScreen: View {
                     }
                     //                    showConfirmationScreen = false
                 }
+                .buttonStyle(.borderedProminent)
+                .fontWeight(.bold)
+                .padding()
                 .frame(width: 200, height: 50)
                 .foregroundColor(.white)
                 .background(Color("AccentColor"))
                 .cornerRadius(8)
-                .padding()
             }
             
             //
@@ -156,6 +162,8 @@ struct NoScreen: View {
                     redirectToHome = true
                 }
             }
+            .buttonStyle(.borderedProminent)
+            .fontWeight(.bold)
             .padding()
             .frame(width: 200, height: 50)
             .foregroundColor(.white)

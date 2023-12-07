@@ -15,6 +15,8 @@ struct GoalDetailView: View {
 //    @Binding var numberOfCompletedGoals: Int
     
     @State private var goalAnimalKind: AnimalKind = .cow
+    @State private var showHabitCompletionView = false
+    @State var isHabitCompleted : Bool = false
 //    @State var title: String = ""
 //    @State var habitTitle: String = ""
 //    @State var indexItem: Int = 0
@@ -22,6 +24,7 @@ struct GoalDetailView: View {
     @State private var showGoalDetailSheet = false
     //    @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
+    @State private var showHabitCompletionAlert = false
 //    @State private var showOverallHabitCompletionAlert = false
 //    @State private var completedDates: Set<Date> = []
 //    @State private var redirectToGoalView = false
@@ -86,7 +89,34 @@ struct GoalDetailView: View {
                                 }
                                 Spacer()
                             }
-                        }
+                            Button{
+                                print("Button shown")
+                                showHabitCompletionAlert = true
+                                } label: {
+                                    Text("Complete habit")
+                                        .buttonStyle(.borderedProminent)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .cornerRadius(8)
+                                }
+                                .padding(.bottom)
+                                .alert("Have you completed the goal: \(goal.habitTitle)?", isPresented: $showHabitCompletionAlert) {
+                                    Button("Yes") {
+                                        isHabitCompleted = true
+                                        showHabitCompletionView = true
+                                    }
+                                    Button("No") {
+                                        isHabitCompleted = false
+                                        showHabitCompletionView = true
+                                        
+                                    }
+                                }
+                                .sheet(isPresented: $showHabitCompletionView) {
+                                    HabitCompletionView(goal: $goal, isHabitCompleted: $isHabitCompleted)
+                                }
+                            }
 
                         )
 //                HStack{
@@ -200,6 +230,12 @@ struct GoalDetailView: View {
             }
         }
         .scrollIndicators(.never)
+    }
+    func showButton() -> Bool {
+        let currentDate = Date()
+        print("current date: \(currentDate)_")
+        print("habit deadline: \(goal.selectedDailyDeadline)")
+        return currentDate >= goal.selectedDailyDeadline
     }
         
 }
