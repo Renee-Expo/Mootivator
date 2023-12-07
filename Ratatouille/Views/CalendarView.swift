@@ -41,39 +41,33 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     }
     
     //update state of the view
-    func updateUIView (_ uiView: FSCalendar, context: Context) -> Void {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let completedDateKeys = goal.completedDates
-        uiView.allowsMultipleSelection = true
-        
-        
-        for dateKey in completedDateKeys {
-            if let date = formatter.date(from: dateKey) {
-                uiView.select(date) // Mark the completed dates as selected
-                
+    func updateUIView(_ uiView: FSCalendar, context: Context) -> Void {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            let completedDateKeys = goal.completedDates
+            uiView.allowsMultipleSelection = true
+
+            for dateKey in completedDateKeys {
+                if let date = formatter.date(from: dateKey) {
+                    uiView.select(date) // Mark the completed dates as selected
+                }
             }
+
+            uiView.appearance.titleSelectionColor = .white
+            uiView.appearance.subtitleSelectionColor = .white
+            uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
+            uiView.appearance.titleDefaultColor = UIColor(named: "DynamicTextColor")
+            uiView.appearance.weekdayTextColor = UIColor(named: "AccentColor")
+            uiView.appearance.headerTitleColor = UIColor(named: "AccentColor")
+
+            uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
+            uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
+
+            // Set the current page to the current month
+            let currentDate = Date()
+            uiView.setCurrentPage(currentDate, animated: false)
         }
-        //        let currentDate = Date()
-        //        let isCompletedForCurrentDate = isHabitCompletedForDate(date: currentDate)
-        uiView.appearance.titleSelectionColor = .white
-        uiView.appearance.subtitleSelectionColor = .white
-        uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
-        uiView.appearance.titleDefaultColor = UIColor(named: "DynamicTextColor")
-        uiView.appearance.weekdayTextColor = UIColor(named: "AccentColor")
-        uiView.appearance.headerTitleColor = UIColor(named: "AccentColor")
-        
-        
-        uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
-        //        uiView.appearance.titleTodayColor = .black
-        
-        uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
-        
-        
-        
-        
-        
-    }
+
     
     //create custom instance that is used to communicate btwn swiftui & uikitviews
     func makeCoordinator() -> Coordinator {
@@ -136,36 +130,40 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         //        }
         //
         func showHabitCompletionAlert(for date: Date) {
+            // Ensure the calendar is updated before checking if the date is in the future
+            self.calendar.deselect(date)
+            self.isHabitCompleted.wrappedValue = false
+
+            // Check if the selected date is in the future
+            guard date <= Date() else {
+                // If the selected date is in the future, do nothing
+                return
+            }
+
+            // The rest of your code for showing the habit completion alert
             let alert = UIAlertController(title: "Habit completion",
                                           message: "Did you complete the habit for this day?",
                                           preferredStyle: .alert)
             let formatter = DateFormatter()
             _ = formatter.string(from: date)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
-                //update habit completion and modify appearance if the habit is completed
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                // Update habit completion and modify appearance if the habit is completed
                 if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
                     // Refresh the progress value in SwiftUI view
-                    //                       self.parent.progress = progress
-                    //                    let progressValue = Double(self.numberOfDaysCompleted.wrappedValue) / Double(targetDays)
-                    //                    progress = min(progressValue, 1.0)
-                    //                    self.updateCalendarAppearanceForCompletionDate(date)
+                    // self.parent.progress = progress
                 }
             }))
-            
+
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.isHabitCompleted.wrappedValue = false
-            //            self.deleteCompletionDate(date)
-            self.calendar.deselect(date)
-            
-            
+
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let rootViewController = windowScene.windows.first?.rootViewController {
                 rootViewController.present(alert, animated: true, completion: nil)
             }
-            
-            
         }
+
+
         //        private func updateCalendarAppearanceForCompletionDate(_ date: Date) {
         //           let formatter = DateFormatter()
         //           formatter.dateFormat = "yyyyMMdd"
