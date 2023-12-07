@@ -12,8 +12,9 @@ struct HabitCompletionView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-    @State private var showHabitCompletionView = false
-    @State var isHabitCompleted : Bool = false
+//    @State private var showHabitCompletionView = false
+    @State private var showNewGoalSheet = false
+    @Binding var isHabitCompleted : Bool
     
 //    @Binding var frequency : Array<String>
 //    @Binding var selectedFrequencyIndex : Goal.frequency
@@ -26,7 +27,6 @@ struct HabitCompletionView: View {
     
     var body: some View {
         VStack {
-            if showHabitCompletionView{
                 Image(systemName: isHabitCompleted ? "checkmark.circle":"xmark.circle")
                     .foregroundColor(isHabitCompleted ? Color("AccentColor") : Color.red)
                     .font(.system(size: 100))
@@ -39,9 +39,22 @@ struct HabitCompletionView: View {
                     .multilineTextAlignment(.center)
                     .fontWeight(.medium)
                     .padding()
+                
+                Button{
+                    print("Button shown")
+                    showNewGoalSheet = true
+                    } label: {
+                        Text("Set new habit")
+                            .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
+                            .padding()
+                            .frame(width: 200, height: 50)
+                            .foregroundColor(.white)
+                            .background(Color("AccentColor"))
+                            .cornerRadius(8)
+                    }
             }
             
-        }
 //        .onAppear{
 //            let currentDate = Date()
 //            if (/*goal.selectedFrequencyIndex == .custom
@@ -90,7 +103,7 @@ struct HabitCompletionView_Previews: PreviewProvider {
         
         return NavigationStack{
             
-            HabitCompletionView(goal: .constant(goal), isHabitCompleted: false)
+            HabitCompletionView(goal: .constant(goal), isHabitCompleted: .constant(false))
                 .environmentObject(GoalManager())
         }
     }
