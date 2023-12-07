@@ -16,6 +16,7 @@ struct GoalDetailView: View {
     
     @State private var goalAnimalKind: AnimalKind = .cow
     @State private var showHabitCompletionView = false
+    @State private var showGoalCompletionView = false
     @State var isHabitCompleted : Bool = false
 //    @State var title: String = ""
 //    @State var habitTitle: String = ""
@@ -28,7 +29,6 @@ struct GoalDetailView: View {
 //    @State private var showOverallHabitCompletionAlert = false
 //    @State private var completedDates: Set<Date> = []
 //    @State private var redirectToGoalView = false
-    @State private var showGoalCompletionView = false
     @State private var showYesScreen = false
     @State private var showNoScreen = false
     
@@ -184,10 +184,13 @@ struct GoalDetailView: View {
             .navigationTitle(goal.title)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        showGoalCompletionView = true
-                    } label: {
-                        Label("Complete goal", systemImage: "checkmark.circle")
+                    
+                    if showButton() {
+                        Button {
+                            showGoalCompletionView = true
+                        } label: {
+                            Label("Complete goal", systemImage: "checkmark.circle")
+                        }
                     }
                     Button {
                         showGoalDetailSheet = true
@@ -234,8 +237,8 @@ struct GoalDetailView: View {
     func showButton() -> Bool {
         let currentDate = Date()
         print("current date: \(currentDate)_")
-        print("habit deadline: \(goal.selectedDailyDeadline)")
-        return currentDate >= goal.selectedDailyDeadline
+        print("habit deadline: \(goal.deadline)")
+        return currentDate >= goal.deadline
     }
         
 }
