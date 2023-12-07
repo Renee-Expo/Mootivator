@@ -116,18 +116,20 @@ final class GoalManager: ItemManager {
     @Published var items: [Goal] = [] { didSet { write() } }
     static var shared: GoalManager = .init()
     static var saveLocation: FileSystem.FileName = .goalManager
-    
-    
+    // numberofcompletedgoals variable
     @Published var numberOfCompletedGoals: Int {
         didSet {
-            UserDefaults.standard.set(numberOfCompletedGoals, forKey: "NumberOfCompletedGoals")
+            UserDefaults.standard.set(numberOfCompletedGoals, forKey: "numberOfCompletedGoals")
         }
     }
     
     init() {
-        self.numberOfCompletedGoals = UserDefaults.standard.integer(forKey: "NumberOfCompletedGoals")
+        self.numberOfCompletedGoals = UserDefaults.standard.integer(forKey: "numberOfCompletedGoals")
         read()
     }
+    
+    
+    
     
     func deleteGoal(_ goal: Goal) {
         // Implement deletion logic here

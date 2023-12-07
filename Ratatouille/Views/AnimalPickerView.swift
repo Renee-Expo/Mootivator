@@ -35,7 +35,7 @@ struct AnimalPickerView: View {
                                 .scaledToFit()
                         }
                         .frame(width: 150, height: 150)
-                        .opacity(selectedAnimalKind == animalKind || UnlockedAnimalManager.shared.items.contains(animalKind) ? 1.0 : 0.5)
+                        .opacity(selectedAnimalKind == animalKind /*|| UnlockedAnimalManager.shared.items.contains(animalKind)*/ ? 1.0 : 0.5)
                     }
                 }
             }

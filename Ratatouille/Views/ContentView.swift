@@ -13,7 +13,7 @@ struct ContentView: View {
     
     @AppStorage("showOnBoarding") var showOnBoarding : Bool = true
 //    @State var showOnBoarding : Bool = true
-    @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 0
+//    @AppStorage("numberOfCompletedGoals") var numberOfCompletedGoals : Int = 0
     @ObservedObject var goalManager: GoalManager = .shared
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     
@@ -60,34 +60,22 @@ struct ContentView: View {
                 //                    print(error.localizedDescription)
                 //                }
                 //            }
-                
-                for animalKind in AnimalKind.allCases {
-                    let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
-                    let isUnlocked = numberOfCompletedGoals >= numberInText
-                    
-                    // update the persisted unlocked animals
-                    if (isUnlocked && (!(unlockedAnimalManager.items.contains(animalKind))) ) {
-                        unlockedAnimalManager.items.append(animalKind)
-                    }
-                }
-                for goal in goalManager.items {
-                    showCompletions(goal: goal)
-                }
+//                 // for notifs
+//                for goal in goalManager.items {
+//                    showCompletions(goal: goal)
+//                }
+                unlockedAnimalManager.items.removeAll()
+                updateAvailibleAnimals()
             }
-            .onChange(of: goalManager.items, perform: { newValues in
-                for animalKind in AnimalKind.allCases {
-                    let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
-                    let isUnlocked = numberOfCompletedGoals >= numberInText
-                    
-                    // update the persisted unlocked animals
-                    if (isUnlocked && (!(unlockedAnimalManager.items.contains(animalKind))) ) {
-                        unlockedAnimalManager.items.append(animalKind)
-                    }
-                }
-                for goal in newValues {
-                    showCompletions(goal: goal)
-                }
-            })
+//            .onChange(of: goalManager.items, perform: { newValues in
+//                // for notifs, not working rn
+//                for goal in newValues {
+//                    showCompletions(goal: goal)
+//                }
+//            })
+            .onChange(of: goalManager.numberOfCompletedGoals) { _ in
+                updateAvailibleAnimals()
+            }
         }
     }
     
@@ -113,6 +101,18 @@ struct ContentView: View {
         isActive = true
         goalItemCompletion = goal
         print("redirected to HabitCompletionView of \(goal.title)")
+    }
+    
+    func updateAvailibleAnimals() {
+        for animalKind in AnimalKind.allCases {
+            let numberInText = numberOfGoalsNeeded[AnimalKind.allCases.firstIndex(of: animalKind)!]
+            let isUnlocked = goalManager.numberOfCompletedGoals >= numberInText
+            
+            // update the persisted unlocked animals
+            if (isUnlocked && (!(unlockedAnimalManager.items.contains(animalKind))) ) {
+                unlockedAnimalManager.items.append(animalKind)
+            }
+        }
     }
 }
 
