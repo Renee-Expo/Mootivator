@@ -32,6 +32,7 @@
 		D97165012B10A6BA00BE63C8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165002B10A6BA00BE63C8 /* CircleView.swift */; };
 		D97165052B10A74500BE63C8 /* CirclesTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165042B10A74500BE63C8 /* CirclesTopView.swift */; };
 		D97165072B10A77400BE63C8 /* AnimateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97165062B10A77400BE63C8 /* AnimateProgressView.swift */; };
+		D9A137912B222DED00BA961B /* NewHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A137902B222DED00BA961B /* NewHabitView.swift */; };
 		D9FCBEC62B19074F00FB5869 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FCBEC52B19074F00FB5869 /* CalendarView.swift */; };
 		D9FCBEC92B19078100FB5869 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D9FCBEC82B19078100FB5869 /* FSCalendar */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		D97165002B10A6BA00BE63C8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		D97165042B10A74500BE63C8 /* CirclesTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesTopView.swift; sourceTree = "<group>"; };
 		D97165062B10A77400BE63C8 /* AnimateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateProgressView.swift; sourceTree = "<group>"; };
+		D9A137902B222DED00BA961B /* NewHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitView.swift; sourceTree = "<group>"; };
 		D9FCBEC52B19074F00FB5869 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 				1E8A3CEC2B0C55FD008771CC /* GoalCompletionView.swift */,
 				070773072B085646008655E6 /* OnboardingView.swift */,
 				1E5DBAE32B0B0B7200BF7A50 /* GoalEditView.swift */,
+				D9A137902B222DED00BA961B /* NewHabitView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				070773082B085646008655E6 /* OnboardingView.swift in Sources */,
 				1E8A3CED2B0C55FD008771CC /* GoalCompletionView.swift in Sources */,
 				1E5DBACF2B0AFA6800BF7A50 /* GoalDetailView.swift in Sources */,
+				D9A137912B222DED00BA961B /* NewHabitView.swift in Sources */,
 				D97165012B10A6BA00BE63C8 /* CircleView.swift in Sources */,
 				070773062B08547F008655E6 /* HomeView.swift in Sources */,
 				D97165072B10A77400BE63C8 /* AnimateProgressView.swift in Sources */,

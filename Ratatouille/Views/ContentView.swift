@@ -18,7 +18,7 @@ struct ContentView: View {
     @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     @State var isActive = false
     @State var goalItemCompletion : Goal = 
-    Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), selectedFixedDeadline: Date(), completedDates: [], deadline: Date())
+    Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), completedDates: [], deadline: Date())
     @State var isHabitCompleted: Bool = false
     
     var body: some View {

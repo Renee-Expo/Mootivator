@@ -1,24 +1,17 @@
 //
-//  NewGoalView.swift
+//  NewHabitView.swift
 //  Ratatouille
 //
-//  Created by Kaveri Mi on 19/11/23.
+//  Created by T Krobot on 8/12/23.
 //
+
 import SwiftUI
 
-struct NewGoalView: View {
-    
+struct NewHabitView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var goalManager: GoalManager = .shared
-    @ObservedObject var unlockedAnimalManager : UnlockedAnimalManager = .shared
     
-    @State private var title = ""
-    @State private var deadline = Date()
     @State private var habitTitle = ""
-    @State var unlockedAnimals: [AnimalKind] = []
-    
-    @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
-    @State private var motivationalQuote = ""
     @State private var selectedFrequencyIndex = Goal.frequency.daily
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
@@ -36,6 +29,7 @@ struct NewGoalView: View {
         Goal.daysOfTheWeek.sunday.text: false]
     @State private var dailyDaysDifference = 0
     @State private var scheduledCompletionDates: [Date] = []
+    
     var areAllTogglesOff: Bool {
         return !customDates.values.contains(true)
     }
@@ -50,26 +44,10 @@ struct NewGoalView: View {
             return day == lastDayOfMonth
         }
     
+    
     var body: some View {
         NavigationStack {
             List{
-                Section("Goal") {
-                    TextField("Enter a Goal here", text: $title)
-                    
-                    DatePicker("Deadline", selection: $deadline, displayedComponents: [.date, .hourAndMinute])
-                }
-                
-                Section("Pick an Animal") {
-                    NavigationLink("Pick an animal") {
-                        AnimalPickerView(selectedAnimalKind: $selectedAnimal.kind, unlockedAnimals: $unlockedAnimals)
-                    }
-                    TextField("Name your animal", text: $selectedAnimal.name)
-                    
-                }
-                
-                
-                
-                
                 Section("Current Habit") {
                     TextField("Enter a Habit", text: $habitTitle)
                     
@@ -121,7 +99,7 @@ struct NewGoalView: View {
                         }
 //                    } else if selectedFrequencyIndex == .custom {
 //                        HStack {
-//                            
+//
 //                            Toggle("M", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.monday.text]!},  set: { customDates[Goal.daysOfTheWeek.monday.text] = $0} ))
 //                            Toggle("T",   isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.tuesday.text]!},  set: { customDates[Goal.daysOfTheWeek.tuesday.text] = $0} ))
 //                            Toggle("W", isOn: Binding<Bool>( get: {customDates[Goal.daysOfTheWeek.wednesday.text]!},  set: { customDates[Goal.daysOfTheWeek.wednesday.text] = $0} ))
@@ -137,13 +115,6 @@ struct NewGoalView: View {
 //                        DatePicker("Deadline", selection: $selectedFixedDeadline, displayedComponents: [.date, .hourAndMinute])
 //                    }
                 }
-                
-                Section("Write something to motivate you") {
-                    TextField("You can do it!", text: $motivationalQuote)
-                }
-                
-                
-                
                 Button {
                     
                     if selectedFrequencyIndex == .daily {
@@ -162,19 +133,19 @@ struct NewGoalView: View {
                     
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     //                    print (dailyDaysDifference)
-                    goalManager.items.append(Goal(title: title,
-                                                  habitTitle: habitTitle,
-                                                  selectedFrequencyIndex: selectedFrequencyIndex,
-                                                  selectedAnimal: selectedAnimal,
-                                                  motivationalQuote: motivationalQuote,
-                                                  selectedDailyDeadline: selectedDailyDeadline,
-                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
-                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
-                                                  dayState: customDates,
-                                                  scheduledCompletionDates: scheduledCompletionDates,
-                                                  completedDates: [],
-                                                  deadline: deadline))
-                    print (scheduledCompletionDates)
+//                    goalManager.items.append(Goal(title: title,
+//                                                  habitTitle: habitTitle,
+//                                                  selectedFrequencyIndex: selectedFrequencyIndex,
+//                                                  selectedAnimal: selectedAnimal,
+//                                                  motivationalQuote: motivationalQuote,
+//                                                  selectedDailyDeadline: selectedDailyDeadline,
+//                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
+//                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
+//                                                  dayState: customDates,
+//                                                  scheduledCompletionDates: scheduledCompletionDates,
+//                                                  completedDates: [],
+//                                                  deadline: deadline))
+//                    print (scheduledCompletionDates)
                     
                     
                     dismiss()
@@ -182,18 +153,15 @@ struct NewGoalView: View {
                     Text("Save")
                         .frame(maxWidth: .infinity)
                 }
-                .disabled(title.isEmpty || habitTitle.isEmpty || selectedAnimal.name.isEmpty || /*(selectedFrequencyIndex == .custom && areAllTogglesOff) || */motivationalQuote.isEmpty)
+                .disabled(habitTitle.isEmpty)
                 
             }
         }
     }
 }
 
-
-struct NewGoalView_Previews: PreviewProvider {
+struct NewHabitView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalView()
+        NewHabitView()
     }
 }
-
-
