@@ -12,7 +12,7 @@ struct NewHabitView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @State private var habitTitle = ""
-    @State private var selectedFrequencyIndex = Goal.frequency.daily
+    @State private var selectedFrequencyIndex = Habit.frequency.daily
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var daysInWeek = 7
@@ -52,7 +52,7 @@ struct NewHabitView: View {
                     TextField("Enter a Habit", text: $habitTitle)
                     
                     Picker("Frequency", selection: $selectedFrequencyIndex) {
-                        ForEach(Goal.frequency.allCases, id: \.self) { index in
+                        ForEach(Habit.frequency.allCases, id: \.self) { index in
                             Text(index.text)
                                 .tag(index)
                         }

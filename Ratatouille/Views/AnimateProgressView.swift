@@ -16,8 +16,8 @@ struct AnimateProgressView: View {
     
     func calculateProgress() -> Double {
         guard targetDays > 0 else { return 0 }
-        let percentage = Double(goal.numberOfDaysCompleted) / Double(targetDays)
-        print("goal.numberOfDaysCompleted = \(goal.numberOfDaysCompleted)")
+        let percentage = Double(goal.habit.numberOfDaysCompleted) / Double(targetDays)
+        print("goal.habit.numberOfDaysCompleted = \(goal.habit.numberOfDaysCompleted)")
         print("percentage? = \(min(percentage, 1.0))")
         return min(percentage, 1.0)
     }
@@ -79,7 +79,8 @@ struct CircularProgressView: View {
 
 struct AnimateProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), completedDates: [], deadline: Date())
+        
+        let goal = Goal(title: "Sample Title", habit: Habit(title: "Sample Habit", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
         
         return AnimateProgressView(targetDays: .constant(30), goal: .constant(goal))
     }

@@ -19,7 +19,7 @@ struct GoalView: View {
                 } label: {
                     VStack(alignment: .leading) {
                         Text(goal.title)
-                        Text(goal.habitTitle)
+                        Text(goal.habit.title)
                             .font(.footnote)
                             .foregroundStyle(.gray)
                     }

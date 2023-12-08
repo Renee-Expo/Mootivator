@@ -134,35 +134,35 @@ struct Goal: Identifiable, Codable, Hashable {
     var id = UUID ()
     
     var title : String
-    var habitTitle : String
+//    var habitTitle : String
     //    var frequencyOfHabits : String // why string?
 //    var frequency : Array<String>
-    enum frequency : Codable, CaseIterable, Hashable {
-//        case custom
-        case daily
-        case weekly
-        case monthly
-        
-        var text : String {
-            switch self {
-//            case.custom     : return "Custom"
-            case.daily      : return "Daily"
-            case.weekly     : return "Weekly"
-            case.monthly    : return "Monthly"
-            }
-        }
-    }
-    var selectedFrequencyIndex : Self.frequency
-    
+//    enum frequency : Codable, CaseIterable, Hashable {
+////        case custom
+//        case daily
+//        case weekly
+//        case monthly
+//
+//        var text : String {
+//            switch self {
+////            case.custom     : return "Custom"
+//            case.daily      : return "Daily"
+//            case.weekly     : return "Weekly"
+//            case.monthly    : return "Monthly"
+//            }
+//        }
+//    }
+//    var selectedFrequencyIndex : Self.frequency
+    var habit: Habit
     var selectedAnimal : Animal
     //    var selectedAnimal : Int
     var motivationalQuote : String
     
-    var selectedDailyDeadline : Date
+//    var selectedDailyDeadline : Date
 //    var selectedFixedDeadline : Date
     
-    var numberOfTimesPerWeek : Double  = 1.0
-    var numberOfTimesPerMonth : Double = 1.0
+//    var numberOfTimesPerWeek : Double  = 1.0
+//    var numberOfTimesPerMonth : Double = 1.0
     // special usage
     enum daysOfTheWeek : Codable, CaseIterable {
         case monday
@@ -199,27 +199,55 @@ struct Goal: Identifiable, Codable, Hashable {
 
     var scheduledCompletionDates: [Date] = []
     var isGoalCompleted : Bool = false
-    var numberOfDaysCompleted : Int { completedDates.count } // computed properties {}
-    var dailyHabitCompleted: Bool = false
-    var completedDates: Set<String> //of habit
+//    var numberOfDaysCompleted : Int { completedDates.count } // computed properties {}
+//    var dailyHabitCompleted: Bool = false
+//    var completedDates: Set<String> //of habit
     var deadline : Date
     var startDate : Date = Date()
     
 }
 
+struct Habit: Codable, Hashable {
+    
+    var title: String
+//    var frequency : Array<String>
+    
+    enum frequency : Codable, CaseIterable, Hashable {
+//        case custom
+        case daily
+        case weekly
+        case monthly
+        
+        var text : String {
+            switch self {
+//            case.custom     : return "Custom"
+            case.daily      : return "Daily"
+            case.weekly     : return "Weekly"
+            case.monthly    : return "Monthly"
+            }
+        }
+    }
+    var selectedFrequencyIndex: Self.frequency
+    
+    var selectedDailyDeadline: Date
+    var numberOfTimesPerWeek : Double  = 1.0
+    var numberOfTimesPerMonth : Double = 1.0
+    var numberOfDaysCompleted : Int { completedDates.count }
+    var completedDates: Set<String>
+
+}
 
 extension Goal {
     
     static let sampleGoals: [Goal] = [
         
-        .init(title: "Get A for Math", habitTitle: "Do one Math practice paper Daily", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", selectedDailyDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
         
-            .init(title: "Lead a healthier Life", habitTitle: "Exercise", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", selectedDailyDeadline: Date(), completedDates: ["20231101"], deadline: Date()),
+        .init(title: "Get A for Math", habit: Habit(title: "Do one practice paper", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffly the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", deadline: Date()),
         
-            .init(title: "Submit Homework On time", habitTitle: "Do Homework according to plan", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal:  Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", selectedDailyDeadline: Date(), completedDates: ["20231101"], deadline: Date())
-
-
-
+            .init(title: "Lead a healtier life", habit: Habit(title: "Excercise", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", deadline: Date()),
+        
+            .init(title: "Submit Homework On time", habit: Habit(title: "Do homework according to plan", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", deadline: Date())
+        
     ]
     
 }
@@ -242,19 +270,19 @@ func calculateTargetDays(for goal: Goal) -> Double {
     
     var targetDays : Double = 0.0
     
-    switch goal.selectedFrequencyIndex {
+    switch goal.habit.selectedFrequencyIndex {
     case .daily:
         
         if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
-            let days = calendar.dateComponents([.day], from: currentDate, to: goal.selectedDailyDeadline).day ?? 0
+            let days = calendar.dateComponents([.day], from: currentDate, to: goal.habit.selectedDailyDeadline).day ?? 0
             targetDays += Double(max(0, days))
             
         }
     case .weekly:
-        targetDays = goal.numberOfTimesPerWeek
+        targetDays = goal.habit.numberOfTimesPerWeek
         
     case .monthly:
-        targetDays = goal.numberOfTimesPerMonth
+        targetDays = goal.habit.numberOfTimesPerMonth
 //    case .custom:
 //        
 //        // Calculate target days for fixed frequency (e.g., specific dates selected)

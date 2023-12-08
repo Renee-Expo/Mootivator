@@ -19,7 +19,7 @@ struct NewGoalView: View {
     
     @State var selectedAnimal: Animal = Animal(name: "", kind: .cow)
     @State private var motivationalQuote = ""
-    @State private var selectedFrequencyIndex = Goal.frequency.daily
+    @State private var selectedFrequencyIndex = Habit.frequency.daily
     @State private var selectedDailyDeadline = Date()
     @State private var numberOfTimesPerWeek = 1.0
     @State private var daysInWeek = 7
@@ -74,7 +74,7 @@ struct NewGoalView: View {
                     TextField("Enter a Habit", text: $habitTitle)
                     
                     Picker("Frequency", selection: $selectedFrequencyIndex) {
-                        ForEach(Goal.frequency.allCases, id: \.self) { index in
+                        ForEach(Habit.frequency.allCases, id: \.self) { index in
                             Text(index.text)
                                 .tag(index)
                         }
@@ -163,16 +163,18 @@ struct NewGoalView: View {
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     //                    print (dailyDaysDifference)
                     goalManager.items.append(Goal(title: title,
-                                                  habitTitle: habitTitle,
-                                                  selectedFrequencyIndex: selectedFrequencyIndex,
+                                                  habit: Habit(title: title,
+                                                               selectedFrequencyIndex: selectedFrequencyIndex,
+                                                               selectedDailyDeadline: selectedDailyDeadline,
+                                                               numberOfTimesPerWeek: numberOfTimesPerWeek,
+                                                               numberOfTimesPerMonth: numberOfTimesPerMonth,
+                                                               completedDates: []),
                                                   selectedAnimal: selectedAnimal,
                                                   motivationalQuote: motivationalQuote,
-                                                  selectedDailyDeadline: selectedDailyDeadline,
-                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
-                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
+//                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
+//                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
                                                   dayState: customDates,
                                                   scheduledCompletionDates: scheduledCompletionDates,
-                                                  completedDates: [],
                                                   deadline: deadline))
                     print (scheduledCompletionDates)
                     

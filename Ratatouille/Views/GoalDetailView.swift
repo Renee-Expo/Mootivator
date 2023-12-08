@@ -46,7 +46,7 @@ struct GoalDetailView: View {
                 
                 
                 
-                Text(goal.habitTitle)
+                Text(goal.habit.title)
                     .font(.headline)
                     .padding(.bottom, 5)
                 //                    .fontWeight(.bold)
@@ -63,7 +63,7 @@ struct GoalDetailView: View {
                                 Spacer()
                                 VStack {
                                     Text("Completed")
-                                    Text("\(goal.numberOfDaysCompleted)d")
+                                    Text("\(goal.habit.numberOfDaysCompleted)d")
                                         .padding(.bottom)
                                     
                                 }
@@ -102,7 +102,7 @@ struct GoalDetailView: View {
                                         .cornerRadius(8)
                                 }
                                 .padding(.bottom)
-                                .alert("Have you completed the goal: \(goal.habitTitle)?", isPresented: $showHabitCompletionAlert) {
+                                .alert("Have you completed the goal: \(goal.habit.title)?", isPresented: $showHabitCompletionAlert) {
                                     Button("Yes") {
                                         isHabitCompleted = true
                                         showHabitCompletionView = true
@@ -245,7 +245,7 @@ struct GoalDetailView: View {
 struct GoalDetailView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let goal = Goal(title: "Sample Title", habitTitle: "Sample Habit Title", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote", selectedDailyDeadline: Date(), completedDates: [], deadline: Date())
+        let goal = Goal(title: "Sample Title", habit: Habit(title: "Sample Habit", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
         
         return NavigationStack {
             GoalDetailView(goal: .constant(goal))

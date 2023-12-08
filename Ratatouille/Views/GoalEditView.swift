@@ -71,31 +71,31 @@ struct GoalEditView: View {
                 
                 Section("Current Habit") {
                     
-                    TextField(text: $workingGoal.habitTitle) {
+                    TextField(text: $workingGoal.habit.title) {
                         Text("Enter a Habit")
                     }
                     
-                    Picker("Frequency", selection: $workingGoal.selectedFrequencyIndex) {
-                        ForEach(Goal.frequency.allCases, id: \.self) { index in
+                    Picker("Frequency", selection: $workingGoal.habit.selectedFrequencyIndex) {
+                        ForEach(Habit.frequency.allCases, id: \.self) { index in
                             Text(index.text)
                                 .tag(index)
                         }
                     }
                     
                     
-                    if workingGoal.selectedFrequencyIndex == .daily {
-                        DatePicker("Deadline", selection: $workingGoal.selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
+                    if workingGoal.habit.selectedFrequencyIndex == .daily {
+                        DatePicker("Deadline", selection: $workingGoal.habit.selectedDailyDeadline, displayedComponents: [.date, .hourAndMinute])
                     }
-                    else if workingGoal.selectedFrequencyIndex == .weekly {
+                    else if workingGoal.habit.selectedFrequencyIndex == .weekly {
                         VStack {
-                            Text("Number of times per week: \(Int(workingGoal.numberOfTimesPerWeek.rounded()))")
-                            Slider(value: $workingGoal.numberOfTimesPerWeek, in: 1...7, step: 1)
+                            Text("Number of times per week: \(Int(workingGoal.habit.numberOfTimesPerWeek.rounded()))")
+                            Slider(value: $workingGoal.habit.numberOfTimesPerWeek, in: 1...7, step: 1)
                         }
                     }
-                    else if workingGoal.selectedFrequencyIndex == .monthly {
+                    else if workingGoal.habit.selectedFrequencyIndex == .monthly {
                         VStack {
-                            Text("Number of times per month: \(Int(workingGoal.numberOfTimesPerMonth.rounded()))")
-                            Slider(value: $workingGoal.numberOfTimesPerMonth, in: 1...31, step: 1)
+                            Text("Number of times per month: \(Int(workingGoal.habit.numberOfTimesPerMonth.rounded()))")
+                            Slider(value: $workingGoal.habit.numberOfTimesPerMonth, in: 1...31, step: 1)
                         }
                     }
                     
@@ -153,12 +153,12 @@ struct GoalEditView: View {
                 
                 Button {
                     
-                    if workingGoal.selectedFrequencyIndex == .daily {
+                    if workingGoal.habit.selectedFrequencyIndex == .daily {
                         workingGoal.scheduledCompletionDates = []
                         let currentDate = Date()
                         var currentDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: currentDate)
                         
-                        while let currentDate = Calendar.current.date(from: currentDateComponent), currentDate <= workingGoal.selectedDailyDeadline {
+                        while let currentDate = Calendar.current.date(from: currentDateComponent), currentDate <= workingGoal.habit.selectedDailyDeadline {
                             workingGoal.scheduledCompletionDates.append(currentDate)
                             currentDateComponent.day! += 1
                         }
@@ -178,7 +178,7 @@ struct GoalEditView: View {
                     Text("Save")
                 }
                 .frame(maxWidth: .infinity)
-                .disabled(workingGoal.title.isEmpty || workingGoal.habitTitle.isEmpty || workingGoal.selectedAnimal.name.isEmpty || /*(workingGoal.selectedFrequencyIndex == .custom && areAllTogglesOff) || */workingGoal.motivationalQuote.isEmpty)
+                .disabled(workingGoal.title.isEmpty || workingGoal.habit.title.isEmpty || workingGoal.selectedAnimal.name.isEmpty || /*(workingGoal.selectedFrequencyIndex == .custom && areAllTogglesOff) || */workingGoal.motivationalQuote.isEmpty)
                 
                 //Button {
                 //                        // does this work???
@@ -235,8 +235,7 @@ struct GoalEditView: View {
 struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
-        
-        let goal = Goal(title: "", habitTitle: "", selectedFrequencyIndex: Goal.frequency.daily, selectedAnimal: Animal(name: "", kind: .cow), motivationalQuote: "", selectedDailyDeadline: .now, dayState: [:], completedDates: [], deadline: .now)
+        let goal = Goal(title: "", habit: Habit(title: "", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
         
         GoalEditView(goal: .constant(goal), workingGoal: goal, selectedAnimalKind: .cow)
             .environmentObject(GoalManager())
