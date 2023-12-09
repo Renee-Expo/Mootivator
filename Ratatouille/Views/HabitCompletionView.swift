@@ -13,7 +13,7 @@ struct HabitCompletionView: View {
     
     @Binding var goal: Goal
 //    @State private var showHabitCompletionView = false
-    @State private var showNewGoalSheet = false
+    @State private var showNewHabitSheet = false
     @Binding var isHabitCompleted : Bool
     
 //    @Binding var frequency : Array<String>
@@ -42,7 +42,7 @@ struct HabitCompletionView: View {
                 
                 Button{
                     print("Button shown")
-                    showNewGoalSheet = true
+                    showNewHabitSheet = true
                     } label: {
                         Text("Set new habit")
                             .buttonStyle(.borderedProminent)
@@ -52,6 +52,9 @@ struct HabitCompletionView: View {
                             .foregroundColor(.white)
                             .background(Color("AccentColor"))
                             .cornerRadius(8)
+                    }
+                    .sheet(isPresented: $showNewHabitSheet){
+                            NewHabitView(goal: $goal)
                     }
             }
             

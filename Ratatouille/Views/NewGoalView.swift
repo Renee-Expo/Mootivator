@@ -162,18 +162,18 @@ struct NewGoalView: View {
                     
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     //                    print (dailyDaysDifference)
+                    let initialHabit = Habit(title: title,
+                                            selectedFrequencyIndex: selectedFrequencyIndex,
+                                            selectedDailyDeadline: selectedDailyDeadline,
+                                            numberOfTimesPerWeek: numberOfTimesPerWeek,
+                                            numberOfTimesPerMonth: numberOfTimesPerMonth,
+                                            completedDates: [])
                     goalManager.items.append(Goal(title: title,
-                                                  habit: Habit(title: title,
-                                                               selectedFrequencyIndex: selectedFrequencyIndex,
-                                                               selectedDailyDeadline: selectedDailyDeadline,
-                                                               numberOfTimesPerWeek: numberOfTimesPerWeek,
-                                                               numberOfTimesPerMonth: numberOfTimesPerMonth,
-                                                               completedDates: []),
+                                                  currentHabits: [initialHabit],
+                                                  completedHabits: [],
+                                                  habit: initialHabit, 
                                                   selectedAnimal: selectedAnimal,
                                                   motivationalQuote: motivationalQuote,
-//                                                  numberOfTimesPerWeek: numberOfTimesPerWeek,
-//                                                  numberOfTimesPerMonth: numberOfTimesPerMonth,
-                                                  dayState: customDates,
                                                   scheduledCompletionDates: scheduledCompletionDates,
                                                   deadline: deadline))
                     print (scheduledCompletionDates)

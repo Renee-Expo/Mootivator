@@ -153,6 +153,8 @@ struct Goal: Identifiable, Codable, Hashable {
 //        }
 //    }
 //    var selectedFrequencyIndex : Self.frequency
+    var currentHabits: [Habit] = []
+    var completedHabits: [Habit] = []
     var habit: Habit
     var selectedAnimal : Animal
     //    var selectedAnimal : Int
@@ -209,6 +211,7 @@ struct Goal: Identifiable, Codable, Hashable {
 
 struct Habit: Codable, Hashable {
     
+    var id = UUID()
     var title: String
 //    var frequency : Array<String>
     
@@ -234,7 +237,12 @@ struct Habit: Codable, Hashable {
     var numberOfTimesPerMonth : Double = 1.0
     var numberOfDaysCompleted : Int { completedDates.count }
     var completedDates: Set<String>
+    var isCompleted: Bool = false
 
+}
+
+func createNewHabit(title: String, selectedFrequencyIndex: Habit.frequency, selectedDailyDeadline: Date, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, completedDates: Set<String>, isCompleted: Bool = false) -> Habit {
+    return Habit(title: title, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: completedDates, isCompleted: isCompleted)
 }
 
 extension Goal {

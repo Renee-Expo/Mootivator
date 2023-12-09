@@ -11,6 +11,7 @@ struct NewHabitView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var goalManager: GoalManager = .shared
     
+    @Binding var goal : Goal
     @State private var habitTitle = ""
     @State private var selectedFrequencyIndex = Habit.frequency.daily
     @State private var selectedDailyDeadline = Date()
@@ -18,21 +19,21 @@ struct NewHabitView: View {
     @State private var daysInWeek = 7
     @State private var numberOfTimesPerMonth = 1.0
     @State private var daysInMonth = 31
-    @State private var selectedFixedDeadline = Date()
-    @State private var customDates: [String: Bool] = [
-        Goal.daysOfTheWeek.monday.text: false,
-        Goal.daysOfTheWeek.tuesday.text: false,
-        Goal.daysOfTheWeek.wednesday.text: false,
-        Goal.daysOfTheWeek.thursday.text: false,
-        Goal.daysOfTheWeek.friday.text: false,
-        Goal.daysOfTheWeek.saturday.text: false,
-        Goal.daysOfTheWeek.sunday.text: false]
+//    @State private var selectedFixedDeadline = Date()
+//    @State private var customDates: [String: Bool] = [
+//        Goal.daysOfTheWeek.monday.text: false,
+//        Goal.daysOfTheWeek.tuesday.text: false,
+//        Goal.daysOfTheWeek.wednesday.text: false,
+//        Goal.daysOfTheWeek.thursday.text: false,
+//        Goal.daysOfTheWeek.friday.text: false,
+//        Goal.daysOfTheWeek.saturday.text: false,
+//        Goal.daysOfTheWeek.sunday.text: false]
     @State private var dailyDaysDifference = 0
     @State private var scheduledCompletionDates: [Date] = []
     
-    var areAllTogglesOff: Bool {
-        return !customDates.values.contains(true)
-    }
+//    var areAllTogglesOff: Bool {
+//        return !customDates.values.contains(true)
+//    }
     
     
     func isLastDayOfMonth() -> Bool {
@@ -132,6 +133,10 @@ struct NewHabitView: View {
                     
                     
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
+                    let newHabit = createNewHabit(title: habitTitle, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: [])
+                    goal.habit = newHabit
+                    self.goal = goal
+                    print("\(goal.habit)")
                     //                    print (dailyDaysDifference)
 //                    goalManager.items.append(Goal(title: title,
 //                                                  habitTitle: habitTitle,
@@ -162,6 +167,9 @@ struct NewHabitView: View {
 
 struct NewHabitView_Previews: PreviewProvider {
     static var previews: some View {
-        NewHabitView()
+        
+        let goal = Goal(title: "", habit: Habit(title: "", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
+        
+        NewHabitView(goal: .constant(goal))
     }
 }
