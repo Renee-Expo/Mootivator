@@ -17,8 +17,7 @@ struct CalendarView: View {
     var body: some View {
         VStack {
             //passing selecteddate as binding
-            CalendarViewRepresentable(selectedDate: $selectedDate, goal: $goal, isHabitCompleted: $isHabitCompleted)
-                .scaledToFit()
+            CalendarViewRepresentable(selectedDate: $selectedDate, goal: $goal, isHabitCompleted: $isHabitCompleted, completedDates: $goal.habit.completedDates)
         }
     }
 }
@@ -32,6 +31,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     @Binding var selectedDate: Date
     @Binding var goal: Goal
     @Binding var isHabitCompleted: Bool
+    @Binding var completedDates: Set<String>
+//    @State private var selectedDates: [Date] = []
     
     //creates uiview that will be rendered on the ui
     func makeUIView(context: Context) -> FSCalendar {
@@ -42,11 +43,16 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     
     //update state of the view
     func updateUIView(_ uiView: FSCalendar, context: Context) -> Void {
+        
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd"
-        let completedDateKeys = goal.habit.completedDates
+//            if !selectedDates.isEmpty {
+//                selectedDates.forEach { uiView.deselect($0) }
+//                selectedDates.removeAll()
+//            }
+        
             uiView.allowsMultipleSelection = true
-
+            let completedDateKeys = goal.habit.completedDates
             for dateKey in completedDateKeys {
                 if let date = formatter.date(from: dateKey) {
                     uiView.select(date) // Mark the completed dates as selected
@@ -62,10 +68,13 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
             uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
             uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
-
+            uiView.reloadData() // Reload data to reset appearance
             // Set the current page to the current month
             let currentDate = Date()
             uiView.setCurrentPage(currentDate, animated: false)
+        print(goal.habit.completedDates)
+        print(completedDateKeys)
+        
         }
 
     
@@ -150,6 +159,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 // Update habit completion and modify appearance if the habit is completed
                 if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
+                    self.calendar.reloadData() 
                     // Refresh the progress value in SwiftUI view
                     // self.parent.progress = progress
                 }

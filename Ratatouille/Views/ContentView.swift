@@ -20,6 +20,7 @@ struct ContentView: View {
     @State var goalItemCompletion : Goal =
     Goal(title: "Sample Title", habit: Habit(title: "Sample Habit", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
     @State var isHabitCompleted: Bool = false
+    @State var showHabitCompletionView: Bool = false
     
     var body: some View {
         VStack {
@@ -46,7 +47,7 @@ struct ContentView: View {
                 //                }
             }
             .navigationDestination(isPresented: $isActive) {
-                HabitCompletionView(goal: $goalItemCompletion, isHabitCompleted: $isHabitCompleted)
+                HabitCompletionView(goal: $goalItemCompletion, isHabitCompleted: $isHabitCompleted, showHabitCompletionView: $showHabitCompletionView)
             }
             .fullScreenCover(isPresented: $showOnBoarding) {
                 OnboardingView(showOnBoarding: $showOnBoarding)

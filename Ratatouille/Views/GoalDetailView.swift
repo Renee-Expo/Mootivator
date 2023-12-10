@@ -26,6 +26,7 @@ struct GoalDetailView: View {
     //    @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
     @State private var showHabitCompletionAlert = false
+    @State private var showNewHabitSheet = false
     //    @State private var showOverallHabitCompletionAlert = false
     //    @State private var completedDates: Set<Date> = []
     //    @State private var redirectToGoalView = false
@@ -59,9 +60,24 @@ struct GoalDetailView: View {
                     .overlay(
                         VStack {
                             CalendarView(selectedDate: Date(), goal: $goal)
-                                .scaledToFit()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .padding()
-                            HStack{
+                            //                            HStack(alignment: .center) {
+                            //                                VStack {
+                            //                                    Text("Completed")
+                            //                                    Text("\(goal.habit.numberOfDaysCompleted)d")
+                            //    //                                    .padding(.bottom)
+                            //                                }
+                            //                                .frame(maxWidth: .infinity, alignment: .center)
+                            //                                VStack {
+                            //                                    Text("Target")
+                            //                                    Text("\(Int(targetDays))d")
+                            ////                                        .padding(.bottom)
+                            //                                }
+                            //                                .frame(maxWidth: .infinity, alignment: .center)
+                            //                            }
+                            //                            .padding(.horizontal, 5)
+                            HStack(alignment: .center){
                                 Spacer()
                                 VStack {
                                     Text("Completed")
@@ -110,6 +126,7 @@ struct GoalDetailView: View {
                                     goal.habit.isCompleted = true
                                     goal.completedHabits.append(goal.habit)
                                     showHabitCompletionView = true
+                                    print("completed dates of completed habit: \(goal.habit.completedDates)")
                                 }
                                 Button("No") {
                                     isHabitCompleted = false
@@ -118,12 +135,13 @@ struct GoalDetailView: View {
                                 }
                             }
                             .sheet(isPresented: $showHabitCompletionView) {
-                                HabitCompletionView(goal: $goal, isHabitCompleted: $isHabitCompleted)
+                                HabitCompletionView(goal: $goal, isHabitCompleted: $isHabitCompleted, showHabitCompletionView: $showHabitCompletionView)
+                                
                             }
-                            
                         }
                         
                     )
+                    .padding()
                 DisclosureGroup(
                     isExpanded: $isExpanded,
                     content: {
@@ -220,6 +238,7 @@ struct GoalDetailView: View {
                 //            }
                 //            .padding(.horizontal)
             }
+            .padding(.horizontal)
             .navigationTitle(goal.title)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {

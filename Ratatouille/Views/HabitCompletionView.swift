@@ -9,12 +9,14 @@ import SwiftUI
 
 
 struct HabitCompletionView: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
 //    @State private var showHabitCompletionView = false
     @State private var showNewHabitSheet = false
     @Binding var isHabitCompleted : Bool
+    @Binding var showHabitCompletionView: Bool
     
 //    @Binding var frequency : Array<String>
 //    @Binding var selectedFrequencyIndex : Goal.frequency
@@ -42,7 +44,11 @@ struct HabitCompletionView: View {
                 
                 Button{
                     print("Button shown")
-                    showNewHabitSheet = true
+                    withAnimation {
+    //                    presentationMode.wrappedValue.dismiss()
+                        showNewHabitSheet = true
+                    }
+//                    showHabitCompletionView = false
                     } label: {
                         Text("Set new habit")
                             .buttonStyle(.borderedProminent)
@@ -57,6 +63,10 @@ struct HabitCompletionView: View {
                             NewHabitView(goal: $goal)
                     }
             }
+//        .fullScreenCover(isPresented: $showNewHabitSheet) {
+//            NewHabitView(goal: $goal)
+//        }
+
             
 //        .onAppear{
 //            let currentDate = Date()
@@ -106,7 +116,7 @@ struct HabitCompletionView_Previews: PreviewProvider {
         
         return NavigationStack{
             
-            HabitCompletionView(goal: .constant(goal), isHabitCompleted: .constant(false))
+            HabitCompletionView(goal: .constant(goal), isHabitCompleted: .constant(false), showHabitCompletionView: .constant(false))
                 .environmentObject(GoalManager())
         }
     }

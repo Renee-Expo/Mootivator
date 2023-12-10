@@ -152,7 +152,7 @@ struct NoScreen: View {
                 .font(.system(size: 200))
                 .foregroundColor(.red)
                 .padding()
-            Text("No worries!")
+            Text("No worries! You can continue with this goal until you achieve it!")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()

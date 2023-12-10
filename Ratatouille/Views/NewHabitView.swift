@@ -135,8 +135,10 @@ struct NewHabitView: View {
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     let newHabit = createNewHabit(title: habitTitle, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: [])
                     goal.habit = newHabit
+                    goal.habit.completedDates = []
                     self.goal = goal
                     print("\(goal.habit)")
+                    print("completed dates of current goal: \(goal.habit.completedDates)")
                     //                    print (dailyDaysDifference)
 //                    goalManager.items.append(Goal(title: title,
 //                                                  habitTitle: habitTitle,
