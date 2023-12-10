@@ -12,28 +12,29 @@ struct GoalDetailView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-//    @Binding var numberOfCompletedGoals: Int
+    //    @Binding var numberOfCompletedGoals: Int
     
     @State private var goalAnimalKind: AnimalKind = .cow
     @State private var showHabitCompletionView = false
     @State private var showGoalCompletionView = false
     @State var isHabitCompleted : Bool = false
-//    @State var title: String = ""
-//    @State var habitTitle: String = ""
-//    @State var indexItem: Int = 0
-//    @State var selectedDate: Date = Date()
+    //    @State var title: String = ""
+    //    @State var habitTitle: String = ""
+    //    @State var indexItem: Int = 0
+    //    @State var selectedDate: Date = Date()
     @State private var showGoalDetailSheet = false
     //    @State private var showMarkHabitCompletionAlert = false
     @State private var showDeleteGoalAlert = false
     @State private var showHabitCompletionAlert = false
-//    @State private var showOverallHabitCompletionAlert = false
-//    @State private var completedDates: Set<Date> = []
-//    @State private var redirectToGoalView = false
+    //    @State private var showOverallHabitCompletionAlert = false
+    //    @State private var completedDates: Set<Date> = []
+    //    @State private var redirectToGoalView = false
     @State private var showYesScreen = false
     @State private var showNoScreen = false
     
     @State private var targetDays : Double = 0
     @State private var isExpanded = false
+    @State private var completedHabits: [String] = ["Habit 1"]
     
     var body: some View {
         ScrollView {
@@ -123,154 +124,165 @@ struct GoalDetailView: View {
                         }
                         
                     )
-                List {
-                    DisclosureGroup(
-                        isExpanded: $isExpanded,
-                        content: {
-                            VStack(alignment: .leading) {
-                                ForEach(goal.completedHabits, id: \.id) { habit in
-                                    HStack {
-                                        Rectangle()
-                                            .fill(Color.blue)
-                                            .frame(width: 10, height: 10)
-                                        Text(habit.title)
-                                    }
+                DisclosureGroup(
+                    isExpanded: $isExpanded,
+                    content: {
+                        VStack(alignment: .leading) {
+                            ForEach(goal.completedHabits, id: \.id) { habit in
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(Color.black, lineWidth: 2)
+                                        .frame(width: 350, height: 50)
+                                        .foregroundColor(.white)
+                                    Text(habit.title)
+                                        .font(.headline)
+                                        .padding(.horizontal, 20)
                                 }
+//                                .padding()
                             }
-                        },
-                        label: {
+                        }
+                    },
+                    label: {
+                        VStack(alignment: .center) {
                             Text("Completed Habits")
-                        }
-                    )
-                    .accentColor(.black)
-                }
-
-//                ForEach(goal.completedHabits, id: \.id) { habit in
-//                    Text(habit.title)
-//                }
-                        //                 HStack{
-                        //                    Spacer()
-                        //                    VStack {
-                        //                        Text("Completed")
-                        //                        Text("\(goal.numberOfDaysCompleted)d")
-                        //
-                        //                    }
-                        //
-                        //                    Spacer()
-                        //                    VStack {
-                        //                        Text("Target")
-                        //                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
-                        //
-                        //                            Text("\(goal.scheduledCompletionDates.count)d")
-                        //                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                        //                        } else if goal.selectedFrequencyIndex == .weekly{
-                        //                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
-                        //                        } else if goal.selectedFrequencyIndex == .monthly {
-                        //                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
-                        //                        }
-                        //
-                        //                    }
-                        //                    Spacer()
-                        //                }
-                        
-                        
-                        //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                        //                    Text("Select a date")
-                        //                }
-                        //                .datePickerStyle(.graphical)
-                        //                .onChange(of: selectedDate) { _ in
-                        //                    showMarkHabitCompletionAlert = true
-                        //                }
-                        //                            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
-                        //                                Button("OK", role: .cancel) {
-                        //
-                        //                                }
-                        //                            }
-                        
-                        
-                        //                HStack {
-                        //                    Spacer()
-                        //                    //                        VStack {
-                        //                    //                            Text("Completed")
-                        //                    //                            Text("\(numberOfDaysCompleted)d")
-                        //                    //                                .fontWeight(.bold)
-                        //                    //                                .padding(1)
-                        //                    //                        }
-                        //                        .padding(5)
-                        //
-                        //                    VStack {
-                        //                        Text("Target")
-                        //                        //                                        Text("\(targetDays)d")
-                        //                            .fontWeight(.bold)
-                        //                            .padding(1)
-                        //                    }
-                        //                    .padding(5)
-                        //                    Spacer()
-                        ////                }
-                        //            }
-                        //            .padding(.horizontal)
-                    }
-                    .navigationTitle(goal.title)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .navigationBarTrailing) {
-                            
-                            if showButton() {
-                                Button {
-                                    showGoalCompletionView = true
-                                } label: {
-                                    Label("Complete goal", systemImage: "checkmark.circle")
-                                }
-                            }
-                            Button {
-                                showGoalDetailSheet = true
-                            } label: {
-                                Label("Edit goal", systemImage: "pencil")
-                            }
-                            
-                            Button {
-                                showDeleteGoalAlert = true
-                            } label: {
-                                Label("Delete goal", systemImage: "trash")
-                                    .foregroundColor(.red)
-                            }
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center) //
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .padding()
                         }
                     }
-                    .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
-                        Button("Yes") {
-                            goalManager.deleteGoal(goal)
-                            self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
-                            
-                        }
-                        Button("Cancel") {}
-                    }
-                    .sheet(isPresented: $showGoalDetailSheet) {
-                        NavigationView {
-                            GoalEditView(goal: $goal, workingGoal: goal)
-                        }
-                    }
-                    .sheet(isPresented: $showGoalCompletionView) {
-                        GoalCompletionView(goal: $goal)
-                    }
-                    .onAppear {
-                        targetDays = Double(calculateTargetDays(for: goal))
-                    }
-                    .onChange(of: goal) { newValue in
-                        targetDays = Double(calculateTargetDays(for: newValue))
-                        //                print("goal = \(goal)")
-                        //                print("newValue = \(newValue)")
-                        print("new TargetDays : \(targetDays)")
-                    }
-                }
-                .scrollIndicators(.never)
+                )
+                .accentColor(.black)
+                
+                //                ForEach(goal.completedHabits, id: \.id) { habit in
+                //                    Text(habit.title)
+                //                }
+                //                 HStack{
+                //                    Spacer()
+                //                    VStack {
+                //                        Text("Completed")
+                //                        Text("\(goal.numberOfDaysCompleted)d")
+                //
+                //                    }
+                //
+                //                    Spacer()
+                //                    VStack {
+                //                        Text("Target")
+                //                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
+                //
+                //                            Text("\(goal.scheduledCompletionDates.count)d")
+                //                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
+                //                        } else if goal.selectedFrequencyIndex == .weekly{
+                //                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
+                //                        } else if goal.selectedFrequencyIndex == .monthly {
+                //                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
+                //                        }
+                //
+                //                    }
+                //                    Spacer()
+                //                }
+                
+                
+                //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
+                //                    Text("Select a date")
+                //                }
+                //                .datePickerStyle(.graphical)
+                //                .onChange(of: selectedDate) { _ in
+                //                    showMarkHabitCompletionAlert = true
+                //                }
+                //                            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
+                //                                Button("OK", role: .cancel) {
+                //
+                //                                }
+                //                            }
+                
+                
+                //                HStack {
+                //                    Spacer()
+                //                    //                        VStack {
+                //                    //                            Text("Completed")
+                //                    //                            Text("\(numberOfDaysCompleted)d")
+                //                    //                                .fontWeight(.bold)
+                //                    //                                .padding(1)
+                //                    //                        }
+                //                        .padding(5)
+                //
+                //                    VStack {
+                //                        Text("Target")
+                //                        //                                        Text("\(targetDays)d")
+                //                            .fontWeight(.bold)
+                //                            .padding(1)
+                //                    }
+                //                    .padding(5)
+                //                    Spacer()
+                ////                }
+                //            }
+                //            .padding(.horizontal)
             }
-            func showButton() -> Bool {
-                let currentDate = Date()
-                print("current date: \(currentDate)_")
-                print("habit deadline: \(goal.deadline)")
-                return currentDate >= goal.deadline
+            .navigationTitle(goal.title)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
+                    if showButton() {
+                        Button {
+                            showGoalCompletionView = true
+                        } label: {
+                            Label("Complete goal", systemImage: "checkmark.circle")
+                        }
+                    }
+                    Button {
+                        showGoalDetailSheet = true
+                    } label: {
+                        Label("Edit goal", systemImage: "pencil")
+                    }
+                    
+                    Button {
+                        showDeleteGoalAlert = true
+                    } label: {
+                        Label("Delete goal", systemImage: "trash")
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+            .alert("Are you sure you would like to delete this goal?", isPresented: $showDeleteGoalAlert) {
+                Button("Yes") {
+                    goalManager.deleteGoal(goal)
+                    self.presentationMode.wrappedValue.dismiss() // basically like dismissing the sheetview, same concept.
+                    
+                }
+                Button("Cancel") {}
+            }
+            .sheet(isPresented: $showGoalDetailSheet) {
+                NavigationView {
+                    GoalEditView(goal: $goal, workingGoal: goal)
+                }
+            }
+            .sheet(isPresented: $showGoalCompletionView) {
+                GoalCompletionView(goal: $goal)
+            }
+            .onAppear {
+                targetDays = Double(calculateTargetDays(for: goal))
+            }
+            .onChange(of: goal) { newValue in
+                targetDays = Double(calculateTargetDays(for: newValue))
+                //                print("goal = \(goal)")
+                //                print("newValue = \(newValue)")
+                print("new TargetDays : \(targetDays)")
             }
             
         }
+        .scrollIndicators(.never)
+    }
+    
+    func showButton() -> Bool {
+        let currentDate = Date()
+        print("current date: \(currentDate)_")
+        print("habit deadline: \(goal.deadline)")
+        return currentDate >= goal.deadline
+    }
+    
+}
 
 
         struct GoalDetailView_Previews: PreviewProvider {
