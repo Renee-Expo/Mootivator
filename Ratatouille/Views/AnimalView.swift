@@ -39,7 +39,9 @@ struct AnimalView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.black, lineWidth: 2)
                                     .frame(width: 150, height: 150)
-                                    .opacity(isUnlocked || unlockedAnimals.contains(animalKind) ? 1.0 : 0.5)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8).opacity(isUnlocked || unlockedAnimals.contains(animalKind) ? 1.0 : 0.5).foregroundColor(.white)
+                                    )
 
                                 Image("\(animalKind.image)" + "Happy")
                                     .resizable()
@@ -53,7 +55,7 @@ struct AnimalView: View {
                             
                             }
                             Text("Complete \(numberInText) goals to unlock")
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .font(.system(size: 12))
                                 .bold()
                                 .padding(.top, 5)

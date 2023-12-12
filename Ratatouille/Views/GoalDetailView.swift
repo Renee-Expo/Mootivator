@@ -9,6 +9,7 @@ import SwiftUI
 struct GoalDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
@@ -56,7 +57,7 @@ struct GoalDetailView: View {
                 RoundedRectangle(cornerRadius: 30)
                     .strokeBorder(Color.black, lineWidth: 1)
                     .frame(width: 350, height: 400)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
                     .overlay(
                         VStack {
                             CalendarView(selectedDate: Date(), goal: $goal)
@@ -123,7 +124,6 @@ struct GoalDetailView: View {
                             .alert("Have you completed the goal: \(goal.habit.title)?", isPresented: $showHabitCompletionAlert) {
                                 Button("Yes") {
                                     isHabitCompleted = true
-                                    goal.habit.isCompleted = true
                                     goal.completedHabits.append(goal.habit)
                                     showHabitCompletionView = true
                                     print("completed dates of completed habit: \(goal.habit.completedDates)")
@@ -150,11 +150,13 @@ struct GoalDetailView: View {
                                 ZStack(alignment: .leading) {
                                     RoundedRectangle(cornerRadius: 20)
                                         .strokeBorder(Color.black, lineWidth: 1)
+                                        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(Color.white))
                                         .frame(width: 350, height: 60)
-                                        .foregroundColor(.white)
                                     Text(habit.title)
                                         .font(.headline)
                                         .padding(.horizontal, 20)
+                                        .foregroundColor(.black)
+                                    
                                 }
 //                                .padding()
                             }
@@ -168,75 +170,12 @@ struct GoalDetailView: View {
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .padding()
+                                .foregroundColor(.primary)
                         }
                     }
                 )
                 .accentColor(.black)
-                
-                //                ForEach(goal.completedHabits, id: \.id) { habit in
-                //                    Text(habit.title)
-                //                }
-                //                 HStack{
-                //                    Spacer()
-                //                    VStack {
-                //                        Text("Completed")
-                //                        Text("\(goal.numberOfDaysCompleted)d")
-                //
-                //                    }
-                //
-                //                    Spacer()
-                //                    VStack {
-                //                        Text("Target")
-                //                        if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
-                //
-                //                            Text("\(goal.scheduledCompletionDates.count)d")
-                //                            //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                //                        } else if goal.selectedFrequencyIndex == .weekly{
-                //                            Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
-                //                        } else if goal.selectedFrequencyIndex == .monthly {
-                //                            Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
-                //                        }
-                //
-                //                    }
-                //                    Spacer()
-                //                }
-                
-                
-                //                DatePicker(selection: $selectedDate, displayedComponents: .date) {
-                //                    Text("Select a date")
-                //                }
-                //                .datePickerStyle(.graphical)
-                //                .onChange(of: selectedDate) { _ in
-                //                    showMarkHabitCompletionAlert = true
-                //                }
-                //                            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showOverallHabitCompletionAlert) {
-                //                                Button("OK", role: .cancel) {
-                //
-                //                                }
-                //                            }
-                
-                
-                //                HStack {
-                //                    Spacer()
-                //                    //                        VStack {
-                //                    //                            Text("Completed")
-                //                    //                            Text("\(numberOfDaysCompleted)d")
-                //                    //                                .fontWeight(.bold)
-                //                    //                                .padding(1)
-                //                    //                        }
-                //                        .padding(5)
-                //
-                //                    VStack {
-                //                        Text("Target")
-                //                        //                                        Text("\(targetDays)d")
-                //                            .fontWeight(.bold)
-                //                            .padding(1)
-                //                    }
-                //                    .padding(5)
-                //                    Spacer()
-                ////                }
-                //            }
-                //            .padding(.horizontal)
+                .padding(.horizontal)
             }
             .padding(.horizontal)
             .navigationTitle(goal.title)
@@ -299,6 +238,14 @@ struct GoalDetailView: View {
         print("current date: \(currentDate)_")
         print("habit deadline: \(goal.deadline)")
         return currentDate >= goal.deadline
+    }
+    
+    var backgroundColor: Color {
+        if colorScheme == .dark {
+            return Color.white // For dark mode, set it to white
+        } else {
+            return Color.white // For light mode, set it to white as well
+        }
     }
     
 }

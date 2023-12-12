@@ -147,7 +147,9 @@ struct PageView : View {
                     showOnBoarding.toggle()
                 }) {
                     Text("Back to home screen")
-                        .frame(width: 200, height: 50)
+                        .buttonStyle(.borderedProminent)
+                        .fontWeight(.bold)
+                        .padding()
                         .foregroundColor(.white)
                         .background(Color("AccentColor"))
                         .cornerRadius(8)
@@ -159,6 +161,9 @@ struct PageView : View {
                     showNewGoalSheet = true
                 } label: {
                     Text("Set your first goal!")
+                        .buttonStyle(.borderedProminent)
+                        .fontWeight(.bold)
+                        .padding()
                         .frame(width: 200, height: 50)
                         .foregroundColor(.white)
                         .background(Color("AccentColor"))

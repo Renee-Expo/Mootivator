@@ -47,9 +47,9 @@ struct CircularProgressView: View {
 
     var body: some View {
         let progressText = String(format: "%.0f%%", progress * 100)
-        let purpleAngularGradient = AngularGradient(
+        let greenAngularGradient = AngularGradient(
             gradient: Gradient(colors: [
-                Color("AccentColor")
+                Color("AccentColor"), Color(red: 61/255, green: 209/225, blue: 100/255),  Color("AccentColor")
             ]),
             center: .center,
             startAngle: .degrees(0),
@@ -61,7 +61,7 @@ struct CircularProgressView: View {
             Circle()
                 .trim(from: 0, to: CGFloat(progress))
                 .stroke(
-                    purpleAngularGradient,
+                    greenAngularGradient,
                     style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .rotationEffect(Angle(degrees: -90))
                 .overlay(
