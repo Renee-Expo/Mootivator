@@ -46,11 +46,8 @@ struct GoalDetailView: View {
                 Text("Current habit")
                     .font(.headline)
                     .fontWeight(.bold)
-                    .padding(.top, 5)
                 
-                
-                
-                Text(goal.habit.title)
+                Text(goal.habit.habitTitle)
                     .font(.headline)
                     .padding(.bottom, 5)
                 //                    .fontWeight(.bold)
@@ -78,7 +75,7 @@ struct GoalDetailView: View {
                             //                                .frame(maxWidth: .infinity, alignment: .center)
                             //                            }
                             //                            .padding(.horizontal, 5)
-                            HStack(alignment: .center){
+                            HStack() {
                                 Spacer()
                                 VStack {
                                     Text("Completed")
@@ -92,18 +89,6 @@ struct GoalDetailView: View {
                                     Text("Target")
                                     Text("\(Int(targetDays))d")
                                         .padding(.bottom)
-                                    //                                    if /*(goal.selectedFrequencyIndex == .custom) || */(goal.selectedFrequencyIndex == .daily) {
-                                    //
-                                    //                                        Text("\(goal.scheduledCompletionDates.count)d")
-                                    //                                            .padding(.bottom)
-                                    //                                        //                    Text("\(goal.selectedFixedDeadline - Date()) days")
-                                    //                                    } else if goal.selectedFrequencyIndex == .weekly{
-                                    //                                        Text ("\(Int(goal.numberOfTimesPerWeek.rounded()))d")
-                                    //                                            .padding(.bottom)
-                                    //                                    } else if goal.selectedFrequencyIndex == .monthly {
-                                    //                                        Text ("\(Int(goal.numberOfTimesPerMonth.rounded()))d")
-                                    //                                            .padding(.bottom)
-                                    //                                    }
                                     
                                 }
                                 Spacer()
@@ -121,7 +106,7 @@ struct GoalDetailView: View {
                                     .cornerRadius(8)
                             }
                             .padding(.bottom)
-                            .alert("Have you completed the goal: \(goal.habit.title)?", isPresented: $showHabitCompletionAlert) {
+                            .alert("Have you completed the habit: \(goal.habit.habitTitle)?", isPresented: $showHabitCompletionAlert) {
                                 Button("Yes") {
                                     isHabitCompleted = true
                                     goal.completedHabits.append(goal.habit)
@@ -150,15 +135,14 @@ struct GoalDetailView: View {
                                 ZStack(alignment: .leading) {
                                     RoundedRectangle(cornerRadius: 20)
                                         .strokeBorder(Color.black, lineWidth: 1)
-                                        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(Color.white))
+                                        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(Color(red: 227/255, green: 229/255, blue: 232/255)))
                                         .frame(width: 350, height: 60)
-                                    Text(habit.title)
+                                    Text(habit.habitTitle)
                                         .font(.headline)
                                         .padding(.horizontal, 20)
                                         .foregroundColor(.black)
                                     
                                 }
-//                                .padding()
                             }
                         }
                     },
@@ -169,7 +153,6 @@ struct GoalDetailView: View {
                                 .multilineTextAlignment(.center) //
                                 .font(.headline)
                                 .fontWeight(.bold)
-                                .padding()
                                 .foregroundColor(.primary)
                         }
                     }
@@ -254,7 +237,7 @@ struct GoalDetailView: View {
         struct GoalDetailView_Previews: PreviewProvider {
             static var previews: some View {
                 
-                let goal = Goal(title: "Sample Title", habit: Habit(title: "Sample Habit", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
+                let goal = Goal(title: "Sample Title", habit: Habit(habitTitle: "Sample Habit", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
                 
                 return NavigationStack {
                     GoalDetailView(goal: .constant(goal))

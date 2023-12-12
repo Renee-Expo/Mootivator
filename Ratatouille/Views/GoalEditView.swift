@@ -71,7 +71,7 @@ struct GoalEditView: View {
                 
                 Section("Current Habit") {
                     
-                    TextField(text: $workingGoal.habit.title) {
+                    TextField(text: $workingGoal.habit.habitTitle) {
                         Text("Enter a Habit")
                     }
                     
@@ -178,7 +178,7 @@ struct GoalEditView: View {
                     Text("Save")
                 }
                 .frame(maxWidth: .infinity)
-                .disabled(workingGoal.title.isEmpty || workingGoal.habit.title.isEmpty || workingGoal.selectedAnimal.name.isEmpty || /*(workingGoal.selectedFrequencyIndex == .custom && areAllTogglesOff) || */workingGoal.motivationalQuote.isEmpty)
+                .disabled(workingGoal.title.isEmpty || workingGoal.habit.habitTitle.isEmpty || workingGoal.selectedAnimal.name.isEmpty || /*(workingGoal.selectedFrequencyIndex == .custom && areAllTogglesOff) || */workingGoal.motivationalQuote.isEmpty)
                 
                 //Button {
                 //                        // does this work???
@@ -235,7 +235,7 @@ struct GoalEditView: View {
 struct GoalEditView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let goal = Goal(title: "", habit: Habit(title: "", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
+        let goal = Goal(title: "", habit: Habit(habitTitle: "", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: []), selectedAnimal: Animal(name: "Name of Animal", kind: .cow), motivationalQuote: "imagine the motivational quote",deadline: Date())
         
         GoalEditView(goal: .constant(goal), workingGoal: goal, selectedAnimalKind: .cow)
             .environmentObject(GoalManager())

@@ -26,7 +26,7 @@ struct ShowingAnimalSegmentedControlElement: View {
                                     Text("\(item.title)")
                                         .font(.system(.title2))
                                         .fontWeight(.heavy)
-                                    Text("\(item.habit.title)")
+                                    Text("\(item.habit.habitTitle)")
                                         .fontWeight(.medium)
                                 }
     //                                .clipShape(Circle())

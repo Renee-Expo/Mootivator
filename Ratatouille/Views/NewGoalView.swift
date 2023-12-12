@@ -162,7 +162,7 @@ struct NewGoalView: View {
                     
                     dailyDaysDifference = Calendar.current.dateComponents([.day], from: Date(), to: selectedDailyDeadline).day ?? 0
                     //                    print (dailyDaysDifference)
-                    let initialHabit = Habit(title: title,
+                    let initialHabit = Habit(habitTitle: habitTitle,
                                             selectedFrequencyIndex: selectedFrequencyIndex,
                                             selectedDailyDeadline: selectedDailyDeadline,
                                             numberOfTimesPerWeek: numberOfTimesPerWeek,

@@ -157,7 +157,7 @@ final class GoalManager: ItemManager {
                 if !self.searchText.isEmpty {
                     filteredGoals = filteredGoals.filter {
                         $0.title.localizedCaseInsensitiveContains(self.searchText) ||
-                        $0.habit.title.localizedCaseInsensitiveContains(self.searchText)
+                        $0.habit.habitTitle.localizedCaseInsensitiveContains(self.searchText)
                     }
                 }
                 

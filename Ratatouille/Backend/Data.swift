@@ -212,7 +212,7 @@ struct Goal: Identifiable, Codable, Hashable {
 struct Habit: Codable, Hashable {
     
     var id = UUID()
-    var title: String
+    var habitTitle: String
 //    var frequency : Array<String>
     
     enum frequency : Codable, CaseIterable, Hashable {
@@ -243,7 +243,7 @@ struct Habit: Codable, Hashable {
 
 func createNewHabit(title: String, selectedFrequencyIndex: Habit.frequency, selectedDailyDeadline: Date, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, completedDates: Set<String>, isCompleted: Bool = false) -> Habit {
     
-    var newHabit = Habit(title: title, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: completedDates, isCompleted: isCompleted)
+    var newHabit = Habit(habitTitle: title, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: completedDates, isCompleted: isCompleted)
     
     newHabit.completedDates = []
     
@@ -255,11 +255,11 @@ extension Goal {
     static let sampleGoals: [Goal] = [
         
         
-        .init(title: "Get A for Math", habit: Habit(title: "Do one practice paper", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffly the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", deadline: Date()),
+        .init(title: "Get A for Math", habit: Habit(habitTitle: "Do one practice paper", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffly the first", kind: .cow), motivationalQuote: "You'll never do a whole lot unless you're brave enough to try", deadline: Date()),
         
-            .init(title: "Lead a healtier life", habit: Habit(title: "Excercise", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", deadline: Date()),
+            .init(title: "Lead a healtier life", habit: Habit(habitTitle: "Excercise", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the second", kind: .duck, emotion: Emotion.happy), motivationalQuote: "If you're not positive energy, you're negative energy", deadline: Date()),
         
-            .init(title: "Submit Homework On time", habit: Habit(title: "Do homework according to plan", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", deadline: Date())
+            .init(title: "Submit Homework On time", habit: Habit(habitTitle: "Do homework according to plan", selectedFrequencyIndex: Habit.frequency.daily, selectedDailyDeadline: Date(), completedDates: ["20231101"]), selectedAnimal: Animal(name: "fluffy the third", kind: .cat, emotion: Emotion.sad), motivationalQuote: "motiovational quotes need to be long...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in massa quis erat viverra porta. Nulla dictum consequat augue et tempor. Etiam nisl risus, gravida in tellus sit amet, posuere porta risus. Ut nec sollicitudin ante. Mauris pulvinar neque tellus, vitae pharetra est porttitor ac. Aenean nec ullamcorper nisl, ac venenatis nunc. Cras ultricies, urna nec porta suscipit, velit elit blandit enim, vel mollis ligula massa nec felis. Quisque cursus urna dolor, id tempus orci porta non. Aliquam viverra, sapien nec consequat pharetra, lorem metus tempus nisi, eu vulputate sem metus vel sapien. Nam mattis felis et iaculis interdum. Aliquam non lorem sed mauris ornare condimentum non a augue. Nulla sed justo pulvinar, facilisis est vel, ullamcorper risus. Nullam quis elit non turpis aliquet tincidunt. Cras vulputate convallis lorem, eget bibendum justo tempor dapibus. Ut feugiat dolor elit, vel interdum urna tristique sed. Aenean faucibus auctor ex, sit amet vulputate ex tempus sit amet.", deadline: Date())
         
     ]
     
