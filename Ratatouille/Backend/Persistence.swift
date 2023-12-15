@@ -132,8 +132,6 @@ final class GoalManager: ItemManager {
     
     
     func deleteGoal(_ goal: Goal) {
-        // Implement deletion logic here
-        // For instance, if you're storing goals in an array:
         if let index = items.firstIndex(where: { $0.id == goal.id }) {
             items.remove(at: index)
         }

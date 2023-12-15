@@ -18,15 +18,6 @@ struct HabitCompletionView: View {
     @Binding var isOverallHabitCompleted : Bool
     @Binding var showHabitCompletionView: Bool
     
-//    @Binding var frequency : Array<String>
-//    @Binding var selectedFrequencyIndex : Goal.frequency
-//    @Binding var selectedDailyDeadline : Date
-//    @Binding var selectedFixedDeadline : Date
-//    @Binding var numberOfDaysCompleted : Int
-//    @Binding var completedDates: [Date]
-//    @Binding var scheduledCompletionDates: [Date]
-
-    
     var body: some View {
         VStack {
                 Image(systemName: isOverallHabitCompleted ? "checkmark.circle":"xmark.circle")
@@ -46,6 +37,7 @@ struct HabitCompletionView: View {
                     print("Button shown")
                     withAnimation {
     //                    presentationMode.wrappedValue.dismiss()
+                        goal.completedHabits.append(goal.habit)
                         showNewHabitSheet = true
                     }
 //                    showHabitCompletionView = false

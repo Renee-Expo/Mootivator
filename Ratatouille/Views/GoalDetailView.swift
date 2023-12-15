@@ -90,7 +90,6 @@ struct GoalDetailView: View {
                             .alert("Have you completed the habit: \(goal.habit.habitTitle)?", isPresented: $showHabitCompletionAlert) {
                                 Button("Yes") {
                                     isOverallHabitCompleted = true
-                                    goal.completedHabits.append(goal.habit)
                                     showHabitCompletionView = true
                                     print("completed dates of completed habit: \(goal.habit.completedDates)")
                                 }
@@ -131,7 +130,8 @@ struct GoalDetailView: View {
                         VStack(alignment: .center) {
                             Text("Completed Habits")
                                 .frame(maxWidth: .infinity)
-                                .multilineTextAlignment(.center) //
+                                .multilineTextAlignment(.center)
+                                .padding(.bottom)
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.primary)

@@ -19,7 +19,15 @@ struct ShowingAnimalSegmentedControlElement: View {
             VStack {
                 if goalManager.items.count > 0 {
                     TabView {
-                        ForEach($goalManager.items, id: \.id ) { $item in
+                        ForEach(
+                            Binding(
+                                get: {
+                                    self.goalManager.items.filter { !$0.isGoalCompleted }
+                                },
+                                set: { _ in }
+                            ),
+                            id: \.id
+                        ) { $item in
                             ScrollView {
                                 AnimalEmotionElement(goal: item)
                                 VStack(alignment: .center) {
