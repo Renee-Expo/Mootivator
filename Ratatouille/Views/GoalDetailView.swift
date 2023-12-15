@@ -13,12 +13,11 @@ struct GoalDetailView: View {
     @ObservedObject var goalManager: GoalManager = .shared
     
     @Binding var goal: Goal
-    //    @Binding var numberOfCompletedGoals: Int
     
     @State private var goalAnimalKind: AnimalKind = .cow
     @State private var showHabitCompletionView = false
     @State private var showGoalCompletionView = false
-    @State var isHabitCompleted : Bool = false
+    @State var isOverallHabitCompleted : Bool = false
     //    @State var title: String = ""
     //    @State var habitTitle: String = ""
     //    @State var indexItem: Int = 0
@@ -28,9 +27,6 @@ struct GoalDetailView: View {
     @State private var showDeleteGoalAlert = false
     @State private var showHabitCompletionAlert = false
     @State private var showNewHabitSheet = false
-    //    @State private var showOverallHabitCompletionAlert = false
-    //    @State private var completedDates: Set<Date> = []
-    //    @State private var redirectToGoalView = false
     @State private var showYesScreen = false
     @State private var showNoScreen = false
     
@@ -60,22 +56,7 @@ struct GoalDetailView: View {
                             CalendarView(selectedDate: Date(), goal: $goal)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .padding()
-                            //                            HStack(alignment: .center) {
-                            //                                VStack {
-                            //                                    Text("Completed")
-                            //                                    Text("\(goal.habit.numberOfDaysCompleted)d")
-                            //    //                                    .padding(.bottom)
-                            //                                }
-                            //                                .frame(maxWidth: .infinity, alignment: .center)
-                            //                                VStack {
-                            //                                    Text("Target")
-                            //                                    Text("\(Int(targetDays))d")
-                            ////                                        .padding(.bottom)
-                            //                                }
-                            //                                .frame(maxWidth: .infinity, alignment: .center)
-                            //                            }
-                            //                            .padding(.horizontal, 5)
-                            HStack() {
+                            HStack {
                                 Spacer()
                                 VStack {
                                     Text("Completed")
@@ -108,19 +89,19 @@ struct GoalDetailView: View {
                             .padding(.bottom)
                             .alert("Have you completed the habit: \(goal.habit.habitTitle)?", isPresented: $showHabitCompletionAlert) {
                                 Button("Yes") {
-                                    isHabitCompleted = true
+                                    isOverallHabitCompleted = true
                                     goal.completedHabits.append(goal.habit)
                                     showHabitCompletionView = true
                                     print("completed dates of completed habit: \(goal.habit.completedDates)")
                                 }
                                 Button("No") {
-                                    isHabitCompleted = false
+                                    isOverallHabitCompleted = false
                                     showHabitCompletionView = true
                                     
                                 }
                             }
                             .sheet(isPresented: $showHabitCompletionView) {
-                                HabitCompletionView(goal: $goal, isHabitCompleted: $isHabitCompleted, showHabitCompletionView: $showHabitCompletionView)
+                                HabitCompletionView(goal: $goal, isOverallHabitCompleted: $isOverallHabitCompleted, showHabitCompletionView: $showHabitCompletionView)
                                 
                             }
                         }
@@ -135,7 +116,7 @@ struct GoalDetailView: View {
                                 ZStack(alignment: .leading) {
                                     RoundedRectangle(cornerRadius: 20)
                                         .strokeBorder(Color.black, lineWidth: 1)
-                                        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(Color(red: 227/255, green: 229/255, blue: 232/255)))
+                                        .background(RoundedRectangle(cornerRadius: 20).foregroundColor(.white))
                                         .frame(width: 350, height: 60)
                                     Text(habit.habitTitle)
                                         .font(.headline)

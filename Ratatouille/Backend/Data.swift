@@ -243,9 +243,7 @@ struct Habit: Codable, Hashable {
 
 func createNewHabit(title: String, selectedFrequencyIndex: Habit.frequency, selectedDailyDeadline: Date, numberOfTimesPerWeek: Double, numberOfTimesPerMonth: Double, completedDates: Set<String>, isCompleted: Bool = false) -> Habit {
     
-    var newHabit = Habit(habitTitle: title, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: completedDates, isCompleted: isCompleted)
-    
-    newHabit.completedDates = []
+    var newHabit = Habit(habitTitle: title, selectedFrequencyIndex: selectedFrequencyIndex, selectedDailyDeadline: selectedDailyDeadline, numberOfTimesPerWeek: numberOfTimesPerWeek, numberOfTimesPerMonth: numberOfTimesPerMonth, completedDates: [], isCompleted: isCompleted)
     
     return newHabit
 }

@@ -43,39 +43,47 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     
     //update state of the view
     func updateUIView(_ uiView: FSCalendar, context: Context) -> Void {
+    
         
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMdd"
-//            if !selectedDates.isEmpty {
-//                selectedDates.forEach { uiView.deselect($0) }
-//                selectedDates.removeAll()
-//            }
-            uiView.allowsMultipleSelection = true
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        uiView.allowsMultipleSelection = true
         
-            let completedDateKeys = goal.habit.completedDates
-            for dateKey in completedDateKeys {
-                if let date = formatter.date(from: dateKey) {
-                    uiView.select(date) // Mark the completed dates as selected
-                }
+        let completedDateKeys = goal.habit.completedDates
+        for dateKey in completedDateKeys {
+            if let date = formatter.date(from: dateKey) {
+                uiView.select(date) // Mark the completed dates as selected
             }
+        }
+        
+        // Assuming `previouslySelectedDates` contains previously selected dates
 
-            uiView.appearance.titleSelectionColor = .white
-            uiView.appearance.subtitleSelectionColor = .white
-            uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
-            uiView.appearance.titleDefaultColor = UIColor(named: "DynamicTextColor")
-            uiView.appearance.weekdayTextColor = UIColor(named: "AccentColor")
-            uiView.appearance.headerTitleColor = UIColor(named: "AccentColor")
+        let previouslySelectedDates = uiView.selectedDates.filter { date in
+            !completedDateKeys.contains(formatter.string(from: date))
+        }
 
-            uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
-            uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
+        for date in previouslySelectedDates {
+            uiView.deselect(date)
+        }
+
+        
+        uiView.appearance.titleSelectionColor = .white
+        uiView.appearance.subtitleSelectionColor = .white
+        uiView.appearance.selectionColor =  UIColor(named: "AccentColor")
+        uiView.appearance.titleDefaultColor = UIColor(named: "DynamicTextColor")
+        uiView.appearance.weekdayTextColor = UIColor(named: "AccentColor")
+        uiView.appearance.headerTitleColor = UIColor(named: "AccentColor")
+        
+        uiView.appearance.todayColor = UIColor(named: "BackgroundColors")
+        uiView.appearance.titleTodayColor = UIColor(named: "DynamicTextColor")
         // Reload data to reset appearance
-            // Set the current page to the current month
-            let currentDate = Date()
-            uiView.setCurrentPage(currentDate, animated: false)
+        // Set the current page to the current month
+        let currentDate = Date()
+        uiView.setCurrentPage(currentDate, animated: false)
         print(goal.habit.completedDates)
         print(completedDateKeys)
         
-        }
+    }
 
     
     //create custom instance that is used to communicate btwn swiftui & uikitviews
@@ -96,7 +104,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         init(_ parent: CalendarViewRepresentable, selectedDate: Binding<Date>, goal: Binding<Goal>, calendar: FSCalendar, isHabitCompleted: Binding<Bool>) {
             self.selectedDate = selectedDate
             
-            self.goal = goal // Assign the habit property
+            self.goal = goal 
             self.calendar = calendar
             self.parent = parent
             self.isHabitCompleted = isHabitCompleted
@@ -108,6 +116,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
             if isHabitCompletedForDate(date) {
                 deleteCompletionDate(date)
+
             }
         }
         func calendar(_ calendar: FSCalendar,
@@ -118,26 +127,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 showHabitCompletionAlert(for: date)
             }
         }
-        //            var parent: CalendarViewRepresentable
-        //
-        //            init(_ parent: CalendarViewRepresentable) {
-        //                self.parent = parent
-        //            }
-        
-        //        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        ////            if isWeekend(date: date) {
-        ////                return false
-        ////            }
-        //            return true
-        //        }
-        //        func calendar(_ calendar: FSCalendar,
-        //                  imageFor date: Date) -> UIImage? {
-        ////            if isWeekend(date: date) {
-        ////                return UIImage(systemName: "sparkles")
-        ////            }
-        //            return nil
-        //        }
-        //
         func showHabitCompletionAlert(for date: Date) {
             // Ensure the calendar is updated before checking if the date is in the future
             self.calendar.deselect(date)
@@ -159,9 +148,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                 // Update habit completion and modify appearance if the habit is completed
                 if !self.isHabitCompletedForDate(date) {
                     self.addCompletionDate(date)
-                    
-                    // Refresh the progress value in SwiftUI view
-                    // self.parent.progress = progress
                 }
             }))
 
@@ -260,64 +246,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     
     
 }
-
-
-//var numberOfDaysCompleted: Int = 0
-//var progress: Double = 0.0
-//var targetDays = 0
-//
-//func calculateTargetDays(for goal: Goal) -> Int {
-//        let currentDate = Date()
-//        let calendar = Calendar.current
-//    
-//        // Function to check if a date falls within a week
-//        func isInCurrentWeek(_ date: Date) -> Bool {
-//            return calendar.isDate(date, equalTo: currentDate, toGranularity: .weekOfYear)
-//        }
-//    
-//        // Function to check if a date falls within a month
-//        func isInCurrentMonth(_ date: Date) -> Bool {
-//            return calendar.isDate(date, equalTo: currentDate, toGranularity: .month)
-//        }
-//    
-//        var targetDays = 0
-//        switch goal.selectedFrequencyIndex {
-//        case .daily:
-//    
-//            if let deadlineDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
-//                let days = calendar.dateComponents([.day], from: currentDate, to: deadlineDate).day ?? 0
-//                targetDays += max(0, days)
-//    
-//            }
-//        case .weekly:
-//            let remainingDaysInWeek = calendar.range(of: .day, in: .weekOfYear, for: currentDate)?.count ?? 0
-//            let remainingWeeksInMonth = calendar.range(of: .weekOfYear, in: .month, for: currentDate)?.count ?? 0
-//            let weeklyFrequency = 2 // Example: The user wants to achieve twice a week
-//    
-//            targetDays += min(remainingDaysInWeek, remainingWeeksInMonth * weeklyFrequency)
-//        case .monthly:
-//            if let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: calendar.startOfDay(for: currentDate)) {
-//                let remainingDaysInMonth = calendar.range(of: .day, in: .month, for: startOfNextMonth)?.count ?? 0
-//                let remainingMonthsInYear = calendar.range(of: .month, in: .year, for: currentDate)?.count ?? 0
-//                let monthlyFrequency = 4 // Example: The user wants to achieve 4 times a month
-//    
-//                targetDays += min(remainingDaysInMonth, remainingMonthsInYear * monthlyFrequency)
-//            }
-//        case .custom:
-//    
-//            // Calculate target days for fixed frequency (e.g., specific dates selected)
-//            // Replace `selectedDates` with actual array of selected dates from Goal struct
-//            let selectedDates: [Date] = [] // Placeholder for selected dates
-//            for date in selectedDates {
-//                if date >= currentDate {
-//                    targetDays += 1
-//                }
-//            }
-//        }
-//        
-//    return targetDays
-//}
-
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {

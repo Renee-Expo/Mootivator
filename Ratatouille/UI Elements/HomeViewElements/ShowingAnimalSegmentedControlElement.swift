@@ -17,7 +17,7 @@ struct ShowingAnimalSegmentedControlElement: View {
     var body: some View {
 //        var colorInverted = (colorScheme == .dark ? Color.black : Color.white)
             VStack {
-                if goalManager.items.count > 0 && goalManager.items.contains(where: { !$0.isGoalCompleted } ){
+                if goalManager.items.count > 0 {
                     TabView {
                         ForEach($goalManager.items, id: \.id ) { $item in
                             ScrollView {
@@ -43,14 +43,12 @@ struct ShowingAnimalSegmentedControlElement: View {
                                         .font(.footnote)
                                         .fontWeight(.medium)
                                         .padding(5)
+                                    
+                                    CalendarView(selectedDate: Date(), goal: $item)
+                                        .scaledToFit()
+                                        .padding()
                                 }
-    //                                .padding(.leading, 100)
-    //                                .padding( )
-    //                                .multilineTextAlignment(.trailing)
                                 
-                                        CalendarView(selectedDate: Date(), goal: $item)
-                                            .scaledToFit()
-                                            .padding()
                                 
     //                            HStack {
     //                                Spacer()
