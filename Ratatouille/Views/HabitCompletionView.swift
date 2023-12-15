@@ -26,7 +26,7 @@ struct HabitCompletionView: View {
                 Text(isOverallHabitCompleted ? "Habit Complete!  Well done!" : "Habit incomplete")
                     .font(.system(size: 24))
                     .fontWeight(.medium)
-                    .padding()
+                    .padding(.top)
                 Text(isOverallHabitCompleted ? "Keep up the good work!" : "It’s ok! Try again, you’ve got this! You may now set the same habit or set a new one!")
                     .font(.system(size: 24))
                     .multilineTextAlignment(.center)

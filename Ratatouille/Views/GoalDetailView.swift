@@ -48,7 +48,7 @@ struct GoalDetailView: View {
                     .padding(.bottom, 5)
                 //                    .fontWeight(.bold)
                 RoundedRectangle(cornerRadius: 30)
-                    .strokeBorder(Color.black, lineWidth: 1)
+                    .strokeBorder(Color.black, lineWidth: 2)
                     .frame(width: 350, height: 400)
                     .foregroundColor(Color.white)
                     .overlay(
@@ -114,7 +114,7 @@ struct GoalDetailView: View {
                             ForEach(goal.completedHabits, id: \.id) { habit in
                                 ZStack(alignment: .leading) {
                                     RoundedRectangle(cornerRadius: 20)
-                                        .strokeBorder(Color.black, lineWidth: 1)
+                                        .strokeBorder(Color.black, lineWidth: 2)
                                         .background(RoundedRectangle(cornerRadius: 20).foregroundColor(.white))
                                         .frame(width: 350, height: 60)
                                     Text(habit.habitTitle)

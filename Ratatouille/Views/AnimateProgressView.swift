@@ -49,8 +49,7 @@ struct CircularProgressView: View {
         let progressText = String(format: "%.0f%%", progress * 100)
         let greenAngularGradient = AngularGradient(
             gradient: Gradient(colors: [
-                Color("AccentColor"), Color(red: 61/255, green: 209/225, blue: 100/255),  Color("AccentColor")
-            ]),
+                Color("AccentColor")]),
             center: .center,
             startAngle: .degrees(0),
             endAngle: .degrees(360.0 * progress))

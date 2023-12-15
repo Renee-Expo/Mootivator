@@ -91,7 +91,7 @@ struct YesScreen: View {
     
     var body: some View {
         ZStack {
-            VStack {
+            VStack(spacing: 10) {
                 Image(systemName: "trophy") //placeholder
                     .font(.system(size: 200))
                     .foregroundColor(Color("AccentColor"))
@@ -99,7 +99,7 @@ struct YesScreen: View {
                 Text("Good Job!")
                     .font(.title)
                     .fontWeight(.medium)
-                    .padding()
+                    .padding(.top)
                 Text("Keep up the good work!")
                     .font(.title)
                     .fontWeight(.medium)
@@ -155,6 +155,7 @@ struct NoScreen: View {
             Text("No worries! You can continue with this goal until you achieve it!")
                 .font(.title)
                 .fontWeight(.bold)
+                .multilineTextAlignment(.center)
                 .padding()
             Button("Go to Home") {
                 withAnimation {
