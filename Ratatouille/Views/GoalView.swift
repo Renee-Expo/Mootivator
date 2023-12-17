@@ -30,11 +30,11 @@ struct GoalView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                 #if DEBUG
-                    Button {
-                        showConfirmAlert = true
-                    } label: {
-                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
-                    }
+//                    Button {
+//                        showConfirmAlert = true
+//                    } label: {
+//                        Label("Load sample data", systemImage: "list.bullet.clipboard.fill")
+//                    }
                 #endif
                     Button {
                         showNewGoalSheet = true
@@ -75,11 +75,11 @@ struct GoalView: View {
             .sheet(isPresented: $showNewGoalSheet) {
                 NewGoalView()
             }
-            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
-                Button("Replace", role: .destructive) {
-                    goalManager.loadSampleData()
-                }
-            }
+//            .alert("Load sample data? Warning: this cannot be undone.", isPresented: $showConfirmAlert) {
+//                Button("Replace", role: .destructive) {
+//                    goalManager.loadSampleData()
+//                }
+//            }
             .searchable(text: $searchText)
             .onChange(of: searchText) { prompt in
                 goalManager.searchText = prompt

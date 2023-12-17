@@ -138,9 +138,9 @@ final class GoalManager: ItemManager {
     }
     
     // during DEBUG only
-    func loadSampleData() {
-        items = Goal.sampleGoals
-    }
+//    func loadSampleData() {
+//        items = Goal.sampleGoals
+//    }
     
     @Published var searchText = ""
     @Published var sortOption: SortOption = .none
