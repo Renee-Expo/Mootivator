@@ -91,7 +91,7 @@ struct NewGoalView: View {
                             Text("Number of times per remaining week: \(Int(numberOfTimesPerWeek.rounded()))")
                             
                             if Calendar.current.component(.weekday, from: Date()) != 7 {
-                                Slider(value: $numberOfTimesPerWeek, in: 1.0...Double(daysInWeek).rounded(.up), step: 1)
+                                Slider(value: $numberOfTimesPerWeek, in: 1.0...7.0.rounded(.up), step: 1)
                             }
                         }
                         .onAppear {
